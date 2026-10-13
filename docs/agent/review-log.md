@@ -1,0 +1,15 @@
+# Review log
+
+One row per reviewer call, oldest first. The reviewer is Grok through the Cursor v1 API and is never the model that wrote the diff. The full text of each review (prompt, raw reply, what was done with each finding) lives in `docs/agent/reviews/` and `docs/agent/slices/<slice>/`; this file is the index. The manager adds a row when a review comes back and fills the outcome when the slice is merged.
+
+| Date | Subject | Round | Model and parameters | Duration | Verdict | Findings | Outcome | Record |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-10-13 | Trial on a synthetic diff with three planted defects | 1 | `grok-4.7`, context=256k, reasoning_effort=high, fast=false | 34 s | BLOCK | 3, all three planted, no false one | Route proven before any slice depended on it | `reviews/grok-smoke.md` |
+| 2026-10-13 | Wave 0, `git diff main...slice/wave-0` at fca2bd7, 80,830 bytes | 1, first call | same | none: the script gave up at its 300-second deadline | none | none | Reply not lost: the run went on at the service and the manager fetched its text once it had finished | `reviews/wave-0-grok.md` on `slice/wave-0` |
+| 2026-10-13 | Wave 0, the same call, reply fetched after the run finished | 1 | same | about 22 minutes | CHANGES REQUESTED | 11 | Adjudicated by the manager: 9 accepted (one as a trial, one in part), 1 deferred to the `web` slice, 1 rejected with the reason in `decisions-log.md`. Fix round and round 2 in progress on `slice/wave-0` | `slices/wave-0/07-review-prompt-round1.md` and `11-review-reply-round1.md` on `slice/wave-0` |
+
+## What the first real review changed
+
+- The reviewer script waits 45 minutes and logs the agent id and the run id right after the create call, so a slow run can be fetched by hand.
+- From round 2 on, a review receives the fix diff and the earlier findings with their outcomes, not the whole patch again.
+- Cost is not returned by the API and is read from the Cursor dashboard.
