@@ -4,7 +4,7 @@ How the three screens of `docs/plan.md` section 10 look. Section 10 stays the de
 
 ## How it was made
 
-On 2026-10-13 the manager session (Claude Opus 5.5) drew the boards on a Claude design canvas, a private artifact on Marcin's account. The Claude Design connection itself rejected the login in that session, so no separate design session ran. The manager cannot see a rendered canvas: the boards were written as markup and have not been looked at by the session that wrote them. Marcin's look at the canvas is the review.
+On 2026-10-13 the manager session (Claude Opus 5.5) drew the boards on a Claude design canvas, a private artifact on Marcin's account: https://claude.ai/artifact/P6j1fZTVgX6kcseReng843 (it opens only for him unless he shares it). The Claude Design connection itself rejected the login in that session, so no separate design session ran. The manager cannot see a rendered canvas: the boards were written as markup and have not been looked at by the session that wrote them. Marcin's look at the canvas is the review.
 
 The `.dc.html` files here are the sources of those boards, copied unchanged. They load a `support.js` that belongs to the canvas and is not in this repository, so they do not render when opened from disk. Read them as markup: every style is inline, every value is a literal.
 
