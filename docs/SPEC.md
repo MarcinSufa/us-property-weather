@@ -480,6 +480,45 @@ Given an unexpected server error
 When Yoga returns the error to the client
 Then it is masked as `INTERNAL_SERVER_ERROR` with no stack trace and is logged on the server.
 
+## CONFIG
+
+### AC-CONFIG-1
+
+Source: plan 9
+Given an environment with the Weatherstack key set
+When the API loads its configuration
+Then every absent variable takes its default and every given value is returned trimmed, with the port and the timeout as numbers.
+
+### AC-CONFIG-2
+
+Source: plan 9
+Given an environment in which several variables are missing or malformed
+When the API loads its configuration
+Then one error names every one of them.
+
+### AC-CONFIG-3
+
+Source: plan 9
+Given a missing key, a malformed value or a blank optional variable
+When the API loads its configuration
+Then the error contains no value from the environment, and a blank optional variable counts as absent.
+
+## STORE
+
+### AC-STORE-1
+
+Source: plan 6
+Given a `DATABASE_PATH` whose folder does not exist
+When the API opens the database
+Then the folder and the file are created and stored properties survive closing and reopening; the path `:memory:` opens an empty database.
+
+### AC-STORE-2
+
+Source: plan 6
+Given a list filter on only the city, only the state or only the zip code
+When the list is read
+Then the query is answered through the index of that column and does not scan the table.
+
 ## User story coverage
 
 | User story                            | GraphQL criteria                                                                                                                                                                                                                                                                                                                                                    | UI criteria                                                                                                  |
