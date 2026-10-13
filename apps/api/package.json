@@ -1,0 +1,24 @@
+{
+  "name": "@covertree/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=../../.env src/main.ts",
+    "start": "node --env-file=../../.env src/main.ts",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "graphql": "^17.0.2",
+    "graphql-yoga": "^5.24.4",
+    "pino": "^10.4.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^7.4.6",
+    "@graphql-codegen/typescript": "^6.1.2",
+    "@graphql-codegen/typescript-resolvers": "^6.1.1",
+    "vitest": "^5.0.4"
+  }
+}

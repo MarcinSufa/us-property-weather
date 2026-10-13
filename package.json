@@ -1,0 +1,32 @@
+{
+  "name": "covertree",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/api", "apps/web", "e2e"],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others --names api,web \"npm run dev --workspace=apps/api\" \"npm run dev --workspace=apps/web\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck --workspace=apps/api && npm run typecheck --workspace=apps/web",
+    "codegen": "npm run codegen --workspace=apps/api && npm run codegen --workspace=apps/web",
+    "test": "npm run test --workspace=apps/api && npm run test --workspace=apps/web && vitest run --config vitest.config.js",
+    "build": "npm run build --workspace=apps/web",
+    "e2e": "npm test --workspace=e2e",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run codegen && npm test && npm run build",
+    "prepare": "npm run codegen"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "concurrently": "^10.0.6",
+    "eslint": "^10.12.0",
+    "prettier": "^3.9.10",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.4"
+  }
+}
