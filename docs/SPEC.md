@@ -519,6 +519,148 @@ Given a list filter on only the city, only the state or only the zip code
 When the list is read
 Then the query is answered through the index of that column and does not scan the table.
 
+## WEB
+
+### AC-WEB-1
+
+Source: plan 10, routes
+Given a path that matches no route
+When the app renders it
+Then the page reads "Page not found" and links back to the list.
+
+### AC-WEB-2
+
+Source: plan 10, routes
+Given any page of the app
+When it is shown
+Then the document title names the page, and on the detail page it names the street.
+
+### AC-WEB-3
+
+Source: plan 10, layout
+Given the page header
+When a page other than the form is shown
+Then the header links to the list and to "Add property"; on the form page the "Add property" link is absent.
+
+### AC-WEB-4
+
+Source: plan 10, `/` route
+Given a list answer with N properties
+When the page renders it
+Then a count reads "N properties", or "1 property" for one.
+
+### AC-WEB-5
+
+Source: plan 10, weather values
+Given a stored weather value that is null
+When the list or the detail page renders it
+Then it reads "Not reported", and a value of zero is shown as zero.
+
+### AC-WEB-6
+
+Source: plan 10, dates
+Given a property with its creation time
+When the list or the detail page renders it
+Then the time is a `time` element whose `dateTime` is the ISO value as received.
+
+### AC-WEB-7
+
+Source: plan 10, load errors
+Given a list or detail request that failed
+When the user chooses "Try again"
+Then the request goes to the network again and its answer is shown.
+
+### AC-WEB-8
+
+Source: plan 10, `/` route
+Given a URL with filter and sort parameters
+When the list page opens
+Then the filter form shows them and the query carries them as variables; an unknown state code is left out.
+
+### AC-WEB-9
+
+Source: plan 10, `/` route
+Given filter inputs that are blank or only spaces
+When the filters are applied
+Then they are left out of the URL and of the query variables.
+
+### AC-WEB-10
+
+Source: plan 10, `/` route
+Given filters in the URL and values typed but not applied
+When the user chooses "Clear"
+Then the filters leave the URL, the sort stays, and the typed values are emptied.
+
+### AC-WEB-11
+
+Source: plan 10, `/` route
+Given a list answer with `BAD_USER_INPUT` and field errors
+When the page renders it
+Then each message appears under its filter field, which is marked invalid and described by it.
+
+### AC-WEB-12
+
+Source: plan 10, `/` route
+Given the filter form
+When it is rendered
+Then every control has a label and the zip code field accepts exactly five digits.
+
+### AC-WEB-13
+
+Source: plan 10, `/properties/new` route
+Given a create request in flight
+When the form is shown
+Then the fields cannot be edited, the button reads "Saving…" and a status reads "Looking up the weather…".
+
+### AC-WEB-14
+
+Source: plan 10, `/properties/new` route
+Given a create request that failed
+When the error is shown
+Then the typed values are still in the form.
+
+### AC-WEB-15
+
+Source: plan 10, `/properties/:id` route
+Given a stored property
+When its page renders
+Then street, city, state, zip code, latitude, longitude and creation time are shown under their terms.
+
+### AC-WEB-16
+
+Source: plan 10, delete confirmation
+Given the delete dialog opened for a property
+When it is shown
+Then it names the street and focus is on "Cancel"; "Cancel" and Escape close it without a delete request.
+
+### AC-WEB-17
+
+Source: plan 10, delete confirmation
+Given a delete request that answers with an error or without data
+When the answer arrives
+Then the dialog stays open with its failure message, and the message is gone when a dialog is opened again.
+
+### AC-WEB-18
+
+Source: plan 10, delete confirmation
+Given a delete confirmed from the list
+When it succeeds
+Then that row and only that row leaves the list without a page reload.
+
+### AC-WEB-19
+
+Source: review of slice `web`, round 1
+Given a delete request in flight
+When the dialog is shown
+Then focus stays inside the dialog, further clicks and Escape do nothing, and a status reads "Deleting…".
+
+### AC-WEB-20
+
+Source: review of slice `web`, round 1
+Given a create request in flight
+When the user leaves the form and the answer arrives afterwards
+Then the app does not navigate to the new property.
+
 ## User story coverage
 
 | User story                            | GraphQL criteria                                                                                                                                                                                                                                                                                                                                                    | UI criteria                                                                                                  |
