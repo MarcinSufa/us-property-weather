@@ -1,0 +1,92 @@
+## Red proof A (scratch tree c:/tmp/covertree-e2e-scratch, never committed): PropertyService.list changed to call the weather provider before reading the repository
+## mutation:
+diff --git a/apps/api/src/property/property-service.ts b/apps/api/src/property/property-service.ts
+index 590d1aa..96d8ff7 100644
+--- a/apps/api/src/property/property-service.ts
++++ b/apps/api/src/property/property-service.ts
+@@ -28,7 +28,8 @@ export class PropertyService {
+     });
+   }
+ 
+-  list(filter: unknown, sort: PropertySort): Property[] {
++  async list(filter: unknown, sort: PropertySort): Promise<Property[]> {
++    await this.weatherProvider.getCurrentWeather({ street: 'x', city: 'x', state: 'AZ', zipCode: '85268' });
+     return this.repository.list(parsePropertyFilter(filter), sort);
+   }
+ 
+## $ npm run e2e
+
+> e2e
+> npm test --workspace=e2e
+
+
+> test
+> playwright test
+
+[WebServer] (node:7192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:34644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:80572) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:58848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 stories.spec.ts:69:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property (621ms)
+  x   2 stories.spec.ts:82:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing (838ms)
+  -   3 stories.spec.ts:130:1 › AC-CREATE-9 AC-CREATE-13 server validation describes and focuses the street field
+  -   4 stories.spec.ts:146:1 › AC-CREATE-10 create the other list properties through the form
+  -   5 stories.spec.ts:156:1 › AC-LIST-2 list rows show address fields and the fixture weather summary
+  -   6 stories.spec.ts:178:1 › AC-FILTER-7 filters by city, state and zip and reloads the same view
+  -   7 stories.spec.ts:240:1 › AC-SORT-4 sort newest first by default and keep oldest first in the URL
+  -   8 stories.spec.ts:267:1 › AC-DETAIL-5 open a list property and show coordinates and stored weather
+  -   9 stories.spec.ts:289:1 › AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show the missing detail
+  -  10 stories.spec.ts:359:1 › AC-WEATHER-9 list, filter, sort, detail and delete do not make weather requests
+
+
+  1) stories.spec.ts:82:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "calls": 2,
+    +   "calls": 3,
+      }
+
+      34 |
+      35 | async function expectWeatherCalls(request: APIRequestContext, expected = expectedWeatherCalls) {
+    > 36 |   expect(await weatherCalls(request)).toEqual({ calls: expected });
+         |                                       ^
+      37 | }
+      38 |
+      39 | async function fillAddress(page: Page, address: Address) {
+        at expectWeatherCalls (C:\tmp\covertree-e2e-scratch\e2e\stories.spec.ts:36:39)
+        at C:\tmp\covertree-e2e-scratch\e2e\stories.spec.ts:126:3
+
+    Error Context: test-results\stories-AC-CREATE-15-AC-WE-72fe1-d-address-and-saves-nothing\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\stories-AC-CREATE-15-AC-WE-72fe1-d-address-and-saves-nothing\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\stories-AC-CREATE-15-AC-WE-72fe1-d-address-and-saves-nothing\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    stories.spec.ts:82:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing 
+  8 did not run
+  1 passed (5.4s)
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\tmp\covertree-e2e-scratch\e2e
+npm error workspace @covertree/e2e
+npm error location C:\tmp\covertree-e2e-scratch\e2e
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c playwright test
+exit 1

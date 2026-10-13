@@ -1,0 +1,9 @@
+## npx eslint e2e in the scratch tree after a failed npm run e2e (the HTML report then holds the trace viewer under e2e/playwright-report/trace/)
+      1   ✖ 1178 problems (1178 errors, 0 warnings)
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\uiMode.CYwC_gH1.js
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\sw.bundle.js
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\snapshot.B_Jk1wbt.js
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\index.7-c5LSTW.js
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\assets\urlMatch-L3liM589.js
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\assets\defaultSettingsView-D-g2vrvf.js
+      1   C:\tmp\covertree-e2e-scratch\e2e\playwright-report\trace\assets\codeMirrorModule-BEB2e8M3.js

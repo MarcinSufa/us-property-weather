@@ -1,0 +1,7 @@
+## After the two final runs of npm run e2e at d51f66b (2026-10-13, Windows 11)
+## $ ls "$TEMP" | grep -c covertree-e2e-
+0
+## $ netstat -ano | grep -E ':(4000|5173|4174)\s' | grep -c LISTENING
+0
+## $ netstat -ano | grep -E ':(4000|5173|4174)\s' | grep -v TIME_WAIT | wc -l   (the only lines left were closed connections in TIME_WAIT with PID 0)
+0
