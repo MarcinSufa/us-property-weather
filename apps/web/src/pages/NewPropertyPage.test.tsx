@@ -280,6 +280,54 @@ test('AC-WEB-20 leaving the form while saving is not undone by the answer', asyn
   expect(router.state.location.pathname).toBe('/');
 });
 
+test('AC-LIST-5 a create that answers after the user left the form refreshes the list', async () => {
+  let created = false;
+  let resolveCreate: ((response: Response) => void) | undefined;
+  const newProperty = {
+    __typename: 'Property',
+    id: 'created-after-leaving',
+    ...address,
+    createdAt: '2026-10-13T08:12:00.000Z',
+    weatherData: {
+      __typename: 'WeatherData',
+      temperature: 24,
+      weather_descriptions: ['Sunny'],
+    },
+  };
+  server.use(
+    http.get('http://localhost/graphql', ({ request }) => {
+      if (new URL(request.url).searchParams.get('operationName') === 'Properties') {
+        return HttpResponse.json({ data: { properties: created ? [newProperty] : [] } });
+      }
+      return HttpResponse.json({});
+    }),
+    createHandler(
+      () =>
+        new Promise((resolve) => {
+          resolveCreate = resolve;
+        }),
+    ),
+  );
+  const { router, user } = renderApp(['/']);
+
+  expect(await screen.findByRole('heading', { name: 'No properties yet' })).toBeInTheDocument();
+  await user.click(within(screen.getByRole('main')).getByRole('link', { name: 'Add property' }));
+  await fillAddress(user);
+  await user.click(screen.getByRole('button', { name: 'Add property' }));
+  await waitFor(() => expect(resolveCreate).toBeDefined());
+  await user.click(screen.getByRole('link', { name: 'Cancel' }));
+  expect(router.state.location.pathname).toBe('/');
+  expect(await screen.findByRole('heading', { name: 'No properties yet' })).toBeInTheDocument();
+
+  resolveCreate?.(
+    HttpResponse.json({ data: { createProperty: { __typename: 'Property', id: newProperty.id } } }),
+  );
+  created = true;
+
+  expect(await screen.findByRole('link', { name: address.street })).toBeInTheDocument();
+  expect(router.state.location.pathname).toBe('/');
+});
+
 test.each([
   [
     'LOCATION_NOT_FOUND',
@@ -334,12 +382,22 @@ test.each([
       ],
     },
   ],
-])('AC-WEB-14 %s keeps typed values and re-enables the form', async (_, response) => {
+])('AC-WEB-14 %s keeps typed values and re-enables the form', async (code, response) => {
   server.use(createHandler(() => HttpResponse.json(response)));
   const { user } = renderApp(['/properties/new']);
   await fillAddress(user);
   await user.click(screen.getByRole('button', { name: 'Add property' }));
 
+  if (code === 'BAD_USER_INPUT') {
+    expect(await screen.findByRole('textbox', { name: 'City' })).toHaveAttribute(
+      'aria-invalid',
+      'true',
+    );
+  } else {
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'The weather service is not answering',
+    );
+  }
   expect(await screen.findByRole('button', { name: 'Add property' })).toBeEnabled();
   expect(screen.getByRole('textbox', { name: 'Street' })).toHaveValue(address.street);
   expect(screen.getByRole('textbox', { name: 'City' })).toHaveValue(address.city);

@@ -67,12 +67,12 @@ export function PropertyForm() {
   const unmounted = useRef(false);
   const [{ fetching }, createProperty] = useMutation(CreatePropertyDocument);
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    unmounted.current = false;
+    return () => {
       unmounted.current = true;
-    },
-    [],
-  );
+    };
+  }, []);
 
   useEffect(() => {
     const firstInvalidField = fieldOrder.find((field) =>
