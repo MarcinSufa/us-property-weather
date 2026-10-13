@@ -8,7 +8,6 @@ import { pathToFileURL } from 'node:url';
 const usage =
   'Usage: node scripts/grok-review.mjs --model <id> --prompt <file> --patch <file> --out <file> [--param <id>=<value>]';
 const apiUrl = 'https://api.cursor.com/v1';
-const deadlineMs = 300_000;
 const fetch = globalThis.fetch;
 
 export function parseArgs(argv) {
@@ -71,9 +70,15 @@ function scrub(text, apiKey) {
   if (!apiKey) return text;
   const encodedKey = Buffer.from(`${apiKey}:`).toString('base64');
   return text
-    .replaceAll(apiKey, '[redacted]')
     .replaceAll(`Basic ${encodedKey}`, '[redacted]')
-    .replaceAll(encodedKey, '[redacted]');
+    .replaceAll(encodedKey, '[redacted]')
+    .replaceAll(apiKey, '[redacted]');
+}
+
+function isDoneEvent(eventText) {
+  return eventText.split(/\r?\n/).some((line) => {
+    return line.startsWith('event:') && line.slice(6).replace(/^ /, '') === 'done';
+  });
 }
 
 async function logHttpFailure(response, callName, apiKey, safeLog) {
@@ -94,10 +99,9 @@ async function readDoneEvent(response) {
       const events = pending.split(/\r?\n\r?\n/);
       pending = events.pop() ?? '';
       for (const eventText of events) {
-        const lines = eventText.split(/\r?\n/);
-        if (lines.some((line) => line === 'event: done')) return true;
+        if (isDoneEvent(eventText)) return true;
       }
-      if (done) return false;
+      if (done) return isDoneEvent(pending);
     }
   } finally {
     await reader.cancel().catch(() => {});
@@ -112,6 +116,7 @@ export async function main(argv, dependencies) {
     writeFile: writeFileImpl,
     log,
     now,
+    deadlineMs = 2_700_000,
   } = dependencies;
   let apiKey = env.CURSOR_API_KEY;
   let startedAt;
@@ -145,6 +150,7 @@ export async function main(argv, dependencies) {
       safeLog('Cursor create response was invalid.');
       return 1;
     }
+    safeLog(`Cursor run started: agent ${agentId}, run ${runId}`);
 
     const headers = {
       Accept: 'text/event-stream',
@@ -199,7 +205,7 @@ export async function main(argv, dependencies) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     if (elapsedSeconds >= deadlineMs / 1000) {
       safeLog(
-        `Run failed after ${elapsedSeconds} seconds (300-second deadline): ${errorName}: ${errorMessage}`,
+        `Run failed after ${elapsedSeconds} seconds (${deadlineMs}-millisecond deadline): ${errorName}: ${errorMessage}`,
       );
     } else {
       safeLog(`${errorName}: ${errorMessage}`);

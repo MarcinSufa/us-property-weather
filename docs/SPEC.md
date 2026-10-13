@@ -1,6 +1,6 @@
 # Acceptance criteria
 
-These stable ids are the source for test names. Every test name starts with the id of the criterion it covers. Later slices add criteria without renumbering existing ones.
+These stable ids are the source for test names. Every test name starts with the id of the criterion it covers. Tests of tooling and of the skeleton that cover no criterion carry no acceptance-criterion id. Later slices add criteria without renumbering existing ones.
 
 ## CREATE
 
@@ -193,14 +193,14 @@ Then zip-code matching is exact.
 ### AC-FILTER-5
 
 Source: plan 7, List, detail, delete
-Given a filter value that is empty or blank
+Given a city filter that is empty or contains only whitespace
 When the client calls `properties`
-Then that filter applies no restriction.
+Then the city filter applies no restriction.
 
 ### AC-FILTER-6
 
 Source: plan 7, List, detail, delete
-Given a zip-code filter that is not exactly five digits
+Given a non-blank zip-code filter whose trimmed value is not exactly five digits
 When the client calls `properties`
 Then the request fails with `BAD_USER_INPUT`.
 
@@ -217,6 +217,27 @@ Source: plan 10, loading, empty and error states
 Given filters match no properties
 When the list page finishes loading
 Then it shows “nothing matches the filters”, distinct from “no properties yet”.
+
+### AC-FILTER-9
+
+Source: plan 7, List, detail, delete
+Given a zip-code filter that is empty or contains only whitespace
+When the client calls `properties`
+Then the zip-code filter applies no restriction.
+
+### AC-FILTER-10
+
+Source: plan 5, Choices inside the schema
+Given the client wants properties in any state
+When the client calls `properties`
+Then it omits the `state` filter.
+
+### AC-FILTER-11
+
+Source: plan 5, Choices inside the schema
+Given the client submits an empty state string as a filter
+When GraphQL validates the `properties` request
+Then it rejects the empty string as an invalid `UsState` before the service runs.
 
 ## SORT
 
@@ -444,7 +465,7 @@ Then it is masked as `INTERNAL_SERVER_ERROR` with no stack trace and is logged o
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | 1. Query all properties               | AC-LIST-1, AC-WEATHER-9                                                                                                                                                                                                                                                                                                | AC-LIST-2, AC-LIST-3, AC-LIST-4, AC-LIST-5                                                                   |
 | 2. Sort properties by creation date   | AC-SORT-1, AC-SORT-2, AC-SORT-3                                                                                                                                                                                                                                                                                        | AC-SORT-4                                                                                                    |
-| 3. Filter by city, zip code and state | AC-FILTER-1, AC-FILTER-2, AC-FILTER-3, AC-FILTER-4, AC-FILTER-5, AC-FILTER-6                                                                                                                                                                                                                                           | AC-FILTER-7, AC-FILTER-8                                                                                     |
+| 3. Filter by city, zip code and state | AC-FILTER-1, AC-FILTER-2, AC-FILTER-3, AC-FILTER-4, AC-FILTER-5, AC-FILTER-6, AC-FILTER-9, AC-FILTER-10, AC-FILTER-11                                                                                                                                                                                                  | AC-FILTER-7, AC-FILTER-8                                                                                     |
 | 4. Query details of one property      | AC-DETAIL-1, AC-DETAIL-2                                                                                                                                                                                                                                                                                               | AC-DETAIL-3, AC-DETAIL-4, AC-DETAIL-5                                                                        |
 | 5. Add a property                     | AC-CREATE-1, AC-CREATE-2, AC-CREATE-3, AC-CREATE-4, AC-CREATE-5, AC-CREATE-6, AC-CREATE-7, AC-CREATE-16, AC-CREATE-17, AC-WEATHER-1, AC-WEATHER-2, AC-WEATHER-3, AC-WEATHER-4, AC-WEATHER-5, AC-WEATHER-6, AC-WEATHER-7, AC-WEATHER-8, AC-WEATHER-10, AC-WEATHER-11, AC-WEATHER-12, AC-ERROR-1, AC-ERROR-3, AC-ERROR-4 | AC-CREATE-8, AC-CREATE-9, AC-CREATE-10, AC-CREATE-11, AC-CREATE-12, AC-CREATE-13, AC-CREATE-14, AC-CREATE-15 |
 | 6. Delete a property                  | AC-DELETE-1, AC-DELETE-2, AC-WEATHER-9                                                                                                                                                                                                                                                                                 | AC-DELETE-3, AC-DELETE-4                                                                                     |

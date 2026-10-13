@@ -8,7 +8,6 @@ const config: CodegenConfig = {
       config: {
         enumsAsTypes: true,
         useTypeImports: true,
-        useIndexSignature: true,
         mapperTypeSuffix: 'Model',
         mappers: {
           Property: '../../property/property.ts#Property',

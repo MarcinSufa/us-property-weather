@@ -191,7 +191,61 @@ describe('reviewer CLI main flow', () => {
     expect(metadata).toContain('FINISHED');
     expect(metadata).toMatch(/10(?:\.0+)?\s*(?:seconds|secs?|s)\b/i);
     expect(savedReply).toBe(reply);
+    const idsLogIndex = output.logEntries.findIndex(
+      (entry) => entry.includes('bc-1') && entry.includes('run-1'),
+    );
+    expect(idsLogIndex).toBeGreaterThanOrEqual(0);
+    expect(idsLogIndex).toBeLessThan(output.logEntries.length - 1);
     expectSecretAbsent(output);
+  });
+
+  test('redacts a colliding key from a 401 response that echoes the authorization header', async () => {
+    const collisionKey = 'Vm0w';
+    const collisionAuthorization = `Basic ${Buffer.from(`${collisionKey}:`).toString('base64')}`;
+    const output = collectOutput();
+    const code = await main(args, {
+      env: { CURSOR_API_KEY: collisionKey },
+      fetch: async () => createResponse(401, `Rejected ${collisionAuthorization}`),
+      readFile: async (path) => (path === 'prompt.md' ? promptText : patchText),
+      writeFile: output.writeFile,
+      log: output.log,
+      now: () => 0,
+    });
+
+    expect(code).not.toBe(0);
+    expect(output.logEntries.join(' ')).not.toContain('Vm0wdzo=');
+    expect(output.logEntries.join(' ')).not.toContain('dzo=');
+  });
+
+  test('redacts a colliding key from the saved success result', async () => {
+    const collisionKey = 'Vm0w';
+    const collisionAuthorization = `Basic ${Buffer.from(`${collisionKey}:`).toString('base64')}`;
+    const output = collectOutput();
+    const fetchWithCollisionResult = async (url) => {
+      if (url === 'https://api.cursor.com/v1/agents') {
+        return createResponse(201, JSON.stringify({ agent: { id: 'bc-1' }, run: { id: 'run-1' } }));
+      }
+      if (url.endsWith('/stream')) return createResponse(200, 'event: done\ndata: {}\n\n');
+      return createResponse(
+        200,
+        JSON.stringify({
+          status: 'FINISHED',
+          result: `The result contains ${collisionAuthorization}`,
+        }),
+      );
+    };
+    const code = await main(args, {
+      env: { CURSOR_API_KEY: collisionKey },
+      fetch: fetchWithCollisionResult,
+      readFile: async (path) => (path === 'prompt.md' ? promptText : patchText),
+      writeFile: output.writeFile,
+      log: output.log,
+      now: () => 0,
+    });
+
+    expect(code).toBe(0);
+    expect(output.writes[0][1]).not.toContain('Vm0wdzo=');
+    expect(output.writes[0][1]).not.toContain('dzo=');
   });
 
   test('returns non-zero and does not fetch when the required model is missing', async () => {
@@ -298,6 +352,84 @@ describe('reviewer CLI main flow', () => {
     expect(code).not.toBe(0);
     expect(output.logEntries.join(' ')).not.toBe('');
     expectSecretAbsent(output);
+  });
+
+  test('succeeds when the done event is the buffered final stream event', async () => {
+    const output = collectOutput();
+    let calls = 0;
+    const code = await main(args, {
+      env: { CURSOR_API_KEY: apiKey },
+      fetch: async () => {
+        calls += 1;
+        if (calls === 1) {
+          return createResponse(
+            201,
+            JSON.stringify({ agent: { id: 'bc-1' }, run: { id: 'run-1' } }),
+          );
+        }
+        if (calls === 2) return createResponse(200, 'event: done\ndata: {}');
+        return createResponse(200, JSON.stringify({ status: 'FINISHED', result: reply }));
+      },
+      readFile: async (path) => (path === 'prompt.md' ? promptText : patchText),
+      writeFile: output.writeFile,
+      log: output.log,
+      now: () => 0,
+    });
+
+    expect(code).toBe(0);
+    expect(output.writes).toHaveLength(1);
+  });
+
+  test('accepts an SSE event field without a space after its colon', async () => {
+    const output = collectOutput();
+    let calls = 0;
+    const code = await main(args, {
+      env: { CURSOR_API_KEY: apiKey },
+      fetch: async () => {
+        calls += 1;
+        if (calls === 1) {
+          return createResponse(
+            201,
+            JSON.stringify({ agent: { id: 'bc-1' }, run: { id: 'run-1' } }),
+          );
+        }
+        if (calls === 2) return createResponse(200, 'event:done\ndata: {}\n\n');
+        return createResponse(200, JSON.stringify({ status: 'FINISHED', result: reply }));
+      },
+      readFile: async (path) => (path === 'prompt.md' ? promptText : patchText),
+      writeFile: output.writeFile,
+      log: output.log,
+      now: () => 0,
+    });
+
+    expect(code).toBe(0);
+  });
+
+  test('aborts a fetch at the injected deadline and reports that deadline', async () => {
+    const output = collectOutput();
+    const code = await Promise.race([
+      main(args, {
+        env: { CURSOR_API_KEY: apiKey },
+        deadlineMs: 35,
+        fetch: async (_url, init = {}) =>
+          new Promise((_, reject) => {
+            init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true });
+          }),
+        readFile: async (path) => (path === 'prompt.md' ? promptText : patchText),
+        writeFile: output.writeFile,
+        log: output.log,
+        now: (() => {
+          const times = [0, 1000];
+          return () => times.shift() ?? 1000;
+        })(),
+      }),
+      new Promise((_, reject) =>
+        globalThis.setTimeout(() => reject(new Error('deadline was not applied')), 250),
+      ),
+    ]);
+
+    expect(code).not.toBe(0);
+    expect(output.logEntries.join(' ')).toContain('35-millisecond deadline');
   });
 
   test('returns non-zero when the run status after done is not FINISHED', async () => {

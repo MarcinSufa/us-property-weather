@@ -10,7 +10,7 @@ This is a small full-stack application for keeping records of US properties. It 
 - Run `npm install` to install the workspaces.
 - Create `.env` from `.env.example` and set the required key locally.
 - Run `npm run dev` to start the API at `http://localhost:4000/graphql` and the web app at `http://localhost:5173`.
-- Run `npm run verify`: `npm run format:check`, `npm run lint`, `npm run typecheck`, `npm run codegen`, `npm test`, then `npm run build`.
+- Run `npm run verify`: `npm run format:check`, `npm run codegen`, `npm run lint`, `npm run typecheck`, `npm test`, then `npm run build`.
 - Run `npm run codegen` to generate GraphQL types and documents.
 - Run `npm run e2e` to run the Playwright suite.
 - Run `npm run format` to format the repository.
@@ -55,6 +55,7 @@ This is a small full-stack application for keeping records of US properties. It 
 
 - Write each test first and show it failing before implementing the behavior.
 - Start every test name with its acceptance-criterion id from `docs/SPEC.md`.
+- Tests of tooling and of the skeleton that cover no criterion carry no acceptance-criterion id.
 - Do not call real Weatherstack from tests, development loops or CI jobs.
 - Use a stub `fetch` and a fake provider in API tests; use `msw` in web tests.
 

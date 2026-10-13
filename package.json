@@ -20,7 +20,7 @@
     "test": "npm run test --workspace=apps/api && npm run test --workspace=apps/web && vitest run --config vitest.config.js",
     "build": "npm run build --workspace=apps/web",
     "e2e": "npm test --workspace=e2e",
-    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run codegen && npm test && npm run build",
+    "verify": "npm run format:check && npm run codegen && npm run lint && npm run typecheck && npm test && npm run build",
     "prepare": "npm run codegen"
   },
   "devDependencies": {

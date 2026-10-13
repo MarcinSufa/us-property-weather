@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { buildSchema, isEnumType } from 'graphql';
+import { buildSchema, isEnumType, isInputObjectType, isObjectType } from 'graphql';
 import { valueFromASTUntyped } from 'graphql/utilities';
 import { expect, test } from 'vitest';
 
@@ -71,3 +71,80 @@ test('the schema includes all state values and only the supported property sorts
       .sort(),
   ).toEqual(['CREATED_AT_ASC', 'CREATED_AT_DESC']);
 });
+
+const expectedFields = [
+  {
+    typeName: 'Property',
+    fields: {
+      id: 'ID!',
+      street: 'String!',
+      city: 'String!',
+      state: 'UsState!',
+      zipCode: 'String!',
+      lat: 'Float!',
+      long: 'Float!',
+      weatherData: 'WeatherData!',
+      createdAt: 'String!',
+    },
+  },
+  {
+    typeName: 'WeatherData',
+    fields: {
+      observation_time: 'String',
+      temperature: 'Float',
+      weather_code: 'Int',
+      weather_icons: '[String!]',
+      weather_descriptions: '[String!]',
+      wind_speed: 'Float',
+      wind_degree: 'Float',
+      wind_dir: 'String',
+      pressure: 'Float',
+      precip: 'Float',
+      humidity: 'Float',
+      cloudcover: 'Float',
+      feelslike: 'Float',
+      uv_index: 'Float',
+      visibility: 'Float',
+      is_day: 'String',
+    },
+  },
+  {
+    typeName: 'CreatePropertyInput',
+    fields: {
+      street: 'String!',
+      city: 'String!',
+      state: 'UsState!',
+      zipCode: 'String!',
+    },
+  },
+  {
+    typeName: 'PropertyFilter',
+    fields: {
+      city: 'String',
+      state: 'UsState',
+      zipCode: 'String',
+    },
+  },
+] as const;
+
+test.each(expectedFields)(
+  'the schema locks every $typeName field name and type',
+  ({ typeName, fields: expected }) => {
+    const type = schema.getType(typeName);
+    expect(type).toBeDefined();
+    if (!type || (!isObjectType(type) && !isInputObjectType(type))) {
+      throw new Error(`Expected ${typeName} to be an object or input object`);
+    }
+
+    const fields = type.getFields();
+    const actual: Record<string, string> = {};
+    for (const fieldName of Object.keys(fields)) {
+      const field = fields[fieldName];
+      if (!field) {
+        throw new Error(`Expected ${typeName}.${fieldName} to be defined`);
+      }
+      actual[fieldName] = String(field.type);
+    }
+    expect(actual).toEqual(expected);
+  },
+);
