@@ -161,4 +161,10 @@ Outcome: answered with an estimate of about 50 percent, counted by merged work a
 
 > ile % wykonano juz , na ile wyceniasz że jeszcze zostało ?
 
-Outcome: answered at 15:36 with about 65 percent done and 2.5 to 3.5 hours of wall-clock time left, both the manager's estimate. Counted as done: wave 0 and four of the five wave 1 slices on `main` (`weather`, `docs`, `api`), with `npm run verify` green there. Left, in the order that sets the finish: `web` (in its first review round), then the end-to-end slice of wave 2, which cannot start before `web` is merged, then the closing (review of the whole diff, the fresh-clone run, one real create, the transcript export, the README). `transcripts` runs beside these and does not set the finish. The spread comes mostly from the reviewer: its calls so far took between 82 and 1412 seconds.
+Outcome: answered at 15:36 with about 65 percent done and 2.5 to 3.5 hours of wall-clock time left, both the manager's estimate. Counted as done: wave 0 and three of the five wave 1 slices on `main` (`weather`, `docs`, `api`), with `npm run verify` green there. Left, in the order that sets the finish: `web` (in its first review round), then the end-to-end slice of wave 2, which cannot start before `web` is merged, then the closing (review of the whole diff, the fresh-clone run, one real create, the transcript export, the README). `transcripts` runs beside these and does not set the finish. The spread comes mostly from the reviewer: its calls so far took between 82 and 1412 seconds.
+
+## Prompt 25
+
+> używasz luny jako workera w subsekcjach ?
+
+Outcome: answered at 15:40 with yes, and with the evidence. The codex session files of the day, grouped by the worktree each one ran in, record `gpt-6-luna` for every worker round of wave 1: `api` 8, `weather` 5, `transcripts` 5, `web` 6, `docs` 6. For `api`, `weather` and `transcripts` the header of each worker log says the same (18 logs). For `web` and `docs` no worker log was found under `c:/tmp`, so the session files are the only proof there, with 13 dispatch commands carrying `-m gpt-6-luna` in the output of the `docs` conductor. Wave 0 was not checked in this step. While checking the record the manager corrected the count in the outcome of prompt 24 from four to three merged slices of wave 1, which is what the answer given to Marcin said.
