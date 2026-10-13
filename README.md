@@ -215,29 +215,24 @@ flowchart LR
 
 ## Trade-offs and what comes next
 
-- Editing a property, pagination and authentication are outside the six stories.
-- Zip-to-city and state validation is omitted because the address is trusted as typed and Weatherstack region naming was measured for one state only.
-- US territories are omitted because the state contract covers the 50 states and DC.
-- Retries, caching and a circuit breaker are omitted because the quota is small and the person can press the button again.
-- A migration tool is omitted because there is one schema version.
-- The API runs its TypeScript directly with Node, and the application is meant to run locally with `npm install` and nothing else. There is no compiled API build, no serving of the web bundle from the API and no deployment.
-- The whole `current` object is stored, but `astro` and `air_quality` are not exposed because some of their keys are expected to contain hyphens, which GraphQL field names cannot. This is unverified.
+Not built:
+
+- Editing a property, pagination and authentication: they are outside the six stories.
+- Zip-to-city and state validation: the address is trusted as typed, and Weatherstack region naming was measured for one state only.
+- US territories: the state contract covers the 50 states and DC.
+- Retries, caching or a circuit breaker around the weather call: the quota is small and the person can press the button again.
+- A migration tool: there is one schema version.
+- A compiled API build, serving the web bundle from the API or deployment: the application is meant to run locally with `npm install` and nothing else.
+- Exposing `astro` and `air_quality`: some keys in the stored `current` object are expected to contain hyphens, which GraphQL field names cannot. This is unverified.
+
+Known limits:
+
 - Weather is a snapshot from creation and is never refreshed.
 - `npm audit` reports 10 high findings, all through the transitive development dependency `braces`; they are left untouched.
 
 ### Path to AWS Lambda (not built)
 
 To move to AWS Lambda, GraphQL Yoga's fetch-style handler would run the same schema and resolvers behind a Lambda function URL or API Gateway with a thin adapter in place of `main.ts`. Since a SQLite file does not survive between invocations, `PropertyRepository` would get a second implementation over a managed database while the service stayed unchanged. The key would move from `.env` to a secrets store, and the web bundle would be served as static files from object storage behind a CDN. This deployment is not built.
-
-Not built:
-
-- Editing a property, pagination and authentication.
-- Zip-to-city and state validation.
-- US territories.
-- Retries, caching or a circuit breaker around the weather call.
-- A migration tool.
-- A production API build, serving the web bundle from the API and deployment.
-- Exposing `astro` and `air_quality`.
 
 ## How AI was used
 
@@ -248,7 +243,18 @@ Not built:
 | Worker    | GPT Luna through `codex exec`, one per slice, in its own worktree and branch `slice/<name>`                | Writes tests and code inside its slice's files                                                           | Touches another slice's files or adds a dependency  |
 | Reviewer  | Grok 4.7 at high reasoning through the Cursor v1 API                                                       | Reads the diff pasted into the prompt and returns findings                                               | Writes code; is never the model that wrote the diff |
 
-The loop follows plan section 14 step for step: brief from the manager; worker prompt written by the conductor; worker round with the test seen red, then green; the conductor's own verification, which reads the whole diff and runs `npm run verify`; reviewer round; fixes, at most three review rounds; report to the manager; merge with `git merge --no-ff`; and `npm run verify` on `main`. A finding that is not fixed is recorded with its reason. Model ids are checked before every vendor leg and passed explicitly.
+The loop of one slice:
+
+1. The manager writes the brief.
+2. The conductor writes the worker prompt.
+3. The worker writes the tests and shows them red, then implements until they are green.
+4. The conductor verifies on its own by reading the whole diff and running `npm run verify`.
+5. The reviewer reads the diff and returns findings.
+6. The worker fixes the findings, with at most three review rounds.
+7. The conductor reports to the manager.
+8. The manager merges with `git merge --no-ff` and runs `npm run verify` on `main`.
+
+A finding that is not fixed is recorded with its reason. Model ids are checked before every vendor leg and passed explicitly.
 
 The project record lives in `docs/agent/`:
 
