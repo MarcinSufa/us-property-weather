@@ -1,0 +1,9 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+
+ Test Files  3 passed (3)
+      Tests  54 passed (54)
+   Start at  14:15:09
+   Duration  271ms (import 73%, transform 18%, tests 6%, worker 3%)
+
