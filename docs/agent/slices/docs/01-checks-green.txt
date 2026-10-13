@@ -1,0 +1,56 @@
+$ node docs/agent/slices/docs/checks.mjs
+## 1. npm scripts named in README.md exist in the root package.json
+ok   npm run dev
+ok   npm run verify
+ok   npm run e2e
+
+## 2. paths named exist at fca2bd7, are created by this slice, or are listed for wave 2
+ok   .env (README.md): to check in wave 2
+ok   .env.example (README.md): at fca2bd7
+ok   .nvmrc (README.md): at fca2bd7
+ok   AGENTS.md (skills/README.md): at fca2bd7
+ok   CLAUDE.md (README.md): at fca2bd7
+ok   SKILL.md (skills/README.md): created by this slice
+ok   apps/api (README.md): at fca2bd7
+ok   apps/web (README.md): at fca2bd7
+ok   docs/SPEC.md (README.md): at fca2bd7
+ok   docs/agent/ (README.md): at fca2bd7
+ok   docs/agent/briefs/ (README.md): at fca2bd7
+ok   docs/agent/decisions-log.md (README.md): at fca2bd7
+ok   docs/agent/handoffs/ (skills/README.md): at fca2bd7
+ok   docs/agent/manager-state.md (README.md): at fca2bd7
+ok   docs/agent/prompts/ (README.md): at fca2bd7
+ok   docs/agent/review-log.md (README.md): to check in wave 2
+ok   docs/agent/reviews/ (README.md): at fca2bd7
+ok   docs/agent/session-metrics.md (README.md): to check in wave 2
+ok   docs/agent/sessions/ (README.md): to check in wave 2
+ok   docs/agent/skills/ (README.md): created by this slice
+ok   docs/agent/skills/README.md (README.md): created by this slice
+ok   docs/agent/skills/grilling/SKILL.md (skills/README.md): created by this slice
+ok   docs/agent/skills/handoff/LICENSE (skills/README.md): created by this slice
+ok   docs/agent/skills/handoff/SKILL.md (skills/README.md): created by this slice
+ok   docs/agent/slices/<slice>/ (README.md): to check in wave 2
+ok   main.ts (README.md): at fca2bd7
+ok   scripts/export-sessions.ts (README.md): to check in wave 2
+ok   scripts/grok-review.mjs (README.md): at fca2bd7
+
+## 3. example operations are valid against apps/api/schema.graphql
+ok   query ListProperties: properties()
+ok   query SortPropertiesOldestFirst: properties(sort)
+ok   query FilterProperties: properties(filter)
+ok   query GetPropertyDetails: property(id)
+ok   mutation AddProperty: createProperty(input)
+ok   mutation DeleteProperty: deleteProperty(id)
+
+## 4. no long dash and no email pattern in the owned paths
+ok   README.md (277 lines)
+ok   docs/agent/skills/grilling/SKILL.md (29 lines)
+ok   docs/agent/skills/grilling/SOURCE.md (8 lines)
+ok   docs/agent/skills/handoff/LICENSE (22 lines)
+ok   docs/agent/skills/handoff/SKILL.md (65 lines)
+ok   docs/agent/skills/handoff/SOURCE.md (9 lines)
+ok   docs/agent/skills/README.md (59 lines)
+self-test on a planted sample: dash hit, email hit
+
+RESULT: PASS
+exit=0

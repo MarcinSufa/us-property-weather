@@ -1,0 +1,7 @@
+$ node docs/agent/slices/docs/checks.mjs <README with a planted unknown script, unknown path and invalid operation>
+FAIL npm run deploy is not a root script
+FAIL docs/agent/nowhere.md (README.md) does not exist and is not listed for wave 2
+FAIL expected 6 graphql blocks, found 7
+FAIL Bad: Cannot query field "nope" on type "Property".
+RESULT: FAIL
+exit=1
