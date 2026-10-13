@@ -174,3 +174,15 @@ Outcome: answered at 15:40 with yes, and with the evidence. The codex session fi
 > nagraj filmy przy uzyciu before after z przebiegiem scenariusz użycia aplikacji + lektor , intro i outro - zleć to subagentowi
 
 Outcome: delegated at 16:55 to one background subagent (Opus 5.5) in its own worktree `c:/tmp/covertree-video`, branch `slice/demo-video`, cut from `main` at 337f522. It uses the `demo-video` plugin: recorded scenes of the running app, `before_after` scenes for the changes of state, a narrator, captions, an intro card and an outro card. The manager set what the request left open and told Marcin so: the narrator speaks English (voice `en-US-AndrewNeural`), the weather comes from a local stub replaying the recorded fixtures and the film says so, the servers run on ports 4100, 5273 and 4274 so the end-to-end slice keeps 4000, 5173 and 4174, the rendered files go to `c:/tmp/covertree-video-out/` and are not committed, and the slice owns `demo-video/**` only. No tunnel, no upload. This slice has no worker model and no Grok review: the manager checks the films itself before anything is merged.
+
+## Prompt 27
+
+> sprawdź czy ten subagent od video nie ma jakiegoś problemu ?
+
+Outcome: checked at 17:49 from the subagent's files and logs, without interrupting it. It was working and not blocked: the first build had ended with exit 0, four films were in `c:/tmp/covertree-video-out/`, its servers were stopped and its ports free, and it was cutting frames to check the film. Two warnings in the build log were reported to Marcin (the plugin scripts out of sync, one font weight). The manager said it had not watched the films yet.
+
+## Prompt 28
+
+> na jakim etapie jestesmy ?
+
+Outcome: answered at about 18:05 with the state of wave 2: slice `e2e` merged into `main` as 5a09132 with `npm run verify` exit 0 and the browser suite at 10 passed, `transcripts` in its fix round before the last review, the demo films rendered once and being checked by their subagent, the closing steps of wave 2 not started. Two checks of the merge that the first pass skipped (a fresh install and the manager's reading of the suite) were done afterwards and recorded. The films were reported by their subagent at 18:22 and checked by the manager; the result is in `manager-state.md`. One question went to Marcin: whether `demo-video/` enters the repository.
