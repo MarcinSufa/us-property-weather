@@ -156,3 +156,9 @@ Outcome: the way conductors are started changed. The manager session starts them
 > ile % zrobiono juz ?
 
 Outcome: answered with an estimate of about 50 percent, counted by merged work and not by time: wave 0, `weather` and `docs` are on `main`; `api` had reported and was waiting for the manager's checks; `web` and `transcripts` were still running; wave 2 (`e2e`, CI, the closing review, the fresh-clone run, one real create, the transcript export) had not started. The estimate is the manager's reading and was given as such.
+
+## Prompt 24
+
+> ile % wykonano juz , na ile wyceniasz że jeszcze zostało ?
+
+Outcome: answered at 15:36 with about 65 percent done and 2.5 to 3.5 hours of wall-clock time left, both the manager's estimate. Counted as done: wave 0 and four of the five wave 1 slices on `main` (`weather`, `docs`, `api`), with `npm run verify` green there. Left, in the order that sets the finish: `web` (in its first review round), then the end-to-end slice of wave 2, which cannot start before `web` is merged, then the closing (review of the whole diff, the fresh-clone run, one real create, the transcript export, the README). `transcripts` runs beside these and does not set the finish. The spread comes mostly from the reviewer: its calls so far took between 82 and 1412 seconds.
