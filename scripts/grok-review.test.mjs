@@ -1,5 +1,8 @@
 import { Buffer } from 'node:buffer';
+import { spawnSync } from 'node:child_process';
+import process from 'node:process';
 import { describe, expect, test } from 'vitest';
+import { fileURLToPath, URL } from 'node:url';
 import { buildCreateRequest, main, parseArgs } from './grok-review.mjs';
 
 const apiKey = 'MARKER-KEY-123';
@@ -97,6 +100,21 @@ function expectSecretAbsent(output) {
 }
 
 describe('reviewer CLI arguments and request', () => {
+  test('starts with plain Node and reports usage when no arguments are given', () => {
+    const env = { ...process.env };
+    delete env.CURSOR_API_KEY;
+    const result = spawnSync(
+      process.execPath,
+      [fileURLToPath(new URL('./grok-review.mjs', import.meta.url))],
+      { encoding: 'utf8', env },
+    );
+    const output = `${result.stdout ?? ''}${result.stderr ?? ''}`;
+
+    expect(result.status).toBe(1);
+    expect(output).toContain('Usage: node scripts/grok-review.mjs');
+    expect(output).not.toContain('SyntaxError');
+  });
+
   test('requires a model and reports malformed parameters with usage', () => {
     expect(() =>
       parseArgs(['--prompt', 'prompt.md', '--patch', 'patch.diff', '--out', 'out.md']),

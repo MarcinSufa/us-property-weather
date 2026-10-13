@@ -1,5 +1,5 @@
 import { Buffer } from 'node:buffer';
-import { console } from 'node:console';
+import console from 'node:console';
 import { readFile, writeFile } from 'node:fs/promises';
 import process from 'node:process';
 import { TextDecoder } from 'node:util';
