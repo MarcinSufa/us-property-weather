@@ -42,7 +42,7 @@ function optionalValue(env: NodeJS.ProcessEnv, key: string): string | undefined 
 
 export function loadConfig(env: NodeJS.ProcessEnv): Config {
   const errors: string[] = [];
-  const rawApiKey = optionalValue(env, 'WEATHERSTACK_API_KEY')?.trim();
+  const rawApiKey = optionalValue(env, 'WEATHERSTACK_API_KEY');
   const apiKey = apiKeySchema.safeParse(rawApiKey);
   if (!apiKey.success) {
     errors.push('WEATHERSTACK_API_KEY is required');

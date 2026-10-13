@@ -19,10 +19,10 @@ export class PropertyRepository {
   private readonly insertStatement;
   private readonly findByIdStatement;
   private readonly deleteByIdStatement;
-  private readonly listAscendingStatement;
-  private readonly listDescendingStatement;
+  private readonly database: DatabaseSync;
 
   constructor(database: DatabaseSync) {
+    this.database = database;
     this.insertStatement = database.prepare(`
       INSERT INTO property (id, street, city, state, zip_code, lat, long, weather_data)
       VALUES (:id, :street, :city, :state, :zipCode, :lat, :long, :weatherData)
@@ -30,20 +30,6 @@ export class PropertyRepository {
     `);
     this.findByIdStatement = database.prepare('SELECT * FROM property WHERE id = :id');
     this.deleteByIdStatement = database.prepare('DELETE FROM property WHERE id = :id RETURNING *');
-    this.listAscendingStatement = database.prepare(`
-      SELECT * FROM property
-      WHERE (:city IS NULL OR city = :city)
-        AND (:state IS NULL OR state = :state)
-        AND (:zipCode IS NULL OR zip_code = :zipCode)
-      ORDER BY created_at ASC, rowid ASC
-    `);
-    this.listDescendingStatement = database.prepare(`
-      SELECT * FROM property
-      WHERE (:city IS NULL OR city = :city)
-        AND (:state IS NULL OR state = :state)
-        AND (:zipCode IS NULL OR zip_code = :zipCode)
-      ORDER BY created_at DESC, rowid DESC
-    `);
   }
 
   insert(row: NewProperty): Property {
@@ -69,13 +55,29 @@ export class PropertyRepository {
   }
 
   list(filter: PropertyFilter, sort: PropertySort): Property[] {
-    const statement =
-      sort === 'CREATED_AT_ASC' ? this.listAscendingStatement : this.listDescendingStatement;
-    const rows = statement.all({
-      city: filter.city ?? null,
-      state: filter.state ?? null,
-      zipCode: filter.zipCode ?? null,
-    });
+    const predicates: string[] = [];
+    const parameters: Record<string, string> = {};
+    if (filter.city !== undefined && filter.city !== null) {
+      predicates.push('city = :city');
+      parameters.city = filter.city;
+    }
+    if (filter.state !== undefined && filter.state !== null) {
+      predicates.push('state = :state');
+      parameters.state = filter.state;
+    }
+    if (filter.zipCode !== undefined && filter.zipCode !== null) {
+      predicates.push('zip_code = :zipCode');
+      parameters.zipCode = filter.zipCode;
+    }
+    const whereClause = predicates.length === 0 ? '' : `WHERE ${predicates.join(' AND ')}`;
+    const orderByClause =
+      sort === 'CREATED_AT_ASC'
+        ? 'ORDER BY created_at ASC, rowid ASC'
+        : 'ORDER BY created_at DESC, rowid DESC';
+    const statement = this.database.prepare(
+      `SELECT * FROM property ${whereClause} ${orderByClause}`,
+    );
+    const rows = statement.all(parameters);
     return rows.map((row) => this.mapRow(row));
   }
 
@@ -85,38 +87,14 @@ export class PropertyRepository {
   }
 
   private mapRow(row: Record<string, SQLOutputValue>): Property {
-    const id = row.id;
-    if (typeof id !== 'string') {
-      throw new Error('Invalid property row column: id');
-    }
-    const street = row.street;
-    if (typeof street !== 'string') {
-      throw new Error('Invalid property row column: street');
-    }
-    const city = row.city;
-    if (typeof city !== 'string') {
-      throw new Error('Invalid property row column: city');
-    }
-    const state = row.state;
-    if (typeof state !== 'string') {
-      throw new Error('Invalid property row column: state');
-    }
-    const zipCode = row.zip_code;
-    if (typeof zipCode !== 'string') {
-      throw new Error('Invalid property row column: zip_code');
-    }
-    const lat = row.lat;
-    if (typeof lat !== 'number') {
-      throw new Error('Invalid property row column: lat');
-    }
-    const long = row.long;
-    if (typeof long !== 'number') {
-      throw new Error('Invalid property row column: long');
-    }
-    const weatherDataJson = row.weather_data;
-    if (typeof weatherDataJson !== 'string') {
-      throw new Error('Invalid property row column: weather_data');
-    }
+    const id = this.textColumn(row, 'id');
+    const street = this.textColumn(row, 'street');
+    const city = this.textColumn(row, 'city');
+    const state = this.textColumn(row, 'state');
+    const zipCode = this.textColumn(row, 'zip_code');
+    const lat = this.numberColumn(row, 'lat');
+    const long = this.numberColumn(row, 'long');
+    const weatherDataJson = this.textColumn(row, 'weather_data');
     let weatherData: unknown;
     try {
       weatherData = JSON.parse(weatherDataJson);
@@ -126,10 +104,7 @@ export class PropertyRepository {
     if (typeof weatherData !== 'object' || weatherData === null || Array.isArray(weatherData)) {
       throw new Error('Invalid property row column: weather_data');
     }
-    const createdAt = row.created_at;
-    if (typeof createdAt !== 'string') {
-      throw new Error('Invalid property row column: created_at');
-    }
+    const createdAt = this.textColumn(row, 'created_at');
 
     return {
       id,
@@ -142,5 +117,21 @@ export class PropertyRepository {
       weatherData: weatherData as Record<string, unknown>,
       createdAt,
     };
+  }
+
+  private textColumn(row: Record<string, SQLOutputValue>, name: string): string {
+    const value = row[name];
+    if (typeof value !== 'string') {
+      throw new Error(`Invalid property row column: ${name}`);
+    }
+    return value;
+  }
+
+  private numberColumn(row: Record<string, SQLOutputValue>, name: string): number {
+    const value = row[name];
+    if (typeof value !== 'number') {
+      throw new Error(`Invalid property row column: ${name}`);
+    }
+    return value;
   }
 }

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { openDatabase } from '../db/database.ts';
 import type { DatabaseSync } from 'node:sqlite';
+import type { SQLOutputValue } from 'node:sqlite';
 import type { PropertyAddress, PropertyFilter } from './property.ts';
 import { PropertyRepository } from './property-repository.ts';
 
@@ -40,6 +41,61 @@ describe('PropertyRepository', () => {
       weatherData,
     });
   }
+
+  function expectIndexedList(filter: PropertyFilter, indexName: string) {
+    const preparedSql: string[] = [];
+    const recordedDatabase = new Proxy(database!, {
+      get(target, property) {
+        if (property === 'prepare') {
+          return (sql: string) => {
+            preparedSql.push(sql);
+            return target.prepare(sql);
+          };
+        }
+        const value: unknown = Reflect.get(target, property, target);
+        return value;
+      },
+    });
+    const recordedRepository = new PropertyRepository(recordedDatabase);
+    const preparedBeforeList = preparedSql.length;
+    recordedRepository.list(filter, 'CREATED_AT_ASC');
+    const preparedDuringList = preparedSql.slice(preparedBeforeList);
+    expect(preparedDuringList).toHaveLength(1);
+    const statementSql = preparedDuringList[0]!;
+    const parameters: Record<string, string | null> = {};
+    if (statementSql.includes(':city')) {
+      parameters.city = filter.city ?? null;
+    }
+    if (statementSql.includes(':state')) {
+      parameters.state = filter.state ?? null;
+    }
+    if (statementSql.includes(':zipCode')) {
+      parameters.zipCode = filter.zipCode ?? null;
+    }
+    const planRows = database!.prepare(`EXPLAIN QUERY PLAN ${statementSql}`).all(parameters);
+    const details = planRows
+      .map((row) => row.detail)
+      .filter((detail): detail is SQLOutputValue => detail !== undefined)
+      .map(String);
+    const planText = details.join('\n');
+
+    expect(planText, `Query plan details:\n${planText}`).toContain(
+      `SEARCH property USING INDEX ${indexName}`,
+    );
+    expect(planText, `Query plan details:\n${planText}`).not.toContain('SCAN property');
+  }
+
+  it('AC-STORE-2 uses the city index for a city-only list filter', () => {
+    expectIndexedList({ city: 'Springfield' }, 'property_city');
+  });
+
+  it('AC-STORE-2 uses the state index for a state-only list filter', () => {
+    expectIndexedList({ state: 'IL' }, 'property_state');
+  });
+
+  it('AC-STORE-2 uses the zip code index for a zip-only list filter', () => {
+    expectIndexedList({ zipCode: '62701' }, 'property_zip_code');
+  });
 
   it('AC-CREATE-1 returns address, coordinates and unique UUID identifiers', () => {
     const first = insert();
