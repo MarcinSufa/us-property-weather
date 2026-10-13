@@ -216,11 +216,11 @@ flowchart LR
 Not built:
 
 - Editing a property, pagination and authentication: they are outside the six stories.
-- Zip-to-city and state validation: `state` must be a `UsState` code; the city and zip code are accepted as typed and are not checked against each other or against the state, and Weatherstack region naming was measured for one state only.
+- Checking that the city, the zip code and the state belong together: `state` must be a `UsState` code, but the city and the zip code are accepted as typed and are not checked against each other or against the state; Weatherstack region naming was measured for one state only.
 - US territories: the state contract covers the 50 states and DC.
 - Retries, caching or a circuit breaker around the weather call: the quota is small and the person can press the button again.
 - A migration tool: there is one schema version.
-- A compiled API build, serving the web bundle from the API or deployment: the API runs its TypeScript directly with Node 24 and the project runs locally as described under "Run it", so no compiled build, bundled hosting or deployment is part of it.
+- A compiled API build, serving the web bundle from the API or deployment: the API runs its TypeScript directly with Node 24 and the project runs locally as described under "Run it", so a compiled API build, serving the web bundle from the API, and deployment are not part of it.
 - Exposing `astro` and `air_quality`: the full Weatherstack `current` object is stored; the recorded answer has 18 keys, and `air_quality` contains `us-epa-index` and `gb-defra-index`, which cannot be GraphQL field names because they contain hyphens.
 
 Known limits:
