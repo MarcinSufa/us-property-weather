@@ -352,7 +352,7 @@ Wave 2 proves this on a fresh clone in a temporary folder, not in the working ch
 | Role | Who | Does | Never |
 |---|---|---|---|
 | Manager | this session, Claude Opus 5.5 | plan, briefs, merges into `main`, verify after each merge, the record | implements |
-| Conductor | one Claude Opus 5.5 session per slice, working directory in this checkout | writes the worker prompt and the reviewer prompt, runs `npm run verify` and reads the diff itself, decides on review findings | implements |
+| Conductor | one Claude Opus 5.5 subagent of the manager session per slice, at medium effort, running in the background | writes the worker prompt and the reviewer prompt, runs `npm run verify` and reads the diff itself, decides on review findings | implements |
 | Worker | GPT Luna through `codex exec`, one per slice, in its own worktree and branch `slice/<name>` | writes tests and code inside its slice's files | touches another slice's files, adds a dependency |
 | Reviewer | Grok 4.7, high reasoning, through the Cursor v1 API | reads the diff pasted into the prompt, returns findings | writes code; is never the model that wrote the diff |
 
@@ -362,7 +362,7 @@ Shared files: `package.json` files and the lockfile belong to the manager after 
 
 Model ids are checked before every vendor leg and passed explicitly.
 
-Conductor sessions are started from a terminal in this checkout through the compaction plugin's launcher with its Jev switch, one terminal per slice, each pointed at its own handoff file under `docs/agent/handoffs/`.
+Conductors are started by the manager session as background subagents, one per slice, each pointed at its own handoff file under `docs/agent/handoffs/` (changed on 2026-10-13; before that the plan had Marcin start them from a terminal). A conductor writes its slice record under `docs/agent/slices/<slice>/` inside the slice worktree and commits it on the slice branch, so parallel conductors never share a git index; the record reaches `main` with the merge.
 
 ## 15. Waves
 

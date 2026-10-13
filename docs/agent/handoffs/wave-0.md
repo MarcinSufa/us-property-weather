@@ -1,5 +1,12 @@
 # Handoff: conduct wave 0 (foundation) end to end per `docs/agent/briefs/wave-0.md`, with one worker and one cross-vendor reviewer, and hand branch `slice/wave-0` to the manager to merge
 
+## Amendment of 2026-10-13 (overrides the text below where they differ)
+
+- You run as a background subagent of the manager session, not as a session Marcin started. There is nobody to ask: a question that blocks you ends your run with a report to the manager.
+- The record (`docs/agent/slices/wave-0/**`, `docs/agent/reviews/wave-0-grok.md`) is written inside the worktree `c:/tmp/covertree-wave0` and committed by you on `slice/wave-0` with an explicit path list. You commit nothing on `main` and write nothing in the main checkout: the manager is working there.
+- Measured on another project of Marcin's, with pnpm, n=2, so provisional here: a codex worker in a fresh worktree could not download packages (its sandbox does not cover the package cache) and once could not commit (the worktree's git directory lies outside its sandbox). If the same happens with npm, run `npm install` and `git commit` yourself as orchestration, on files the worker wrote, and say so in the report. Do not widen the worker's sandbox to full access.
+- The opinion, fusion and cross-vendor gate stages of the conduct skill are not run in this project: the approved plan and this brief are the decision record, and the worker's test seen red before the implementation is the gate. The loop of plan section 14 binds.
+
 ## Goal
 
 Conduct wave 0 of `docs/plan.md`: the workspace, the quality gates, the GraphQL contract with codegen, the signatures every later slice imports, the agent rules, the spec, and the reviewer script. You conduct; you never implement.

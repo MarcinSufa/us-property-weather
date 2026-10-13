@@ -138,3 +138,15 @@ Outcome: the design is accepted; the `web` brief will point at `docs/design/READ
 > P7 tak
 
 Outcome: the split of skills is settled. Copies are committed for the public ones (grilling, i-have-adhd, handoff, superpowers, gstack, graphify, demo-video); the private ones (conduct, conduct-binding, exo-compact) are described only. `docs/plan.md` section 19 no longer lists an owed input. The manager's own reading, to be carried into the wave 1 brief that owns the README: only skills actually invoked in this project are copied, as skill files with source, version and licence notice, not as whole upstream repositories.
+
+## Prompt 22, with three messages sent mid-turn
+
+> Jeśli to koniec planu planowania, to ruszaj z jak największą liczbą równoległych sesji, gdzie workerem będzie Luna, Ty będziesz Opus 5.5 na medium i będziesz orkiestratorował, a Grog będzie reviewerem. Puść jak najwięcej tych sesji i kontroluj je tutaj. Bądź głównym orkiestratorem całego workflow i tej fabryki.
+
+> Muszę koniecznie odpalać w Powershowie, nie mogę tutaj.
+
+> W sensie chcę odpalić tutaj, nie z Porsche.
+
+> Nie z powershell tylko tutaj tobie potwierdzam odpalaj
+
+Outcome: the way conductors are started changed. The manager session starts them itself as background subagents (Claude Opus 5.5 at medium effort), one per slice, instead of Marcin starting each from a terminal; the worker stays GPT Luna through `codex exec` and the reviewer stays Grok through the Cursor API. The second message read as the opposite, the third and fourth corrected it. What "as many as possible" comes to: wave 0 has to run alone, because every later slice imports what it creates, so one conductor was started now; the five slices of wave 1 start together once wave 0 is merged and green. While wave 0 runs the manager writes the wave 1 briefs. Each conductor keeps its record on its slice branch, so parallel conductors never share a git index.
