@@ -1,4 +1,3 @@
-import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Layout } from './components/Layout.tsx';
 import { PropertyListPage } from './pages/PropertyListPage.tsx';
 import { NewPropertyPage } from './pages/NewPropertyPage.tsx';
@@ -16,8 +15,3 @@ export const routes = [
     ],
   },
 ];
-
-export function App() {
-  const router = createBrowserRouter(routes);
-  return <RouterProvider router={router} />;
-}

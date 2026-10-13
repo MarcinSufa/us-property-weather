@@ -1,6 +1,19 @@
+import { http, HttpResponse } from 'msw';
 import { screen, within } from '@testing-library/react';
-import { expect, test } from 'vitest';
+import { beforeEach, expect, test } from 'vitest';
+import { server } from './test/server.ts';
 import { renderApp } from './test/render-app.tsx';
+
+beforeEach(() => {
+  server.use(
+    http.get('http://localhost/graphql', ({ request }) => {
+      const operationName = new URL(request.url).searchParams.get('operationName');
+      return operationName === 'Properties'
+        ? HttpResponse.json({ data: { properties: [] } })
+        : HttpResponse.json({});
+    }),
+  );
+});
 
 test.each([
   ['/', 'Properties', 'Properties - CoverTree'],

@@ -64,3 +64,9 @@ End with a reply that states, in this order:
 3. The green run: the command and the counts, and the results of codegen, typecheck, eslint and prettier.
 4. Every place where what you built departs from a board or from the prompt, with the reason.
 5. Anything you could not do or were unsure about. Do not paper over it.
+
+## Added after round 1
+
+- Evidence files must be plain UTF-8 without colour codes. Your shell is PowerShell, whose `>` writes UTF-16: set `$env:NO_COLOR = '1'` and write with `2>&1 | Out-File -Encoding utf8 <file>`.
+- This installed `msw` (3.0.3) names the option `onUnhandledFrame: 'error'`; the setup file already uses it.
+- jsdom does not update `document.title` from a React 19 `<title>` element, so `apps/web/src/components/PageTitle.tsx` sets it in an effect. Use that component on every page.
