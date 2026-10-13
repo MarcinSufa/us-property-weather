@@ -17,17 +17,15 @@ Use Node.js 24, as specified in `.nvmrc`. Create `.env` from `.env.example` and 
 npm install
 cp .env.example .env     # then put the Weatherstack key in .env
 npm run dev              # API on http://localhost:4000/graphql (with GraphiQL), web on http://localhost:5173
-npm run verify
-npm run e2e
 ```
 
-The last two commands are the checks described in the next section; only the first three are needed to run the application.
+`npm run dev` keeps running until it is stopped with Ctrl+C.
 
 The local API with GraphiQL is at http://localhost:4000/graphql. The web app is at http://localhost:5173.
 
 ## Test it
 
-`npm run verify` runs format check, codegen, lint, typecheck, unit and integration tests, and the web build.
+`npm run verify` runs format check, codegen, lint, typecheck, unit and integration tests, and the web build. It does not need the application to be running.
 
 ```sh
 npm run verify
@@ -47,13 +45,13 @@ npm run e2e
 | GraphQL API            | All six stories, error codes and field errors, failed weather stores nothing, zero-provider-calls proof                                                             | Vitest, in process through `yoga.fetch`, no port |
 | Web                    | Form validation and error display, filter and sort to URL, list states, delete confirmation, empty-list refresh                                                     | Vitest, Testing Library, `msw`                   |
 | End to end             | Six stories against the API, a temporary database and a local Weatherstack stub                                                                                     | Playwright                                       |
-| Real service           | One create against Weatherstack, evidence saved without the key                                                                                                     | Manual                                           |
+| Real service           | One create against the real Weatherstack, made once by hand at the end of the project, with evidence saved without the key                                          | Manual, not a reader step                        |
 
-No test calls the real Weatherstack service.
+No automated test, development loop or CI job calls the real Weatherstack service.
 
 ## Environment variables
 
-Configuration is parsed at start-up. A missing or malformed value stops the process with a message naming the variable, never its value.
+Configuration is parsed at start-up. A missing `WEATHERSTACK_API_KEY` or a malformed value of any variable stops the process with a message that names the variable and never its value; every other variable falls back to the default in the table.
 
 | Variable                | Default                        | Notes                                                 |
 | ----------------------- | ------------------------------ | ----------------------------------------------------- |
@@ -185,7 +183,7 @@ flowchart LR
   AD -->|"GET /current, once per create"| WS[Weatherstack]
 ```
 
-1. Resolvers pass arguments to the service and translate domain errors into GraphQL errors.
+1. Resolvers contain no business logic; they pass arguments to the service and translate domain errors into GraphQL errors. The mapping from domain error to GraphQL error is in `apps/api/src/graphql/errors.ts`.
 2. `PropertyService` validates, fetches weather and persists; it depends on `WeatherProvider`, not `fetch`.
 3. `PropertyRepository` is the only file that contains SQL.
 4. `WeatherstackProvider` owns Weatherstack URL, query, response and error-code knowledge, and receives `fetch`, base URL, key and timeout through its constructor.
@@ -197,7 +195,7 @@ flowchart LR
 | Concern                    | Choice                                                                         | Reason                                                                                                         | Rejected                                                                                                                           |
 | -------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | Runtime                    | Node 24                                                                        | Built-in SQLite and direct TypeScript execution                                                                | Node 22: `node:sqlite` is flagged experimental there                                                                               |
-| Repository                 | npm workspaces: `apps/api`, `apps/web`, `e2e`                                  | Built into npm; one install and one lockfile                                                                   | pnpm or Turborepo: another tool for two packages                                                                                   |
+| Repository                 | npm workspaces: `apps/api`, `apps/web`, `e2e`                                  | Built into npm; one install and one lockfile                                                                   | pnpm or Turborepo: another tool for three small packages                                                                           |
 | Language                   | TypeScript 6.0 with `strict`, `noUncheckedIndexedAccess`, `erasableSyntaxOnly` | Newest version the linter supports                                                                             | TypeScript 7: outside `typescript-eslint`'s range                                                                                  |
 | API                        | GraphQL Yoga 5 on `node:http`                                                  | Small, spec-compliant, error masking, health endpoint and GraphiQL built in, in-process `yoga.fetch` for tests | Apollo Server: more surface for six operations; Express: not needed                                                                |
 | Schema                     | Schema-first SDL and graphql-codegen                                           | The SDL contract lets backend and frontend sessions work in parallel                                           | Code-first (Pothos, Nexus): the contract would be TypeScript inside the API package                                                |
@@ -218,11 +216,11 @@ flowchart LR
 Not built:
 
 - Editing a property, pagination and authentication: they are outside the six stories.
-- Zip-to-city and state validation: the address is trusted as typed, and Weatherstack region naming was measured for one state only.
+- Zip-to-city and state validation: `state` must be a `UsState` code; the city and zip code are accepted as typed and are not checked against each other or against the state, and Weatherstack region naming was measured for one state only.
 - US territories: the state contract covers the 50 states and DC.
 - Retries, caching or a circuit breaker around the weather call: the quota is small and the person can press the button again.
 - A migration tool: there is one schema version.
-- A compiled API build, serving the web bundle from the API or deployment: the application is meant to run locally with `npm install` and nothing else.
+- A compiled API build, serving the web bundle from the API or deployment: the API runs its TypeScript directly with Node 24 and the project runs locally as described under "Run it", so no compiled build, bundled hosting or deployment is part of it.
 - Exposing `astro` and `air_quality`: the full Weatherstack `current` object is stored; the recorded answer has 18 keys, and `air_quality` contains `us-epa-index` and `gb-defra-index`, which cannot be GraphQL field names because they contain hyphens.
 
 Known limits:
@@ -232,7 +230,7 @@ Known limits:
 
 ### Path to AWS Lambda (not built)
 
-To move to AWS Lambda, GraphQL Yoga's fetch-style handler would run the same schema and resolvers behind a Lambda function URL or API Gateway with a thin adapter in place of `main.ts`. Since a SQLite file does not survive between invocations, `PropertyRepository` would get a second implementation over a managed database while the service stayed unchanged. The key would move from `.env` to a secrets store, and the web bundle would be served as static files from object storage behind a CDN. This deployment is not built.
+To move to AWS Lambda, GraphQL Yoga's fetch-style handler would run the same schema and resolvers behind a Lambda function URL or API Gateway with a thin adapter in place of `main.ts`. Lambda has no durable shared disk for the SQLite file: the deployment directory is read-only, temporary storage is per execution environment and is discarded with it, and concurrent environments cannot share one file. `PropertyRepository` would therefore get a second implementation over a managed database while the service stayed unchanged. The key would move from `.env` to a secrets store, and the web bundle would be served as static files from object storage behind a CDN. This deployment is not built.
 
 ## How AI was used
 

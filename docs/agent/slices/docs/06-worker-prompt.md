@@ -1,0 +1,17 @@
+# Worker prompt 06: slice `docs`, fixes after review round 1
+
+You are the worker of slice `docs`. Change only `README.md`. Do not run git commands that write. All earlier rules hold (plain sentences, no long dashes, no personal names, `npx prettier --check README.md` passes, exactly six `graphql` fenced blocks, only existing npm scripts and paths).
+
+The reviewer's findings and the conductor's decision on each. Apply the ones marked "fix".
+
+- F1, fix. "Test it" says both that one create runs against the real Weatherstack and that no test calls it. Change the closing sentence to: no automated test, development loop or CI job calls the real Weatherstack service. Change the "Real service" row so it is clear this is not a step for the reader: one create against the real Weatherstack, made once by hand at the end of the project, with the evidence saved without the key.
+- F2, fix. "Environment variables": only `WEATHERSTACK_API_KEY` is required. Say: a missing `WEATHERSTACK_API_KEY` or a malformed value of any variable stops the process with a message that names the variable and never its value; every other variable falls back to the default in the table.
+- F3, fix. "Not built", the item on the compiled API build: the reason "meant to run locally with `npm install` and nothing else" is wrong as worded, because running also needs Node 24, `.env` and `npm run dev`. New reason: the API runs its TypeScript directly with Node 24 and the project runs locally as described under "Run it", so no compiled build, bundled hosting or deployment is part of it.
+- F4, fix. Lambda paragraph: replace the reason "a SQLite file does not survive between invocations". Correct reason: Lambda has no durable shared disk for the SQLite file (the deployment directory is read-only, temporary storage is per execution environment and is discarded with it, and concurrent environments cannot share one file), so `PropertyRepository` would get a second implementation over a managed database while the service stays unchanged.
+- F5, fix in part. Architecture rule 1 stays as the plan has it (resolvers contain no business logic; they pass arguments to the service and translate domain errors into GraphQL errors), and add that the mapping from domain error to GraphQL error is in `apps/api/src/graphql/errors.ts`. Still one sentence, or two short ones.
+- F6 and F7 concern the provenance files, which you do not edit. No change from you.
+- F8, fix. The zip item: `state` is not free text, it must be one of the `UsState` codes. Say that the city and the zip code are accepted as typed and are not checked against each other or against the state, and keep the second half (Weatherstack region naming was measured for one state only).
+- F9, fix. Stack table, repository row: three workspaces are listed and the rejected cell says "two packages". Change the rejected cell to: pnpm or Turborepo: another tool for three small packages.
+- F10, fix. "Run it": `npm run dev` does not return, so the two check commands after it in the same block are never reached. End the "Run it" code block at `npm run dev` (keep the three lines and their comments exactly as they are), delete the sentence about "the last two commands", and add: `npm run dev` keeps running until it is stopped with Ctrl+C. Under "Test it", say that `npm run verify` does not need the application to be running. Say nothing about whether `npm run e2e` needs it stopped; that is not known yet.
+
+Reply with what you changed, by finding id.
