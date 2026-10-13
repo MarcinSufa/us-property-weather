@@ -1,0 +1,23 @@
+
+> e2e
+> npm test --workspace=e2e
+
+
+> test
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+  ok  1 stories.spec.ts:65:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property (774ms)
+  ok  2 stories.spec.ts:78:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing (877ms)
+  ok  3 stories.spec.ts:121:1 › AC-CREATE-9 AC-CREATE-13 server validation describes and focuses the street field (551ms)
+  ok  4 stories.spec.ts:137:1 › AC-CREATE-10 create the other list properties through the form (867ms)
+  ok  5 stories.spec.ts:147:1 › AC-LIST-2 list rows show address fields and the fixture weather summary (474ms)
+  ok  6 stories.spec.ts:169:1 › AC-FILTER-7 filters by city, state and zip and reloads the same view (1.5s)
+  ok  7 stories.spec.ts:212:1 › AC-SORT-4 sort newest first by default and keep oldest first in the URL (718ms)
+  ok  8 stories.spec.ts:236:1 › AC-DETAIL-5 open a list property and show coordinates and stored weather (507ms)
+  ok  9 stories.spec.ts:254:1 › AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show the missing detail (998ms)
+  ok 10 stories.spec.ts:320:1 › AC-WEATHER-9 list, filter, sort, detail and delete do not make weather requests (16ms)
+
+  10 passed (11.6s)

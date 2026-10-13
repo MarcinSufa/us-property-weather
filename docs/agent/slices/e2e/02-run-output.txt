@@ -1,0 +1,67 @@
+
+> e2e
+> npm test --workspace=e2e
+
+
+> test
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+  x   1 stories.spec.ts:65:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property (2.0s)
+  -   2 stories.spec.ts:78:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing
+  -   3 stories.spec.ts:110:1 › AC-CREATE-9 AC-CREATE-13 server validation describes and focuses the street field
+  -   4 stories.spec.ts:126:1 › AC-CREATE-10 create the other list properties through the form
+  -   5 stories.spec.ts:136:1 › AC-LIST-2 list rows show address fields and the fixture weather summary
+  -   6 stories.spec.ts:156:1 › AC-FILTER-7 filters by city, state and zip and reloads the same view
+  -   7 stories.spec.ts:197:1 › AC-SORT-4 sort newest first by default and keep oldest first in the URL
+  -   8 stories.spec.ts:219:1 › AC-DETAIL-5 open a list property and show coordinates and stored weather
+  -   9 stories.spec.ts:235:1 › AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show the missing detail
+  -  10 stories.spec.ts:283:1 › AC-WEATHER-9 list, filter, sort, detail and delete do not make weather requests
+
+
+  1) stories.spec.ts:65:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('19 °C')
+    Expected: visible
+    Error: strict mode violation: getByText('19 °C') resolved to 2 elements:
+        1) <span class="weather-card__temperature">19 °C</span> aka getByText('19 °C', { exact: true })
+        2) <span class="weather-card__description">Patchy rain nearby · feels like 19 °C</span> aka getByText('Patchy rain nearby · feels')
+
+    Call log:
+      - Expect "toBeVisible" getByText('19 °C') with timeout 5000ms
+      - waiting for getByText('19 °C')
+
+
+      71 |
+      72 |   await expect(page.getByRole('heading', { name: 'Weather at creation' })).toBeVisible();
+    > 73 |   await expect(page.getByText('19 °C')).toBeVisible();
+         |                                         ^
+      74 |   await expect(page.getByText('Patchy rain nearby')).toBeVisible();
+      75 |   await expectWeatherCalls(request);
+      76 | });
+        at C:\tmp\covertree-e2e\e2e\stories.spec.ts:73:41
+
+    Error Context: test-results\stories-AC-CREATE-10-creat-2e1bc--and-opens-the-new-property\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\stories-AC-CREATE-10-creat-2e1bc--and-opens-the-new-property\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\stories-AC-CREATE-10-creat-2e1bc--and-opens-the-new-property\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    stories.spec.ts:65:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property 
+  9 did not run
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\tmp\covertree-e2e\e2e
+npm error workspace @covertree/e2e
+npm error location C:\tmp\covertree-e2e\e2e
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c playwright test
