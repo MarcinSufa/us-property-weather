@@ -192,7 +192,8 @@ select {
   color: var(--color-danger-strong);
 }
 
-.button:disabled {
+.button:disabled,
+.button[aria-disabled='true'] {
   border-color: var(--color-border);
   background: var(--color-border-subtle);
   color: var(--color-text-muted);

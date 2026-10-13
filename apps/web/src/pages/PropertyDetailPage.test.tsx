@@ -151,6 +151,35 @@ test('AC-DETAIL-5 shows all weather values with metric units', async () => {
   }
 });
 
+test('AC-DETAIL-5 shows every weather description and the saved icon as a decorative image', async () => {
+  server.use(
+    propertyHandler(() =>
+      successResponse({
+        ...property,
+        weatherData: {
+          ...weather,
+          weather_descriptions: ['Light rain', 'Moderate rain'],
+          weather_icons: ['https://example.test/rain.png'],
+        },
+      }),
+    ),
+  );
+  renderApp(['/properties/property-42']);
+  const card = await screen.findByRole('region', { name: 'Weather at creation' });
+
+  expect(
+    within(card).getByText('Light rain, Moderate rain · feels like 23 °C'),
+  ).toBeInTheDocument();
+  expect(within(card).getByRole('presentation')).toHaveAttribute(
+    'src',
+    'https://example.test/rain.png',
+  );
+  expect(within(card).getByRole('presentation')).toHaveAttribute('width', '44');
+  expect(within(card).getByRole('presentation')).toHaveAttribute('height', '44');
+  expect(within(card).getByRole('presentation')).toHaveAttribute('loading', 'lazy');
+  expect(within(card).getByRole('presentation')).toHaveAttribute('referrerPolicy', 'no-referrer');
+});
+
 test('AC-WEB-5 shows Not reported for null humidity and observation time while preserving zero', async () => {
   server.use(
     propertyHandler(() =>
@@ -200,6 +229,7 @@ test('AC-WEB-5 renders every null weather field as Not reported', async () => {
   );
   renderApp(['/properties/property-42']);
   const card = await screen.findByRole('region', { name: 'Weather at creation' });
+  expect(within(card).queryByRole('presentation')).not.toBeInTheDocument();
 
   for (const term of [
     'Humidity',

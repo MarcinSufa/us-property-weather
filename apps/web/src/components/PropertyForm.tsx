@@ -9,7 +9,7 @@ import {
 } from '../graphql/errors.ts';
 import { CreatePropertyDocument } from '../graphql/operations.ts';
 import { ErrorAlert } from './ErrorAlert.tsx';
-import { ErrorIcon } from './ErrorIcon.tsx';
+import { FieldErrorMessages, fieldErrorProps } from './FieldErrors.tsx';
 import { StateOptions } from './StateOptions.tsx';
 
 type CreateField = 'street' | 'city' | 'state' | 'zipCode';
@@ -64,7 +64,15 @@ export function PropertyForm() {
     zipCode: null,
   });
   const pending = useRef(false);
+  const unmounted = useRef(false);
   const [{ fetching }, createProperty] = useMutation(CreatePropertyDocument);
+
+  useEffect(
+    () => () => {
+      unmounted.current = true;
+    },
+    [],
+  );
 
   useEffect(() => {
     const firstInvalidField = fieldOrder.find((field) =>
@@ -74,28 +82,6 @@ export function PropertyForm() {
   }, [fieldErrors]);
 
   const errorsFor = (field: CreateField) => fieldErrors.filter((error) => error.field === field);
-  const errorProps = (field: CreateField) => {
-    const errors = errorsFor(field);
-    const describedBy = [
-      ...(field === 'zipCode' ? [`${fieldIds.zipCode}-hint`] : []),
-      ...errors.map((_, index) => `${fieldIds[field]}-error-${index}`),
-    ];
-    return {
-      'aria-invalid': errors.length > 0 ? true : undefined,
-      'aria-describedby': describedBy.length > 0 ? describedBy.join(' ') : undefined,
-    };
-  };
-  const renderFieldErrors = (field: CreateField) =>
-    errorsFor(field).map((error, index) => (
-      <p
-        className="field__error new-property__error"
-        id={`${fieldIds[field]}-error-${index}`}
-        key={`${field}-${index}`}
-      >
-        <ErrorIcon size={14} />
-        <span>{error.message}</span>
-      </p>
-    ));
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -112,6 +98,7 @@ export function PropertyForm() {
       const result = await createProperty({
         input: { ...values, state: values.state as CreatePropertyInput['state'] },
       });
+      if (unmounted.current) return;
       if (result.data?.createProperty) {
         void navigate(`/properties/${result.data.createProperty.id}`);
         return;
@@ -126,7 +113,7 @@ export function PropertyForm() {
         setAlert(defaultError);
       }
     } catch {
-      setAlert(defaultError);
+      if (!unmounted.current) setAlert(defaultError);
     } finally {
       pending.current = false;
     }
@@ -156,10 +143,16 @@ export function PropertyForm() {
             placeholder="15 Saguaro Blvd"
             value={values.street}
             readOnly={fetching}
-            {...errorProps('street')}
+            {...fieldErrorProps(fieldIds.street, errorsFor('street'))}
             onChange={(event) => setValues({ ...values, street: event.target.value })}
           />
-          {renderFieldErrors('street')}
+          <FieldErrorMessages
+            controlId={fieldIds.street}
+            errors={errorsFor('street')}
+            className="new-property__error"
+            iconSize={14}
+            element="p"
+          />
         </div>
         <div className="field">
           <label htmlFor={fieldIds.city}>City</label>
@@ -175,10 +168,16 @@ export function PropertyForm() {
             placeholder="Fountain Hills"
             value={values.city}
             readOnly={fetching}
-            {...errorProps('city')}
+            {...fieldErrorProps(fieldIds.city, errorsFor('city'))}
             onChange={(event) => setValues({ ...values, city: event.target.value })}
           />
-          {renderFieldErrors('city')}
+          <FieldErrorMessages
+            controlId={fieldIds.city}
+            errors={errorsFor('city')}
+            className="new-property__error"
+            iconSize={14}
+            element="p"
+          />
         </div>
         <div className="new-property__address-fields">
           <div className="field">
@@ -192,12 +191,18 @@ export function PropertyForm() {
               autoComplete="address-level1"
               value={values.state}
               disabled={fetching}
-              {...errorProps('state')}
+              {...fieldErrorProps(fieldIds.state, errorsFor('state'))}
               onChange={(event) => setValues({ ...values, state: event.target.value })}
             >
               <StateOptions emptyLabel="Select a state" />
             </select>
-            {renderFieldErrors('state')}
+            <FieldErrorMessages
+              controlId={fieldIds.state}
+              errors={errorsFor('state')}
+              className="new-property__error"
+              iconSize={14}
+              element="p"
+            />
           </div>
           <div className="field">
             <label htmlFor={fieldIds.zipCode}>Zip code</label>
@@ -216,13 +221,23 @@ export function PropertyForm() {
               placeholder="85268"
               value={values.zipCode}
               readOnly={fetching}
-              {...errorProps('zipCode')}
+              {...fieldErrorProps(
+                fieldIds.zipCode,
+                errorsFor('zipCode'),
+                `${fieldIds.zipCode}-hint`,
+              )}
               onChange={(event) => setValues({ ...values, zipCode: event.target.value })}
             />
             <p className="field__hint" id={`${fieldIds.zipCode}-hint`}>
               5 digits. The weather lookup uses it.
             </p>
-            {renderFieldErrors('zipCode')}
+            <FieldErrorMessages
+              controlId={fieldIds.zipCode}
+              errors={errorsFor('zipCode')}
+              className="new-property__error"
+              iconSize={14}
+              element="p"
+            />
           </div>
         </div>
         <div className="new-property__actions">

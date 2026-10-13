@@ -16,7 +16,7 @@ const properties = [
     weatherData: {
       __typename: 'WeatherData',
       temperature: 24,
-      weather_descriptions: ['Sunny'],
+      weather_descriptions: ['Sunny', 'Partly cloudy'],
     },
   },
   {
@@ -105,6 +105,9 @@ test('AC-LIST-2 rows show each property field and the street links to its detail
   expect(screen.getByText('85268')).toBeInTheDocument();
   expect(screen.getByRole('region', { name: 'Property list' })).toHaveAttribute('tabindex', '0');
   expect(screen.getByText('24 °C · Sunny')).toBeInTheDocument();
+  expect(screen.getByRole('cell', { name: '24 °C · Sunny' })).not.toHaveTextContent(
+    'Partly cloudy',
+  );
   expect(screen.getByRole('cell', { name: 'Not reported · Light rain' })).toBeInTheDocument();
   expect(screen.getByRole('cell', { name: '27 °C · Not reported' })).toBeInTheDocument();
   expect(screen.getAllByRole('columnheader')).toHaveLength(7);
@@ -254,6 +257,62 @@ test.each(['PROPERTY_NOT_FOUND', 'network'] as const)(
   },
 );
 
+test('AC-WEB-17 an answer without data keeps the dialog open with the failure message', async () => {
+  handleProperties();
+  server.use(deleteHandler(() => HttpResponse.json({ data: null })));
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+  await user.click(screen.getByRole('button', { name: 'Delete property' }));
+
+  expect(await screen.findByRole('alert')).toHaveTextContent(
+    'Could not delete. The property is still here.',
+  );
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+});
+
+test('AC-WEB-19 pending delete keeps focus, blocks repeat actions, and recovers after failure', async () => {
+  handleProperties();
+  let requests = 0;
+  let resolveResponse: ((response: Response) => void) | undefined;
+  server.use(
+    deleteHandler(() => {
+      requests += 1;
+      return requests === 1
+        ? new Promise((resolve) => (resolveResponse = resolve))
+        : HttpResponse.json({ data: { deleteProperty: { __typename: 'Property', id: 'one' } } });
+    }),
+  );
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+  const dangerButton = screen.getByRole('button', { name: 'Delete property' });
+  await user.click(dangerButton);
+
+  const pendingButton = screen.getByRole('button', { name: 'Deleting…' });
+  expect(pendingButton).toHaveFocus();
+  expect(pendingButton).not.toBeDisabled();
+  expect(pendingButton).toHaveAttribute('aria-disabled', 'true');
+  expect(screen.getByRole('button', { name: 'Cancel' })).toHaveAttribute('aria-disabled', 'true');
+  expect(screen.getByRole('status')).toHaveTextContent('Deleting…');
+
+  await user.click(pendingButton);
+  await user.click(screen.getByRole('button', { name: 'Cancel' }));
+  expect(requests).toBe(1);
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+  resolveResponse?.(
+    HttpResponse.json({
+      errors: [{ message: 'Failed', extensions: { code: 'PROPERTY_NOT_FOUND' } }],
+    }),
+  );
+  expect(await screen.findByRole('alert')).toHaveTextContent(
+    'Could not delete. The property is still here.',
+  );
+  const usableButton = screen.getByRole('button', { name: 'Delete property' });
+  expect(usableButton).not.toHaveAttribute('aria-disabled', 'true');
+  await user.click(usableButton);
+  await waitFor(() => expect(requests).toBe(2));
+});
+
 test('AC-WEB-17 reopening another list dialog clears the previous failure', async () => {
   handleProperties();
   server.use(
@@ -279,8 +338,11 @@ test('AC-WEB-6 creation time is a time element with the received ISO value', asy
   renderApp(['/']);
 
   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' })).toBeInTheDocument();
-  const time = document.querySelector('time');
-  expect(time).toHaveAttribute('datetime', properties[0]!.createdAt);
+  const rows = screen.getAllByRole('row').slice(1);
+  expect(rows).toHaveLength(properties.length);
+  rows.forEach((row, index) => {
+    expect(within(row).getByRole('time')).toHaveAttribute('dateTime', properties[index]!.createdAt);
+  });
 });
 
 test('AC-WEB-5 missing weather values read Not reported once per missing value group', async () => {
@@ -317,7 +379,7 @@ test('AC-LIST-4 pending list request shows a loading status', async () => {
   );
   renderApp(['/']);
 
-  expect(await screen.findByText('Loading properties…')).toHaveAttribute('role', 'status');
+  expect(await screen.findByRole('status')).toHaveTextContent('Loading properties…');
   resolveResponse?.(HttpResponse.json({ data: { properties: [] } }));
   expect(await screen.findByRole('heading', { name: 'No properties yet' })).toBeInTheDocument();
 });
@@ -610,7 +672,7 @@ test('AC-LIST-4 changing the URL hides old rows while its request is pending', a
   await user.type(screen.getByRole('textbox', { name: 'City' }), 'Austin');
   await user.click(screen.getByRole('button', { name: 'Apply filters' }));
 
-  expect(await screen.findByText('Loading properties…')).toHaveAttribute('role', 'status');
+  expect(await screen.findByRole('status')).toHaveTextContent('Loading properties…');
   expect(screen.queryByRole('link', { name: '15 Saguaro Blvd' })).not.toBeInTheDocument();
   resolveResponse?.(HttpResponse.json({ data: { properties: [] } }));
   expect(

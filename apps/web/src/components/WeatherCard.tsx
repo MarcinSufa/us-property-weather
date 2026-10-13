@@ -22,7 +22,12 @@ function formatObservation(weather: WeatherData, createdAt: string): string {
 }
 
 export function WeatherCard({ weather, createdAt }: WeatherCardProps) {
-  const description = weather.weather_descriptions?.[0]?.trim() || null;
+  const description =
+    weather.weather_descriptions
+      ?.map((entry) => entry.trim())
+      .filter(Boolean)
+      .join(', ') || null;
+  const icon = weather.weather_icons?.[0] || null;
   const temperature = formatTemperature(weather.temperature);
   const feelsLike = formatTemperature(weather.feelslike);
   const wind =
@@ -52,19 +57,16 @@ export function WeatherCard({ weather, createdAt }: WeatherCardProps) {
         <p>{formatObservation(weather, createdAt)}</p>
       </div>
       <div className="weather-card__highlight">
-        <svg
-          aria-hidden="true"
-          width="44"
-          height="44"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8m9.8 9.8 1.8 1.8M5.3 18.7l1.8-1.8m11.6-11.6-1.8 1.8" />
-        </svg>
+        {icon && (
+          <img
+            src={icon}
+            alt=""
+            width="44"
+            height="44"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+          />
+        )}
         <div className="weather-card__summary">
           <span className="weather-card__temperature">{temperature}</span>
           <span className="weather-card__description">

@@ -226,6 +226,60 @@ test('AC-CREATE-13 state-only field error receives focus', async () => {
   expect(screen.getByRole('combobox', { name: 'State' })).toHaveFocus();
 });
 
+test('AC-CREATE-13 with errors for street and zip code the street field has focus', async () => {
+  server.use(
+    createHandler(() =>
+      HttpResponse.json({
+        errors: [
+          {
+            message: 'Invalid address',
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              fieldErrors: [
+                { field: 'zipCode', message: 'Zip code must be exactly 5 digits.' },
+                { field: 'street', message: 'Enter a street address.' },
+              ],
+            },
+          },
+        ],
+      }),
+    ),
+  );
+  const { user } = renderApp(['/properties/new']);
+  await fillAddress(user);
+  await user.click(screen.getByRole('button', { name: 'Add property' }));
+
+  expect(await screen.findByText('Zip code must be exactly 5 digits.')).toBeInTheDocument();
+  expect(screen.getByRole('textbox', { name: 'Street' })).toHaveFocus();
+});
+
+test('AC-WEB-20 leaving the form while saving is not undone by the answer', async () => {
+  let resolveResponse: ((response: Response) => void) | undefined;
+  let resolveListResponse: ((response: Response) => void) | undefined;
+  server.use(
+    http.get('http://localhost/graphql', ({ request }) => {
+      if (new URL(request.url).searchParams.get('operationName') === 'Properties') {
+        return new Promise((resolve) => (resolveListResponse = resolve));
+      }
+      return HttpResponse.json({});
+    }),
+    createHandler(() => new Promise((resolve) => (resolveResponse = resolve))),
+  );
+  const { router, user } = renderApp(['/properties/new']);
+  await fillAddress(user);
+  await user.click(screen.getByRole('button', { name: 'Add property' }));
+  await screen.findByRole('status');
+  await waitFor(() => expect(resolveResponse).toBeDefined());
+  await user.click(screen.getByRole('link', { name: 'Cancel' }));
+
+  expect(router.state.location.pathname).toBe('/');
+  await screen.findByRole('status');
+  resolveResponse?.(successResponse());
+  resolveListResponse?.(HttpResponse.json({ data: { properties: [] } }));
+  expect(await screen.findByRole('heading', { name: 'No properties yet' })).toBeInTheDocument();
+  expect(router.state.location.pathname).toBe('/');
+});
+
 test.each([
   [
     'LOCATION_NOT_FOUND',

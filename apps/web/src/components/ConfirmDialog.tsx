@@ -14,7 +14,7 @@ export function ConfirmDialog({ property, onClose, onDeleted }: ConfirmDialogPro
   const dialogRef = useRef<HTMLDialogElement>(null);
   const cancelRef = useRef<HTMLButtonElement>(null);
   const [failure, setFailure] = useState(false);
-  const [result, deleteProperty] = useMutation(DeletePropertyDocument);
+  const [mutationResult, deleteProperty] = useMutation(DeletePropertyDocument);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -25,10 +25,10 @@ export function ConfirmDialog({ property, onClose, onDeleted }: ConfirmDialogPro
   }, [property]);
 
   const confirmDelete = async () => {
-    if (!property) return;
+    if (!property || mutationResult.fetching) return;
     setFailure(false);
     const result = await deleteProperty({ id: property.id });
-    if (result.error) {
+    if (!result.data?.deleteProperty) {
       setFailure(true);
       return;
     }
@@ -47,7 +47,7 @@ export function ConfirmDialog({ property, onClose, onDeleted }: ConfirmDialogPro
         onClose();
       }}
       onCancel={(event) => {
-        if (result.fetching) event.preventDefault();
+        if (mutationResult.fetching) event.preventDefault();
       }}
     >
       <h2 id="confirm-dialog-title">Delete {property?.street}?</h2>
@@ -65,20 +65,27 @@ export function ConfirmDialog({ property, onClose, onDeleted }: ConfirmDialogPro
           ref={cancelRef}
           className="button button--dialog-cancel"
           type="button"
-          disabled={result.fetching}
-          onClick={() => dialogRef.current?.close()}
+          aria-disabled={mutationResult.fetching || undefined}
+          onClick={() => {
+            if (!mutationResult.fetching) dialogRef.current?.close();
+          }}
         >
           Cancel
         </button>
         <button
           className="button button--danger"
           type="button"
-          disabled={result.fetching}
+          aria-disabled={mutationResult.fetching || undefined}
           onClick={() => void confirmDelete()}
         >
-          {result.fetching ? 'Deleting…' : 'Delete property'}
+          {mutationResult.fetching ? 'Deleting…' : 'Delete property'}
         </button>
       </div>
+      {mutationResult.fetching && (
+        <p className="text-muted" role="status">
+          Deleting…
+        </p>
+      )}
     </dialog>
   );
 }

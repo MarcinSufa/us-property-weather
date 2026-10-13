@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import type { PropertyFilter } from '../graphql/generated/graphql.ts';
 import type { PropertyFieldError } from '../graphql/errors.ts';
-import { ErrorIcon } from './ErrorIcon.tsx';
+import { FieldErrorMessages, fieldErrorProps } from './FieldErrors.tsx';
 import { StateOptions } from './StateOptions.tsx';
 
 export type FilterValues = {
@@ -46,30 +46,7 @@ export function PropertyFilters({
     onApply(formValues);
   };
 
-  const fieldErrorProps = (field: FilterField) => {
-    const fieldErrors = errors.filter((error) => error.field === field);
-    return {
-      'aria-invalid': fieldErrors.length > 0 ? true : undefined,
-      'aria-describedby':
-        fieldErrors.length > 0
-          ? fieldErrors.map((_, index) => `${fieldIds[field]}-error-${index}`).join(' ')
-          : undefined,
-    };
-  };
-
-  const renderErrors = (field: FilterField) =>
-    errors
-      .filter((error) => error.field === field)
-      .map((error, index) => (
-        <span
-          className="field__error property-filter-error"
-          id={`${fieldIds[field]}-error-${index}`}
-          key={`${field}-${index}-${error.message}`}
-        >
-          <ErrorIcon size={16} />
-          {error.message}
-        </span>
-      ));
+  const errorsFor = (field: FilterField) => errors.filter((error) => error.field === field);
 
   return (
     <form className="card property-filters" onSubmit={onSubmit} aria-live="polite">
@@ -81,10 +58,14 @@ export function PropertyFilters({
           placeholder="Any city"
           maxLength={100}
           value={formValues.city}
-          {...fieldErrorProps('city')}
+          {...fieldErrorProps(fieldIds.city, errorsFor('city'))}
           onChange={(event) => setFormValues({ ...formValues, city: event.target.value })}
         />
-        {renderErrors('city')}
+        <FieldErrorMessages
+          controlId={fieldIds.city}
+          errors={errorsFor('city')}
+          className="property-filter-error"
+        />
       </div>
       <div className="property-filters__mobile-address">
         <div className="field property-filters__state">
@@ -92,12 +73,16 @@ export function PropertyFilters({
           <select
             id={fieldIds.state}
             value={formValues.state}
-            {...fieldErrorProps('state')}
+            {...fieldErrorProps(fieldIds.state, errorsFor('state'))}
             onChange={(event) => setFormValues({ ...formValues, state: event.target.value })}
           >
             <StateOptions emptyLabel="Any" />
           </select>
-          {renderErrors('state')}
+          <FieldErrorMessages
+            controlId={fieldIds.state}
+            errors={errorsFor('state')}
+            className="property-filter-error"
+          />
         </div>
         <div className="field property-filters__zip">
           <label htmlFor={fieldIds.zipCode}>Zip code</label>
@@ -110,10 +95,14 @@ export function PropertyFilters({
             maxLength={5}
             placeholder="5 digits"
             value={formValues.zip}
-            {...fieldErrorProps('zipCode')}
+            {...fieldErrorProps(fieldIds.zipCode, errorsFor('zipCode'))}
             onChange={(event) => setFormValues({ ...formValues, zip: event.target.value })}
           />
-          {renderErrors('zipCode')}
+          <FieldErrorMessages
+            controlId={fieldIds.zipCode}
+            errors={errorsFor('zipCode')}
+            className="property-filter-error"
+          />
         </div>
       </div>
       <div className="property-filters__actions">
