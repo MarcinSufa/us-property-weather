@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useQuery } from 'urql';
 import { Link, useSearchParams } from 'react-router';
 import { PageTitle } from '../components/PageTitle.tsx';
+import { ErrorAlert } from '../components/ErrorAlert.tsx';
 import { PropertyFilters, type FilterValues } from '../components/PropertyFilters.tsx';
 import { PropertyTable } from '../components/PropertyTable.tsx';
 import { PropertiesDocument } from '../graphql/operations.ts';
@@ -76,8 +77,8 @@ function EmptyProperties({
   if (hasFilters) {
     return (
       <section className="property-list__state-card">
-        <h2 className="property-list__state-title">No properties match these filters</h2>
-        <div className="card empty-state">
+        <div className="card empty-state property-list__filtered-empty">
+          <h2 className="property-list__state-title">No properties match these filters</h2>
           <p className="property-list__state-detail">{summary}</p>
           <button className="button button--secondary" type="button" onClick={onClear}>
             Clear filters
@@ -142,7 +143,15 @@ export function PropertyListPage() {
     context: propertyQueryContext,
   });
   const errorCode = getFirstGraphqlErrorCode(error);
-  const fieldErrors = errorCode === 'BAD_USER_INPUT' ? getFieldErrors(error) : [];
+  const fieldErrors =
+    errorCode === 'BAD_USER_INPUT'
+      ? getFieldErrors(error).filter(
+          (fieldError) =>
+            fieldError.field === 'city' ||
+            fieldError.field === 'state' ||
+            fieldError.field === 'zipCode',
+        )
+      : [];
   const setFilters = (values: FilterValues) =>
     setSearchParams(createSearchParamsWithFilters(searchParams, values));
   const clearFilters = () => {
@@ -175,7 +184,6 @@ export function PropertyListPage() {
       </div>
       <PropertyFilters
         values={filterValues}
-        urlKey={searchParams.toString()}
         sort={oldestFirst ? 'oldest' : 'newest'}
         errors={fieldErrors}
         onApply={setFilters}
@@ -184,30 +192,12 @@ export function PropertyListPage() {
       />
       {fetching ? (
         <LoadingProperties />
-      ) : errorCode === 'BAD_USER_INPUT' ? null : error ? (
+      ) : error && (errorCode !== 'BAD_USER_INPUT' || fieldErrors.length === 0) ? (
         <section className="card property-list__state-card property-list__alert-card">
-          <div className="alert" role="alert">
-            <svg
-              className="alert__icon"
-              aria-hidden="true"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 7.5v5.5" />
-              <path d="M12 16.5h.01" />
-            </svg>
-            <div>
-              <h2 className="property-list__state-title alert__title">Could not load properties</h2>
-              <p className="alert__body">The server did not answer. Nothing was changed.</p>
-            </div>
-          </div>
+          <ErrorAlert
+            title="Could not load properties"
+            body="The server did not answer. Nothing was changed."
+          />
           <div>
             <button
               className="button button--secondary"
@@ -218,7 +208,7 @@ export function PropertyListPage() {
             </button>
           </div>
         </section>
-      ) : properties && properties.length === 0 ? (
+      ) : errorCode === 'BAD_USER_INPUT' ? null : properties && properties.length === 0 ? (
         <EmptyProperties
           hasFilters={urlFilters.hasFilters}
           summary={summary}

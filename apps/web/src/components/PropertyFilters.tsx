@@ -1,7 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import type { PropertyFilter } from '../graphql/generated/graphql.ts';
 import type { PropertyFieldError } from '../graphql/errors.ts';
-import { US_STATES } from '../us-states.ts';
+import { ErrorIcon } from './ErrorIcon.tsx';
+import { StateOptions } from './StateOptions.tsx';
 
 export type FilterValues = {
   city: string;
@@ -11,7 +12,6 @@ export type FilterValues = {
 
 type PropertyFiltersProps = {
   values: FilterValues;
-  urlKey: string;
   sort: 'newest' | 'oldest';
   errors: PropertyFieldError[];
   onApply: (values: FilterValues) => void;
@@ -19,15 +19,16 @@ type PropertyFiltersProps = {
   onSortChange: (sort: 'newest' | 'oldest') => void;
 };
 
+type FilterField = keyof PropertyFilter;
+
 const fieldIds = {
   city: 'property-filter-city',
   state: 'property-filter-state',
   zipCode: 'property-filter-zip',
-} satisfies Record<keyof PropertyFilter, string>;
+} satisfies Record<FilterField, string>;
 
 export function PropertyFilters({
   values,
-  urlKey,
   sort,
   errors,
   onApply,
@@ -38,14 +39,14 @@ export function PropertyFilters({
 
   useEffect(() => {
     setFormValues(values);
-  }, [urlKey, values]);
+  }, [values]);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onApply(formValues);
   };
 
-  const fieldErrorProps = (field: keyof PropertyFilter) => {
+  const fieldErrorProps = (field: FilterField) => {
     const fieldErrors = errors.filter((error) => error.field === field);
     return {
       'aria-invalid': fieldErrors.length > 0 ? true : undefined,
@@ -56,7 +57,7 @@ export function PropertyFilters({
     };
   };
 
-  const renderErrors = (field: keyof PropertyFilter) =>
+  const renderErrors = (field: FilterField) =>
     errors
       .filter((error) => error.field === field)
       .map((error, index) => (
@@ -64,23 +65,8 @@ export function PropertyFilters({
           className="field__error property-filter-error"
           id={`${fieldIds[field]}-error-${index}`}
           key={`${field}-${index}-${error.message}`}
-          role="alert"
         >
-          <svg
-            aria-hidden="true"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 7.5v5.5" />
-            <path d="M12 16.5h.01" />
-          </svg>
+          <ErrorIcon size={16} />
           {error.message}
         </span>
       ));
@@ -109,12 +95,7 @@ export function PropertyFilters({
             {...fieldErrorProps('state')}
             onChange={(event) => setFormValues({ ...formValues, state: event.target.value })}
           >
-            <option value="">Any</option>
-            {Object.entries(US_STATES).map(([code, name]) => (
-              <option key={code} value={code}>
-                {code} {name}
-              </option>
-            ))}
+            <StateOptions emptyLabel="Any" />
           </select>
           {renderErrors('state')}
         </div>
@@ -139,7 +120,14 @@ export function PropertyFilters({
         <button className="button button--secondary" type="submit">
           Apply filters
         </button>
-        <button className="button button--quiet" type="button" onClick={onClear}>
+        <button
+          className="button button--quiet"
+          type="button"
+          onClick={() => {
+            setFormValues({ city: '', state: '', zip: '' });
+            onClear();
+          }}
+        >
           Clear
         </button>
       </div>

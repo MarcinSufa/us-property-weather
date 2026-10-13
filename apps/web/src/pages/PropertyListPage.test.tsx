@@ -288,6 +288,20 @@ test('AC-WEB-8 unknown URL state is omitted and the state control shows Any', as
   expect(requests.at(-1)).toEqual({ sort: 'CREATED_AT_DESC' });
 });
 
+test('AC-FILTER-10 choosing Any omits the state filter from the query and URL', async () => {
+  const requests: ListVariables[] = [];
+  handleProperties(properties, (variables) => requests.push(variables));
+  const { router, user } = renderApp(['/?city=Austin&state=TX']);
+
+  await screen.findByRole('link', { name: '15 Saguaro Blvd' });
+  await user.selectOptions(screen.getByRole('combobox', { name: 'State' }), '');
+  await user.click(screen.getByRole('button', { name: 'Apply filters' }));
+
+  expect(requests.at(-1)?.filter).toEqual({ city: 'Austin' });
+  expect(requests.at(-1)?.filter).not.toHaveProperty('state');
+  expect(router.state.location.search).toBe('?city=Austin');
+});
+
 test('AC-WEB-9 blank filter inputs are omitted from URL and query variables', async () => {
   const requests: ListVariables[] = [];
   handleProperties(properties, (variables) => requests.push(variables));
@@ -310,6 +324,33 @@ test('AC-WEB-10 Clear keeps oldest sort and removes all filter variables', async
 
   expect(router.state.location.search).toBe('?sort=oldest');
   expect(requests.at(-1)).toEqual({ sort: 'CREATED_AT_ASC' });
+});
+
+test('AC-WEB-10 Clear empties typed values that were never applied', async () => {
+  handleProperties([]);
+  const { router, user } = renderApp(['/']);
+
+  await screen.findByRole('heading', { name: 'No properties yet' });
+  const city = screen.getByRole('textbox', { name: 'City' });
+  await user.type(city, 'Austin');
+  await user.click(screen.getByRole('button', { name: 'Clear' }));
+
+  expect(city).toHaveValue('');
+  expect(router.state.location.search).not.toContain('city');
+});
+
+test('AC-LIST-4 BAD_USER_INPUT without field errors shows the load error', async () => {
+  server.use(
+    propertiesHandler(() =>
+      HttpResponse.json({
+        errors: [{ message: 'Invalid input', extensions: { code: 'BAD_USER_INPUT' } }],
+      }),
+    ),
+  );
+  renderApp(['/']);
+
+  expect(await screen.findByRole('alert')).toHaveTextContent('Could not load properties');
+  expect(screen.getByRole('button', { name: 'Try again' })).toBeInTheDocument();
 });
 
 test('AC-SORT-4 sort changes keep filters and back restores the selected sort', async () => {

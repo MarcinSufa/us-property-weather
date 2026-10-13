@@ -233,13 +233,20 @@ select {
   background: var(--color-danger-bg);
 }
 
+.alert > svg {
+  flex: 0 0 auto;
+  color: var(--color-danger);
+}
+
 .alert__icon {
   flex: 0 0 auto;
   color: var(--color-danger);
 }
 
 .alert__title {
+  margin: 0;
   color: var(--color-danger-strong);
+  font-size: 16px;
   font-weight: 600;
 }
 
