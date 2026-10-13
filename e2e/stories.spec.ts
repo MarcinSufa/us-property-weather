@@ -43,13 +43,17 @@ async function fillAddress(page: Page, address: Address) {
   await page.getByRole('textbox', { name: 'Zip code', exact: true }).fill(address.zipCode);
 }
 
-async function createProperty(page: Page, address: Address) {
+async function createProperty(page: Page, request: APIRequestContext, address: Address) {
   await page.goto('/properties/new');
   await fillAddress(page, address);
   expectedWeatherCalls += 1;
   await page.getByRole('button', { name: 'Add property', exact: true }).click();
   await expect(page.getByRole('heading', { name: address.street, exact: true })).toBeVisible();
   await expect(page).toHaveURL(/\/properties\/[^/]+$/);
+  await expect(
+    page.getByRole('region', { name: 'Weather at creation', exact: true }),
+  ).toBeVisible();
+  await expectWeatherCalls(request);
 }
 
 function propertyRows(page: Page) {
@@ -67,7 +71,7 @@ test('AC-CREATE-10 create stores the weather snapshot and opens the new property
   request,
 }) => {
   await expectWeatherCalls(request, 0);
-  await createProperty(page, properties[0]!);
+  await createProperty(page, request, properties[0]!);
 
   const weather = page.getByRole('region', { name: 'Weather at creation', exact: true });
   await expect(weather).toContainText('19 °C');
@@ -115,6 +119,11 @@ test('AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves 
 
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Properties', exact: true })).toBeVisible();
+  const rows = propertyRows(page);
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText(properties[0]!.street);
+  await expect(page.getByText('1 property', { exact: true })).toBeVisible();
+  await expectWeatherCalls(request);
   await expect(page.getByRole('link', { name: unknownAddress.street, exact: true })).toHaveCount(0);
 });
 
@@ -139,8 +148,8 @@ test('AC-CREATE-10 create the other list properties through the form', async ({
   request,
 }) => {
   await expectWeatherCalls(request);
-  await createProperty(page, properties[1]!);
-  await createProperty(page, properties[2]!);
+  await createProperty(page, request, properties[1]!);
+  await createProperty(page, request, properties[2]!);
   await expectWeatherCalls(request);
 });
 
@@ -180,11 +189,17 @@ test('AC-FILTER-7 filters by city, state and zip and reloads the same view', asy
   await expect(page).toHaveURL(/[?&]city=fOuNtAiN\+hIlLs(?:&|$)/);
   await expect(rows).toHaveCount(1);
   await expect(rows.first()).toContainText(properties[0]!.street);
+  await expect(page.getByRole('link', { name: properties[1]!.street, exact: true })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: properties[2]!.street, exact: true })).toHaveCount(0);
+  await expectWeatherCalls(request);
   await page.reload();
   await expect(page.getByRole('textbox', { name: 'City', exact: true })).toHaveValue(
     'fOuNtAiN hIlLs',
   );
   await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText(properties[0]!.street);
+  await expect(page.getByRole('link', { name: properties[1]!.street, exact: true })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: properties[2]!.street, exact: true })).toHaveCount(0);
   await expectWeatherCalls(request);
 
   await page.getByRole('textbox', { name: 'City', exact: true }).fill('');
@@ -192,9 +207,16 @@ test('AC-FILTER-7 filters by city, state and zip and reloads the same view', asy
   await page.getByRole('button', { name: 'Apply filters', exact: true }).click();
   await expect(page).toHaveURL(/state=AZ/);
   await expect(rows).toHaveCount(2);
+  await expect(page.getByRole('link', { name: properties[0]!.street, exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: properties[1]!.street, exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: properties[2]!.street, exact: true })).toHaveCount(0);
+  await expectWeatherCalls(request);
   await page.reload();
   await expect(page.getByRole('combobox', { name: 'State', exact: true })).toHaveValue('AZ');
   await expect(rows).toHaveCount(2);
+  await expect(page.getByRole('link', { name: properties[0]!.street, exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: properties[1]!.street, exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: properties[2]!.street, exact: true })).toHaveCount(0);
   await expectWeatherCalls(request);
 
   await page.getByRole('combobox', { name: 'State', exact: true }).selectOption('');
@@ -203,9 +225,15 @@ test('AC-FILTER-7 filters by city, state and zip and reloads the same view', asy
   await expect(page).toHaveURL(/zip=78701/);
   await expect(rows).toHaveCount(1);
   await expect(rows.first()).toContainText(properties[2]!.street);
+  await expect(page.getByRole('link', { name: properties[0]!.street, exact: true })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: properties[1]!.street, exact: true })).toHaveCount(0);
+  await expectWeatherCalls(request);
   await page.reload();
   await expect(page.getByRole('textbox', { name: 'Zip code', exact: true })).toHaveValue('78701');
   await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText(properties[2]!.street);
+  await expect(page.getByRole('link', { name: properties[0]!.street, exact: true })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: properties[1]!.street, exact: true })).toHaveCount(0);
   await expectWeatherCalls(request);
 });
 
@@ -225,11 +253,14 @@ test('AC-SORT-4 sort newest first by default and keep oldest first in the URL', 
   await expect(page).toHaveURL(/sort=oldest/);
   await expect(rows.nth(0)).toContainText(properties[0]!.street);
   await expect(rows.nth(2)).toContainText(properties[2]!.street);
+  await expectWeatherCalls(request);
   await page.reload();
   await expect(page.getByRole('combobox', { name: 'Sort by created', exact: true })).toHaveValue(
     'oldest',
   );
   await expect(rows.nth(0)).toContainText(properties[0]!.street);
+  await expect(rows.nth(1)).toContainText(properties[1]!.street);
+  await expect(rows.nth(2)).toContainText(properties[2]!.street);
   await expectWeatherCalls(request);
 });
 
@@ -238,6 +269,9 @@ test('AC-DETAIL-5 open a list property and show coordinates and stored weather',
   request,
 }) => {
   await page.goto('/');
+  const rows = propertyRows(page);
+  await expect(rows).toHaveCount(3);
+  await expect(page.getByRole('link', { name: properties[2]!.street, exact: true })).toBeVisible();
   await expectWeatherCalls(request);
   await page.getByRole('link', { name: properties[2]!.street, exact: true }).click();
   await expect(page).toHaveURL(/\/properties\/[^/]+$/);
@@ -246,6 +280,7 @@ test('AC-DETAIL-5 open a list property and show coordinates and stored weather',
   ).toBeVisible();
   await expect(page.getByText('33.609', { exact: true })).toBeVisible();
   await expect(page.getByText('-111.724', { exact: true })).toBeVisible();
+  await expectWeatherCalls(request);
   const weather = page.getByRole('region', { name: 'Weather at creation', exact: true });
   await expect(weather).toContainText('19 °C');
   await expectWeatherCalls(request);
@@ -256,6 +291,9 @@ test('AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show 
   request,
 }) => {
   await page.goto('/');
+  const rows = propertyRows(page);
+  await expect(rows).toHaveCount(3);
+  await expect(page.getByRole('link', { name: properties[2]!.street, exact: true })).toBeVisible();
   await expectWeatherCalls(request);
   const deletedStreet = properties[2]!.street;
   const deleteButton = page.getByRole('button', {
@@ -306,8 +344,9 @@ test('AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show 
   await expectWeatherCalls(request);
   await dialog.getByRole('button', { name: 'Delete property', exact: true }).click();
   await expect(dialog).toBeHidden();
-  await expect(page.getByRole('link', { name: deletedStreet, exact: true })).toHaveCount(0);
   await expect(page.getByText('2 properties', { exact: true })).toBeVisible();
+  await expect(rows).toHaveCount(2);
+  await expect(page.getByRole('link', { name: deletedStreet, exact: true })).toHaveCount(0);
   await expectWeatherCalls(request);
 
   await page.goto(detailHref!);

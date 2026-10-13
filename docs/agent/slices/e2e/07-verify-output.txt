@@ -1,0 +1,131 @@
+
+> verify
+> npm run format:check && npm run codegen && npm run lint && npm run typecheck && npm test && npm run build
+
+
+> format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> codegen
+> npm run codegen --workspace=apps/api && npm run codegen --workspace=apps/web
+
+
+> codegen
+> graphql-codegen --config codegen.ts
+
+❯ Parse Configuration
+✔ Parse Configuration
+❯ Generate outputs
+❯ Generate to src/graphql/generated/resolvers-types.ts
+❯ Load GraphQL schemas
+✔ Load GraphQL schemas
+❯ Load GraphQL documents
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/resolvers-types.ts
+✔ Generate outputs
+
+> codegen
+> graphql-codegen --config codegen.ts
+
+❯ Parse Configuration
+✔ Parse Configuration
+❯ Generate outputs
+❯ Generate to src/graphql/generated/
+❯ Generate to src/graphql/generated/schema-types.ts
+❯ Load GraphQL schemas
+❯ Load GraphQL schemas
+✔ Load GraphQL schemas
+✔ Load GraphQL schemas
+❯ Load GraphQL documents
+❯ Load GraphQL documents
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/schema-types.ts
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/
+✔ Generate outputs
+
+> lint
+> eslint .
+
+
+> typecheck
+> npm run typecheck --workspace=apps/api && npm run typecheck --workspace=apps/web && npm run typecheck --workspace=e2e
+
+
+> typecheck
+> tsc --noEmit -p tsconfig.json
+
+
+> typecheck
+> tsc --noEmit -p tsconfig.json
+
+
+> typecheck
+> tsc --noEmit -p tsconfig.json
+
+
+> test
+> npm run test --workspace=apps/api && npm run test --workspace=apps/web && vitest run --config vitest.config.js
+
+
+> test
+> vitest run
+
+
+ RUN  v5.0.4 C:/tmp/covertree-e2e/apps/api
+
+
+ Test Files  9 passed (9)
+      Tests  274 passed (274)
+   Start at  17:43:42
+   Duration  882ms (import 72%, tests 19%, transform 6%, worker 3%)
+
+
+> test
+> vitest run
+
+
+ RUN  v5.0.4 C:/tmp/covertree-e2e/apps/web
+
+
+ Test Files  4 passed (4)
+      Tests  79 passed (79)
+   Start at  17:43:44
+   Duration  16.13s (tests 71%, environment 19%, setup 5%, import 4%, transform 1%)
+
+
+ RUN  v5.0.4 C:/tmp/covertree-e2e
+
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  17:44:00
+   Duration  323ms (tests 87%, import 7%, transform 4%, worker 2%)
+
+
+> build
+> npm run build --workspace=apps/web
+
+
+> build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 128 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.70 kB │ gzip:   0.38 kB
+dist/assets/index-DTFsEnkO.css   15.25 kB │ gzip:   3.04 kB
+dist/assets/index-DlhNFqSA.js   375.98 kB │ gzip: 116.69 kB
+
+✓ built in 215ms

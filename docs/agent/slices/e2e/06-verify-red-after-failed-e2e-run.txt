@@ -1,0 +1,107 @@
+## The commands of .github/workflows/ci.yml run by hand, in order, in a second worktree at commit e21a2dc (Windows 11, Node v24.16.0); no .env in this tree: absent
+
+## YAML parse
+{
+ "on": [
+  "push",
+  "pull_request"
+ ],
+ "permissions": {
+  "contents": "read"
+ },
+ "runsOn": "ubuntu-latest",
+ "steps": [
+  "actions/checkout@v7",
+  "actions/setup-node@v7",
+  "npm ci",
+  "npm run verify",
+  "npx playwright install --with-deps chromium",
+  "npm run e2e",
+  "actions/upload-artifact@v7"
+ ]
+}
+
+## $ npm ci
+❯ Load GraphQL documents
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/schema-types.ts
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/
+✔ Generate outputs
+
+added 505 packages, and audited 509 packages in 13s
+
+108 packages are looking for funding
+  run `npm fund` for details
+
+10 high severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+exit 0
+
+## $ npm run verify
+  4:7158   error  'navigator' is not defined                                                                                    no-undef
+  4:7804   error  Unexpected empty object pattern                                                                               no-empty-pattern
+  4:8834   error  'atob' is not defined                                                                                         no-undef
+  4:9114   error  'clearTimeout' is not defined                                                                                 no-undef
+  4:9160   error  'setTimeout' is not defined                                                                                   no-undef
+  5:524    error  'clearTimeout' is not defined                                                                                 no-undef
+  5:2088   error  'e' is defined but never used                                                                                 no-unused-vars
+  5:2711   error  'console' is not defined                                                                                      no-undef
+  5:3679   error  'addEventListener' is not defined                                                                             no-undef
+  5:3714   error  'removeEventListener' is not defined                                                                          no-undef
+  5:4058   error  Unsafe usage of optional chaining. If it short-circuits with 'undefined' the evaluation will throw TypeError  no-unsafe-optional-chaining
+  5:4847   error  'window' is not defined                                                                                       no-undef
+  5:8585   error  'window' is not defined                                                                                       no-undef
+  5:8625   error  'navigator' is not defined                                                                                    no-undef
+  5:8732   error  'window' is not defined                                                                                       no-undef
+  5:8776   error  'navigator' is not defined                                                                                    no-undef
+  5:8825   error  'navigator' is not defined                                                                                    no-undef
+  5:8883   error  'navigator' is not defined                                                                                    no-undef
+  5:8936   error  'setInterval' is not defined                                                                                  no-undef
+  5:8959   error  'fetch' is not defined                                                                                        no-undef
+  5:8992   error  'document' is not defined                                                                                     no-undef
+
+✖ 1178 problems (1178 errors, 0 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+
+exit 1
+
+## $ npx playwright install --with-deps chromium
+exit 0
+
+## $ npm run e2e
+
+> e2e
+> npm test --workspace=e2e
+
+
+> test
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+  ok  1 stories.spec.ts:65:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property (624ms)
+  ok  2 stories.spec.ts:78:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing (757ms)
+  ok  3 stories.spec.ts:121:1 › AC-CREATE-9 AC-CREATE-13 server validation describes and focuses the street field (459ms)
+  ok  4 stories.spec.ts:137:1 › AC-CREATE-10 create the other list properties through the form (869ms)
+  ok  5 stories.spec.ts:147:1 › AC-LIST-2 list rows show address fields and the fixture weather summary (502ms)
+  ok  6 stories.spec.ts:169:1 › AC-FILTER-7 filters by city, state and zip and reloads the same view (1.4s)
+  ok  7 stories.spec.ts:212:1 › AC-SORT-4 sort newest first by default and keep oldest first in the URL (656ms)
+  ok  8 stories.spec.ts:236:1 › AC-DETAIL-5 open a list property and show coordinates and stored weather (468ms)
+  ok  9 stories.spec.ts:254:1 › AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show the missing detail (938ms)
+  ok 10 stories.spec.ts:320:1 › AC-WEATHER-9 list, filter, sort, detail and delete do not make weather requests (14ms)
+
+  10 passed (11.2s)
+exit 0

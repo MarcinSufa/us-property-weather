@@ -1,0 +1,86 @@
+## The commands of .github/workflows/ci.yml run by hand, in order, in a second worktree at commit e21a2dc (Windows 11, Node v24.16.0); .env in this tree: absent; e2e/playwright-report and e2e/test-results absent at the start
+
+## $ npm ci
+❯ Load GraphQL documents
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/schema-types.ts
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/
+✔ Generate outputs
+
+added 505 packages, and audited 509 packages in 14s
+
+108 packages are looking for funding
+  run `npm fund` for details
+
+10 high severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+exit 0
+
+## $ npm run verify
+
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  17:02:38
+   Duration  264ms (tests 77%, transform 13%, import 8%, worker 2%)
+
+
+> build
+> npm run build --workspace=apps/web
+
+
+> build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 128 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.70 kB │ gzip:   0.38 kB
+dist/assets/index-DTFsEnkO.css   15.25 kB │ gzip:   3.04 kB
+dist/assets/index-DlhNFqSA.js   375.98 kB │ gzip: 116.69 kB
+
+✓ built in 174ms
+exit 0
+
+## $ npx playwright install --with-deps chromium
+exit 0
+
+## $ npm run e2e
+
+> e2e
+> npm test --workspace=e2e
+
+
+> test
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+  ok  1 stories.spec.ts:65:1 › AC-CREATE-10 create stores the weather snapshot and opens the new property (582ms)
+  ok  2 stories.spec.ts:78:1 › AC-CREATE-15 AC-WEB-14 unknown location keeps the typed address and saves nothing (758ms)
+  ok  3 stories.spec.ts:121:1 › AC-CREATE-9 AC-CREATE-13 server validation describes and focuses the street field (463ms)
+  ok  4 stories.spec.ts:137:1 › AC-CREATE-10 create the other list properties through the form (802ms)
+  ok  5 stories.spec.ts:147:1 › AC-LIST-2 list rows show address fields and the fixture weather summary (439ms)
+  ok  6 stories.spec.ts:169:1 › AC-FILTER-7 filters by city, state and zip and reloads the same view (1.4s)
+  ok  7 stories.spec.ts:212:1 › AC-SORT-4 sort newest first by default and keep oldest first in the URL (708ms)
+  ok  8 stories.spec.ts:236:1 › AC-DETAIL-5 open a list property and show coordinates and stored weather (449ms)
+  ok  9 stories.spec.ts:254:1 › AC-DELETE-3 AC-WEB-16 confirm in the modal dialog, restore focus and show the missing detail (938ms)
+  ok 10 stories.spec.ts:320:1 › AC-WEATHER-9 list, filter, sort, detail and delete do not make weather requests (13ms)
+
+  10 passed (11.1s)
+exit 0
