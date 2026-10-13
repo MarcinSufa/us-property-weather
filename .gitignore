@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+
+node_modules/
+
+*.db
+*.sqlite
+
+.exovault/
+.conduct/
+.claude/settings.local.json
+.claude/handoff/
