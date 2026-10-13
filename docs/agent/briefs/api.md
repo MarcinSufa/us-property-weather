@@ -4,7 +4,7 @@ Wave 1. Conductor rules: `docs/agent/handoffs/wave-1.md`. Binding design: `docs/
 
 ## Owns
 
-`apps/api/src/property/**`, `apps/api/src/db/**`, `apps/api/src/graphql/**`, `apps/api/src/main.ts`, `apps/api/src/config.ts`. Not `apps/api/src/weather/**`: this slice imports the `WeatherProvider` interface and its two error classes and tests against a fake provider. `main.ts` constructs the real `WeatherstackProvider`, whose body another slice is writing.
+`apps/api/src/property/**`, `apps/api/src/db/**`, `apps/api/src/graphql/**`, `apps/api/src/main.ts`, `apps/api/src/config.ts`. Not `apps/api/src/weather/**`: this slice imports the `WeatherProvider` interface and its two error classes and tests against a fake provider. `main.ts` constructs the real `WeatherstackProvider`, whose body another slice is writing. Inside `apps/api/src/graphql/`, leave `schema.contract.test.ts` and the `generated/` folder alone: the review round of wave 0 is changing that test at the same time.
 
 ## What to build
 

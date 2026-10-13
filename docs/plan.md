@@ -324,7 +324,7 @@ Each test name starts with the acceptance-criterion id from `docs/SPEC.md`.
 
 Every worker writes the test first and shows it red before the implementation. For the zero-provider-calls proof the worker shows it failing against a list resolver that deliberately calls the provider, then removes the call. The red output goes into the slice record.
 
-`npm run verify` runs format check, lint, typecheck, codegen, unit and integration tests, and the web build. `npm run e2e` runs Playwright. CI runs both; it can only be seen running after Marcin publishes the repository.
+`npm run verify` runs format check, codegen, lint, typecheck, unit and integration tests, and the web build. `npm run e2e` runs Playwright. CI runs both; it can only be seen running after Marcin publishes the repository.
 
 ## 12. Running it
 

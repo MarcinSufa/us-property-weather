@@ -15,6 +15,8 @@ Two rules follow, and they bind the conductor:
 
 `scripts/export-sessions.ts`, its test and its fixtures under `scripts/`, one new line in `.gitignore` (`banned-phrases.local.txt`), `docs/agent/sessions/README.md`. The folder `docs/agent/sessions/` and `docs/agent/session-metrics.md` are filled in wave 2.
 
+Wave 0 left `scripts/` without TypeScript support: its Vitest configuration includes only `scripts/**/*.test.mjs`, no `tsconfig.json` covers the folder (the lint rules for `.ts` files need one), and the root `typecheck` script runs the two workspaces only. This slice therefore also owns, and changes as little as possible in: a new root `tsconfig.json` that extends `tsconfig.base.json` and includes `scripts/**/*.ts`, the `include` line of the root `vitest.config.js`, and the `typecheck` line of the root `package.json`, so that `npm run verify` type-checks, lints and tests the exporter. That one script line is the only exception to the manager owning every `package.json`; no dependency is added and no other line changes.
+
 ## Input
 
 Claude Code writes one JSON Lines file per session, and one per subagent under `<session id>/subagents/agent-<id>.jsonl` with a `.meta.json` beside it. Record types seen in this project: `user`, `assistant`, `system` (subtypes `compact_boundary`, `stop_hook_summary`), `attachment`, and bookkeeping types (`ai-title`, `queue-operation`, `file-history-snapshot`, `file-history-delta`, `last-prompt`, and others). `message.content` is a string or a list of blocks: `text`, `thinking`, `tool_use`, `tool_result`. Records carry `timestamp`, `isSidechain`, and on some user records `isMeta` or `isCompactSummary`; assistant records carry `message.model` and `message.usage`. An unknown record type must not break the export.

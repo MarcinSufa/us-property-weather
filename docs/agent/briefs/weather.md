@@ -4,7 +4,7 @@ Wave 1. Conductor rules: `docs/agent/handoffs/wave-1.md`. Binding design: `docs/
 
 ## Owns
 
-`apps/api/src/weather/**`. Nothing else. The signatures in `weather-provider.ts` and the constructor of `WeatherstackProvider` are fixed by wave 0.
+`apps/api/src/weather/**`. Nothing else. Fixed by wave 0 and not to change: everything exported from `weather-provider.ts` (`WeatherReport`, `WeatherProvider`, the two error classes) and `WeatherstackProviderOptions` with the constructor of `WeatherstackProvider`, because the `api` slice builds against them at the same time. The types in `weatherstack-response.ts` are used only inside this slice: wave 0 wrote them as a placeholder and this slice replaces them with types inferred from the Zod schema.
 
 ## What to build
 

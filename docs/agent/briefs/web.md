@@ -46,7 +46,7 @@ Vitest, Testing Library, `msw` (node) answering the GraphQL operations by name. 
 
 - The test DOM may not implement `showModal()`. A shim in the test setup file is allowed; a dependency for it is not.
 - Do not assert on formatted local time: assert on the `dateTime` attribute.
-- urql's document cache serves a repeated query from memory: each test builds its own client.
+- urql's document cache serves a repeated query from memory: each test builds its own client. The skeleton exports one module-level client fixed at `/graphql` and its route test renders without a urql `Provider` (finding 6 of the wave 0 review, deferred to this slice): export a client factory, keep one place that builds the client for the browser, and wrap every test render in a `Provider`.
 
 ## Done when
 
