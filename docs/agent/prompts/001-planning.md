@@ -88,3 +88,11 @@ Outcome: the repository's own git config now carries the GitHub no-reply address
 > ok teraz jev powinien dzialac sprawdź z doctor
 
 Outcome: the same doctor command passed: all four checks ok, the Jev service answered as model jev-1.13.0, exit code 0 (it was 3 with HTTP 402 at prompt 11). This proves the key and the service, not the plugin's use of them: `jevEnabled` is still not set, and compaction in a session started from the editor extension still falls back to the native one.
+
+## Prompts 13 and 14 (the second sent mid-turn)
+
+> ok ale wtyczka z jevem dziala ? chcę ją włączyć
+
+> chce pracować na wtyczce exo-compact nie na natywnym kompakcie
+
+Outcome: two plugin options changed in the user settings file (a dated backup sits next to it): `jevEnabled` set to true, `interactiveOnly` set from true to false. Checked before the change: the plugin's hooks do run in a session started from the editor extension (it wrote and twice refreshed the task card), so the plugin loads; what it did not do is take the compaction. `compact.ts:404` hands the compaction back to the native one when `interactiveOnly` is true and the session reports no surface, without any notice. That an editor-extension session reports no surface is inferred, not measured. The plugin is enabled only in this project (`.claude/settings.local.json`, ignored by git), so turning `interactiveOnly` off changes scripted runs only here. Options are read when a session starts: this manager session stays on native compaction, and the proof is a new session whose first message after `/compact` starts with the plugin's seed marker.
