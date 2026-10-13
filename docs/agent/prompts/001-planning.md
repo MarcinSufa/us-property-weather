@@ -82,3 +82,9 @@ Outcome: checked in the plugin's source and in this session's own transcript. Je
 > plan wyglada ok, chyba nie wiem, czy… Znaczy, powinniśmy chyba jeszcze zrobić cloud design, jak skończymy plan, żeby ustalić, jak front powinien wyglądać.
 
 Outcome: the repository's own git config now carries the GitHub no-reply address, the global config is untouched. The staged files were scanned for the Weatherstack key, other keys, the employer's name, the recruiter's name and private email addresses (0 hits in 8 files, after the same scan hit all six patterns in a planted sample), then the first commit was made. The plugin's doctor with the Jev probe: Node, Claude Code and recall files fine, the Jev service answered HTTP 402, so it is not usable for now. "cloud design" is read as Claude Design (dictation); a design step was added to `docs/plan.md` before the `web` slice. The plan is taken as accepted in general, with the eight open points still to be answered.
+
+## Prompt 12
+
+> ok teraz jev powinien dzialac sprawdź z doctor
+
+Outcome: the same doctor command passed: all four checks ok, the Jev service answered as model jev-1.13.0, exit code 0 (it was 3 with HTTP 402 at prompt 11). This proves the key and the service, not the plugin's use of them: `jevEnabled` is still not set, and compaction in a session started from the editor extension still falls back to the native one.
