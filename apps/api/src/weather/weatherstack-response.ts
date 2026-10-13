@@ -1,15 +1,23 @@
-export interface WeatherstackSuccessResponse {
-  location: { lat: string; lon: string };
-  current: Record<string, unknown>;
-}
+import { z } from 'zod';
 
-export interface WeatherstackErrorResponse {
-  success: false;
-  error: { code: number; type: string };
-}
+const coordinateSchema = z.string().trim().min(1).transform(Number).pipe(z.number().finite());
 
-export type WeatherstackResponse = WeatherstackSuccessResponse | WeatherstackErrorResponse;
+export const WeatherstackFailureResponseSchema = z.object({
+  success: z.literal(false),
+  error: z.object({
+    code: z.number(),
+    type: z.string(),
+  }),
+});
 
-export function parseWeatherstackResponse(_body: unknown): WeatherstackResponse {
-  throw new Error('not implemented');
-}
+export type WeatherstackFailureResponse = z.infer<typeof WeatherstackFailureResponseSchema>;
+
+export const WeatherstackSuccessResponseSchema = z.object({
+  location: z.object({
+    lat: coordinateSchema,
+    lon: coordinateSchema,
+  }),
+  current: z.record(z.string(), z.unknown()),
+});
+
+export type WeatherstackSuccessResponse = z.infer<typeof WeatherstackSuccessResponseSchema>;
