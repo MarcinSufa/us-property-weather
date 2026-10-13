@@ -8,12 +8,12 @@ Skills are instruction files an agent session loads for a kind of task. This fol
 
 An interview skill that puts each open plan decision to the author in rounds, with a recommended answer for every question. In this project it was used in the planning session to settle the plan's open points before approval (plan section 19).
 
-- File copied: `SKILL.md`, text unchanged from the local skill folder on 2026-10-13 (git stores it with LF line endings).
+- Files copied: `SKILL.md`, text unchanged from the local skill folder on 2026-10-13, and `LICENSE`, the file at the root of the upstream repository, fetched on 2026-10-13 (git stores both with LF line endings).
 - Source URL: https://github.com/mattpocock/skills, path `skills/productivity/grilling` (as recorded in the local skill folder's own source note).
-- Commit or version: not established locally. The local source note records only the date the skill was taken from upstream, 2026-09-04.
-- Licence: MIT, as recorded in the local source note. The upstream licence text and its copyright line are not established locally and are therefore not reproduced here.
-- This is a locally modified copy. The local note says a single skill was taken instead of the whole upstream plugin; which lines differ from upstream is not established locally.
-- Files: `grilling/SKILL.md`.
+- Commit: the copy equals upstream `skills/productivity/grilling/SKILL.md` at commit `85f83d3fde1d3a90d5c9a657f6998c79a6c37308` (2026-08-20), compared by the manager against GitHub on 2026-10-13. Upstream has since added one sentence (commit `95249b0b49`, 2026-10-07), which this copy does not have.
+- Licence: MIT. The upstream notice with its copyright line is in `grilling/LICENSE` next to the skill.
+- This is not a modified copy: the text equals upstream at the commit above. Only this one skill was taken, not the whole upstream plugin.
+- Files: `grilling/SKILL.md` and `grilling/LICENSE`.
 
 ### handoff
 
@@ -21,9 +21,9 @@ Passes a session's working state (goal, specifics, state, next step, constraints
 
 - Files copied: `SKILL.md` and `LICENSE`, text unchanged from the installed plugin on 2026-10-13 (git stores them with LF line endings).
 - Source URL: https://github.com/MarcinSufa/claude-handoff (from the plugin manifest).
-- Version: 1.0.0 (plugin manifest). Installed from commit `03c5eb1434a40e322a4ebaa5b3de2fee907a9fa1` (the local plugin registry).
+- Version: 1.0.0 (plugin manifest). The local plugin registry records installation from commit `03c5eb1434a40e322a4ebaa5b3de2fee907a9fa1`, but the copied `SKILL.md` equals upstream at commits `0737b61cae0a681c8d283b0199291dc069ec6848` (2026-09-11) to `50ac3e76c5fd22ed750042bc5a16c3b2c64887fc` (2026-09-14), compared by the manager against GitHub on 2026-10-13. `LICENSE` is the same at every upstream commit.
 - Licence: MIT. The notice is in `handoff/LICENSE` next to the skill.
-- This is a locally modified copy: the installed `SKILL.md` differs from the one at the commit above (the spawn modes and the same-window default were added after installation). Whether upstream has since received the same change is not established locally.
+- This is not a locally modified copy: it is an upstream snapshot later than the commit in the registry, and upstream has changed the file again since (commit `0e998448d4`, 2026-09-25).
 - Not copied: the plugin's `tools/` and `hooks/` scripts, which `SKILL.md` refers to, its README, and its manifest files. The manifest files carry an email address.
 - Files: `handoff/SKILL.md` and `handoff/LICENSE`.
 

@@ -47,7 +47,7 @@ Versions are the registry's latest on 2026-10-13 unless a compatibility range sa
 | Concern | Choice | Why | Rejected |
 |---|---|---|---|
 | Runtime | Node 24 (`engines` and `.nvmrc`) | Built-in SQLite and direct TypeScript execution, both verified here | Node 22: `node:sqlite` is flagged experimental there |
-| Repository | npm workspaces: `apps/api`, `apps/web`, `e2e` | Built into npm; one install, one lockfile | pnpm or Turborepo: another tool for two packages |
+| Repository | npm workspaces: `apps/api`, `apps/web`, `e2e` | Built into npm; one install, one lockfile | pnpm or Turborepo: another tool for three small packages |
 | Language | TypeScript 6.0, `strict`, `noUncheckedIndexedAccess`, `erasableSyntaxOnly` | Newest version the linter supports | TypeScript 7: outside `typescript-eslint`'s range today |
 | API | GraphQL Yoga 5 on `node:http` | Small, spec-compliant, error masking, health endpoint and GraphiQL built in, in-process `yoga.fetch` for tests | Apollo Server: more surface for the same six operations; Express: not needed |
 | Schema | Schema-first SDL in one file, types generated with graphql-codegen for both apps | The SDL file is the contract that lets backend and frontend sessions work in parallel | Code-first (Pothos, Nexus): the contract would be TypeScript inside the API package |
