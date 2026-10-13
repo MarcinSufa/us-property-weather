@@ -1,0 +1,7 @@
+.back-to-properties {
+  display: inline-flex;
+  min-height: var(--control-height);
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--space-1);
+}

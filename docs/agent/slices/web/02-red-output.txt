@@ -1,0 +1,3293 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-web/apps/web
+
+ ❯ src/pages/PropertyListPage.test.tsx (21 tests | 21 failed) 16295ms
+   × AC-LIST-2 rows show each property field and the street links to its detail 1036ms
+   × AC-WEB-6 creation time is a time element with the received ISO value 1005ms
+   × AC-WEB-5 missing weather values read Not reported once per missing value group 1006ms
+   × AC-WEB-4 loaded list count reflects the rows shown 1017ms
+   × AC-WEB-4 loaded list count reflects the rows shown 1009ms
+   × AC-LIST-4 pending list request shows a loading status 1005ms
+   × AC-LIST-4 network list failure offers a retry 1007ms
+   × AC-LIST-4 graphql list failure offers a retry 1018ms
+   × AC-WEB-7 Try again resends the list query to the network 1013ms
+   × AC-LIST-3 empty unfiltered answer shows the initial empty state 17ms
+   × AC-FILTER-8 empty filtered answer can clear filters from the URL 1017ms
+   × AC-FILTER-7 applying trimmed filters updates the URL and query variables 11ms
+   × AC-FILTER-7 navigating back restores the earlier URL, rows, and filter controls 10ms
+   × AC-WEB-8 URL filters and oldest sort initialize fields and query variables 1014ms
+   × AC-WEB-8 unknown URL state is omitted and the state control shows Any 1005ms
+   × AC-WEB-9 blank filter inputs are omitted from URL and query variables 31ms
+   × AC-WEB-10 Clear keeps oldest sort and removes all filter variables 1013ms
+   × AC-SORT-4 sort changes keep filters and back restores the selected sort 1009ms
+   × AC-WEB-11 BAD_USER_INPUT field errors describe and invalidate their filter control 18ms
+   × AC-WEB-12 every filter has a label and the zip field has the five digit pattern 1019ms
+   × AC-LIST-4 changing the URL hides old rows while its request is pending 1008ms
+node : 
+At line:2 char:22
++ ... OLOR = '1'; node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mj ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯ Failed Tests 21 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-LIST-2 rows show each property field and the street links to its detail
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:86:23
+     84|   renderApp(['/']);
+     85|
+     86|   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' }))…
+       |                       ^
+     87|     'href',
+     88|     '/properties/one',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-6 creation time is a time element with the received ISO value
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:105:23
+    103|   renderApp(['/']);
+    104|
+    105|   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' }))…
+       |                       ^
+    106|   expect(screen.getByText(/Oct 13, 2026/)).toHaveAttribute('datetime',…
+    107| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-5 missing weather values read Not reported once per missing value g
+roup
+TestingLibraryElementError: Unable to find role="link" and name "200 Pine St"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:113:23
+    111|   renderApp(['/']);
+    112|
+    113|   expect(await screen.findByRole('link', { name: '200 Pine St' })).toB…
+       |                       ^
+    114|   const rows = screen.getAllByRole('row');
+    115|   expect(within(rows[2]!).getByText('Not reported')).toBeInTheDocument…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-4 loaded list count reflects the rows shown
+TestingLibraryElementError: Unable to find an element with the text: 3 properties. This could be because the text is br
+oken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more 
+flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:126:23
+    124|   renderApp(['/']);
+    125|
+    126|   expect(await screen.findByText(count)).toBeInTheDocument();
+       |                       ^
+    127| });
+    128|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-4 loaded list count reflects the rows shown
+TestingLibraryElementError: Unable to find an element with the text: 1 property. This could be because the text is brok
+en up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more fl
+exible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:126:23
+    124|   renderApp(['/']);
+    125|
+    126|   expect(await screen.findByText(count)).toBeInTheDocument();
+       |                       ^
+    127| });
+    128|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-LIST-4 pending list request shows a loading status
+TestingLibraryElementError: Unable to find role="status" and name "Loading properties…"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:140:23
+    138|   renderApp(['/']);
+    139|
+    140|   expect(await screen.findByRole('status', { name: 'Loading properties…
+       |                       ^
+    141|   resolveResponse?.(HttpResponse.json({ data: { properties: [] } }));
+    142| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-LIST-4 network list failure offers a retry
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-LIST-4 graphql list failure offers a retry
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:157:25
+    155|     renderApp(['/']);
+    156|
+    157|     expect(await screen.findByRole('alert')).toHaveTextContent('Could …
+       |                         ^
+    158|     expect(screen.getByRole('alert')).toHaveTextContent(
+    159|       'The server did not answer. Nothing was changed.',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-7 Try again resends the list query to the network
+TestingLibraryElementError: Unable to find role="button" and name "Try again"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:177:33
+    175|   const { user } = renderApp(['/']);
+    176|
+    177|   await user.click(await screen.findByRole('button', { name: 'Try agai…
+       |                                 ^
+    178|
+    179|   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' }))…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-LIST-3 empty unfiltered answer shows the initial empty state
+TestingLibraryElementError: Unable to find an accessible element with the role "heading" and name "No properties yet"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Properties":
+  <h1
+    class="page-title"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<main
+  class="page-frame"
+>
+  <h1
+    class="page-title"
+  >
+    Properties
+  </h1>
+</main>
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/PropertyListPage.test.tsx:188:23
+    186|
+    187|   const main = await screen.findByRole('main');
+    188|   expect(within(main).getByRole('heading', { name: 'No properties yet'…
+       |                       ^
+    189|   expect(within(main).getByRole('link', { name: 'Add property' })).toH…
+    190|     'href',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-FILTER-8 empty filtered answer can clear filters from the URL
+TestingLibraryElementError: Unable to find role="heading" and name "No properties match these filters"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:200:23
+    198|   const { router, user } = renderApp(['/?city=Austin']);
+    199|
+    200|   expect(await screen.findByRole('heading', { name: 'No properties mat…
+       |                       ^
+    201|   expect(screen.queryByRole('heading', { name: 'No properties yet' }))…
+    202|   await user.click(screen.getByRole('button', { name: 'Clear filters' …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-FILTER-7 applying trimmed filters updates the URL and query variables
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "City"
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  <header
+    class="site-header"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  <nav
+    aria-label="Main navigation"
+    class="site-header__inner"
+  />
+
+  --------------------------------------------------
+  link:
+
+  Name "Properties":
+  <a
+    class="brand-link"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Add property":
+  <a
+    class="button button--primary"
+    data-discover="true"
+    href="/properties/new"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="page-frame"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Properties":
+  <h1
+    class="page-title"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/PropertyListPage.test.tsx:214:26
+    212|   const { router, user } = renderApp(['/']);
+    213|
+    214|   await user.type(screen.getByRole('textbox', { name: 'City' }), '  Au…
+       |                          ^
+    215|   await user.selectOptions(screen.getByRole('combobox', { name: 'State…
+    216|   await user.type(screen.getByRole('textbox', { name: 'Zip code' }), '…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-FILTER-7 navigating back restores the earlier URL, rows, and filter con
+trols
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "City"
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  <header
+    class="site-header"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  <nav
+    aria-label="Main navigation"
+    class="site-header__inner"
+  />
+
+  --------------------------------------------------
+  link:
+
+  Name "Properties":
+  <a
+    class="brand-link"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Add property":
+  <a
+    class="button button--primary"
+    data-discover="true"
+    href="/properties/new"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="page-frame"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Properties":
+  <h1
+    class="page-title"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/PropertyListPage.test.tsx:230:26
+    228|   const { router, user } = renderApp(['/']);
+    229|
+    230|   await user.type(screen.getByRole('textbox', { name: 'City' }), 'Seat…
+       |                          ^
+    231|   await user.click(screen.getByRole('button', { name: 'Apply filters' …
+    232|   await screen.findByText('3 properties');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-8 URL filters and oldest sort initialize fields and query variables
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:245:23
+    243|   renderApp(['/?city=Austin&state=TX&zip=78701&sort=oldest']);
+    244|
+    245|   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' }))…
+       |                       ^
+    246|   expect(screen.getByRole('textbox', { name: 'City' })).toHaveValue('A…
+    247|   expect(screen.getByRole('combobox', { name: 'State' })).toHaveValue(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-8 unknown URL state is omitted and the state control shows Any
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:261:23
+    259|   renderApp(['/?state=XX']);
+    260|
+    261|   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' }))…
+       |                       ^
+    262|   expect(screen.getByRole('combobox', { name: 'State' })).toHaveValue(…
+    263|   expect(requests.at(-1)).toEqual({ sort: 'CREATED_AT_DESC' });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-9 blank filter inputs are omitted from URL and query variables
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "City"
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  <header
+    class="site-header"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  <nav
+    aria-label="Main navigation"
+    class="site-header__inner"
+  />
+
+  --------------------------------------------------
+  link:
+
+  Name "Properties":
+  <a
+    class="brand-link"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Add property":
+  <a
+    class="button button--primary"
+    data-discover="true"
+    href="/properties/new"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="page-frame"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Properties":
+  <h1
+    class="page-title"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/PropertyListPage.test.tsx:271:26
+    269|   const { router, user } = renderApp(['/']);
+    270|
+    271|   await user.type(screen.getByRole('textbox', { name: 'City' }), '   '…
+       |                          ^
+    272|   await user.click(screen.getByRole('button', { name: 'Apply filters' …
+    273|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-10 Clear keeps oldest sort and removes all filter variables
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:283:16
+    281|   const { router, user } = renderApp(['/?city=Austin&sort=oldest']);
+    282|
+    283|   await screen.findByRole('link', { name: '15 Saguaro Blvd' });
+       |                ^
+    284|   await user.click(screen.getByRole('button', { name: 'Clear' }));
+    285|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-SORT-4 sort changes keep filters and back restores the selected sort
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:295:16
+    293|   const { router, user } = renderApp(['/?city=Austin']);
+    294|
+    295|   await screen.findByRole('link', { name: '15 Saguaro Blvd' });
+       |                ^
+    296|   const sort = screen.getByRole('combobox', { name: 'Sort by created' …
+    297|   await user.selectOptions(sort, 'oldest');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-11 BAD_USER_INPUT field errors describe and invalidate their filter
+ control
+TestingLibraryElementError: Unable to find an accessible element with the role "textbox" and name "Zip code"
+
+Here are the accessible roles:
+
+  banner:
+
+  Name "":
+  <header
+    class="site-header"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Main navigation":
+  <nav
+    aria-label="Main navigation"
+    class="site-header__inner"
+  />
+
+  --------------------------------------------------
+  link:
+
+  Name "Properties":
+  <a
+    class="brand-link"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Add property":
+  <a
+    class="button button--primary"
+    data-discover="true"
+    href="/properties/new"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="page-frame"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Properties":
+  <h1
+    class="page-title"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/PropertyListPage.test.tsx:326:22
+    324|   renderApp(['/?zip=12']);
+    325|
+    326|   const zip = screen.getByRole('textbox', { name: 'Zip code' });
+       |                      ^
+    327|   const error = await screen.findByText('Zip code must be exactly 5 di…
+    328|   expect(zip).toHaveAttribute('aria-invalid', 'true');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-12 every filter has a label and the zip field has the five digit pa
+ttern
+TestingLibraryElementError: Unable to find role="textbox" and name "City"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:338:23
+    336|   renderApp(['/']);
+    337|
+    338|   expect(await screen.findByRole('textbox', { name: 'City' })).toBeInT…
+       |                       ^
+    339|   expect(screen.getByRole('combobox', { name: 'State' }).querySelector…
+    340|   expect(screen.getByRole('textbox', { name: 'Zip code' })).toHaveAttr…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/21]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-LIST-4 changing the URL hides old rows while its request is pending
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+ Test Files  1 failed | 1 passed (2)
+      Tests  21 failed | 8 passed (29)
+   Start at  14:24:02
+   Duration  17.41s (tests 89%, environment 7%, setup 2%, import 1%)
+
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1
+        class="page-title"
+      >
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:358:23
+    356|   );
+    357|   const { user } = renderApp(['/']);
+    358|   expect(await screen.findByRole('link', { name: '15 Saguaro Blvd' }))…
+       |                       ^
+    359|
+    360|   await user.type(screen.getByRole('textbox', { name: 'City' }), 'Aust…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/21]⎯
+

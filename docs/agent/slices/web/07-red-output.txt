@@ -1,0 +1,663 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-web/apps/web
+
+ ❯ src/pages/PropertyDetailPage.test.tsx (17 tests | 1 failed) 908ms
+   × AC-DETAIL-5 shows every weather description and the saved icon as a decorative image 25ms
+ ❯ src/pages/PropertyListPage.test.tsx (35 tests | 2 failed) 5200ms
+   × AC-WEB-17 an answer without data keeps the dialog open with the failure message 1134ms
+   × AC-WEB-19 pending delete keeps focus, blocks repeat actions, and recovers after failure 135ms
+ ❯ src/pages/NewPropertyPage.test.tsx (18 tests | 1 failed) 12616ms
+   × AC-WEB-20 leaving the form while saving is not undone by the answer 895ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/NewPropertyPage.test.tsx > AC-WEB-20 leaving the form while saving is not undone by the answer
+Error: expect(element).toBeInTheDocument()
+
+element could not be found in the document
+ ❯ src/pages/NewPropertyPage.test.tsx:279:77
+    277|   resolveResponse?.(successResponse());
+    278|   resolveListResponse?.(HttpResponse.json({ data: { properties: [] } }…
+    279|   expect(await screen.findByRole('heading', { name: 'No properties yet…
+       |                                                                             ^
+    280|   expect(router.state.location.pathname).toBe('/');
+    281| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-5 shows every weather description and the saved icon as a deco
+rative image
+TestingLibraryElementError: Unable to find an element with the text: Light rain, Moderate rain · feels like 23 °C. This
+ could be because the text is broken up by multiple elements. In this case, you can provide a function for your text ma
+tcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<section
+  aria-labelledby="weather-card-title"
+  class="card weather-card"
+>
+  <div
+    class="weather-card__heading"
+  >
+    <h2
+      id="weather-card-title"
+    >
+      Weather at creation
+    </h2>
+    <p>
+      Observed 05:12 PM UTC on Oct 13, 2026. Saved once, never refreshed.
+    </p>
+  </div>
+  <div
+    class="weather-card__highlight"
+  >
+    <svg
+      aria-hidden="true"
+      fill="none"
+      height="44"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-width="1.6"
+      viewBox="0 0 24 24"
+      width="44"
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="4"
+      />
+      <path
+        d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8m9.8 9.8 1.8 1.8M5.3 18.7l1.8-1.8m11.
+6-11.6-1.8 1.8"
+      />
+    </svg>
+    <div
+      class="weather-card__summary"
+    >
+      <span
+        class="weather-card__temperature"
+      >
+        24 °C
+      </span>
+      <span
+        class="weather-card__description"
+      >
+        Light rain
+         · feels like 
+        23 °C
+      </span>
+    </div>
+  </div>
+  <dl
+    class="weather-card__fields"
+  >
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Humidity
+      </dt>
+      <dd>
+        18 %
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Wind
+      </dt>
+      <dd>
+        11 km/h SW
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Wind direction
+      </dt>
+      <dd>
+        225°
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Pressure
+      </dt>
+      <dd>
+        1012 mb
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Precipitation
+      </dt>
+      <dd>
+        0 mm
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Cloud cover
+      </dt>
+      <dd>
+        0 %
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        UV index
+      </dt>
+      <dd>
+        6
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Visibility
+      </dt>
+      <dd>
+        16 km
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Daytime
+      </dt>
+      <dd>
+        Yes
+      </dd>
+    </div>
+    <div
+      class="weather-card__field"
+    >
+      <dt>
+        Weather code
+      </dt>
+      <dd>
+        113
+      </dd>
+    </div>
+  </dl>
+</section>
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/pages/PropertyDetailPage.test.tsx:170:23
+    168|   const card = await screen.findByRole('region', { name: 'Weather at c…
+    169|
+    170|   expect(within(card).getByText('Light rain, Moderate rain · feels lik…
+       |                       ^
+    171|   expect(within(card).getByRole('presentation')).toHaveAttribute(
+    172|     'src',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-17 an answer without data keeps the dialog open with the failure me
+ssage
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame property-list"
+    >
+      <div
+        class="property-list__heading"
+      >
+        <h1
+          class="page-title"
+        >
+          Properties
+        </h1>
+        <p
+          class="property-list__count"
+        >
+          3
+           
+          properties
+        </p>
+      </div>
+      <form
+        aria-live="polite"
+        class="card property-filters"
+      >
+        <div
+          class="field property-filters__city"
+        >
+          <label
+            for="property-filter-city"
+          >
+            City
+          </label>
+          <input
+            id="property-filter-city"
+            maxlength="100"
+            placeholder="Any city"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="property-filters__mobile-address"
+        >
+          <div
+            class="field property-filters__state"
+          >
+            <label
+              for="property-filter-state"
+            >
+              State
+            </label>
+            <select
+              id="property-filter-state"
+            >
+              <option
+                value=""
+              >
+                Any
+              </option>
+              <option
+                value="AL"
+              >
+                AL
+                 
+                Alabama
+              </option>
+              <option
+                value="AK"
+              >
+                AK
+                 
+                Alaska
+              </option>
+              <option
+                value="AZ"
+              >
+                AZ
+                 
+                Arizona
+              </option>
+              <option
+                value="AR"
+              >
+                AR
+                 
+                Arkansas
+              </option>
+              <option
+                value="CA"
+              >
+                CA
+                 
+                California
+              </option>
+              <option
+                value="CO"
+              >
+                CO
+                 
+                Colorado
+              </option>
+              <option
+                value="CT"
+              >
+                CT
+                 
+                Connecticut
+              </option>
+              <option
+                value="DE"
+              >
+                DE
+                 
+                Delaware
+              </option>
+              <option
+                value="DC"
+              >
+                DC
+                 
+                District of Columbia
+              </option>
+              <option
+                value="FL"
+              >
+                FL
+                 
+                Florida
+              </option>
+              <option
+                value="GA"
+              >
+                GA
+                 
+                Georgia
+              </option>
+              <option
+                value="HI"
+              >...
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame property-list"
+    >
+      <div
+        class="property-list__heading"
+      >
+        <h1
+          class="page-title"
+        >
+          Properties
+        </h1>
+        <p
+          class="property-list__count"
+        >
+          3
+           
+          properties
+        </p>
+      </div>
+      <form
+        aria-live="polite"
+        class="card property-filters"
+      >
+        <div
+          class="field property-filters__city"
+        >
+          <label
+            for="property-filter-city"
+          >
+            City
+          </label>
+          <input
+            id="property-filter-city"
+            maxlength="100"
+            placeholder="Any city"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="property-filters__mobile-address"
+        >
+          <div
+            class="field property-filters__state"
+          >
+            <label
+              for="property-filter-state"
+            >
+              State
+            </label>
+            <select
+              id="property-filter-state"
+            >
+              <option
+                value=""
+              >
+                Any
+
+              </option>
+              <option
+                value="AL"
+              >
+                AL
+                 
+                Alabama
+              </option>
+              <option
+                value="AK"
+              >
+                AK
+                 
+                Alaska
+              </option>
+              <option
+                value="AZ"
+              >
+                AZ
+                 
+                Arizona
+              </option>
+              <option
+                value="AR"
+              >
+                AR
+                 
+                Arkansas
+              </option>
+              <option
+                value="CA"
+              >
+                CA
+                 
+                California
+              </option>
+              <option
+                value="CO"
+              >
+                CO
+                 
+                Colorado
+              </option>
+              <option
+                value="CT"
+              >
+                CT
+                 
+                Connecticut
+              </option>
+              <option
+                value="DE"
+              >
+                DE
+                 
+                Delaware
+              </option>
+              <option
+                value="DC"
+              >
+                DC
+                 
+                District of Columbia
+              </option>
+              <option
+                value="FL"
+              >
+                FL
+                 
+                Florida
+              </option>
+              <option
+                value="GA"
+              >
+                GA
+                 
+                Georgia
+              </option>
+              <option
+                value="HI"
+              >...
+ Test Files  3 failed (3)
+      Tests  4 failed | 66 passed (70)
+   Start at  15:41:28
+   Duration  13.83s (tests 85%, environment 9%, setup 3%, import 2%, transform 1%)
+
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyListPage.test.tsx:264:23
+    262|   await user.click(screen.getByRole('button', { name: 'Delete property…
+    263|
+    264|   expect(await screen.findByRole('alert')).toHaveTextContent(
+       |                       ^
+    265|     'Could not delete. The property is still here.',
+    266|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/pages/PropertyListPage.test.tsx > AC-WEB-19 pending delete keeps focus, blocks repeat actions, and recovers 
+after failure
+Error: expect(element).not.toBeDisabled()
+
+Received element is disabled:
+  <button
+  class="button button--danger"
+  disabled=""
+  type="button"
+/>
+ ❯ src/pages/PropertyListPage.test.tsx:289:29
+    287|   const pendingButton = screen.getByRole('button', { name: 'Deleting…'…
+    288|   expect(pendingButton).toHaveFocus();
+    289|   expect(pendingButton).not.toBeDisabled();
+       |                             ^
+    290|   expect(pendingButton).toHaveAttribute('aria-disabled', 'true');
+    291|   expect(screen.getByRole('button', { name: 'Cancel' })).toHaveAttribu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+

@@ -1,0 +1,9 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-web/apps/web
+
+
+ Test Files  4 passed (4)
+      Tests  73 passed (73)
+   Start at  15:07:10
+   Duration  12.90s (tests 71%, environment 20%, setup 5%, import 3%, transform 1%)
+

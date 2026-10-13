@@ -1,0 +1,38 @@
+:root {
+  --color-bg: #f3f5f7;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f8fafb;
+  --color-border: #d5dbe1;
+  --color-border-subtle: #e6eaee;
+  --color-border-input: #7b8794;
+  --color-text: #16202e;
+  --color-text-muted: #4a5868;
+  --color-primary: #0b5d5e;
+  --color-primary-hover: #084647;
+  --color-danger: #b42318;
+  --color-danger-strong: #7a1810;
+  --color-danger-bg: #fdecea;
+  --color-dialog-backdrop: rgba(22, 32, 46, 0.45);
+  --shadow-dialog: 0 12px 32px rgba(22, 32, 46, 0.28);
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-size-page-title: 28px;
+  --font-size-state-title: 20px;
+  --font-size-card-title: 18px;
+  --font-size-body: 15px;
+  --font-size-label: 13px;
+  --font-size-mono: 14px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --radius-control: 6px;
+  --radius-card: 10px;
+  --control-height: 44px;
+  --content-width: 1120px;
+  --form-width: 640px;
+}

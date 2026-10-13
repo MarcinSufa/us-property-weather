@@ -1,0 +1,1222 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-web/apps/web
+
+--------------x
+node : 
+At line:2 char:22
++ ... OLOR = '1'; node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mj ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/NewPropertyPage.test.tsx > AC-LIST-5 creating from an empty list refreshes the list without reloading 
+the app
+TestingLibraryElementError: Unable to find role="link" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame property-list"
+    >
+      <div
+        class="property-list__heading"
+      >
+        <h1
+          class="page-title"
+        >
+          Properties
+        </h1>
+        <p
+          class="property-list__count"
+        >
+          0
+           
+          properties
+        </p>
+      </div>
+      <form
+        aria-live="polite"
+        class="card property-filters"
+      >
+        <div
+          class="field property-filters__city"
+        >
+          <label
+            for="property-filter-city"
+          >
+            City
+          </label>
+          <input
+            id="property-filter-city"
+            maxlength="100"
+            placeholder="Any city"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="property-filters__mobile-address"
+        >
+          <div
+            class="field property-filters__state"
+          >
+            <label
+              for="property-filter-state"
+            >
+              State
+            </label>
+            <select
+              id="property-filter-state"
+            >
+              <option
+                value=""
+              >
+                Any
+              </option>
+              <option
+                value="AL"
+              >
+                AL
+                 
+                Alabama
+              </option>
+              <option
+                value="AK"
+              >
+                AK
+                 
+                Alaska
+              </option>
+              <option
+                value="AZ"
+              >
+                AZ
+                 
+                Arizona
+              </option>
+              <option
+                value="AR"
+              >
+                AR
+                 
+                Arkansas
+              </option>
+              <option
+                value="CA"
+              >
+                CA
+                 
+                California
+              </option>
+              <option
+                value="CO"
+              >
+                CO
+                 
+                Colorado
+              </option>
+              <option
+                value="CT"
+              >
+                CT
+                 
+                Connecticut
+              </option>
+              <option
+                value="DE"
+              >
+                DE
+                 
+                Delaware
+              </option>
+              <option
+                value="DC"
+              >
+                DC
+                 
+                District of Columbia
+              </option>
+              <option
+                value="FL"
+              >
+                FL
+                 
+                Florida
+              </option>
+              <option
+                value="GA"
+              >
+                GA
+                 
+                Georgia
+              </option>
+              <option
+                value="HI"
+              >
+                HI
+                 
+                Hawaii
+              </option>
+              <option
+                value="ID"
+              >
+                ID
+                 
+                Idaho
+              </option>
+              <option
+                value="IL"
+              >
+                IL
+                 
+                Illinois
+              </option>
+              <option
+                value="IN"
+              >
+                IN
+                 
+                Indiana
+              </option>
+              <option
+                value="IA"
+              >
+                IA
+                 
+                Iowa
+              </option>
+              <option
+                value="KS"
+              >
+                KS
+                 
+                Kansas
+              </option>
+              <option
+                value="KY"
+              >
+                KY
+                 
+                Kentucky
+              </option>
+              <option
+                value="LA"
+              >
+                LA
+                 
+                Louisiana
+              </option>
+              <option
+                value="ME"
+              >
+                ME
+                 
+                Maine
+              </option>
+              <option
+                value="MD"
+              >
+                MD
+                 
+                Maryland
+              </option>
+              <option
+                value="MA"
+              >
+                MA
+                 
+                Massachusetts
+              </option>
+              <option
+                value="MI"
+              >
+                MI
+                 
+                Michigan
+              </option>
+              <option
+                value="MN"
+              >
+                MN
+                 
+                Minnesota
+              </option>
+              <option
+                value="MS"
+              >
+                MS
+                 
+                Mississippi
+              </option>
+              <option
+                value="MO"
+              >
+                MO
+                 
+                Missouri
+              </option>
+              <option
+                value="MT"
+              >
+                MT
+                 
+                Montana
+              </option>
+              <option
+                value="NE"
+              >
+                NE
+                 
+                Nebraska
+              </option>
+              <option
+                value="NV"
+              >
+                NV
+                 
+                Nevada
+              </option>
+              <option
+                value="NH"
+              >
+                NH
+                 
+                New Hampshire
+              </option>
+              <option
+                value="NJ"
+              >
+                NJ
+                 
+                New Jersey
+              </option>
+              <option
+                value="NM"
+              >
+                NM
+                 
+                New Mexico
+              </option>
+              <option
+                value="NY"
+              >
+                NY
+                 
+                New York
+              </option>
+              <option
+                value="NC"
+              >
+                NC
+                 
+                North Carolina
+              </option>
+              <option
+                value="ND"
+              >
+                ND
+                 
+                North Dakota
+              </option>
+              <option
+                value="OH"
+              >
+                OH
+                 
+                Ohio
+              </option>
+              <option
+                value="OK"
+              >
+                OK
+                 
+                Oklahoma
+              </option>
+              <option
+                value="OR"
+              >
+                OR
+                 
+                Oregon
+              </option>
+              <option
+                value="PA"
+              >
+                PA
+                 
+                Pennsylvania
+              </option>
+              <option
+                value="RI"
+              >
+                RI
+                 
+                Rhode Island
+              </option>
+              <option
+                value="SC"
+              >
+                SC
+                 
+                South Carolina
+              </option>
+              <option
+                value="SD"
+              >
+                SD
+                 
+                South Dakota
+              </option>
+              <option
+                value="TN"
+              >
+                TN
+                 
+                Tennessee
+              </option>
+              <option
+                value="TX"
+              >
+                TX
+                 
+                Texas
+              </option>
+              <option
+                value="UT"
+              >
+                UT
+                 
+                Utah
+              </option>
+              <option
+                value="VT"
+              >
+                VT
+                 
+                Vermont
+              </option>
+              <option
+                value="VA"
+              >
+                VA
+                 
+                Virginia
+              </option>
+              <option
+                value="WA"
+              >
+                WA
+                 
+                Washington
+              </option>
+              <option
+                value="WV"
+              >
+                WV
+                 
+                West Virginia
+              </option>
+              <option
+                value="WI"
+              >
+                WI
+                 
+                Wisconsin
+              </option>
+              <option
+                value="WY"
+              >
+                WY
+                 
+                Wyoming
+              </option>
+            </select>
+          </div>
+          <div
+            class="field property-filters__zip"
+          >
+            <label
+              for="property-filter-zip"
+            >
+              Zip code
+            </label>
+            <input
+              class="property-filters__zip-input"
+              id="property-filter-zip"
+              inputmode="numeric"
+              maxlength="5"
+              pattern="\\d{5}"
+              placeholder="5 digits"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="property-filters__actions"
+        >
+          <button
+            class="button button--secondary"
+            type="submit"
+          >
+            Apply filters
+          </button>
+          <button
+            class="button button--quiet"
+            type="button"
+          >
+            Clear
+          </button>
+        </div>
+        <div
+          class="field property-filters__sort"
+        >
+          <label
+            for="property-filter-sort"
+          >
+            Sort by created
+          </label>
+          <select
+            id="property-filter-sort"
+          >
+            <option
+              value="newest"
+            >
+              Newest first
+            </option>
+            <option
+              value="oldest"
+            >
+              Oldest first
+            </option>
+          </select>
+        </div>
+      </form>
+      <section
+        class="property-list__state-card"
+      >
+        <div
+          class="card property-list__empty-content"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="40"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.6"
+            viewBox="0 0 24 24"
+            width="40"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <h2
+            class="property-list__state-title"
+          >
+            No properties yet
+          </h2>
+          <p>
+            Add an address and the weather at that moment is saved with it.
+          </p>
+          <a
+            class="button button--primary"
+            data-discover="true"
+            href="/properties/new"
+          >
+            Add property
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame property-list"
+    >
+      <div
+        class="property-list__heading"
+      >
+        <h1
+          class="page-title"
+        >
+          Properties
+        </h1>
+        <p
+          class="property-list__count"
+        >
+          0
+           
+          properties
+        </p>
+      </div>
+      <form
+        aria-live="polite"
+        class="card property-filters"
+      >
+        <div
+          class="field property-filters__city"
+        >
+          <label
+            for="property-filter-city"
+          >
+            City
+          </label>
+          <input
+            id="property-filter-city"
+            maxlength="100"
+            placeholder="Any city"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="property-filters__mobile-address"
+        >
+          <div
+            class="field property-filters__state"
+          >
+            <label
+              for="property-filter-state"
+            >
+              State
+            </label>
+            <select
+              id="property-filter-state"
+            >
+              <option
+                value=""
+              >
+                Any
+              </option>
+              <option
+                value="AL"
+              >
+                AL
+                 
+                Alabama
+              </option>
+              <option
+                value="AK"
+              >
+                AK
+                 
+                Alaska
+              </option>
+              <option
+                value="AZ"
+              >
+                AZ
+                 
+                Arizona
+              </option>
+              <option
+                value="AR"
+              >
+                AR
+                 
+                Arkansas
+              </option>
+              <option
+                value="CA"
+              >
+                CA
+                 
+                California
+              </option>
+              <option
+                value="CO"
+              >
+                CO
+                 
+                Colorado
+              </option>
+              <option
+                value="CT"
+              >
+                CT
+                 
+                Connecticut
+              </option>
+              <option
+                value="DE"
+              >
+                DE
+                 
+                Delaware
+              </option>
+              <option
+                value="DC"
+              >
+                DC
+                 
+                District of Columbia
+              </option>
+              <option
+                value="FL"
+              >
+                FL
+                 
+                Florida
+              </option>
+              <option
+                value="GA"
+              >
+                GA
+                 
+                Georgia
+              </option>
+              <option
+                value="HI"
+              >
+                HI
+                 
+                Hawaii
+              </option>
+              <option
+                value="ID"
+              >
+                ID
+                 
+                Idaho
+              </option>
+              <option
+                value="IL"
+              >
+                IL
+                 
+                Illinois
+              </option>
+              <option
+                value="IN"
+              >
+                IN
+                 
+                Indiana
+              </option>
+              <option
+                value="IA"
+              >
+                IA
+                 
+                Iowa
+              </option>
+              <option
+                value="KS"
+              >
+                KS
+                 
+                Kansas
+              </option>
+              <option
+                value="KY"
+              >
+                KY
+                 
+                Kentucky
+              </option>
+              <option
+                value="LA"
+              >
+                LA
+                 
+                Louisiana
+              </option>
+              <option
+                value="ME"
+              >
+                ME
+                 
+                Maine
+              </option>
+              <option
+                value="MD"
+              >
+                MD
+                 
+                Maryland
+              </option>
+              <option
+                value="MA"
+              >
+                MA
+                 
+                Massachusetts
+              </option>
+              <option
+                value="MI"
+              >
+                MI
+                 
+                Michigan
+              </option>
+              <option
+                value="MN"
+              >
+                MN
+                 
+                Minnesota
+              </option>
+              <option
+                value="MS"
+              >
+                MS
+                 
+                Mississippi
+              </option>
+              <option
+                value="MO"
+              >
+                MO
+                 
+                Missouri
+              </option>
+              <option
+                value="MT"
+              >
+                MT
+                 
+                Montana
+              </option>
+              <option
+                value="NE"
+              >
+                NE
+                 
+                Nebraska
+              </option>
+              <option
+                value="NV"
+              >
+                NV
+                 
+                Nevada
+              </option>
+              <option
+                value="NH"
+              >
+                NH
+                 
+                New Hampshire
+              </option>
+              <option
+                value="NJ"
+              >
+                NJ
+                 
+                New Jersey
+              </option>
+              <option
+                value="NM"
+              >
+                NM
+                 
+                New Mexico
+              </option>
+              <option
+                value="NY"
+              >
+                NY
+                 
+                New York
+              </option>
+              <option
+                value="NC"
+              >
+                NC
+                 
+                North Carolina
+              </option>
+              <option
+                value="ND"
+              >
+                ND
+                 
+                North Dakota
+              </option>
+              <option
+                value="OH"
+              >
+                OH
+                 
+                Ohio
+              </option>
+              <option
+                value="OK"
+              >
+                OK
+                 
+                Oklahoma
+              </option>
+              <option
+                value="OR"
+              >
+                OR
+                 
+                Oregon
+              </option>
+              <option
+                value="PA"
+              >
+                PA
+                 
+                Pennsylvania
+              </option>
+              <option
+                value="RI"
+              >
+                RI
+                 
+                Rhode Island
+              </option>
+              <option
+                value="SC"
+              >
+                SC
+                 
+                South Carolina
+              </option>
+              <option
+                value="SD"
+              >
+                SD
+                 
+                South Dakota
+              </option>
+              <option
+                value="TN"
+              >
+                TN
+                 
+                Tennessee
+              </option>
+              <option
+                value="TX"
+              >
+                TX
+                 
+                Texas
+              </option>
+              <option
+                value="UT"
+              >
+                UT
+                 
+                Utah
+              </option>
+              <option
+                value="VT"
+              >
+                VT
+                 
+                Vermont
+              </option>
+              <option
+                value="VA"
+              >
+                VA
+                 
+                Virginia
+              </option>
+              <option
+                value="WA"
+              >
+                WA
+                 
+                Washington
+              </option>
+              <option
+                value="WV"
+              >
+                WV
+                 
+                West Virginia
+              </option>
+              <option
+                value="WI"
+              >
+                WI
+                 
+                Wisconsin
+              </option>
+              <option
+                value="WY"
+              >
+                WY
+                 
+                Wyoming
+              </option>
+            </select>
+          </div>
+          <div
+            class="field property-filters__zip"
+          >
+            <label
+              for="property-filter-zip"
+            >
+              Zip code
+            </label>
+            <input
+              class="property-filters__zip-input"
+              id="property-filter-zip"
+              inputmode="numeric"
+              maxlength="5"
+              pattern="\\d{5}"
+              placeholder="5 digits"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="property-filters__actions"
+        >
+          <button
+            class="button button--secondary"
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 skipped (15)
+   Start at  14:42:04
+   Duration  2.99s (tests 72%, environment 18%, setup 5%, import 4%, transform 2%)
+
+            type="submit"
+          >
+            Apply filters
+          </button>
+          <button
+            class="button button--quiet"
+            type="button"
+          >
+            Clear
+          </button>
+        </div>
+        <div
+          class="field property-filters__sort"
+        >
+          <label
+            for="property-filter-sort"
+          >
+            Sort by created
+          </label>
+          <select
+            id="property-filter-sort"
+          >
+            <option
+              value="newest"
+            >
+              Newest first
+            </option>
+            <option
+              value="oldest"
+            >
+              Oldest first
+            </option>
+          </select>
+        </div>
+      </form>
+      <section
+        class="property-list__state-card"
+      >
+        <div
+          class="card property-list__empty-content"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="40"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.6"
+            viewBox="0 0 24 24"
+            width="40"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <h2
+            class="property-list__state-title"
+          >
+            No properties yet
+          </h2>
+          <p>
+            Add an address and the weather at that moment is saved with it.
+          </p>
+          <a
+            class="button button--primary"
+            data-discover="true"
+            href="/properties/new"
+          >
+            Add property
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/NewPropertyPage.test.tsx:295:23
+    293|   await user.click(screen.getByRole('link', { name: 'Properties' }));
+    294|
+    295|   expect(await screen.findByRole('link', { name: address.street })).to…
+       |                       ^
+    296|     'href',
+    297|     '/properties/new-list-property',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+

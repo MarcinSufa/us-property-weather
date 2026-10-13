@@ -1,0 +1,2076 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-web/apps/web
+
+ ❯ src/pages/PropertyDetailPage.test.tsx (13 tests | 13 failed) 13187ms
+   × AC-DETAIL-1 sends the route id in the Property query 1037ms
+   × AC-WEB-15 shows the property address and coordinates by their terms 1013ms
+   × AC-WEB-6 shows creation time as a time element with the received ISO value 1018ms
+   × AC-DETAIL-5 shows the weather at creation and its observation time 1009ms
+   × AC-DETAIL-5 shows all weather values with metric units 1018ms
+   × AC-WEB-5 shows Not reported for null humidity and observation time while preserving zero 1018ms
+   × AC-WEB-5 renders every null weather field as Not reported 1017ms
+   × AC-DETAIL-3 shows loading while the query response is held open 1014ms
+   × AC-DETAIL-3 shows the load error for a network failure 1012ms
+   × AC-DETAIL-3 shows the load error for a graphql failure 1011ms
+   × AC-WEB-7 Try again sends a second request and shows its property 1005ms
+   × AC-DETAIL-4 shows not found and a link back to all properties 1008ms
+   × AC-WEB-2 uses the street and not-found page titles 1004ms
+node : 
+At line:2 char:113
++ ... _COLOR='1'; node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mj ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-1 sends the route id in the Property query
+TestingLibraryElementError: Unable to find role="heading" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:72:23
+     70|   renderApp(['/properties/property-42']);
+     71|
+     72|   expect(await screen.findByRole('heading', { level: 1, name: property…
+       |                       ^
+     73|   expect(requests).toEqual([{ id: 'property-42' }]);
+     74| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-WEB-15 shows the property address and coordinates by their terms
+TestingLibraryElementError: Unable to find role="region" and name "Property"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:78:29
+     76| test('AC-WEB-15 shows the property address and coordinates by their te…
+     77|   renderApp(['/properties/property-42']);
+     78|   const card = await screen.findByRole('region', { name: 'Property' });
+       |                             ^
+     79|   const details = within(card);
+     80|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-WEB-6 shows creation time as a time element with the received ISO val
+ue
+TestingLibraryElementError: Unable to find role="region" and name "Property"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:97:29
+     95| test('AC-WEB-6 shows creation time as a time element with the received…
+     96|   renderApp(['/properties/property-42']);
+     97|   const card = await screen.findByRole('region', { name: 'Property' });
+       |                             ^
+     98|   expect(within(card).getByRole('term', { name: 'Created' })).toBeInTh…
+     99|   expect(within(card).getByText(/Oct 13, 2026/)).toHaveAttribute('date…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-5 shows the weather at creation and its observation time
+TestingLibraryElementError: Unable to find role="region" and name "Weather at creation"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:104:29
+    102| test('AC-DETAIL-5 shows the weather at creation and its observation ti…
+    103|   renderApp(['/properties/property-42']);
+    104|   const card = await screen.findByRole('region', { name: 'Weather at c…
+       |                             ^
+    105|   expect(card).toHaveTextContent('Observed 05:12 PM UTC on Oct 13, 202…
+    106| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-5 shows all weather values with metric units
+TestingLibraryElementError: Unable to find role="region" and name "Weather at creation"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:110:29
+    108| test('AC-DETAIL-5 shows all weather values with metric units', async (…
+    109|   renderApp(['/properties/property-42']);
+    110|   const card = await screen.findByRole('region', { name: 'Weather at c…
+       |                             ^
+    111|
+    112|   expect(within(card).getByText('24 °C')).toBeInTheDocument();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-WEB-5 shows Not reported for null humidity and observation time while
+ preserving zero
+TestingLibraryElementError: Unable to find role="region" and name "Weather at creation"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:137:29
+    135|   })));
+    136|   renderApp(['/properties/property-42']);
+    137|   const card = await screen.findByRole('region', { name: 'Weather at c…
+       |                             ^
+    138|
+    139|   expect(within(card).getByText('Observation time: Not reported. Saved…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-WEB-5 renders every null weather field as Not reported
+TestingLibraryElementError: Unable to find role="region" and name "Weather at creation"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:151:29
+    149|   })));
+    150|   renderApp(['/properties/property-42']);
+    151|   const card = await screen.findByRole('region', { name: 'Weather at c…
+       |                             ^
+    152|
+    153|   for (const term of ['Humidity', 'Wind', 'Wind direction', 'Pressure'…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-3 shows loading while the query response is held open
+TestingLibraryElementError: Unable to find role="status"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:165:23
+    163|   renderApp(['/properties/property-42']);
+    164|
+    165|   expect(await screen.findByRole('status')).toHaveTextContent('Loading…
+       |                       ^
+    166| });
+    167|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-3 shows the load error for a network failure
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-3 shows the load error for a graphql failure
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:175:30
+    173|   renderApp(['/properties/property-42']);
+    174|
+    175|   const alert = await screen.findByRole('alert');
+       |                              ^
+    176|   expect(within(alert).getByRole('heading', { name: 'Could not load th…
+    177|   expect(alert).toHaveTextContent('The server did not answer. Nothing …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-WEB-7 Try again sends a second request and shows its property
+TestingLibraryElementError: Unable to find role="button" and name "Try again"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:191:33
+    189|   const { user } = renderApp(['/properties/property-42']);
+    190|
+    191|   await user.click(await screen.findByRole('button', { name: 'Try agai…
+       |                                 ^
+    192|
+    193|   expect(await screen.findByRole('heading', { level: 1, name: 'Second …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-DETAIL-4 shows not found and a link back to all properties
+TestingLibraryElementError: Unable to find role="heading" and name "Property not found"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:201:23
+    199|   renderApp(['/properties/unknown']);
+    200|
+    201|   expect(await screen.findByRole('heading', { level: 1, name: 'Propert…
+       |                       ^
+    202|   expect(screen.getByRole('link', { name: 'Back to all properties' }))…
+    203| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/13]⎯
+
+ FAIL  src/pages/PropertyDetailPage.test.tsx > AC-WEB-2 uses the street and not-found page titles
+TestingLibraryElementError: Unable to find role="heading" and name "15 Saguaro Blvd"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+
+ Test Files  1 failed (1)
+      Tests  13 failed (13)
+   Start at  14:48:30
+   Duration  14.29s (tests 93%, environment 5%, setup 1%, import 1%)
+
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <header
+      class="site-header"
+    >
+      <nav
+        aria-label="Main navigation"
+        class="site-header__inner"
+      >
+        <a
+          class="brand-link"
+          data-discover="true"
+          href="/"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="22"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="22"
+          >
+            <path
+              d="M3 11.5 12 4l9 7.5"
+            />
+            <path
+              d="M5.5 10v10h13V10"
+            />
+            <path
+              d="M10 20v-6h4v6"
+            />
+          </svg>
+          <span>
+            Properties
+          </span>
+        </a>
+        <a
+          class="button button--primary"
+          data-discover="true"
+          href="/properties/new"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+            viewBox="0 0 24 24"
+            width="16"
+          >
+            <path
+              d="M12 5v14"
+            />
+            <path
+              d="M5 12h14"
+            />
+          </svg>
+          <span>
+            Add property
+          </span>
+        </a>
+      </nav>
+    </header>
+    <main
+      class="page-frame"
+    >
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/PropertyDetailPage.test.tsx:207:16
+    205| test('AC-WEB-2 uses the street and not-found page titles', async () =>…
+    206|   renderApp(['/properties/property-42']);
+    207|   await screen.findByRole('heading', { level: 1, name: property.street…
+       |                ^
+    208|   await waitFor(() => expect(document.title).toBe(`${property.street} …
+    209|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/13]⎯
+
+
