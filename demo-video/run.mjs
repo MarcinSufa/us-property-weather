@@ -49,6 +49,10 @@ const patches = {
     ['rgba(255,255,255,', 'rgba(11,93,94,'],
     ['rgba(219,175,113,', 'rgba(11,93,94,'],
     ['background:rgba(11,93,94,0.9)', 'background:rgba(11,93,94,0.55)'],
+    [
+      '    else if (action.wait) {',
+      "    else if (action.cut_when) { await page.waitForSelector(action.cut_when, { state: action.state ?? 'visible', timeout: 8000 }); trimStart = (Date.now() - recStart) / 1000 + 0.15; label = label || 'cut_when'; }\n    else if (action.wait) {",
+    ],
   ],
   'build.sh': [
     ['node record-frame.mjs', 'cp videos/final-with-captions.mp4 videos/final-framed.mp4'],

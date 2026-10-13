@@ -61,29 +61,30 @@ scenes:
           - { click: 'header a:has-text("Add property")' }
           - { wait: 0.3 }
           - { click: '#new-property-street' }
-          - { type: '13001 N La Montana Dr' }
+          - { type: '15 Saguaro Blvd' }
           - { press: 'Tab' }
           - { type: 'Fountain Hills' }
           - { press: 'Tab' }
           - { type: 'AZ' }
           - { press: 'Tab' }
           - { type: '85268' }
+          - { hover: 'button[type=submit]' }
       after:
         label: 'AFTER: saved with its weather'
         url: 'http://127.0.0.1:5273/properties/new'
         viewport: { width: 1600, height: 900 }
         settle_ms: 500
-        trim_start_ms: 7500
+        trim_start_ms: 5400
         tail_ms: 500
         actions:
-          - { fill: { selector: '#new-property-street', text: '13001 N La Montana Dr' } }
+          - { fill: { selector: '#new-property-street', text: '15 Saguaro Blvd' } }
           - { fill: { selector: '#new-property-city', text: 'Fountain Hills' } }
           - { press: 'Tab' }
           - { type: 'AZ' }
           - { fill: { selector: '#new-property-zip', text: '85268' } }
-          - { wait: 3.0 }
           - { click: 'button[type=submit]' }
-          - { wait: 5.8 }
+          - { cut_when: 'section.weather-card' }
+          - { wait: 6.5 }
           - { highlight: 'section.weather-card' }
           - { wait: 0.8 }
           - { click: 'a.back-to-properties' }
@@ -92,9 +93,9 @@ scenes:
 
     - type: before_after
       export: 'before-after-validation'
-      duration: 15.0
+      duration: 16.0
       before:
-        label: 'BEFORE: street and city are only spaces'
+        label: 'BEFORE: not saved yet'
         url: 'http://127.0.0.1:5273/properties/new'
         viewport: { width: 1600, height: 900 }
         settle_ms: 2600
@@ -112,27 +113,28 @@ scenes:
           - { type: '85259' }
           - { wait: 0.3 }
           - { click: 'button[type=submit]' }
-          - { wait: 1.2 }
+          - { wait: 2.5 }
+          - { fill: { selector: '#new-property-street', text: '220 Palm Street' } }
+          - { fill: { selector: '#new-property-city', text: 'Scottsdale' } }
+          - { hover: 'button[type=submit]' }
       after:
         label: 'AFTER: corrected and saved'
         url: 'http://127.0.0.1:5273/properties/new'
+        cursor: false
         viewport: { width: 1600, height: 900 }
         settle_ms: 500
-        trim_start_ms: 7700
+        trim_start_ms: 6500
         tail_ms: 500
         actions:
-          - { fill: { selector: '#new-property-street', text: '   ' } }
-          - { fill: { selector: '#new-property-city', text: '   ' } }
+          - { fill: { selector: '#new-property-street', text: '220 Palm Street' } }
+          - { fill: { selector: '#new-property-city', text: 'Scottsdale' } }
           - { press: 'Tab' }
           - { type: 'AZ' }
           - { fill: { selector: '#new-property-zip', text: '85259' } }
           - { click: 'button[type=submit]' }
-          - { wait: 3.0 }
-          - { fill: { selector: '#new-property-street', text: '11500 E Via Linda' } }
-          - { fill: { selector: '#new-property-city', text: 'Scottsdale' } }
-          - { wait: 0.3 }
-          - { click: 'button[type=submit]' }
-          - { wait: 3.0 }
+          - { click: 'a.back-to-properties' }
+          - { cut_when: 'button[aria-label="Delete 220 Palm Street"]' }
+          - { wait: 4.0 }
 
     - type: browser_capture
       url: 'http://127.0.0.1:5273/properties/new'
@@ -142,7 +144,7 @@ scenes:
       tail_ms: 500
       duration: 13.2
       actions:
-        - { fill: { selector: '#new-property-street', text: '16838 E Palisades Blvd' } }
+        - { fill: { selector: '#new-property-street', text: '300 Pine Avenue' } }
         - { fill: { selector: '#new-property-city', text: 'Fountain Hills' } }
         - { press: 'Tab' }
         - { type: 'AZ' }
@@ -202,19 +204,21 @@ scenes:
         tail_ms: 300
         actions:
           - { wait: 0.6 }
-          - { click: 'button[aria-label="Delete 11500 E Via Linda"]' }
-          - { wait: 2.0 }
+          - { click: 'button[aria-label="Delete 220 Palm Street"]' }
+          - { wait: 1.85 }
+          - { hover: 'dialog[open] button.button--danger' }
       after:
         label: 'AFTER: two remain'
         url: 'http://127.0.0.1:5273/'
         viewport: { width: 1600, height: 900 }
         settle_ms: 500
-        trim_start_ms: 5200
+        trim_start_ms: 3800
         tail_ms: 500
         actions:
-          - { click: 'button[aria-label="Delete 11500 E Via Linda"]' }
-          - { wait: 3.0 }
+          - { click: 'button[aria-label="Delete 220 Palm Street"]' }
+          - { wait: 0.5 }
           - { click: 'dialog[open] button.button--danger' }
+          - { cut_when: 'button[aria-label="Delete 220 Palm Street"]', state: 'detached' }
           - { wait: 8.0 }
 
     - type: browser_capture
@@ -244,7 +248,7 @@ voiceover:
 
   - { text: 'Empty fields are blocked by the browser, so we type only spaces.', pause_after: 0.64 }
   - { text: 'The server checks the input too, and reports each field.', pause_after: 0.9 }
-  - { text: 'With a real street and city, the property saves.', pause_after: 1.8 }
+  - { text: 'With a real street and city, the property saves.', pause_after: 2.8 }
 
   - { text: 'Next, a zip code the weather service does not know.', pause_after: 0.85 }
   - { text: 'The form says so, and nothing is saved.', pause_after: 0.6 }
