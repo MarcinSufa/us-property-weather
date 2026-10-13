@@ -168,3 +168,9 @@ Outcome: answered at 15:36 with about 65 percent done and 2.5 to 3.5 hours of wa
 > używasz luny jako workera w subsekcjach ?
 
 Outcome: answered at 15:40 with yes, and with the evidence. The codex session files of the day, grouped by the worktree each one ran in, record `gpt-6-luna` for every worker round of wave 1: `api` 8, `weather` 5, `transcripts` 5, `web` 6, `docs` 6. For `api`, `weather` and `transcripts` the header of each worker log says the same (18 logs). For `web` and `docs` no worker log was found under `c:/tmp`, so the session files are the only proof there, with 13 dispatch commands carrying `-m gpt-6-luna` in the output of the `docs` conductor. Wave 0 was not checked in this step. While checking the record the manager corrected the count in the outcome of prompt 24 from four to three merged slices of wave 1, which is what the answer given to Marcin said.
+
+## Prompt 26
+
+> nagraj filmy przy uzyciu before after z przebiegiem scenariusz użycia aplikacji + lektor , intro i outro - zleć to subagentowi
+
+Outcome: delegated at 16:55 to one background subagent (Opus 5.5) in its own worktree `c:/tmp/covertree-video`, branch `slice/demo-video`, cut from `main` at 337f522. It uses the `demo-video` plugin: recorded scenes of the running app, `before_after` scenes for the changes of state, a narrator, captions, an intro card and an outro card. The manager set what the request left open and told Marcin so: the narrator speaks English (voice `en-US-AndrewNeural`), the weather comes from a local stub replaying the recorded fixtures and the film says so, the servers run on ports 4100, 5273 and 4274 so the end-to-end slice keeps 4000, 5173 and 4174, the rendered files go to `c:/tmp/covertree-video-out/` and are not committed, and the slice owns `demo-video/**` only. No tunnel, no upload. This slice has no worker model and no Grok review: the manager checks the films itself before anything is merged.
