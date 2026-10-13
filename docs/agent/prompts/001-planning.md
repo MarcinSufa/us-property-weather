@@ -40,7 +40,7 @@ Outcome: `git init -b main`, `.gitignore` written, `git check-ignore` confirms `
 
 > Aplikacja działa lokalnie, bez AWS (GraphQL Yoga, SQLite, React z Vite).
 > Nic nie wysyłam na GitHuba. Review robi Grok przez API Cursora, na wklejonym diffie.
-> Robię lokalnie git init i od razu zapisuję prompty i decyzje, tak jak w juo.
+> Robię lokalnie git init i od razu zapisuję prompty i decyzje, tak jak w [redacted].
 > Ta sesja jest managerem. Dokładam testy e2e w Playwright i CI, bez wideo.
 > Transkrypty trafiają do repo po redakcji, bez danych innych klientów i twojego emaila.
 >
@@ -215,4 +215,12 @@ Outcome: answered during the review: the app was already running from the manage
 
 > nic w docsach nie ma wrażliwego przed wypchnięciem do githuba ?
 
-Outcome: no secret was found in the documents, and the three key-like values in them are test markers. Six things were put to Marcin as his decisions before a public push, none changed by the manager: the first prompt names another project of his and links the job offer; the name of one of his personal skills, which he may prefer to keep out of a public record, stands in the README, the plan and six other places of the record; his local user name and home folder stand in 19 files of worker output, briefs and handoffs; the names of his private tools stand in the prompts, the decisions and the plan; the design notes link a private artifact and the review files carry 58 run identifiers of the reviewer service; and the starting brief quotes the essentials of the employer's assignment. He was told that a correction in a new commit leaves the old text in the history, that the history can be rewritten before the first push at the cost of every commit hash cited in the record, and that only `main` should be pushed.
+Outcome: no secret was found in the documents, and the three key-like values in them are test markers. Six things were put to Marcin as his decisions before a public push, none changed by the manager: the first prompt carried two passages he may not want public; the name of one of his personal skills, which he may prefer to keep out of a public record, stands in the README, the plan and six other places of the record; his local user name stands in 19 files of worker output, briefs and handoffs; the names of his private tools stand in the prompts, the decisions and the plan; the design notes link a private artifact and the review files carry 58 run identifiers of the reviewer service; and the starting brief quotes the essentials of the employer's assignment. He was told that a correction in a new commit leaves the old text in the history, that the history can be rewritten before the first push at the cost of every commit hash cited in the record, and that only `main` should be pushed.
+
+## Prompt 34
+
+> x1 usuń nawiązanie do [redacted] i oferty pracy ,
+> x3 [redacted] mozesz wywalić
+> x5 , ale cytujesz to jako pełną treść i jest tam info ze to zadanie rekrtacyjne ?
+
+Outcome: two decisions and one question, and two words of this prompt are themselves replaced by `[redacted]`. The manager made both redactions in the record, as one commit: in `000-bootstrap.md` the name of the other project and the sentence with the link in prompt 1 are now `[redacted]`, and so is the same name in prompt 6 of this file; the local user name is replaced by `USER` in 19 record files (three handoffs, two briefs, two files of the wave 0 slice and twelve files of worker test output), 20 places in all. On the question the manager answered from the file: `docs/brief/cover-tree.md` is Marcin's own starting prompt, not the employer's document; its section 0 gives the essentials of the assignment (six user stories, the property fields, five requirements), its first and fourth lines say that this is a recruitment task, and its requirements include a public GitHub repository, so publishing is what the assignment asks for. The redactions do not reach the earlier commits: the old text stays in the history until Marcin decides whether the history is rewritten before the first push. The skill name and the names of the private tools were not decided and stay as they are.

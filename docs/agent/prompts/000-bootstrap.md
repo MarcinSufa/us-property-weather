@@ -1,12 +1,12 @@
 # 000: bootstrap (2026-10-13)
 
-First session in this folder (Claude Code, Cursor extension, model Claude Opus 5.5), before the folder was a git repository. It read the brief (`cover-tree.md`), the job offer and the reference workflow from an earlier project, installed the exo-compact plugin, asked round 1 of the grilling and ended with a handoff to a fresh session so the plugin could load. No project file was written.
+First session in this folder (Claude Code, Cursor extension, model Claude Opus 5.5), before the folder was a git repository. It read the brief (`cover-tree.md`) and a reference workflow, installed the exo-compact plugin, asked round 1 of the grilling and ended with a handoff to a fresh session so the plugin could load. No project file was written.
 
-Prompts are quoted as typed, in Polish, typos included. Source: the session transcript, each prompt confirmed by a text search of the transcript file.
+Prompts are quoted as typed, in Polish, typos included. Source: the session transcript, each prompt confirmed by a text search of the transcript file. Two passages of prompt 1 were replaced by `[redacted]` before publication, at Marcin's request (prompt 34 in `001-planning.md`).
 
 ## Prompt 1
 
-> hej chcę żebyśmy użyli podobneg flow jak w [redacted] - czyli raportowanie sesji i historii i decyzji, również chcę użyć podobnych skill i pluginów jak tam , zacząć od planowania z grill-me , grill-me-with-docs , sprawdź cover-tree.md , zamieszczam jeszcze ofertę pracy i informacje o firmie. [redacted] Pracować po planowaniu będziemy w wielu sesjach orkietrowanych , gdzie workerem będzie luna, opus 5.5 będzie orkiestrował w każdej  równoległych sekcji, grok będzie review robił - używająć api cursora .
+> hej chcę żebyśmy użyli podobneg flow jak w [redacted] - czyli raportowanie sesji i historii i decyzji, również chcę użyć podobnych skill i pluginów jak tam , zacząć od planowania z grill-me , grill-me-with-docs , sprawdź cover-tree.md , [redacted] Pracować po planowaniu będziemy w wielu sesjach orkietrowanych , gdzie workerem będzie luna, opus 5.5 będzie orkiestrował w każdej  równoległych sekcji, grok będzie review robił - używająć api cursora .
 
 Outcome: the working model for this repo. A manager session plans and merges, one Opus 5.5 conductor per slice, GPT Luna implements through `codex exec`, Grok reviews through the Cursor API, and every prompt, decision and review round is kept in the repo.
 
