@@ -21,6 +21,8 @@ npm run verify
 npm run e2e
 ```
 
+The last two commands are the checks described in the next section; only the first three are needed to run the application.
+
 The local API with GraphiQL is at http://localhost:4000/graphql. The web app is at http://localhost:5173.
 
 ## Test it
@@ -192,68 +194,74 @@ flowchart LR
 
 ## Stack and why
 
-| Choice                                                                         | Reason                                                                                                         | Rejected                                                                                    |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Node 24                                                                        | Built-in SQLite and direct TypeScript execution                                                                | Node 22: `node:sqlite` is flagged experimental there                                        |
-| npm workspaces: `apps/api`, `apps/web`, `e2e`                                  | Built into npm; one install and one lockfile                                                                   | pnpm or Turborepo: another tool for two packages                                            |
-| TypeScript 6.0 with `strict`, `noUncheckedIndexedAccess`, `erasableSyntaxOnly` | Newest version the linter supports                                                                             | TypeScript 7: outside `typescript-eslint`'s range                                           |
-| GraphQL Yoga 5 on `node:http`                                                  | Small, spec-compliant, error masking, health endpoint and GraphiQL built in, in-process `yoga.fetch` for tests | Apollo Server: more surface for six operations; Express: not needed                         |
-| Schema-first SDL and graphql-codegen                                           | The SDL contract lets backend and frontend sessions work in parallel                                           | Code-first (Pothos, Nexus): the contract would be TypeScript inside the API package         |
-| `node --watch --env-file=.env src/main.ts`                                     | No build step, `tsx` or `dotenv`                                                                               | `tsx` and a compiled `dist/`                                                                |
-| Built-in `node:sqlite`, hand-written SQL in one repository file                | One table and five statements, no native addon, zero dependencies                                              | Drizzle or Prisma with `better-sqlite3`; Drizzle on `node:sqlite` is release-candidate only |
-| Zod 4 at the two trust boundaries                                              | One library parses and types mutation input and Weatherstack responses                                         | Hand-written checks                                                                         |
-| pino                                                                           | Structured lines, one dependency, redaction built in                                                           | `console.log`                                                                               |
-| React 19, Vite 8, React Router 8                                               | Three routes with filters in the URL                                                                           | Next.js: a server is not needed                                                             |
-| urql 5 with default document cache                                             | Small; mutations invalidate lists by type name; typed documents from codegen                                   | Apollo Client: normalised cache for six operations; TanStack Query: cache keys by hand      |
-| Plain CSS with custom properties                                               | No UI kit                                                                                                      | Tailwind or a component library                                                             |
-| Vitest 5, Testing Library and `msw` (node)                                     | One runner for both apps                                                                                       | Jest                                                                                        |
-| Playwright, Chromium only                                                      | The six user stories as code                                                                                   | Cypress                                                                                     |
-| ESLint, Prettier, `tsc --noEmit`, `npm run verify`                             | One command answers whether quality checks pass                                                                | None specified                                                                              |
-| `concurrently`                                                                 | One `npm run dev` for API and web                                                                              | Two terminals                                                                               |
+| Concern                    | Choice                                                                         | Reason                                                                                                         | Rejected                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Runtime                    | Node 24                                                                        | Built-in SQLite and direct TypeScript execution                                                                | Node 22: `node:sqlite` is flagged experimental there                                                                               |
+| Repository                 | npm workspaces: `apps/api`, `apps/web`, `e2e`                                  | Built into npm; one install and one lockfile                                                                   | pnpm or Turborepo: another tool for two packages                                                                                   |
+| Language                   | TypeScript 6.0 with `strict`, `noUncheckedIndexedAccess`, `erasableSyntaxOnly` | Newest version the linter supports                                                                             | TypeScript 7: outside `typescript-eslint`'s range                                                                                  |
+| API                        | GraphQL Yoga 5 on `node:http`                                                  | Small, spec-compliant, error masking, health endpoint and GraphiQL built in, in-process `yoga.fetch` for tests | Apollo Server: more surface for six operations; Express: not needed                                                                |
+| Schema                     | Schema-first SDL and graphql-codegen                                           | The SDL contract lets backend and frontend sessions work in parallel                                           | Code-first (Pothos, Nexus): the contract would be TypeScript inside the API package                                                |
+| Running the API            | `node --watch --env-file=.env src/main.ts`                                     | No build step, `tsx` or `dotenv`                                                                               | `tsx` and a compiled `dist/`                                                                                                       |
+| Database                   | Built-in `node:sqlite`, hand-written SQL in one repository file                | One table and five statements, no native addon, zero dependencies                                              | Drizzle or Prisma with `better-sqlite3`: a native addon and an ORM for one table; Drizzle on `node:sqlite`: release candidate only |
+| Validation                 | Zod 4 at the two trust boundaries                                              | One library parses and types mutation input and Weatherstack responses                                         | Hand-written checks                                                                                                                |
+| Logging                    | pino                                                                           | Structured lines, one dependency, redaction built in                                                           | `console.log`                                                                                                                      |
+| Web                        | React 19, Vite 8, React Router 8                                               | Three routes with filters in the URL                                                                           | Next.js: a server is not needed                                                                                                    |
+| GraphQL client             | urql 5 with default document cache                                             | Small; mutations invalidate lists by type name; typed documents from codegen                                   | Apollo Client: normalised cache for six operations; TanStack Query: cache keys by hand                                             |
+| Styling                    | Plain CSS with custom properties                                               | No UI kit                                                                                                      | Tailwind or a component library                                                                                                    |
+| Unit and integration tests | Vitest 5, Testing Library and `msw` (node)                                     | One runner for both apps                                                                                       | Jest                                                                                                                               |
+| End-to-end                 | Playwright, Chromium only                                                      | The six user stories as code                                                                                   | Cypress                                                                                                                            |
+| Quality gates              | ESLint, Prettier, `tsc --noEmit`, `npm run verify`                             | One command answers whether quality checks pass                                                                |                                                                                                                                    |
+| Parallel dev processes     | `concurrently`                                                                 | One `npm run dev` for API and web                                                                              | Two terminals                                                                                                                      |
 
 ## Trade-offs and what comes next
 
 - Editing a property, pagination and authentication are outside the six stories.
 - Zip-to-city and state validation is omitted because the address is trusted as typed and Weatherstack region naming was measured for one state only.
 - US territories are omitted because the state contract covers the 50 states and DC.
-- Retries, caching and a circuit breaker are omitted to keep the weather call direct and because the quota is small.
+- Retries, caching and a circuit breaker are omitted because the quota is small and the person can press the button again.
 - A migration tool is omitted because there is one schema version.
-- A production API build, serving the web bundle from the API and deployment are omitted from this local application.
-- `astro` and `air_quality` are not exposed because the contract only exposes the selected current-weather fields.
+- The API runs its TypeScript directly with Node, and the application is meant to run locally with `npm install` and nothing else. There is no compiled API build, no serving of the web bundle from the API and no deployment.
+- The whole `current` object is stored, but `astro` and `air_quality` are not exposed because some of their keys are expected to contain hyphens, which GraphQL field names cannot. This is unverified.
 - Weather is a snapshot from creation and is never refreshed.
 - `npm audit` reports 10 high findings, all through the transitive development dependency `braces`; they are left untouched.
 
+### Path to AWS Lambda (not built)
+
 To move to AWS Lambda, GraphQL Yoga's fetch-style handler would run the same schema and resolvers behind a Lambda function URL or API Gateway with a thin adapter in place of `main.ts`. Since a SQLite file does not survive between invocations, `PropertyRepository` would get a second implementation over a managed database while the service stayed unchanged. The key would move from `.env` to a secrets store, and the web bundle would be served as static files from object storage behind a CDN. This deployment is not built.
+
+Not built:
+
+- Editing a property, pagination and authentication.
+- Zip-to-city and state validation.
+- US territories.
+- Retries, caching or a circuit breaker around the weather call.
+- A migration tool.
+- A production API build, serving the web bundle from the API and deployment.
+- Exposing `astro` and `air_quality`.
 
 ## How AI was used
 
-| Role      | Who                                                 | Does                                                                                                     | Never                                              |
-| --------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| Manager   | The manager session                                 | Plans, writes briefs, merges into `main`, verifies after each merge and maintains the record             | Implements                                         |
-| Conductor | A background subagent per slice                     | Writes worker and reviewer prompts, runs `npm run verify`, reads the diff and decides on review findings | Implements                                         |
-| Worker    | A worker model in its own worktree and slice branch | Writes tests and code inside its slice's files                                                           | Touches another slice's files or adds a dependency |
-| Reviewer  | A model from another vendor than the worker         | Reads the diff and returns findings                                                                      | Writes code or reviews its own diff                |
+| Role      | Who                                                                                                        | Does                                                                                                     | Never                                               |
+| --------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| Manager   | The manager session, Claude Opus 5.5                                                                       | Plans, writes briefs, merges into `main`, verifies after each merge and maintains the record             | Implements                                          |
+| Conductor | One Claude Opus 5.5 subagent of the manager session per slice, at medium effort, running in the background | Writes worker and reviewer prompts, runs `npm run verify`, reads the diff and decides on review findings | Implements                                          |
+| Worker    | GPT Luna through `codex exec`, one per slice, in its own worktree and branch `slice/<name>`                | Writes tests and code inside its slice's files                                                           | Touches another slice's files or adds a dependency  |
+| Reviewer  | Grok 4.7 at high reasoning through the Cursor v1 API                                                       | Reads the diff pasted into the prompt and returns findings                                               | Writes code; is never the model that wrote the diff |
 
-One slice follows this loop:
-
-1. The manager provides a brief.
-2. The worker writes a test and shows it failing, then implements until it passes.
-3. The conductor verifies the slice and asks the reviewer to inspect the diff.
-4. The worker fixes findings, with at most three review rounds.
-5. The conductor reports to the manager, who merges and verifies on `main`.
+The loop follows plan section 14 step for step: brief from the manager; worker prompt written by the conductor; worker round with the test seen red, then green; the conductor's own verification, which reads the whole diff and runs `npm run verify`; reviewer round; fixes, at most three review rounds; report to the manager; merge with `git merge --no-ff`; and `npm run verify` on `main`. A finding that is not fixed is recorded with its reason. Model ids are checked before every vendor leg and passed explicitly.
 
 The project record lives in `docs/agent/`:
 
-- `prompts/`: prompts with outcomes.
+- `prompts/`: prompts verbatim with their outcomes.
 - `decisions-log.md`: decisions.
 - `manager-state.md`: manager state.
-- `briefs/`: slice briefs.
-- `handoffs/`: handoff files for sessions.
-- `slices/<slice>/`: worker and reviewer prompts with raw replies.
-- `reviews/`: review records.
+- `briefs/`: one brief per slice.
+- `handoffs/`: one handoff file per wave.
+- `slices/<slice>/`: each worker prompt and reviewer prompt with its raw reply, and the red and green test output.
+- `reviews/`: the reviewer's raw findings per slice.
 - `review-log.md`: review log.
 - `session-metrics.md`: session metrics.
-- `sessions/`: redacted transcripts.
+- `sessions/`: redacted session transcripts.
 - `skills/`: copies and descriptions of skills used.
 
 `AGENTS.md` contains the rules agents follow, and `CLAUDE.md` imports those rules. `docs/SPEC.md` holds acceptance criteria in Given/When/Then form with ids, which tests use. `scripts/grok-review.mjs` sends diffs to the reviewer and saves raw replies. `scripts/export-sessions.ts` exports transcripts to redacted Markdown and has a test for banned phrases.

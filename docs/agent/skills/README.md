@@ -8,7 +8,7 @@ Skills are instruction files an agent session loads for a kind of task. This fol
 
 An interview skill that puts each open plan decision to the author in rounds, with a recommended answer for every question. In this project it was used in the planning session to settle the plan's open points before approval (plan section 19).
 
-- File copied: `SKILL.md`, byte for byte from the local skill folder on 2026-10-13.
+- File copied: `SKILL.md`, text unchanged from the local skill folder on 2026-10-13 (git stores it with LF line endings).
 - Source URL: https://github.com/mattpocock/skills, path `skills/productivity/grilling` (as recorded in the local skill folder's own source note).
 - Commit or version: not established locally. The local source note records only the date the skill was taken from upstream, 2026-09-04.
 - Licence: MIT, as recorded in the local source note. The upstream licence text and its copyright line are not established locally and are therefore not reproduced here.
@@ -19,7 +19,7 @@ An interview skill that puts each open plan decision to the author in rounds, wi
 
 Passes a session's working state (goal, specifics, state, next step, constraints, gotchas and verification commands) to a fresh session through a structured document. In this project its document format models the files under `docs/agent/handoffs/` that conductors are started from.
 
-- Files copied: `SKILL.md` and `LICENSE`, byte for byte from the installed plugin on 2026-10-13.
+- Files copied: `SKILL.md` and `LICENSE`, text unchanged from the installed plugin on 2026-10-13 (git stores them with LF line endings).
 - Source URL: https://github.com/MarcinSufa/claude-handoff (from the plugin manifest).
 - Version: 1.0.0 (plugin manifest). Installed from commit `03c5eb1434a40e322a4ebaa5b3de2fee907a9fa1` (the local plugin registry).
 - Licence: MIT. The notice is in `handoff/LICENSE` next to the skill.
