@@ -1,0 +1,1 @@
+Updated `README.md` with the measured Weatherstack `current` and `air_quality` facts, and clarified that mapped error codes in the body apply at any HTTP status. Prettier check passes, and the README has exactly six `graphql` fenced blocks.

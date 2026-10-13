@@ -39,15 +39,15 @@ npm run verify
 npm run e2e
 ```
 
-| Layer                  | What                                                                                                                            | How                                              |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-| Input rules            | Valid and invalid inputs and filters, trimming                                                                                  | Vitest, pure functions                           |
-| Weather adapter        | Success with string coordinates, mapped error codes, HTTP 429, 5xx, timeout, unreadable body, missing location, key never leaks | Vitest with a stub `fetch` and recorded fixtures |
-| Service and repository | Create, list with every filter combination, both sort orders, delete, not found                                                 | Vitest, real SQLite in `:memory:`, fake provider |
-| GraphQL API            | All six stories, error codes and field errors, failed weather stores nothing, zero-provider-calls proof                         | Vitest, in process through `yoga.fetch`, no port |
-| Web                    | Form validation and error display, filter and sort to URL, list states, delete confirmation, empty-list refresh                 | Vitest, Testing Library, `msw`                   |
-| End to end             | Six stories against the API, a temporary database and a local Weatherstack stub                                                 | Playwright                                       |
-| Real service           | One create against Weatherstack, evidence saved without the key                                                                 | Manual                                           |
+| Layer                  | What                                                                                                                                                                | How                                              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Input rules            | Valid and invalid inputs and filters, trimming                                                                                                                      | Vitest, pure functions                           |
+| Weather adapter        | Success with string coordinates, each mapped error code in the body, at any HTTP status, HTTP 429, 5xx, timeout, unreadable body, missing location, key never leaks | Vitest with a stub `fetch` and recorded fixtures |
+| Service and repository | Create, list with every filter combination, both sort orders, delete, not found                                                                                     | Vitest, real SQLite in `:memory:`, fake provider |
+| GraphQL API            | All six stories, error codes and field errors, failed weather stores nothing, zero-provider-calls proof                                                             | Vitest, in process through `yoga.fetch`, no port |
+| Web                    | Form validation and error display, filter and sort to URL, list states, delete confirmation, empty-list refresh                                                     | Vitest, Testing Library, `msw`                   |
+| End to end             | Six stories against the API, a temporary database and a local Weatherstack stub                                                                                     | Playwright                                       |
+| Real service           | One create against Weatherstack, evidence saved without the key                                                                                                     | Manual                                           |
 
 No test calls the real Weatherstack service.
 
@@ -223,7 +223,7 @@ Not built:
 - Retries, caching or a circuit breaker around the weather call: the quota is small and the person can press the button again.
 - A migration tool: there is one schema version.
 - A compiled API build, serving the web bundle from the API or deployment: the application is meant to run locally with `npm install` and nothing else.
-- Exposing `astro` and `air_quality`: some keys in the stored `current` object are expected to contain hyphens, which GraphQL field names cannot. This is unverified.
+- Exposing `astro` and `air_quality`: the full Weatherstack `current` object is stored; the recorded answer has 18 keys, and `air_quality` contains `us-epa-index` and `gb-defra-index`, which cannot be GraphQL field names because they contain hyphens.
 
 Known limits:
 

@@ -10,13 +10,13 @@ const wave2 = new Set([
   'e2e/stories.spec.ts',
   'scripts/export-sessions.ts',
   '.github/workflows/verify.yml',
-  'docs/agent/review-log.md',
   'docs/agent/session-metrics.md',
   'docs/agent/sessions/',
   'docs/agent/slices/<slice>/',
   'apps/api/src/weather/fixtures/',
   '.env',
 ]);
+const onMain = new Set(['docs/agent/review-log.md']);
 const ownedHere = new Set(['README.md', 'docs/agent/skills/', 'docs/agent/skills/README.md']);
 const recordRoot = 'docs/agent/';
 const recordEntries = [
@@ -87,6 +87,7 @@ for (const [path, file] of [...candidates].sort()) {
   if (existsAtBase(resolved)) console.log(`ok   ${path} (${file}): at ${base}`);
   else if (ownedHere.has(resolved) || (resolved.startsWith('docs/agent/skills/') && existsSync(resolved)))
     console.log(`ok   ${path} (${file}): created by this slice`);
+  else if (onMain.has(resolved)) console.log(`ok   ${path} (${file}): on main since the base commit`);
   else if (wave2.has(resolved)) console.log(`ok   ${path} (${file}): to check in wave 2`);
   else fail(`${path} (${file}) does not exist and is not listed for wave 2`);
 }
