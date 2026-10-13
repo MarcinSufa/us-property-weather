@@ -275,9 +275,9 @@ Every error the client is meant to handle carries `extensions.code`. Anything un
 
 - Request: `GET {WEATHERSTACK_BASE_URL}/current?access_key=...&query={zipCode}`, with `AbortSignal.timeout(WEATHER_TIMEOUT_MS)`.
 - The response is parsed with a Zod schema before anything is trusted: either `{ success: false, error: { code, type } }` or `{ location: { lat, lon }, current: {...} }`. Unknown keys inside `current` are kept.
-- HTTP 200 with `success: false` is a failure. Mapping: code 615 (`request_failed`, per the Weatherstack documentation, not yet seen here) becomes `LOCATION_NOT_FOUND`; 104 and 106 (106 seen here with HTTP 429), 101, 105 and everything else become `WEATHER_UNAVAILABLE`.
+- A body with `success: false` is a failure at any HTTP status: the adapter reads the body before the status, and the error code in the body decides. Mapping: code 615 (`request_failed`, seen here with HTTP 400 when the fixtures were recorded) becomes `LOCATION_NOT_FOUND`; 104 and 106 (106 seen here with HTTP 429), 101, 105 and everything else become `WEATHER_UNAVAILABLE`.
 - The key travels in the query string, because that is the only way Weatherstack accepts it. So the adapter never logs or throws a URL: log lines carry the outcome, the error code and the duration. A test drives the adapter through every failure with a marker key and asserts that the marker appears in no log line and in no error.
-- Fixtures: the weather slice records two real responses once (a known zip and an unknown one), removes the key, and tests against the files. Calls spent so far: 3. Budget for the rest of the project: 2 for fixtures, 2 for the final manual run. No test, no dev loop and no CI job calls the real API.
+- Fixtures: the weather slice records two real responses once (a known zip and an unknown one), removes the key, and tests against the files. Calls spent so far: 5 (3 during planning, 2 for the fixtures on 2026-10-13). Budget for the rest of the project: 2 for the final manual run. No test, no dev loop and no CI job calls the real API.
 
 ## 9. Configuration and secrets
 

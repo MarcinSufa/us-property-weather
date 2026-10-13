@@ -25,7 +25,7 @@ What the conductors of wave 1 need and the plan does not say. Measured on 2026-1
 - Worker id: `gpt-6-luna` answers; `gpt-5.6-luna` is the stale name. Dispatch as `codex exec -m gpt-6-luna -s workspace-write -C <worktree> -o <reply file> - < <prompt file> > <log file> 2>&1`, with the log file outside the repository.
 - The worker sandbox has no network: the conductor runs `npm ci` itself. No `npm install` is needed in wave 1, because no slice may add a dependency.
 - The worker sandbox cannot write the git index: the conductor stages and commits, with an explicit path list.
-- Vite cannot start its build inside the sandbox (`spawn EPERM`): the conductor runs `npm run verify` and the build, and gives the output back to the worker when something fails. The worker can run the API and web unit tests.
+- Vite cannot start its build inside the sandbox (`spawn EPERM`): the conductor runs `npm run verify` and the build, and gives the output back to the worker when something fails. The worker could run the unit tests in wave 0; in the `weather` slice of wave 1 Vitest failed to start in the sandbox with the same error, so there the conductor ran every test run and the worker ran lint, typecheck and format only.
 - Stopping a background task does not stop the Node processes it started on Windows: find them by command line and stop them by process id, and check that ports 4000 and 5173 are free before the final message.
 - A subagent cannot write a file named as a report: the harness refuses. The final message of a conductor is its report; the manager saves it as `docs/agent/slices/<slice>/report.md` at merge.
 - Generated GraphQL code is not committed. A root `prepare` script runs codegen after `npm ci`. At commit fca2bd7 `npm run verify` runs lint and typecheck before codegen; the review round of wave 0 moves codegen first.
@@ -35,6 +35,8 @@ What the conductors of wave 1 need and the plan does not say. Measured on 2026-1
 - `docs/SPEC.md` holds 60 criteria in the areas CREATE, LIST, FILTER, SORT, DETAIL, DELETE, WEATHER and ERROR. The tests of wave 0 carry no criterion id, because they test the skeleton and no criterion.
 - The web GraphQL client in `apps/web/src/graphql/client.ts` is one module-level instance; tests that need their own client need a factory, which the `web` slice may add inside its own paths.
 - The skeleton signatures are the contract between `api`, `weather` and `web`. Read them from the source on `main`: `apps/api/src/property/property.ts`, `property-input.ts`, `property-repository.ts`, `property-service.ts`, `apps/api/src/weather/weather-provider.ts`, `weatherstack-provider.ts`, `apps/api/src/graphql/resolvers.ts`, `errors.ts`, `apps/api/src/config.ts`, `apps/api/src/db/database.ts`.
+- Facts from the `weather` slice (2026-10-13, branch `slice/weather`, not merged): Weatherstack answers an unknown location with code 615 and HTTP 400, not HTTP 200; the real `current` object has 18 keys, and `air_quality` holds the hyphenated keys `us-epa-index` and `gb-defra-index`. The end-to-end stub of wave 2 should serve the unknown-location fixture with HTTP 400.
+- The fixed reviewer script (commit e8edf5e of `slice/wave-0`) also lies at `c:/tmp/covertree-tools/grok-review.mjs`, outside every worktree, so that slice reviews do not wait for the wave 0 merge. Delete the folder when wave 1 is merged.
 
 ## Roles
 
@@ -54,7 +56,7 @@ What the conductors of wave 1 need and the plan does not say. Measured on 2026-1
 - The codex config maps `gpt-5.6-luna` to another id: check the current Luna id before the first dispatch.
 - `.claude/handoff/HANDOFF.md` is one file per repository. When several slice sessions are spawned by handoff, keep a copy per slice under `docs/agent/handoffs/` and point each session at its own copy.
 - exo-compact loads only in new main sessions under a folder that carries its flag; subagents and worktrees outside this folder stay on native compaction.
-- The Weatherstack key lives in `.env` (ignored by git). No agent reads, prints or logs it. Real calls made so far: 3 (two answered, one refused with code 106 for coming right after another). Leave seconds between calls.
+- The Weatherstack key lives in `.env` (ignored by git). No agent reads, prints or logs it. Real calls made so far: 5 (three during planning: two answered, one refused with code 106 for coming right after another; two by the conductor of the `weather` slice for the fixtures, both answered). Two are left for the final manual run. Leave seconds between calls.
 - Weatherstack answers over HTTPS on this key. Coordinates arrive as strings. Measured values and the comparison of the two lookup variants are in `docs/plan.md` section 2.
 - `node:sqlite` and direct TypeScript execution both work on this Node with nothing printed on stderr.
 - TypeScript 7 is outside `typescript-eslint`'s supported range today; the plan pins 6.0.

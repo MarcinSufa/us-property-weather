@@ -47,7 +47,7 @@ Conduct your slice of `docs/plan.md` section 15: tests seen red, then the implem
 - No code comments unless the code reads as a mistake without one. No long dashes in any file.
 - No background process left running when you finish.
 - Reviewer cost is accepted by Marcin at the estimate of plan section 16; reruns cover failed calls only. A review at high reasoning is slow: the wave 0 review of an 80 KB patch took 22 minutes. Let the script's own deadline decide, run the call in the background of your own run, and never start a second call for the same round while the first may still be alive.
-- The reviewer script in your worktree is the unfixed one: it gives up after 300 seconds and would lose the reply. Call the copy in the main checkout, `node C:/Users/USER/IdeaProjects/CoverTree/scripts/grok-review.mjs`, which exists there once the manager has merged wave 0. If it is not there when you reach the review, end your run with the report "built and verified, not reviewed"; the manager resumes you.
+- The reviewer script in your worktree is the unfixed one: it gives up after 300 seconds and would lose the reply. Call the fixed copy, `node c:/tmp/covertree-tools/grok-review.mjs` (the file of commit e8edf5e on `slice/wave-0`, put there by the manager on 2026-10-13 after two conductors had stopped at this point; it waits 45 minutes and prints the agent id and the run id after the create call). After the wave 0 merge the same file is `scripts/grok-review.mjs` in the main checkout. If neither is there when you reach the review, end your run with the report "built and verified, not reviewed"; the manager resumes you.
 
 ## Gotchas
 
