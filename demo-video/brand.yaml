@@ -1,0 +1,269 @@
+project:
+  name: 'CoverTree'
+  url: 'localhost'
+
+palette:
+  bg: '#16202e'
+  fg: '#aeb9c5'
+  fg_lo: '#7b8794'
+  fg_faint: '#4a5868'
+  accent: '#ffffff'
+  rule: '#d5dbe1'
+  end_card_bg: '#f3f5f7'
+
+typography:
+  display: 'IBM Plex Sans'
+  body: 'IBM Plex Sans'
+  mono: 'IBM Plex Mono'
+  tagline: 'IBM Plex Sans'
+
+voice:
+  provider: 'edge-tts'
+  voice_id: 'en-US-AndrewNeural'
+  rate: '+0%'
+  leading_silence: 0.2
+  wpm: 159
+
+music:
+  mode: 'none'
+
+backdrop:
+  type: 'color'
+  color: '#16202e'
+
+scenes:
+  speedup: 1.0
+  crossfade_seconds: 0.5
+  sequence:
+    - type: browser_capture
+      url: 'http://127.0.0.1:8765/intro.html'
+      cursor: false
+      viewport: { width: 1920, height: 1080 }
+      settle_ms: 2600
+      trim_start_ms: 3000
+      tail_ms: 500
+      duration: 8.6
+      actions:
+        - { wait: 8.6 }
+
+    - type: before_after
+      export: 'before-after-create'
+      duration: 24.8
+      before:
+        label: 'BEFORE: no properties yet'
+        url: 'http://127.0.0.1:5273/'
+        viewport: { width: 1600, height: 900 }
+        settle_ms: 2600
+        trim_start_ms: 3000
+        tail_ms: 300
+        actions:
+          - { wait: 1.9 }
+          - { click: 'header a:has-text("Add property")' }
+          - { wait: 0.3 }
+          - { click: '#new-property-street' }
+          - { type: '13001 N La Montana Dr' }
+          - { press: 'Tab' }
+          - { type: 'Fountain Hills' }
+          - { press: 'Tab' }
+          - { type: 'AZ' }
+          - { press: 'Tab' }
+          - { type: '85268' }
+      after:
+        label: 'AFTER: saved with its weather'
+        url: 'http://127.0.0.1:5273/properties/new'
+        viewport: { width: 1600, height: 900 }
+        settle_ms: 500
+        trim_start_ms: 7500
+        tail_ms: 500
+        actions:
+          - { fill: { selector: '#new-property-street', text: '13001 N La Montana Dr' } }
+          - { fill: { selector: '#new-property-city', text: 'Fountain Hills' } }
+          - { press: 'Tab' }
+          - { type: 'AZ' }
+          - { fill: { selector: '#new-property-zip', text: '85268' } }
+          - { wait: 3.0 }
+          - { click: 'button[type=submit]' }
+          - { wait: 5.8 }
+          - { highlight: 'section.weather-card' }
+          - { wait: 0.8 }
+          - { click: 'a.back-to-properties' }
+          - { hover: '.property-table tbody tr:first-child td:nth-child(6)' }
+          - { wait: 3.1 }
+
+    - type: before_after
+      export: 'before-after-validation'
+      duration: 15.0
+      before:
+        label: 'BEFORE: street and city are only spaces'
+        url: 'http://127.0.0.1:5273/properties/new'
+        viewport: { width: 1600, height: 900 }
+        settle_ms: 2600
+        trim_start_ms: 3000
+        tail_ms: 300
+        actions:
+          - { wait: 0.8 }
+          - { click: '#new-property-street' }
+          - { type: '   ' }
+          - { press: 'Tab' }
+          - { type: '   ' }
+          - { press: 'Tab' }
+          - { type: 'AZ' }
+          - { press: 'Tab' }
+          - { type: '85259' }
+          - { wait: 0.3 }
+          - { click: 'button[type=submit]' }
+          - { wait: 1.2 }
+      after:
+        label: 'AFTER: corrected and saved'
+        url: 'http://127.0.0.1:5273/properties/new'
+        viewport: { width: 1600, height: 900 }
+        settle_ms: 500
+        trim_start_ms: 7700
+        tail_ms: 500
+        actions:
+          - { fill: { selector: '#new-property-street', text: '   ' } }
+          - { fill: { selector: '#new-property-city', text: '   ' } }
+          - { press: 'Tab' }
+          - { type: 'AZ' }
+          - { fill: { selector: '#new-property-zip', text: '85259' } }
+          - { click: 'button[type=submit]' }
+          - { wait: 3.0 }
+          - { fill: { selector: '#new-property-street', text: '11500 E Via Linda' } }
+          - { fill: { selector: '#new-property-city', text: 'Scottsdale' } }
+          - { wait: 0.3 }
+          - { click: 'button[type=submit]' }
+          - { wait: 3.0 }
+
+    - type: browser_capture
+      url: 'http://127.0.0.1:5273/properties/new'
+      viewport: { width: 1600, height: 900 }
+      settle_ms: 2600
+      trim_start_ms: 3000
+      tail_ms: 500
+      duration: 13.2
+      actions:
+        - { fill: { selector: '#new-property-street', text: '16838 E Palisades Blvd' } }
+        - { fill: { selector: '#new-property-city', text: 'Fountain Hills' } }
+        - { press: 'Tab' }
+        - { type: 'AZ' }
+        - { click: '#new-property-zip' }
+        - { type: '00000' }
+        - { click: 'button[type=submit]' }
+        - { highlight: '[role=alert]' }
+        - { wait: 2.4 }
+        - { fill: { selector: '#new-property-zip', text: '85268' } }
+        - { wait: 0.4 }
+        - { click: 'button[type=submit]' }
+        - { wait: 3.0 }
+
+    - type: browser_capture
+      url: 'http://127.0.0.1:5273/'
+      viewport: { width: 1600, height: 900 }
+      settle_ms: 2600
+      trim_start_ms: 3000
+      tail_ms: 500
+      duration: 12.7
+      actions:
+        - { wait: 3.2 }
+        - { click: '.property-table tbody tr:first-child a' }
+        - { wait: 4.4 }
+        - { highlight: 'section.weather-card' }
+        - { wait: 3.0 }
+
+    - type: browser_capture
+      url: 'http://127.0.0.1:5273/'
+      viewport: { width: 1600, height: 900 }
+      settle_ms: 2600
+      trim_start_ms: 3000
+      tail_ms: 500
+      duration: 13.5
+      actions:
+        - { wait: 0.6 }
+        - { click: '#property-filter-city' }
+        - { type: 'scottsdale' }
+        - { click: '.property-filters button[type=submit]' }
+        - { wait: 3.6 }
+        - { click: '.property-filters button.button--quiet' }
+        - { wait: 0.6 }
+        - { hover: '#property-filter-sort' }
+        - { press: 'Tab' }
+        - { type: 'O' }
+        - { wait: 3.5 }
+
+    - type: before_after
+      export: 'before-after-delete'
+      duration: 12.3
+      before:
+        label: 'BEFORE: three properties'
+        url: 'http://127.0.0.1:5273/'
+        viewport: { width: 1600, height: 900 }
+        settle_ms: 2600
+        trim_start_ms: 3000
+        tail_ms: 300
+        actions:
+          - { wait: 0.6 }
+          - { click: 'button[aria-label="Delete 11500 E Via Linda"]' }
+          - { wait: 2.0 }
+      after:
+        label: 'AFTER: two remain'
+        url: 'http://127.0.0.1:5273/'
+        viewport: { width: 1600, height: 900 }
+        settle_ms: 500
+        trim_start_ms: 5200
+        tail_ms: 500
+        actions:
+          - { click: 'button[aria-label="Delete 11500 E Via Linda"]' }
+          - { wait: 3.0 }
+          - { click: 'dialog[open] button.button--danger' }
+          - { wait: 8.0 }
+
+    - type: browser_capture
+      url: 'http://127.0.0.1:8765/outro.html'
+      cursor: false
+      viewport: { width: 1920, height: 1080 }
+      settle_ms: 2600
+      trim_start_ms: 3000
+      tail_ms: 500
+      duration: 12.1
+      actions:
+        - { wait: 12.1 }
+
+voiceover:
+  - { text: 'This is a small app that keeps records of US properties.', pause_after: 0.5 }
+  - { text: 'Each property keeps the weather from the moment it was created.', pause_after: 1.0 }
+
+  - { text: 'We start with an empty list.', pause_after: 0.4 }
+  - { text: "Let's add a property in Fountain Hills, Arizona.", pause_after: 2.53 }
+  - { text: 'Saving asks Weatherstack for the current weather, exactly once.', pause_after: 0.4 }
+  - {
+      text: 'In this recording, a local stub replays a saved Weatherstack response.',
+      pause_after: 0.4,
+    }
+  - { text: 'The weather is stored with the property.', pause_after: 0.5 }
+  - { text: 'So the list shows it without calling the weather service again.', pause_after: 1.0 }
+
+  - { text: 'Empty fields are blocked by the browser, so we type only spaces.', pause_after: 0.64 }
+  - { text: 'The server checks the input too, and reports each field.', pause_after: 0.9 }
+  - { text: 'With a real street and city, the property saves.', pause_after: 1.8 }
+
+  - { text: 'Next, a zip code the weather service does not know.', pause_after: 0.85 }
+  - { text: 'The form says so, and nothing is saved.', pause_after: 0.6 }
+  - { text: 'The typed values stay, so we fix the zip code and save.', pause_after: 1.6 }
+
+  - { text: 'Three properties are saved. The rejected attempts are not.', pause_after: 0.5 }
+  - {
+      text: 'The detail page shows the address, coordinates and the stored weather.',
+      pause_after: 0.5,
+    }
+  - { text: 'Saved once, never refreshed.', pause_after: 1.2 }
+
+  - { text: 'The list filters by city, state and zip code.', pause_after: 0.5 }
+  - { text: 'City matching ignores upper and lower case.', pause_after: 0.8 }
+  - { text: 'Sorting is by creation date, newest or oldest first.', pause_after: 1.2 }
+
+  - { text: 'Delete asks for confirmation and names the property.', pause_after: 0.5 }
+  - { text: 'Confirm, and it is gone, together with its saved weather.', pause_after: 0.4 }
+  - { text: 'Delete does not call the weather service either.', pause_after: 1.2 }
+
+  - { text: 'Built with TypeScript, Node, GraphQL, React and SQLite.', pause_after: 0.5 }
+  - { text: 'Planned first, built in slices, each reviewed by a second model.', pause_after: 1.0 }
