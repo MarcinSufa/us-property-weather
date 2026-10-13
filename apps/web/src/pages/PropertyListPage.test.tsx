@@ -94,6 +94,8 @@ test('AC-LIST-2 rows show each property field and the street links to its detail
     'href',
     '/properties/three',
   );
+  expect(screen.getAllByRole('columnheader')).toHaveLength(7);
+  expect(screen.getAllByRole('columnheader')[6]).toHaveAccessibleName('Actions');
   expect(screen.getByText('Fountain Hills')).toBeInTheDocument();
   expect(screen.getByText('Seattle')).toBeInTheDocument();
   expect(screen.getByText('Austin')).toBeInTheDocument();
@@ -105,10 +107,171 @@ test('AC-LIST-2 rows show each property field and the street links to its detail
   expect(screen.getByText('24 °C · Sunny')).toBeInTheDocument();
   expect(screen.getByRole('cell', { name: 'Not reported · Light rain' })).toBeInTheDocument();
   expect(screen.getByRole('cell', { name: '27 °C · Not reported' })).toBeInTheDocument();
-  expect(screen.getAllByRole('columnheader')).toHaveLength(6);
+  expect(screen.getAllByRole('columnheader')).toHaveLength(7);
   for (const name of ['Street', 'City', 'State', 'Zip code', 'Created', 'Weather at creation']) {
     expect(screen.getByRole('columnheader', { name })).toHaveAttribute('scope', 'col');
   }
+});
+
+type DeleteVariables = { id: string };
+
+function deleteHandler(resolve: (variables: DeleteVariables) => Response | Promise<Response>) {
+  return http.post('http://localhost/graphql', async ({ request }) => {
+    const body = (await request.json()) as {
+      operationName: string;
+      variables: DeleteVariables;
+    };
+    if (body.operationName !== 'DeleteProperty') return HttpResponse.json({});
+    return resolve(body.variables);
+  });
+}
+
+test('AC-DELETE-3 opens the list delete dialog without sending a mutation', async () => {
+  handleProperties();
+  const deletes: DeleteVariables[] = [];
+  server.use(
+    deleteHandler((variables) => {
+      deletes.push(variables);
+      return HttpResponse.json({
+        data: { deleteProperty: { __typename: 'Property', id: variables.id } },
+      });
+    }),
+  );
+  const { user } = renderApp(['/']);
+
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+
+  expect(screen.getByRole('dialog', { name: 'Delete 15 Saguaro Blvd?' })).toBeInTheDocument();
+  expect(deletes).toEqual([]);
+});
+
+test('AC-WEB-16 names the property and focuses Cancel in the list dialog', async () => {
+  handleProperties();
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+
+  expect(screen.getByRole('dialog', { name: 'Delete 15 Saguaro Blvd?' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Cancel' })).toHaveFocus();
+});
+
+test('AC-WEB-16 cancelling the list dialog leaves the property and sends no mutation', async () => {
+  handleProperties();
+  const deletes: DeleteVariables[] = [];
+  server.use(
+    deleteHandler((variables) => {
+      deletes.push(variables);
+      return HttpResponse.json({
+        data: { deleteProperty: { __typename: 'Property', id: variables.id } },
+      });
+    }),
+  );
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+  await user.click(screen.getByRole('button', { name: 'Cancel' }));
+
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByRole('link', { name: '15 Saguaro Blvd' })).toBeInTheDocument();
+  expect(deletes).toEqual([]);
+});
+
+test('AC-WEB-16 Escape closes the list dialog without deleting the property', async () => {
+  handleProperties();
+  const deletes: DeleteVariables[] = [];
+  server.use(
+    deleteHandler((variables) => {
+      deletes.push(variables);
+      return HttpResponse.json({
+        data: { deleteProperty: { __typename: 'Property', id: variables.id } },
+      });
+    }),
+  );
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+  const dialog = screen.getByRole<HTMLDialogElement>('dialog');
+  const cancel = new Event('cancel', { cancelable: true });
+  dialog.dispatchEvent(cancel);
+  if (!cancel.defaultPrevented) dialog.close();
+
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(screen.getByRole('link', { name: '15 Saguaro Blvd' })).toBeInTheDocument();
+  expect(deletes).toEqual([]);
+});
+
+test('AC-WEB-18 confirms a list delete, refreshes the list, and removes only that row', async () => {
+  let remaining = properties;
+  const listRequests: ListVariables[] = [];
+  server.use(
+    propertiesHandler((variables) => {
+      listRequests.push(variables);
+      return HttpResponse.json({ data: { properties: remaining } });
+    }),
+  );
+  const deletes: DeleteVariables[] = [];
+  server.use(
+    deleteHandler((variables) => {
+      deletes.push(variables);
+      remaining = properties.filter((property) => property.id !== variables.id);
+      return HttpResponse.json({
+        data: { deleteProperty: { __typename: 'Property', id: variables.id } },
+      });
+    }),
+  );
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+  await user.click(screen.getByRole('button', { name: 'Delete property' }));
+
+  expect(await screen.findByRole('link', { name: '200 Pine St' })).toBeInTheDocument();
+  await waitFor(() => expect(screen.queryByRole('link', { name: '15 Saguaro Blvd' })).toBeNull());
+  expect(screen.getByRole('link', { name: '100 Congress Ave' })).toBeInTheDocument();
+  expect(deletes).toEqual([{ id: 'one' }]);
+  expect(listRequests.length).toBeGreaterThan(1);
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+});
+
+test.each(['PROPERTY_NOT_FOUND', 'network'] as const)(
+  'AC-WEB-17 keeps the list dialog open after a %s delete failure',
+  async (failure) => {
+    handleProperties();
+    server.use(
+      deleteHandler(() =>
+        failure === 'network'
+          ? HttpResponse.json({}, { status: 503 })
+          : HttpResponse.json({
+              errors: [{ message: 'Missing', extensions: { code: 'PROPERTY_NOT_FOUND' } }],
+            }),
+      ),
+    );
+    const { user } = renderApp(['/']);
+    await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+    await user.click(screen.getByRole('button', { name: 'Delete property' }));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Could not delete. The property is still here.',
+    );
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '15 Saguaro Blvd' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeEnabled();
+  },
+);
+
+test('AC-WEB-17 reopening another list dialog clears the previous failure', async () => {
+  handleProperties();
+  server.use(
+    deleteHandler(() =>
+      HttpResponse.json({
+        errors: [{ message: 'Missing', extensions: { code: 'PROPERTY_NOT_FOUND' } }],
+      }),
+    ),
+  );
+  const { user } = renderApp(['/']);
+  await user.click(await screen.findByRole('button', { name: 'Delete 15 Saguaro Blvd' }));
+  await user.click(screen.getByRole('button', { name: 'Delete property' }));
+  await screen.findByRole('alert');
+  await user.click(screen.getByRole('button', { name: 'Cancel' }));
+  await user.click(screen.getByRole('button', { name: 'Delete 200 Pine St' }));
+
+  expect(screen.getByRole('dialog', { name: 'Delete 200 Pine St?' })).toBeInTheDocument();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
 
 test('AC-WEB-6 creation time is a time element with the received ISO value', async () => {

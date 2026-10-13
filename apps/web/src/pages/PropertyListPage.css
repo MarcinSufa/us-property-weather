@@ -96,6 +96,10 @@
   font-weight: 500;
 }
 
+.property-table__actions {
+  text-align: right;
+}
+
 .property-list__state-card {
   display: flex;
   padding: var(--space-8);
@@ -281,6 +285,19 @@
   .property-table td:first-child a {
     min-height: var(--control-height);
     align-content: center;
+  }
+
+  .property-table__actions {
+    justify-content: flex-end;
+    padding-top: 0;
+  }
+
+  .property-table__actions::before {
+    content: none;
+  }
+
+  .property-table__actions .button {
+    margin-right: -12px;
   }
 
   .property-list__state-card {

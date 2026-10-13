@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useQuery } from 'urql';
-import { Link, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { BackToProperties } from '../components/BackToProperties.tsx';
+import { ConfirmDialog } from '../components/ConfirmDialog.tsx';
 import { ErrorAlert } from '../components/ErrorAlert.tsx';
 import { PageTitle } from '../components/PageTitle.tsx';
 import { WeatherCard } from '../components/WeatherCard.tsx';
@@ -34,6 +36,8 @@ function LoadingProperty() {
 
 export function PropertyDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [{ data, error, fetching }, executeQuery] = useQuery({
     query: PropertyDocument,
     variables: { id: id ?? '' },
@@ -73,13 +77,29 @@ export function PropertyDetailPage() {
         <>
           <PageTitle page={property.street} />
           <div className="property-detail__heading">
-            <BackToProperties />
-            <h1 className="page-title">{property.street}</h1>
-            <p className="property-detail__address">
-              {property.city}, {property.state}{' '}
-              <span className="property-detail__zip">{property.zipCode}</span>
-            </p>
+            <div className="property-detail__heading-copy">
+              <BackToProperties />
+              <h1 className="page-title">{property.street}</h1>
+              <p className="property-detail__address">
+                {property.city}, {property.state}{' '}
+                <span className="property-detail__zip">{property.zipCode}</span>
+              </p>
+            </div>
+            <button
+              className="button button--danger-outline"
+              type="button"
+              onClick={() => setConfirmingDelete(true)}
+            >
+              Delete property
+            </button>
           </div>
+          <ConfirmDialog
+            property={confirmingDelete ? { id: property.id, street: property.street } : null}
+            onClose={() => setConfirmingDelete(false)}
+            onDeleted={() => {
+              void navigate('/');
+            }}
+          />
           <div className="property-detail__grid">
             <section className="card property-detail__card" aria-labelledby="property-card-title">
               <h2 id="property-card-title">Property</h2>

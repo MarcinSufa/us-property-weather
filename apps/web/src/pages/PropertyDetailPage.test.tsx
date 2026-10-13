@@ -60,6 +60,19 @@ function successResponse(data: PropertyFixture | null = property) {
   return HttpResponse.json({ data: { property: data } });
 }
 
+type DeleteVariables = { id: string };
+
+function deleteHandler(resolve: (variables: DeleteVariables) => Response | Promise<Response>) {
+  return http.post('http://localhost/graphql', async ({ request }) => {
+    const body = (await request.json()) as {
+      operationName: string;
+      variables: DeleteVariables;
+    };
+    if (body.operationName !== 'DeleteProperty') return HttpResponse.json({});
+    return resolve(body.variables);
+  });
+}
+
 beforeEach(() => {
   server.use(propertyHandler(() => successResponse()));
 });
@@ -277,4 +290,65 @@ test('AC-WEB-2 uses the street and not-found page titles', async () => {
   await screen.findByRole('heading', { level: 1, name: 'Property not found' });
   await waitFor(() => expect(document.title).toBe('Property not found - CoverTree'));
   unmount();
+});
+
+test('AC-DELETE-3 opens the detail delete dialog without sending a mutation', async () => {
+  const deletes: DeleteVariables[] = [];
+  server.use(
+    deleteHandler((variables) => {
+      deletes.push(variables);
+      return HttpResponse.json({
+        data: { deleteProperty: { __typename: 'Property', id: variables.id } },
+      });
+    }),
+  );
+  const { user } = renderApp(['/properties/property-42']);
+
+  await user.click(await screen.findByRole('button', { name: 'Delete property' }));
+
+  expect(screen.getByRole('dialog', { name: 'Delete 15 Saguaro Blvd?' })).toBeInTheDocument();
+  expect(deletes).toEqual([]);
+});
+
+test('AC-DELETE-4 confirms detail deletion with its id and returns to the list', async () => {
+  let deleted = false;
+  const deletes: DeleteVariables[] = [];
+  server.use(
+    propertyHandler(() => successResponse(deleted ? null : property)),
+    deleteHandler((variables) => {
+      deletes.push(variables);
+      deleted = true;
+      return HttpResponse.json({
+        data: { deleteProperty: { __typename: 'Property', id: variables.id } },
+      });
+    }),
+  );
+  const { user, router } = renderApp(['/properties/property-42']);
+  await user.click(await screen.findByRole('button', { name: 'Delete property' }));
+  await user.click(
+    within(screen.getByRole('dialog')).getByRole('button', { name: 'Delete property' }),
+  );
+
+  await waitFor(() => expect(router.state.location.pathname).toBe('/'));
+  expect(deletes).toEqual([{ id: 'property-42' }]);
+});
+
+test('AC-WEB-17 keeps the detail route and dialog after a failed delete', async () => {
+  server.use(
+    deleteHandler(() =>
+      HttpResponse.json({
+        errors: [{ message: 'Missing', extensions: { code: 'PROPERTY_NOT_FOUND' } }],
+      }),
+    ),
+  );
+  const { user, router } = renderApp(['/properties/property-42']);
+  await user.click(await screen.findByRole('button', { name: 'Delete property' }));
+  const dialog = screen.getByRole('dialog');
+  await user.click(within(dialog).getByRole('button', { name: 'Delete property' }));
+
+  expect(await screen.findByRole('alert')).toHaveTextContent(
+    'Could not delete. The property is still here.',
+  );
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+  expect(router.state.location.pathname).toBe('/properties/property-42');
 });

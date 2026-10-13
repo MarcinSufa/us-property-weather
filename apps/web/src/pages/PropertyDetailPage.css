@@ -1,5 +1,12 @@
 .property-detail__heading {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.property-detail__heading-copy {
+  display: flex;
   flex-direction: column;
   gap: var(--space-1);
 }
@@ -193,6 +200,11 @@
 }
 
 @media (max-width: 600px) {
+  .property-detail__heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .property-detail__fields {
     grid-template-columns: minmax(0, 1fr);
     row-gap: var(--space-1);

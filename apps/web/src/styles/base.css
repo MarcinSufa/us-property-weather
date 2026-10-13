@@ -171,8 +171,28 @@ select {
   color: var(--color-danger-strong);
 }
 
-.button:disabled,
-.button--disabled {
+.button--dialog-cancel {
+  border-color: var(--color-border-input);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.button--dialog-cancel:hover {
+  background: var(--color-surface-subtle);
+}
+
+.button--danger-outline {
+  border-color: var(--color-danger);
+  background: var(--color-surface);
+  color: var(--color-danger);
+}
+
+.button--danger-outline:hover {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-strong);
+}
+
+.button:disabled {
   border-color: var(--color-border);
   background: var(--color-border-subtle);
   color: var(--color-text-muted);

@@ -1,5 +1,5 @@
 import type { PropertyQuery } from '../graphql/generated/graphql.ts';
-import { formatDate, formatReportedValue } from '../formatters.ts';
+import { formatDate, formatReportedValue, formatTemperature } from '../formatters.ts';
 
 type WeatherData = NonNullable<PropertyQuery['property']>['weatherData'];
 type WeatherCardProps = {
@@ -8,15 +8,11 @@ type WeatherCardProps = {
 };
 
 function formatObservation(weather: WeatherData, createdAt: string): string {
-  const date = formatDate(
-    createdAt,
-    {
-      dateStyle: 'medium',
-      timeStyle: undefined,
-      timeZone: 'UTC',
-    },
-    'en-US',
-  );
+  const date = formatDate(createdAt, {
+    dateOnly: true,
+    timeZone: 'UTC',
+    locale: 'en-US',
+  });
   const observed = formatReportedValue(
     weather.observation_time,
     (value) => `Observed ${value} UTC on ${date}`,
@@ -27,8 +23,8 @@ function formatObservation(weather: WeatherData, createdAt: string): string {
 
 export function WeatherCard({ weather, createdAt }: WeatherCardProps) {
   const description = weather.weather_descriptions?.[0]?.trim() || null;
-  const temperature = formatReportedValue(weather.temperature, (value) => `${value} °C`);
-  const feelsLike = formatReportedValue(weather.feelslike, (value) => `${value} °C`);
+  const temperature = formatTemperature(weather.temperature);
+  const feelsLike = formatTemperature(weather.feelslike);
   const wind =
     weather.wind_speed === null && weather.wind_dir === null
       ? formatReportedValue(null, String)
