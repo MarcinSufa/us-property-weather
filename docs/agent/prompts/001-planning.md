@@ -192,3 +192,9 @@ Outcome: answered at about 18:05 with the state of wave 2: slice `e2e` merged in
 > mozemy wrzucic do repo ten film , czemu nie rekomendujesz tego ? f2 tak f3 daj zmyślone adresy f4 głos zostaje
 
 Outcome: the four decisions on the demo films were taken as Marcin's. The films and their sources enter the repository (the manager had recommended keeping them out, as a presentation tool that is not part of the graded code and as binary files that stay in the history; the four files are 7.4 MB together). The before/after banners are retimed, the three real addresses are replaced by the invented ones the tests already use, and the narrator's voice stays. At 18:29 the same subagent was resumed for one rebuild with these changes; it copies the final films to `docs/demo/` and commits them with the sources as one new commit on `slice/demo-video`. Nobody has listened to the narration yet.
+
+## Prompt 30
+
+> odpal lokanie apke , przetestuję ją
+
+Outcome: at about 19:10 the manager started `npm run dev` from `main` (head b3f6c6e) as a background process: the API answers on port 4000 and the web app on port 5173, and a list query through the web proxy returned without an error. The process reads the local environment file, which the manager did not open, so every property Marcin creates makes one real Weatherstack request; he was told this and that the plan had kept two requests for the final manual run. The question on the `transcripts` slice (one more fix round, a merge with the limits recorded, or no export) stays open. While the servers run, the browser suite cannot start, because it uses the same two ports.
