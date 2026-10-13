@@ -28,82 +28,78 @@ export class WeatherstackProvider implements WeatherProvider {
 
   async getCurrentWeather(address: PropertyAddress): Promise<WeatherReport> {
     const startedAt = Date.now();
+    let report: WeatherReport;
 
     try {
-      const url = new URL(this.options.baseUrl);
-      url.pathname = `${url.pathname.replace(/\/+$/, '')}/current`;
-      url.searchParams.set('access_key', this.options.apiKey);
-      url.searchParams.set('query', address.zipCode);
-
-      let response: Response;
-      try {
-        response = await this.options.fetch(url, {
-          method: 'GET',
-          signal: AbortSignal.timeout(this.options.timeoutMs),
-        });
-      } catch (error) {
-        throw this.unavailable(isTimeout(error) ? 'timeout' : 'network');
-      }
-
-      let bodyText: string;
-      try {
-        bodyText = await response.text();
-      } catch (error) {
-        throw this.unavailable(isTimeout(error) ? 'timeout' : 'network');
-      }
-
-      let body: unknown;
-      let isJson = true;
-      try {
-        body = JSON.parse(bodyText) as unknown;
-      } catch {
-        isJson = false;
-      }
-
-      const failure = WeatherstackFailureResponseSchema.safeParse(body);
-      if (failure.success) {
-        if (failure.data.error.code === 615) throw new LocationNotFoundError();
-        throw this.unavailable(`code_${failure.data.error.code}`);
-      }
-
-      if (!response.ok) throw this.unavailable(`http_${response.status}`);
-      if (!isJson) throw this.unavailable('unreadable_body');
-
-      const parsed = WeatherstackSuccessResponseSchema.safeParse(body);
-      if (!parsed.success) throw this.unavailable('unexpected_shape');
-
-      this.options.logger.info(
-        { outcome: 'ok', durationMs: Date.now() - startedAt },
-        'Weather lookup completed',
-      );
-      return {
-        lat: parsed.data.location.lat,
-        long: parsed.data.location.lon,
-        current: parsed.data.current,
-      };
+      report = await this.requestWeather(address);
     } catch (error) {
       const locationNotFound = error instanceof LocationNotFoundError;
-      const reason = locationNotFound
-        ? 'code_615'
-        : error instanceof WeatherUnavailableError
-          ? error.reason
-          : 'unexpected_error';
+      if (!locationNotFound && !(error instanceof WeatherUnavailableError)) throw error;
       this.options.logger.warn(
         {
           outcome: locationNotFound ? 'location_not_found' : 'unavailable',
-          reason,
+          reason: locationNotFound ? 'code_615' : error.reason,
           durationMs: Date.now() - startedAt,
         },
         'Weather lookup failed',
       );
-      throw error instanceof WeatherUnavailableError || locationNotFound
-        ? error
-        : this.unavailable('unexpected_error');
+      throw error;
     }
+
+    this.options.logger.info(
+      { outcome: 'ok', durationMs: Date.now() - startedAt },
+      'Weather lookup completed',
+    );
+    return report;
   }
 
-  private unavailable(reason: string): WeatherUnavailableError {
-    return new WeatherUnavailableError(reason);
+  private async requestWeather(address: PropertyAddress): Promise<WeatherReport> {
+    const url = new URL(this.options.baseUrl);
+    url.pathname = `${url.pathname.replace(/\/+$/, '')}/current`;
+    url.searchParams.set('access_key', this.options.apiKey);
+    url.searchParams.set('query', address.zipCode);
+
+    let response: Response;
+    try {
+      response = await this.options.fetch(url, {
+        method: 'GET',
+        signal: AbortSignal.timeout(this.options.timeoutMs),
+      });
+    } catch (error) {
+      throw new WeatherUnavailableError(isTimeout(error) ? 'timeout' : 'network');
+    }
+
+    let bodyText: string;
+    try {
+      bodyText = await response.text();
+    } catch (error) {
+      throw new WeatherUnavailableError(isTimeout(error) ? 'timeout' : 'network');
+    }
+
+    let body: unknown;
+    try {
+      body = JSON.parse(bodyText) as unknown;
+    } catch {
+      if (!response.ok) throw new WeatherUnavailableError(`http_${response.status}`);
+      throw new WeatherUnavailableError('unreadable_body');
+    }
+
+    const failure = WeatherstackFailureResponseSchema.safeParse(body);
+    if (failure.success) {
+      if (failure.data.error.code === 615) throw new LocationNotFoundError();
+      throw new WeatherUnavailableError(`code_${failure.data.error.code}`);
+    }
+
+    if (!response.ok) throw new WeatherUnavailableError(`http_${response.status}`);
+
+    const parsed = WeatherstackSuccessResponseSchema.safeParse(body);
+    if (!parsed.success) throw new WeatherUnavailableError('unexpected_shape');
+
+    return {
+      lat: parsed.data.location.lat,
+      long: parsed.data.location.lon,
+      current: parsed.data.current,
+    };
   }
 }
 

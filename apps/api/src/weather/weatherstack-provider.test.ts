@@ -32,7 +32,8 @@ interface Harness {
 type FailureKind = 'location_not_found' | 'unavailable';
 
 interface FailureCase {
-  name: string;
+  criterion: string;
+  label: string;
   expectedKind: FailureKind;
   expectedReason: string;
   status?: number;
@@ -44,76 +45,87 @@ interface FailureCase {
 
 const failureCases: FailureCase[] = [
   {
-    name: 'AC-WEATHER-3 HTTP 200 success false',
+    criterion: 'AC-WEATHER-3',
+    label: 'HTTP 200 success false',
     expectedKind: 'unavailable',
     expectedReason: 'code_101',
     status: 200,
     body: { success: false, error: { code: 101, type: 'invalid_access_key' } },
   },
   {
-    name: 'AC-WEATHER-4 code 615 HTTP 400 fixture',
+    criterion: 'AC-WEATHER-4',
+    label: 'code 615 HTTP 400 fixture',
     expectedKind: 'location_not_found',
     expectedReason: 'code_615',
     status: 400,
     body: unknownFixture,
   },
   {
-    name: 'AC-WEATHER-4 code 615 HTTP 200',
+    criterion: 'AC-WEATHER-4',
+    label: 'code 615 HTTP 200',
     expectedKind: 'location_not_found',
     expectedReason: 'code_615',
     status: 200,
     body: unknownFixture,
   },
   ...[101, 104, 105, 106, 999].map((code): FailureCase => ({
-    name: `AC-WEATHER-5 Weatherstack error code ${code}`,
+    criterion: 'AC-WEATHER-5',
+    label: `Weatherstack error code ${code}`,
     expectedKind: 'unavailable',
     expectedReason: `code_${code}`,
     status: code === 106 ? 429 : 200,
     body: { success: false, error: { code, type: 'request_failed' } },
   })),
   {
-    name: 'AC-WEATHER-6 HTTP 500 with a non-JSON body',
+    criterion: 'AC-WEATHER-6',
+    label: 'HTTP 500 with a non-JSON body',
     expectedKind: 'unavailable',
     expectedReason: 'http_500',
     status: 500,
     bodyText: 'not json',
   },
   {
-    name: 'AC-WEATHER-6 rejected fetch is a network failure',
+    criterion: 'AC-WEATHER-6',
+    label: 'rejected fetch is a network failure',
     expectedKind: 'unavailable',
     expectedReason: 'network',
     fetchError: (url) => hostileError(url, 'Fetch failed', 'TypeError'),
   },
   {
-    name: 'AC-WEATHER-6 aborted fetch is a timeout',
+    criterion: 'AC-WEATHER-6',
+    label: 'aborted fetch is a timeout',
     expectedKind: 'unavailable',
     expectedReason: 'timeout',
     fetchError: (url) =>
       hostileError(url, 'The operation was aborted due to timeout', 'TimeoutError'),
   },
   {
-    name: 'AC-WEATHER-6 unreadable body is unreadable_body on HTTP 200',
+    criterion: 'AC-WEATHER-6',
+    label: 'unreadable body is unreadable_body on HTTP 200',
     expectedKind: 'unavailable',
     expectedReason: 'unreadable_body',
     status: 200,
     bodyText: 'not json',
   },
   {
-    name: 'AC-WEATHER-6 body read timeout is a timeout',
+    criterion: 'AC-WEATHER-6',
+    label: 'body read timeout is a timeout',
     expectedKind: 'unavailable',
     expectedReason: 'timeout',
     status: 200,
     bodyReadError: (url) => hostileError(url, 'Body read timed out', 'TimeoutError'),
   },
   {
-    name: 'AC-WEATHER-6 body read network failure is network',
+    criterion: 'AC-WEATHER-6',
+    label: 'body read network failure is network',
     expectedKind: 'unavailable',
     expectedReason: 'network',
     status: 200,
     bodyReadError: (url) => hostileError(url, 'Body read failed', 'TypeError'),
   },
   {
-    name: 'AC-WEATHER-6 missing location is unexpected_shape',
+    criterion: 'AC-WEATHER-6',
+    label: 'missing location is unexpected_shape',
     expectedKind: 'unavailable',
     expectedReason: 'unexpected_shape',
     status: 200,
@@ -125,6 +137,13 @@ const failureCases: FailureCase[] = [
     ['empty latitude', '', '-111.724'],
     ['blank latitude', '   ', '-111.724'],
     ['nonnumeric latitude', 'abc', '-111.724'],
+    ['hex latitude', '0x10', '-111.724'],
+    ['exponent latitude', '1e3', '-111.724'],
+    ['plus sign latitude', '+33.6', '-111.724'],
+    ['trailing dot latitude', '33.', '-111.724'],
+    ['leading dot latitude', '.5', '-111.724'],
+    ['leading space latitude', ' 33.609', '-111.724'],
+    ['out-of-range latitude', '90.001', '-111.724'],
     ['NaN latitude', 'NaN', '-111.724'],
     ['infinite latitude', 'Infinity', '-111.724'],
     ['number longitude', '33.609', -111.724],
@@ -132,45 +151,58 @@ const failureCases: FailureCase[] = [
     ['empty longitude', '33.609', ''],
     ['blank longitude', '33.609', '  '],
     ['nonnumeric longitude', '33.609', 'abc'],
+    ['hex longitude', '33.609', '0x10'],
+    ['exponent longitude', '33.609', '1e3'],
+    ['plus sign longitude', '33.609', '+33.6'],
+    ['trailing dot longitude', '33.609', '33.'],
+    ['leading dot longitude', '33.609', '.5'],
+    ['leading space longitude', '33.609', ' 33.609'],
+    ['out-of-range longitude', '33.609', '-180.001'],
     ['NaN longitude', '33.609', 'NaN'],
     ['infinite longitude', '33.609', 'Infinity'],
   ].map(([label, lat, lon]): FailureCase => ({
-    name: `AC-WEATHER-6 ${String(label)} is unexpected_shape`,
+    criterion: 'AC-WEATHER-6',
+    label: `${String(label)} is unexpected_shape`,
     expectedKind: 'unavailable',
     expectedReason: 'unexpected_shape',
     status: 200,
     body: { location: { lat, lon }, current: {} },
   })),
   {
-    name: 'AC-WEATHER-6 current missing is unexpected_shape',
+    criterion: 'AC-WEATHER-6',
+    label: 'current missing is unexpected_shape',
     expectedKind: 'unavailable',
     expectedReason: 'unexpected_shape',
     status: 200,
     body: { location: { lat: '1', lon: '2' } },
   },
   {
-    name: 'AC-WEATHER-6 current array is unexpected_shape',
+    criterion: 'AC-WEATHER-6',
+    label: 'current array is unexpected_shape',
     expectedKind: 'unavailable',
     expectedReason: 'unexpected_shape',
     status: 200,
     body: { location: { lat: '1', lon: '2' }, current: [] },
   },
   {
-    name: 'AC-WEATHER-6 null current is unexpected_shape',
+    criterion: 'AC-WEATHER-6',
+    label: 'null current is unexpected_shape',
     expectedKind: 'unavailable',
     expectedReason: 'unexpected_shape',
     status: 200,
     body: { location: { lat: '1', lon: '2' }, current: null },
   },
   {
-    name: 'AC-WEATHER-6 non-JSON success response is unreadable_body',
+    criterion: 'AC-WEATHER-6',
+    label: 'non-JSON success response is unreadable_body',
     expectedKind: 'unavailable',
     expectedReason: 'unreadable_body',
     status: 200,
     bodyText: '{broken',
   },
   {
-    name: 'AC-WEATHER-6 non-2xx JSON with an unexpected shape is http_500',
+    criterion: 'AC-WEATHER-6',
+    label: 'non-2xx JSON with an unexpected shape is http_500',
     expectedKind: 'unavailable',
     expectedReason: 'http_500',
     status: 500,
@@ -291,6 +323,21 @@ describe('WeatherstackProvider', () => {
     expect(Number.isFinite(weather.long)).toBe(true);
   });
 
+  it('AC-WEATHER-2 accepts the inclusive coordinate bounds', async () => {
+    const fixture = {
+      ...knownFixture,
+      location: { ...knownFixture.location, lat: '-90', lon: '180' },
+    };
+    const harness = createHarness(() =>
+      Promise.resolve(new Response(JSON.stringify(fixture), { status: 200 })),
+    );
+
+    const weather = await harness.provider.getCurrentWeather(address());
+
+    expect(weather.lat).toBe(-90);
+    expect(weather.long).toBe(180);
+  });
+
   it('AC-WEATHER-8 keeps current whole, including nested and unknown keys', async () => {
     const current = { ...knownFixture.current, adapter_future_field: { preserved: true } };
     const fixture = { ...knownFixture, current };
@@ -306,22 +353,25 @@ describe('WeatherstackProvider', () => {
     expect(weather.current.adapter_future_field).toEqual({ preserved: true });
   });
 
-  it.each(failureCases)('$name rejects with the mapped weather error', async (failure) => {
-    const harness = createHarness((url) => responseFor(failure, url));
+  it.each(failureCases)(
+    '$criterion $label rejects with the mapped weather error',
+    async (failure) => {
+      const harness = createHarness((url) => responseFor(failure, url));
 
-    const result = harness.provider.getCurrentWeather(address());
+      const result = harness.provider.getCurrentWeather(address());
 
-    if (failure.expectedKind === 'location_not_found') {
-      await expect(result).rejects.toBeInstanceOf(LocationNotFoundError);
-    } else {
-      await expect(result).rejects.toBeInstanceOf(WeatherUnavailableError);
-      await expect(result).rejects.toMatchObject({ reason: failure.expectedReason });
-    }
-    expect(harness.calls).toHaveLength(1);
-  });
+      if (failure.expectedKind === 'location_not_found') {
+        await expect(result).rejects.toBeInstanceOf(LocationNotFoundError);
+      } else {
+        await expect(result).rejects.toBeInstanceOf(WeatherUnavailableError);
+        await expect(result).rejects.toMatchObject({ reason: failure.expectedReason });
+      }
+      expect(harness.calls).toHaveLength(1);
+    },
+  );
 
   it.each(failureCases)(
-    'AC-WEATHER-13 logs one $name outcome with failure fields',
+    'AC-WEATHER-13 logs one $label outcome with failure fields',
     async (failure) => {
       const harness = createHarness((url) => responseFor(failure, url));
 
@@ -351,19 +401,65 @@ describe('WeatherstackProvider', () => {
     expect(logFields(harness.logs)[0]?.durationMs).toBeGreaterThanOrEqual(0);
   });
 
-  it.each(failureCases)('AC-WEATHER-15 reports $expectedReason for $name', async (failure) => {
-    const harness = createHarness((url) => responseFor(failure, url));
+  it('AC-WEATHER-6 propagates a success logger error without logging again', async () => {
+    const logs: string[] = [];
+    const stream = new Writable({
+      write(chunk: Buffer | string, _encoding, callback) {
+        logs.push(String(chunk));
+        callback();
+      },
+    });
+    const logger = pino({ level: 'trace' }, stream);
+    const originalError = new Error('logger failed');
+    logger.info = () => {
+      throw originalError;
+    };
+    const fetchStub: typeof fetch = () =>
+      Promise.resolve(new Response(JSON.stringify(knownFixture), { status: 200 }));
+    const provider = new WeatherstackProvider({
+      fetch: fetchStub,
+      baseUrl: 'https://weather.example.test/v1',
+      apiKey: markerKey,
+      timeoutMs: 1234,
+      logger,
+    });
+    const result = provider.getCurrentWeather(address());
 
-    await harness.provider.getCurrentWeather(address()).catch(() => undefined);
-
-    expect(logFields(harness.logs)[0]?.reason).toBe(failure.expectedReason);
+    await expect(result).rejects.toBe(originalError);
+    const rejection = await result.catch((error: unknown) => error);
+    expect(rejection).not.toBeInstanceOf(WeatherUnavailableError);
+    expect(logs).toHaveLength(0);
   });
+
+  const reasonCases = [
+    'timeout',
+    'network',
+    'http_500',
+    'code_106',
+    'unreadable_body',
+    'unexpected_shape',
+  ].map((reason) => {
+    const failure = failureCases.find((candidate) => candidate.expectedReason === reason);
+    if (!failure) throw new Error(`Missing failure case for reason ${reason}`);
+    return { reason, failure };
+  });
+
+  it.each(reasonCases)(
+    'AC-WEATHER-15 reports $reason on the thrown weather error',
+    async ({ reason, failure }) => {
+      const harness = createHarness((url) => responseFor(failure, url));
+
+      const result = harness.provider.getCurrentWeather(address());
+      await expect(result).rejects.toBeInstanceOf(WeatherUnavailableError);
+      await expect(result).rejects.toMatchObject({ reason });
+    },
+  );
 
   it('AC-WEATHER-7 leak inspection detects a marker in a deliberately unsafe error', () => {
     expect(errorTextDeep(new Error(`unsafe ${markerKey}`))).toContain(markerKey);
   });
 
-  it.each(failureCases)('AC-WEATHER-7 does not leak the key for $name', async (failure) => {
+  it.each(failureCases)('AC-WEATHER-7 does not leak the key for $label', async (failure) => {
     const harness = createHarness((url) => responseFor(failure, url));
     let caught: unknown;
     try {

@@ -1,0 +1,489 @@
+
+> test
+> vitest run
+
+
+ RUN  v5.0.4 C:/tmp/covertree-weather/apps/api
+
+ ❯ src/weather/weatherstack-provider.test.ts (159 tests | 43 failed) 92ms
+   ❯ WeatherstackProvider (159)
+     × AC-WEATHER-6 hex latitude is unexpected_shape rejects with the mapped weather error 5ms
+     × AC-WEATHER-6 exponent latitude is unexpected_shape rejects with the mapped weather error 1ms
+     × AC-WEATHER-6 plus sign latitude is unexpected_shape rejects with the mapped weather error 1ms
+     × AC-WEATHER-6 trailing dot latitude is unexpected_sha… rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 leading dot latitude is unexpected_shape rejects with the mapped weather error 1ms
+     × AC-WEATHER-6 leading space latitude is unexpected_sh… rejects with the mapped weather error 1ms
+     × AC-WEATHER-6 out-of-range latitude is unexpected_sha… rejects with the mapped weather error 1ms
+     × AC-WEATHER-6 hex longitude is unexpected_shape rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 exponent longitude is unexpected_shape rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 plus sign longitude is unexpected_shape rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 trailing dot longitude is unexpected_sh… rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 leading dot longitude is unexpected_sha… rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 leading space longitude is unexpected_s… rejects with the mapped weather error 0ms
+     × AC-WEATHER-6 out-of-range longitude is unexpected_sh… rejects with the mapped weather error 0ms
+     × AC-WEATHER-13 logs one hex latitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one exponent latitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one plus sign latitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one trailing dot latitude is unexpected_sha… outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one leading dot latitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one leading space latitude is unexpected_sh… outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one out-of-range latitude is unexpected_sha… outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one hex longitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one exponent longitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one plus sign longitude is unexpected_shape outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one trailing dot longitude is unexpected_sh… outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one leading dot longitude is unexpected_sha… outcome with failure fields 0ms
+     × AC-WEATHER-13 logs one leading space longitude is unexpected_s… outcome with failure fields 1ms
+     × AC-WEATHER-13 logs one out-of-range longitude is unexpected_sh… outcome with failure fields 1ms
+     × AC-WEATHER-6 propagates a success logger error without logging again 1ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+     × AC-WEATHER-7 does not leak the key for undefined 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 43 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 hex latitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 16, long: -111.724, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 16,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 exponent latitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 1000, long: -111.724, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 1000,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 plus sign latitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.6, long: -111.724, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.6,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 trailing dot latitude is unexpected_sha… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33, long: -111.724, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 leading dot latitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 0.5, long: -111.724, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 0.5,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 leading space latitude is unexpected_sh… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: -111.724, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 out-of-range latitude is unexpected_sha… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 90.001, long: -111.724, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 90.001,
++   "long": -111.724,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 hex longitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: 16, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": 16,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 exponent longitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: 1000, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": 1000,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 plus sign longitude is unexpected_shape rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: 33.6, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": 33.6,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 trailing dot longitude is unexpected_sh… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: 33, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": 33,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 leading dot longitude is unexpected_sha… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: 0.5, current: {} }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": 0.5,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 leading space longitude is unexpected_s… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: 33.609, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": 33.609,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 out-of-range longitude is unexpected_sh… rejects with the mapped weather error
+AssertionError: promise resolved "{ lat: 33.609, long: -180.001, …(1) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "current": {},
++   "lat": 33.609,
++   "long": -180.001,
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:366:29
+    364|         await expect(result).rejects.toBeInstanceOf(LocationNotFoundEr…
+    365|       } else {
+    366|         await expect(result).rejects.toBeInstanceOf(WeatherUnavailable…
+       |                             ^
+    367|         await expect(result).rejects.toMatchObject({ reason: failure.e…
+    368|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one hex latitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one exponent latitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one plus sign latitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one trailing dot latitude is unexpected_sha… outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one leading dot latitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one leading space latitude is unexpected_sh… outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one out-of-range latitude is unexpected_sha… outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one hex longitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one exponent longitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one plus sign longitude is unexpected_shape outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one trailing dot longitude is unexpected_sh… outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one leading dot longitude is unexpected_sha… outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one leading space longitude is unexpected_s… outcome with failure fields
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-13 logs one out-of-range longitude is unexpected_sh… outcome with failure fields
+AssertionError: expected { Object (level, time, ...) } to match object { outcome: 'unavailable', …(1) }
+(6 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "outcome": "unavailable",
+-   "reason": "unexpected_shape",
++   "outcome": "ok",
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:381:42
+    379|
+    380|       expect(harness.logs).toHaveLength(1);
+    381|       expect(logFields(harness.logs)[0]).toMatchObject({
+       |                                          ^
+    382|         outcome: failure.expectedKind,
+    383|         reason: failure.expectedReason,
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-6 propagates a success logger error without logging again
+AssertionError: expected WeatherUnavailableError: Weather is unava… { reason: '…' } to be Error: logger failed // Object.is equality
+
+- Expected
++ Received
+
+- Error {
+-   "message": "logger failed",
++ WeatherUnavailableError {
++   "message": "Weather is unavailable",
++   "reason": "unexpected_error",
++   "name": "WeatherUnavailableError",
+  }
+
+ ❯ src/weather/weatherstack-provider.test.ts:428:25
+    426|     const result = provider.getCurrentWeather(address());
+    427|
+    428|     await expect(result).rejects.toBe(originalError);
+       |                         ^
+    429|     const rejection = await result.catch((error: unknown) => error);
+    430|     expect(rejection).not.toBeInstanceOf(WeatherUnavailableError);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/43]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for undefined
+AssertionError: expected undefined to be defined
+ ❯ src/weather/weatherstack-provider.test.ts:472:20
+    470|
+    471|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    472|     expect(caught).toBeDefined();
+       |                    ^
+    473|     expect(combined).not.toContain(markerKey);
+    474|     expect(combined).not.toContain('access_key');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/43]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  43 failed | 118 passed (161)
+   Start at  14:27:20
+   Duration  507ms (import 62%, tests 24%, transform 12%, worker 2%)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\tmp\covertree-weather\apps\api
+npm error workspace @covertree/api
+npm error location C:\tmp\covertree-weather\apps\api
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c vitest run

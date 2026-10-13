@@ -1,6 +1,12 @@
 import { z } from 'zod';
 
-const coordinateSchema = z.string().trim().min(1).transform(Number).pipe(z.number().finite());
+function coordinateSchema(bound: number) {
+  return z
+    .string()
+    .regex(/^-?\d+(?:\.\d+)?$/)
+    .transform(Number)
+    .pipe(z.number().finite().min(-bound).max(bound));
+}
 
 export const WeatherstackFailureResponseSchema = z.object({
   success: z.literal(false),
@@ -14,8 +20,8 @@ export type WeatherstackFailureResponse = z.infer<typeof WeatherstackFailureResp
 
 export const WeatherstackSuccessResponseSchema = z.object({
   location: z.object({
-    lat: coordinateSchema,
-    lon: coordinateSchema,
+    lat: coordinateSchema(90),
+    lon: coordinateSchema(180),
   }),
   current: z.record(z.string(), z.unknown()),
 });
