@@ -224,3 +224,9 @@ Outcome: no secret was found in the documents, and the three key-like values in 
 > x5 , ale cytujesz to jako pełną treść i jest tam info ze to zadanie rekrtacyjne ?
 
 Outcome: two decisions and one question, and two words of this prompt are themselves replaced by `[redacted]`. The manager made both redactions in the record, as one commit: in `000-bootstrap.md` the name of the other project and the sentence with the link in prompt 1 are now `[redacted]`, and so is the same name in prompt 6 of this file; the local user name is replaced by `USER` in 19 record files (three handoffs, two briefs, two files of the wave 0 slice and twelve files of worker test output), 20 places in all. On the question the manager answered from the file: `docs/brief/cover-tree.md` is Marcin's own starting prompt, not the employer's document; its section 0 gives the essentials of the assignment (six user stories, the property fields, five requirements), its first and fourth lines say that this is a recruitment task, and its requirements include a public GitHub repository, so publishing is what the assignment asks for. The redactions do not reach the earlier commits: the old text stays in the history until Marcin decides whether the history is rewritten before the first push. The skill name and the names of the private tools were not decided and stay as they are.
+
+## Prompt 35
+
+> "the stack named in the job offer" = tak tez usuń
+
+Outcome: the manager had left one more mention of the offer, in the alternatives of the decision that the app runs locally, and had asked about it. On this answer the clause was removed from that row of `docs/agent/decisions-log.md`; the alternative now reads "AWS Lambda and CDK". The earlier commits still hold the old text, and the questions on the history, on the skill name and on the names of the private tools stay open.
