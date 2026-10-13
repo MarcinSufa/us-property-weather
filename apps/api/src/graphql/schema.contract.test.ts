@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { buildSchema, isEnumType } from 'graphql';
+import { valueFromASTUntyped } from 'graphql/utilities';
 import { expect, test } from 'vitest';
 
 const schema = buildSchema(readFileSync(new URL('../../schema.graphql', import.meta.url), 'utf8'));
@@ -34,7 +35,20 @@ test('the GraphQL schema exposes the exact property operation contract', () => {
     expect(String(field?.type)).toBe(expectedReturnType);
   }
 
-  expect(query?.getFields().properties.args[1]?.defaultValue).toBe('CREATED_AT_DESC');
+  const propertiesField = query?.getFields().properties;
+  if (!propertiesField) {
+    throw new Error('Expected the properties query field');
+  }
+  const sortArgument = propertiesField.args[1];
+  if (!sortArgument) {
+    throw new Error('Expected the sort argument');
+  }
+  const sortDefault = sortArgument.default;
+  expect(sortDefault).toBeDefined();
+  if (sortDefault?.literal === undefined) {
+    throw new Error('Expected the sort default to be a GraphQL literal');
+  }
+  expect(valueFromASTUntyped(sortDefault.literal)).toBe('CREATED_AT_DESC');
 });
 
 test('the schema includes all state values and only the supported property sorts', () => {

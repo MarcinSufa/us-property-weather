@@ -9,6 +9,10 @@ const config: CodegenConfig = {
         enumsAsTypes: true,
         useTypeImports: true,
         useIndexSignature: true,
+        mapperTypeSuffix: 'Model',
+        mappers: {
+          Property: '../../property/property.ts#Property',
+        },
       },
     },
   },

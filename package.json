@@ -2,7 +2,11 @@
   "name": "covertree",
   "private": true,
   "type": "module",
-  "workspaces": ["apps/api", "apps/web", "e2e"],
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "e2e"
+  ],
   "engines": {
     "node": ">=24"
   },

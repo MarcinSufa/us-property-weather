@@ -12,6 +12,13 @@ const config: CodegenConfig = {
         useTypeImports: true,
       },
     },
+    'src/graphql/generated/schema-types.ts': {
+      plugins: ['typescript'],
+      config: {
+        enumsAsTypes: true,
+        useTypeImports: true,
+      },
+    },
   },
 };
 

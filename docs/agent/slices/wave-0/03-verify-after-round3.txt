@@ -1,0 +1,30 @@
+
+> verify
+> npm run format:check && npm run lint && npm run typecheck && npm run codegen && npm test && npm run build
+
+
+> format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> lint
+> eslint .
+
+
+> typecheck
+> npm run typecheck --workspace=apps/api && npm run typecheck --workspace=apps/web
+
+
+> typecheck
+> tsc --noEmit -p tsconfig.json
+
+src/graphql/schema.contract.test.ts(37,10): error TS2532: Object is possibly 'undefined'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path C:\tmp\covertree-wave0\apps\api
+npm error workspace @covertree/api
+npm error location C:\tmp\covertree-wave0\apps\api
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c tsc --noEmit -p tsconfig.json

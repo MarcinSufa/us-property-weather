@@ -9,3 +9,4 @@ docs/brief/**
 .claude/**
 .exovault/**
 apps/api/schema.graphql
+docs/plan.md

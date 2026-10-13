@@ -233,6 +233,7 @@ describe('reviewer CLI main flow', () => {
 
     expect(code).not.toBe(0);
     expect(output.logEntries.join(' ')).not.toBe('');
+    expect(output.logEntries.join(' ')).toContain('401');
     expectSecretAbsent(output);
   });
 
@@ -251,6 +252,7 @@ describe('reviewer CLI main flow', () => {
 
     expect(code).not.toBe(0);
     expect(output.logEntries.join(' ')).not.toBe('');
+    expect(output.logEntries.join(' ')).toContain('Request failed');
     expectSecretAbsent(output);
   });
 
@@ -305,7 +307,7 @@ describe('reviewer CLI main flow', () => {
     });
 
     expect(code).not.toBe(0);
-    expect(output.logEntries.join(' ')).not.toBe('');
+    expect(output.logEntries.join(' ')).toContain('FAILED');
     expectSecretAbsent(output);
   });
 });
