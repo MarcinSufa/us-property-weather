@@ -1,0 +1,3 @@
+I stopped before writing because two requirements conflict: `docs/SPEC.md` must cover same-millisecond insertion order, but its allowed sources are limited to plan sections 5, 7, 8, and 10. That behavior appears only in section 6. Citing section 6 would violate the source limit; citing another section would misstate the source.
+
+No files were written, and I did not run Prettier. Please allow section 6 as a source for that criterion, or remove the criterion requirement.

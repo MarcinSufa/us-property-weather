@@ -1,0 +1,19 @@
+== GET http://localhost:4000/graphql (Accept: text/html)
+status 200 type text/html bytes 1371
+<title>Yoga GraphiQL</title>
+GraphiQL
+== POST introspection
+{"data":{"__schema":{"queryType":{"fields":[{"name":"properties"},{"name":"property"}]},"mutationType":{"fields":[{"name":"createProperty"},{"name":"deleteProperty"}]}}}}
+== POST { properties { id } } (placeholder body)
+{"errors":[{"message":"Unexpected error.","locations":[{"line":1,"column":3}],"path":["properties"],"extensions":{"code":"INTERNAL_SERVER_ERROR"}}],"data":null}
+== GET http://localhost:5173/
+status 200 type text/html bytes 551
+<div id="root"></div> src="/src/main.tsx" 
+== GET http://localhost:5173/properties/new
+status 200 type text/html bytes 551
+<div id="root"></div> src="/src/main.tsx" 
+== GET http://localhost:5173/properties/abc-123
+status 200 type text/html bytes 551
+<div id="root"></div> src="/src/main.tsx" 
+== GET http://localhost:5173/src/App.tsx
+path: "/" path: "/properties/new" path: "/properties/:id" 

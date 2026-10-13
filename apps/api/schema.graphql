@@ -1,0 +1,67 @@
+type Query {
+  "All properties, newest first unless asked otherwise. Never calls the weather service."
+  properties(filter: PropertyFilter, sort: PropertySort! = CREATED_AT_DESC): [Property!]!
+  "One property, or null when the id is unknown."
+  property(id: ID!): Property
+}
+
+type Mutation {
+  "Fetches current weather for the address once, then stores the property. Stores nothing if the weather call fails."
+  createProperty(input: CreatePropertyInput!): Property!
+  "Deletes and returns the property. Error PROPERTY_NOT_FOUND when the id is unknown."
+  deleteProperty(id: ID!): Property!
+}
+
+type Property {
+  id: ID!
+  street: String!
+  city: String!
+  state: UsState!
+  zipCode: String!
+  lat: Float!
+  long: Float!
+  "Weather at the moment the property was created."
+  weatherData: WeatherData!
+  "ISO 8601, UTC, set by the database."
+  createdAt: String!
+}
+
+"The `current` object of the Weatherstack response, field names unchanged."
+type WeatherData {
+  observation_time: String
+  temperature: Float
+  weather_code: Int
+  weather_icons: [String!]
+  weather_descriptions: [String!]
+  wind_speed: Float
+  wind_degree: Float
+  wind_dir: String
+  pressure: Float
+  precip: Float
+  humidity: Float
+  cloudcover: Float
+  feelslike: Float
+  uv_index: Float
+  visibility: Float
+  is_day: String
+}
+
+input CreatePropertyInput {
+  street: String!
+  city: String!
+  state: UsState!
+  zipCode: String!
+}
+
+input PropertyFilter {
+  "Whole name, case-insensitive."
+  city: String
+  state: UsState
+  "Exactly five digits."
+  zipCode: String
+}
+
+enum PropertySort { CREATED_AT_DESC CREATED_AT_ASC }
+
+"The 50 states and DC."
+enum UsState { AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY }

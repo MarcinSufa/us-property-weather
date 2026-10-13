@@ -1,0 +1,56 @@
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+
+> prepare
+> npm run codegen
+
+
+> codegen
+> npm run codegen --workspace=apps/api && npm run codegen --workspace=apps/web
+
+
+> codegen
+> graphql-codegen --config codegen.ts
+
+❯ Parse Configuration
+✔ Parse Configuration
+❯ Generate outputs
+❯ Generate to src/graphql/generated/resolvers-types.ts
+❯ Load GraphQL schemas
+✔ Load GraphQL schemas
+❯ Load GraphQL documents
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/resolvers-types.ts
+✔ Generate outputs
+
+> codegen
+> graphql-codegen --config codegen.ts
+
+❯ Parse Configuration
+✔ Parse Configuration
+❯ Generate outputs
+❯ Generate to src/graphql/generated/
+❯ Load GraphQL schemas
+✔ Load GraphQL schemas
+❯ Load GraphQL documents
+✔ Load GraphQL documents
+❯ Generate
+✔ Generate
+✔ Generate to src/graphql/generated/
+✔ Generate outputs
+
+added 505 packages, and audited 509 packages in 34s
+
+108 packages are looking for funding
+  run `npm fund` for details
+
+10 high severity vulnerabilities
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.

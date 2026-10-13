@@ -3,6 +3,12 @@
 !.env.example
 
 node_modules/
+dist/
+apps/api/src/graphql/generated/
+apps/web/src/graphql/generated/
+data/
+test-results/
+playwright-report/
 
 *.db
 *.sqlite
