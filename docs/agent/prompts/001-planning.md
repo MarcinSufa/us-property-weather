@@ -126,3 +126,9 @@ Outcome: `/design-login` is a command typed into the prompt box of a Claude Code
 > mam pytanie w jaki sposób filtrujemy adresy? uzywamy api zewnętrzenego do tego ?
 
 Outcome: answered from `docs/plan.md`. No external API is involved in filtering: the list is one SQL query on the local SQLite database with the three filters as bound parameters (section 6), city compared whole and case-insensitively, state and zip code exactly (section 7). Weatherstack is called only when a property is created. The zip code is not checked against the city and state; that is a listed deferral (section 17).
+
+## Prompt 20
+
+> Design ok , exo- compact działa?
+
+Outcome: the design is accepted; the `web` brief will point at `docs/design/README.md`. On the plugin: yes, it took this session's third compaction. Checked: the context after that compaction opens with the plugin's seed marker; its capture folder holds a segment file with 105 records written at the time of the cut; the recall tool answered a test question from an index of 1054 of 1054 vectors; the label file holds 7 labels with model jev-1.13.0, so the Jev ranking ran. One compaction, so the result is provisional. The earlier claim that the changed options would only reach a new session was wrong. Defects seen in the seed: harness boilerplate and a sentence fragment listed as constraints, and a truncated errors section.
