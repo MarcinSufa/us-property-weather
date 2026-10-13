@@ -114,3 +114,15 @@ Outcome: the eight open points of `docs/plan.md` section 19 shown in Polish with
 > wszystko tak
 
 Outcome: the plan is approved. All eight points are settled as recommended, and so is the way conductors are started (from a terminal, through the plugin's launcher with its Jev switch). `docs/plan.md` carries the approved status and no open markers. The brief and the handoff for wave 0 are written: `docs/agent/briefs/wave-0.md`, `docs/agent/handoffs/wave-0.md`. Still owed by Marcin: which of the skills used are private (point P7), and the Claude Design login for the design step.
+
+## Prompt 18
+
+> gdzie jest /design-login ? czy mozesz sam zlecic claude designer zeby wykonał designy potrzebne ?
+
+Outcome: `/design-login` is a command typed into the prompt box of a Claude Code session; the manager cannot run it, and the Claude Design connection stayed rejected (HTTP 403). The design was made another way: the manager drew eight boards on a Claude design canvas (a private artifact on Marcin's account) and copied their sources to `docs/design/` with a README that lists the boards, the tokens and the wording the design adds to plan section 10. Not checked: how the boards render, because the manager cannot see the canvas; Marcin's look at it is the review. Alongside, a read-only subagent classified the skills and plugins in use for point P7: public are grilling, i-have-adhd, handoff, superpowers, gstack, graphify and demo-video; private are conduct, conduct-binding and exo-compact. Three of the public ones are locally modified copies (grilling, i-have-adhd, graphify), and the origin of two (i-have-adhd, graphify) is inferred, not recorded locally. Marcin has not confirmed the split.
+
+## Prompt 19 (sent mid-turn)
+
+> mam pytanie w jaki sposób filtrujemy adresy? uzywamy api zewnętrzenego do tego ?
+
+Outcome: answered from `docs/plan.md`. No external API is involved in filtering: the list is one SQL query on the local SQLite database with the three filters as bound parameters (section 6), city compared whole and case-insensitively, state and zip code exactly (section 7). Weatherstack is called only when a property is created. The zip code is not checked against the city and state; that is a listed deferral (section 17).

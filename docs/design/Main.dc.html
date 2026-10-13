@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Properties list</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;background:#F3F5F7}
+a{color:#0B5D5E}a:hover{color:#084647}
+</style>
+</helmet>
+<div style="min-height: 860px; background: #F3F5F7; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #16202E; font-size: 15px; line-height: 1.45">
+  <header style="background: #FFFFFF; border-bottom: 1px solid #D5DBE1">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 12px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; color: #16202E; text-decoration: none; font-weight: 600; font-size: 17px">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B5D5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v10h13V10"></path><path d="M10 20v-6h4v6"></path></svg>
+        <span>Properties</span>
+      </a>
+      <a href="NewProperty.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; box-sizing: border-box; background: #0B5D5E; color: #FFFFFF; border-radius: 6px; text-decoration: none; font-weight: 500">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+        <span>Add property</span>
+      </a>
+    </div>
+  </header>
+
+  <main style="max-width: 1120px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+      <h1 style="margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em">Properties</h1>
+      <p style="margin: 0; color: #4A5868">4 properties</p>
+    </div>
+
+    <form style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 16px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px">
+      <div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px">
+        <label for="f-city" style="font-size: 13px; font-weight: 500; color: #4A5868">City</label>
+        <input id="f-city" type="text" placeholder="Any city" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+      </div>
+      <div style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px">
+        <label for="f-state" style="font-size: 13px; font-weight: 500; color: #4A5868">State</label>
+        <select id="f-state" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+          <option>Any</option>
+          <option>AZ Arizona</option>
+          <option>FL Florida</option>
+          <option>TX Texas</option>
+          <option>WA Washington</option>
+        </select>
+      </div>
+      <div style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px">
+        <label for="f-zip" style="font-size: 13px; font-weight: 500; color: #4A5868">Zip code</label>
+        <input id="f-zip" type="text" inputmode="numeric" placeholder="5 digits" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #16202E; background: #FFFFFF">
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px">
+        <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #0B5D5E; border-radius: 6px; background: #FFFFFF; color: #0B5D5E; font: inherit; font-weight: 500; cursor: pointer">Apply filters</button>
+        <button type="button" style="height: 44px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: #4A5868; font: inherit; cursor: pointer">Clear</button>
+      </div>
+      <div style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; margin-left: auto; max-width: 220px">
+        <label for="f-sort" style="font-size: 13px; font-weight: 500; color: #4A5868">Sort by created</label>
+        <select id="f-sort" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+          <option>Newest first</option>
+          <option>Oldest first</option>
+        </select>
+      </div>
+    </form>
+
+    <div style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; overflow-x: auto">
+      <table style="width: 100%; min-width: 820px; border-collapse: collapse; text-align: left">
+        <thead>
+          <tr style="background: #F8FAFB; color: #4A5868; font-size: 13px">
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1">Street</th>
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1">City</th>
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1">State</th>
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1">Zip code</th>
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1">Created</th>
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1">Weather at creation</th>
+            <th scope="col" style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #D5DBE1"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%)">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{rows}}" as="row" hint-placeholder-count="4">
+            <tr>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE"><a href="PropertyDetail.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 500">{{row.street}}</a></td>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE">{{row.city}}</td>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE">{{row.state}}</td>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px">{{row.zip}}</td>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE; color: #4A5868; white-space: nowrap">{{row.created}}</td>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE; white-space: nowrap"><span style="font-weight: 500">{{row.temp}}</span><span style="color: #4A5868"> · {{row.desc}}</span></td>
+              <td style="padding: 6px 16px; border-bottom: 1px solid #E6EAEE; text-align: right"><button type="button" aria-label="{{row.deleteLabel}}" style="height: 44px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: #B42318; font: inherit; font-weight: 500; cursor: pointer">Delete</button></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":860}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const rows = [
+      { street: '15 Saguaro Blvd', city: 'Fountain Hills', state: 'AZ', zip: '85268', created: 'Oct 13, 2026, 10:12', temp: '24 °C', desc: 'Sunny' },
+      { street: '200 Pine St', city: 'Seattle', state: 'WA', zip: '98101', created: 'Oct 12, 2026, 16:40', temp: '13 °C', desc: 'Light rain' },
+      { street: '100 Congress Ave', city: 'Austin', state: 'TX', zip: '78701', created: 'Oct 12, 2026, 09:05', temp: '27 °C', desc: 'Partly cloudy' },
+      { street: '12 Ocean Dr', city: 'Miami Beach', state: 'FL', zip: '33139', created: 'Oct 10, 2026, 14:22', temp: '30 °C', desc: 'Clear' },
+    ];
+    return { rows: rows.map((row) => ({ ...row, deleteLabel: 'Delete ' + row.street })) };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add property states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;background:#F3F5F7}
+a{color:#0B5D5E}a:hover{color:#084647}
+</style>
+</helmet>
+<div style="min-height: 1000px; box-sizing: border-box; padding: 40px; background: #F3F5F7; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #16202E; font-size: 15px; line-height: 1.45; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start">
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Field errors (BAD_USER_INPUT)</h2>
+    <form aria-live="polite" style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <label for="e-street" style="font-size: 13px; font-weight: 500; color: #4A5868">Street</label>
+        <input id="e-street" type="text" value="" aria-invalid="true" aria-describedby="e-street-err" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 2px solid #B42318; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF; outline: 3px solid #0B5D5E; outline-offset: 2px">
+        <p id="e-street-err" style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; color: #B42318">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5h.01"></path></svg>
+          <span>Enter a street address.</span>
+        </p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <label for="e-city" style="font-size: 13px; font-weight: 500; color: #4A5868">City</label>
+        <input id="e-city" type="text" value="Fountain Hills" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="e-state" style="font-size: 13px; font-weight: 500; color: #4A5868">State</label>
+          <select id="e-state" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+            <option>AZ Arizona</option>
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="e-zip" style="font-size: 13px; font-weight: 500; color: #4A5868">Zip code</label>
+          <input id="e-zip" type="text" value="8526" aria-invalid="true" aria-describedby="e-zip-err" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 2px solid #B42318; border-radius: 6px; font: inherit; font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #16202E; background: #FFFFFF">
+          <p id="e-zip-err" style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; color: #B42318">
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5h.01"></path></svg>
+            <span>Zip code must be exactly 5 digits.</span>
+          </p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; padding-top: 4px">
+        <button type="button" style="height: 44px; padding: 0 20px; border: 1px solid #0B5D5E; border-radius: 6px; background: #0B5D5E; color: #FFFFFF; font: inherit; font-weight: 500; cursor: pointer">Add property</button>
+        <span style="padding: 0 12px; color: #4A5868">Cancel</span>
+      </div>
+    </form>
+    <p style="margin: 0; font-size: 13px; color: #4A5868">Each message sits under its field and is tied to it with aria-describedby. Focus moves to the first invalid field (Street here, shown with the focus ring). Typed values are kept.</p>
+  </section>
+
+  <div style="display: flex; flex-direction: column; gap: 32px">
+    <section style="display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Weather error: LOCATION_NOT_FOUND</h2>
+      <div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #B42318; border-radius: 6px; background: #FDECEA">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5h.01"></path></svg>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 600; color: #7A1810">The weather service does not know this location</h3>
+          <p style="margin: 0">Check the zip code and try again. Nothing was saved.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Weather error: WEATHER_UNAVAILABLE</h2>
+      <div role="alert" style="display: flex; gap: 12px; padding: 16px; border: 1px solid #B42318; border-radius: 6px; background: #FDECEA">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5h.01"></path></svg>
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h3 style="margin: 0; font-size: 16px; font-weight: 600; color: #7A1810">The weather service is not answering</h3>
+          <p style="margin: 0">Nothing was saved. Try again in a moment.</p>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #4A5868">One alert above the form, one sentence per code. The form below it keeps every typed value. Any other error shows: "Something went wrong. Nothing was saved."</p>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Sending</h2>
+      <div aria-busy="true" style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; font-weight: 500; color: #4A5868">Zip code</span>
+          <div style="height: 44px; box-sizing: border-box; padding: 0 12px; display: flex; align-items: center; border: 1px solid #D5DBE1; border-radius: 6px; font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #4A5868; background: #F8FAFB">85268</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <button type="button" disabled style="height: 44px; padding: 0 20px; border: 1px solid #D5DBE1; border-radius: 6px; background: #E6EAEE; color: #4A5868; font: inherit; font-weight: 500; cursor: not-allowed">Saving…</button>
+          <span role="status" style="color: #4A5868">Looking up the weather…</span>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #4A5868">Fields are read-only and the button is disabled while the request runs, so a second click cannot create a second property.</p>
+    </section>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

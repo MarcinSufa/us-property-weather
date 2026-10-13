@@ -1,0 +1,35 @@
+{
+  "v": 3,
+  "attachments": {},
+  "createdOnFiles": { "at": "2026-10-13T10:35:48.635Z", "v": 1 },
+  "title": "CoverTree Properties UI",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 1280, "h": 860, "title": "List: properties", "expand": "fill" },
+    "ListStates.dc.html": { "x": 1360, "y": 0, "w": 1280, "h": 980, "title": "List: loading, empty, no match, error" },
+    "MobileList.dc.html": { "x": 2720, "y": 0, "w": 390, "h": 1040, "title": "List: phone width", "expand": "fill" },
+    "NewProperty.dc.html": { "x": 0, "y": 1300, "w": 1280, "h": 820, "title": "Create: empty form", "expand": "fill" },
+    "NewPropertyErrors.dc.html": { "x": 1360, "y": 1300, "w": 1280, "h": 1000, "title": "Create: field errors, weather errors, sending", "expand": "fill" },
+    "PropertyDetail.dc.html": { "x": 0, "y": 2620, "w": 1280, "h": 900, "title": "Detail: property and weather at creation", "expand": "fill" },
+    "DetailStates.dc.html": { "x": 1360, "y": 2620, "w": 1280, "h": 900, "title": "Detail: not found, loading, error, delete dialog" },
+    "Tokens.dc.html": { "x": 0, "y": 3840, "w": 1280, "h": 1000, "title": "Tokens and components" }
+  },
+  "order": [
+    "Main.dc.html",
+    "ListStates.dc.html",
+    "MobileList.dc.html",
+    "NewProperty.dc.html",
+    "NewPropertyErrors.dc.html",
+    "PropertyDetail.dc.html",
+    "DetailStates.dc.html",
+    "Tokens.dc.html"
+  ],
+  "notes": {
+    "t-list": { "x": 0, "y": -260, "text": "List", "kind": "title1", "maxW": 3110 },
+    "t-create": { "x": 0, "y": 1040, "text": "Create", "kind": "title1", "maxW": 2640 },
+    "t-detail": { "x": 0, "y": 2360, "text": "Detail and delete", "kind": "title1", "maxW": 2640 },
+    "t-tokens": { "x": 0, "y": 3580, "text": "Tokens", "kind": "title1", "maxW": 1280 }
+  },
+  "designSystems": []
+}

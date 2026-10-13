@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tokens and components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;background:#F3F5F7}
+a{color:#0B5D5E}a:hover{color:#084647}
+</style>
+</helmet>
+<div style="width: 1280px; height: 1000px; box-sizing: border-box; padding: 40px; background: #F3F5F7; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #16202E; font-size: 15px; line-height: 1.45; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-content: start">
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Color</h2>
+    <div style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px">
+      <sc-for list="{{colors}}" as="color" hint-placeholder-count="13">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 6px; border: 1px solid #D5DBE1; background: {{color.hex}}"></div>
+          <div style="display: flex; flex-direction: column; min-width: 0">
+            <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px">{{color.name}}</span>
+            <span style="font-size: 12px; color: #4A5868">{{color.hex}} · {{color.use}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin: 0; font-size: 13px; color: #4A5868">Contrast on white: text 16.4:1, muted text 7.3:1, primary 7.7:1, danger 6.6:1, input border 3.7:1; muted text on the page background 6.7:1 (computed from the hex values, WCAG 2 formula). Light theme only.</p>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Type</h2>
+    <div style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 16px 24px; display: flex; flex-direction: column; gap: 10px">
+      <div style="font-size: 28px; font-weight: 600; letter-spacing: -0.01em">Page title 28 / 600</div>
+      <div style="font-size: 20px; font-weight: 600">State title 20 / 600</div>
+      <div style="font-size: 18px; font-weight: 600">Card title 18 / 600</div>
+      <div style="font-size: 15px">Body 15 / 400, line height 1.45</div>
+      <div style="font-size: 13px; font-weight: 500; color: #4A5868">Label and hint 13 / 500</div>
+      <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px">85268 · 33.609, -111.724 (mono 14, zip and coordinates)</div>
+      <div style="font-size: 13px; color: #4A5868">IBM Plex Sans and IBM Plex Mono, fallback system-ui and ui-monospace.</div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Space, radius, size</h2>
+    <div style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 16px 24px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: flex-end; gap: 12px">
+        <sc-for list="{{spaces}}" as="space" hint-placeholder-count="8">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px">
+            <div style="width: {{space.px}}; height: {{space.px}}; background: #0B5D5E; border-radius: 2px"></div>
+            <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #4A5868">{{space.label}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #4A5868">Radius: 6 controls and alerts, 10 cards and dialog. Control height 44 (also the minimum touch target). Content width 1120, form width 640. Phone gutter 16.</p>
+      <p style="margin: 0; font-size: 13px; color: #4A5868">Focus: 3px outline in primary, 2px offset, on every interactive element. Motion: none required; skeletons are static.</p>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 12px">
+    <h2 style="margin: 0; font-size: 13px; font-weight: 500; color: #4A5868; text-transform: uppercase; letter-spacing: 0.06em">Components</h2>
+    <div style="background: #FFFFFF; border: 1px solid #D5DBE1; border-radius: 10px; padding: 16px 24px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+        <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #0B5D5E; border-radius: 6px; background: #0B5D5E; color: #FFFFFF; font: inherit; font-weight: 500">Primary</button>
+        <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #0B5D5E; border-radius: 6px; background: #FFFFFF; color: #0B5D5E; font: inherit; font-weight: 500">Secondary</button>
+        <button type="button" style="height: 44px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: #4A5868; font: inherit">Quiet</button>
+        <button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #B42318; border-radius: 6px; background: #B42318; color: #FFFFFF; font: inherit; font-weight: 500">Danger</button>
+        <button type="button" style="height: 44px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: #B42318; font: inherit; font-weight: 500">Danger quiet</button>
+        <button type="button" disabled style="height: 44px; padding: 0 16px; border: 1px solid #D5DBE1; border-radius: 6px; background: #E6EAEE; color: #4A5868; font: inherit; font-weight: 500">Disabled</button>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="t-ok" style="font-size: 13px; font-weight: 500; color: #4A5868">Field</label>
+          <input id="t-ok" type="text" value="Fountain Hills" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 1px solid #7B8794; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="t-bad" style="font-size: 13px; font-weight: 500; color: #4A5868">Field with error</label>
+          <input id="t-bad" type="text" value="8526" aria-invalid="true" style="height: 44px; box-sizing: border-box; padding: 0 12px; border: 2px solid #B42318; border-radius: 6px; font: inherit; color: #16202E; background: #FFFFFF">
+          <span style="font-size: 13px; color: #B42318">Zip code must be exactly 5 digits.</span>
+        </div>
+      </div>
+      <div role="presentation" style="display: flex; gap: 12px; padding: 12px 16px; border: 1px solid #B42318; border-radius: 6px; background: #FDECEA">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5"></path><path d="M12 16.5h.01"></path></svg>
+        <p style="margin: 0"><span style="font-weight: 600; color: #7A1810">Alert.</span> Title in danger-strong, body in text, icon plus words (never color alone).</p>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #4A5868">Also used: card, table (scrolls sideways inside its card below 820px, stacked cards at phone width), skeleton bar, empty state, native dialog.</p>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [
+        { name: '--color-bg', hex: '#F3F5F7', use: 'page' },
+        { name: '--color-surface', hex: '#FFFFFF', use: 'cards, inputs' },
+        { name: '--color-surface-subtle', hex: '#F8FAFB', use: 'table head' },
+        { name: '--color-border', hex: '#D5DBE1', use: 'cards' },
+        { name: '--color-border-subtle', hex: '#E6EAEE', use: 'rows, skeleton' },
+        { name: '--color-border-input', hex: '#7B8794', use: 'inputs' },
+        { name: '--color-text', hex: '#16202E', use: 'body' },
+        { name: '--color-text-muted', hex: '#4A5868', use: 'labels, hints' },
+        { name: '--color-primary', hex: '#0B5D5E', use: 'actions, links' },
+        { name: '--color-primary-hover', hex: '#084647', use: 'hover' },
+        { name: '--color-danger', hex: '#B42318', use: 'delete, errors' },
+        { name: '--color-danger-strong', hex: '#7A1810', use: 'alert title' },
+        { name: '--color-danger-bg', hex: '#FDECEA', use: 'alert fill' },
+      ],
+      spaces: [4, 8, 12, 16, 24, 32, 40, 48].map((n) => ({ px: n + 'px', label: String(n) })),
+    };
+  }
+}
+</script>
+</body>
+</html>
