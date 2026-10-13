@@ -362,7 +362,7 @@ Shared files: `package.json` files and the lockfile belong to the manager after 
 
 Model ids are checked before every vendor leg and passed explicitly.
 
-Conductors are started by the manager session as background subagents, one per slice, each pointed at its own handoff file under `docs/agent/handoffs/` (changed on 2026-10-13; before that the plan had Marcin start them from a terminal). A conductor writes its slice record under `docs/agent/slices/<slice>/` inside the slice worktree and commits it on the slice branch, so parallel conductors never share a git index; the record reaches `main` with the merge.
+Conductors are started by the manager session as background subagents, one per slice, each pointed at the handoff file of its wave under `docs/agent/handoffs/` and at its own brief under `docs/agent/briefs/` (changed on 2026-10-13; before that the plan had Marcin start them from a terminal, each with a handoff of its own). A conductor writes its slice record under `docs/agent/slices/<slice>/` inside the slice worktree and commits it on the slice branch, so parallel conductors never share a git index; the record reaches `main` with the merge.
 
 ## 15. Waves
 
