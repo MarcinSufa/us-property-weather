@@ -350,12 +350,12 @@ Then the provider makes one request using the zip code as its query.
 Source: plan 8, Response parsing
 Given a successful Weatherstack response with string latitude and longitude
 When the adapter parses it
-Then it returns finite numeric coordinates.
+Then it returns finite numeric coordinates, with latitude from -90 to 90 and longitude from -180 to 180, bounds included.
 
 ### AC-WEATHER-3
 
-Source: plan 8, HTTP 200 with `success: false`
-Given an HTTP 200 response with `success: false`
+Source: plan 8, Response with `success: false`
+Given a response with `success: false`, at any HTTP status
 When the adapter handles the response
 Then it treats the response as a failure.
 
@@ -376,9 +376,9 @@ Then it raises `WEATHER_UNAVAILABLE`.
 ### AC-WEATHER-6
 
 Source: plan 8, Mapping and fixtures
-Given a timeout, network failure, non-2xx response, unreadable body, missing location or unexpected response body
+Given a timeout, network failure, non-2xx response, unreadable body, missing location or unexpected response body, which includes a coordinate that is not a plain decimal number or lies outside its range
 When the adapter handles the failure
-Then it raises `WEATHER_UNAVAILABLE`.
+Then it raises `WEATHER_UNAVAILABLE`, and an error it does not know propagates unchanged with no log line.
 
 ### AC-WEATHER-7
 
@@ -422,6 +422,27 @@ Given a test, development loop or CI job exercises weather retrieval
 When it makes a weather request
 Then it does not call the real Weatherstack API.
 
+### AC-WEATHER-13
+
+Source: plan 8, Key handling; weather slice
+Given a weather call that succeeds or ends in a mapped failure
+When the adapter finishes
+Then it writes one log line with `outcome` (`ok`, `location_not_found` or `unavailable`), `durationMs` and, on a failure, `reason`, and never the URL or the key.
+
+### AC-WEATHER-14
+
+Source: plan 8, Mapping; weather slice
+Given a non-2xx response whose body is a Weatherstack `success: false` object
+When the adapter maps the response
+Then the code in the body decides, not the HTTP status.
+
+### AC-WEATHER-15
+
+Source: plan 8, Mapping; weather slice
+Given the adapter raises `WEATHER_UNAVAILABLE`
+When the error is inspected
+Then its `reason` is one of `timeout`, `network`, `http_<status>`, `code_<code>`, `unreadable_body` or `unexpected_shape`.
+
 ## ERROR
 
 ### AC-ERROR-1
@@ -461,11 +482,11 @@ Then it is masked as `INTERNAL_SERVER_ERROR` with no stack trace and is logged o
 
 ## User story coverage
 
-| User story                            | GraphQL criteria                                                                                                                                                                                                                                                                                                       | UI criteria                                                                                                  |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| 1. Query all properties               | AC-LIST-1, AC-WEATHER-9                                                                                                                                                                                                                                                                                                | AC-LIST-2, AC-LIST-3, AC-LIST-4, AC-LIST-5                                                                   |
-| 2. Sort properties by creation date   | AC-SORT-1, AC-SORT-2, AC-SORT-3                                                                                                                                                                                                                                                                                        | AC-SORT-4                                                                                                    |
-| 3. Filter by city, zip code and state | AC-FILTER-1, AC-FILTER-2, AC-FILTER-3, AC-FILTER-4, AC-FILTER-5, AC-FILTER-6, AC-FILTER-9, AC-FILTER-10, AC-FILTER-11                                                                                                                                                                                                  | AC-FILTER-7, AC-FILTER-8                                                                                     |
-| 4. Query details of one property      | AC-DETAIL-1, AC-DETAIL-2                                                                                                                                                                                                                                                                                               | AC-DETAIL-3, AC-DETAIL-4, AC-DETAIL-5                                                                        |
-| 5. Add a property                     | AC-CREATE-1, AC-CREATE-2, AC-CREATE-3, AC-CREATE-4, AC-CREATE-5, AC-CREATE-6, AC-CREATE-7, AC-CREATE-16, AC-CREATE-17, AC-WEATHER-1, AC-WEATHER-2, AC-WEATHER-3, AC-WEATHER-4, AC-WEATHER-5, AC-WEATHER-6, AC-WEATHER-7, AC-WEATHER-8, AC-WEATHER-10, AC-WEATHER-11, AC-WEATHER-12, AC-ERROR-1, AC-ERROR-3, AC-ERROR-4 | AC-CREATE-8, AC-CREATE-9, AC-CREATE-10, AC-CREATE-11, AC-CREATE-12, AC-CREATE-13, AC-CREATE-14, AC-CREATE-15 |
-| 6. Delete a property                  | AC-DELETE-1, AC-DELETE-2, AC-WEATHER-9                                                                                                                                                                                                                                                                                 | AC-DELETE-3, AC-DELETE-4                                                                                     |
+| User story                            | GraphQL criteria                                                                                                                                                                                                                                                                                                                                                    | UI criteria                                                                                                  |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 1. Query all properties               | AC-LIST-1, AC-WEATHER-9                                                                                                                                                                                                                                                                                                                                             | AC-LIST-2, AC-LIST-3, AC-LIST-4, AC-LIST-5                                                                   |
+| 2. Sort properties by creation date   | AC-SORT-1, AC-SORT-2, AC-SORT-3                                                                                                                                                                                                                                                                                                                                     | AC-SORT-4                                                                                                    |
+| 3. Filter by city, zip code and state | AC-FILTER-1, AC-FILTER-2, AC-FILTER-3, AC-FILTER-4, AC-FILTER-5, AC-FILTER-6, AC-FILTER-9, AC-FILTER-10, AC-FILTER-11                                                                                                                                                                                                                                               | AC-FILTER-7, AC-FILTER-8                                                                                     |
+| 4. Query details of one property      | AC-DETAIL-1, AC-DETAIL-2                                                                                                                                                                                                                                                                                                                                            | AC-DETAIL-3, AC-DETAIL-4, AC-DETAIL-5                                                                        |
+| 5. Add a property                     | AC-CREATE-1, AC-CREATE-2, AC-CREATE-3, AC-CREATE-4, AC-CREATE-5, AC-CREATE-6, AC-CREATE-7, AC-CREATE-16, AC-CREATE-17, AC-WEATHER-1, AC-WEATHER-2, AC-WEATHER-3, AC-WEATHER-4, AC-WEATHER-5, AC-WEATHER-6, AC-WEATHER-7, AC-WEATHER-8, AC-WEATHER-10, AC-WEATHER-11, AC-WEATHER-12, AC-WEATHER-13, AC-WEATHER-14, AC-WEATHER-15, AC-ERROR-1, AC-ERROR-3, AC-ERROR-4 | AC-CREATE-8, AC-CREATE-9, AC-CREATE-10, AC-CREATE-11, AC-CREATE-12, AC-CREATE-13, AC-CREATE-14, AC-CREATE-15 |
+| 6. Delete a property                  | AC-DELETE-1, AC-DELETE-2, AC-WEATHER-9                                                                                                                                                                                                                                                                                                                              | AC-DELETE-3, AC-DELETE-4                                                                                     |
