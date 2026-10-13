@@ -1,12 +1,34 @@
-Model: grok-4.7
-Param context: 256k
-Param reasoning_effort: high
-Param fast: false
-Agent: bc-427c771a-3e59-4596-84dd-3a5bd2be5cf2
-Run: run-507d8146-61ad-4def-8402-fc0788a5c860
-Status: FINISHED
-Elapsed: 814.27 seconds
----
+# Grok review of slice `docs`
+
+Reviewer: `grok-4.7` with `context=256k`, `reasoning_effort=high`, `fast=false`, through the Cursor v1 API (`grok-review.mjs`, the fixed file of commit e8edf5e). The id was checked against `GET /v1/models` before round 1 (it lists grok-4.7, grok-4.6 and grok-4.5). The API returns neither the model that answered nor the cost. Prompts and raw replies: `docs/agent/slices/docs/04-`, `07-` and `09-reviewer-prompt.md` and `-reply.md`.
+
+| Round | Patch | Elapsed | Verdict |
+|---|---|---|---|
+| 1 | `git diff fca2bd7 eefb44b` without the slice record, 42,219 bytes, 7 files | 814 s | CHANGES REQUESTED, F1 to F10 |
+| 2 | `git diff eefb44b ff5631a -- README.md`, 9,462 bytes | 377 s | CHANGES REQUESTED, G1 and G2 |
+| 3 | `git diff ff5631a 94a012d -- README.md`, 1,798 bytes | 82 s | APPROVED |
+
+## Outcome of each finding
+
+| Id | Severity | Finding | Outcome |
+|---|---|---|---|
+| F1 | high | "Test it" asks for a real Weatherstack create and says no test calls it | Fixed in ff5631a: the sentence speaks of automated tests, development loops and CI jobs; the manual row is marked as made once by hand, not a reader step. No command is given on purpose. |
+| F2 | medium | "A missing value stops the process" although five variables have defaults | Fixed in ff5631a. |
+| F3 | medium | "runs with `npm install` and nothing else" | Fixed in ff5631a, then narrowed in 94a012d (G2). |
+| F4 | medium | Wrong reason why the SQLite file does not fit Lambda | Fixed in ff5631a with the reviewer's reason. |
+| F5 | medium | Error translation in resolvers is logic | Fixed in part in ff5631a. The plan fixes the rule with the translation in it, so the sentence stays; the README names `apps/api/src/graphql/errors.ts` as the place of the mapping. |
+| F6 | medium | `grilling`: not a local modification but an older upstream snapshot; the upstream MIT notice is missing | Not fixed. The reviewer checked upstream; the conductor has no network and may state only what the local files establish. Passed to the manager: verify against upstream and add the notice before publication. |
+| F7 | medium | `handoff`: the text matches a later upstream revision, so "locally modified" and version 1.0.0 are not exact | Not fixed, same reason. The local registry records commit 03c5eb1 and the installed file differs from it. Passed to the manager to verify. |
+| F8 | low | `state` is not free text | Fixed in ff5631a, label corrected in 94a012d (G1). |
+| F9 | low | Three workspaces, "two packages" | Fixed in ff5631a. The plan's own table still says "two packages". |
+| F10 | low | `npm run dev` does not return, the checks after it are never reached | Fixed in ff5631a: the run block ends at `npm run dev`. Whether `npm run e2e` needs it stopped is left for wave 2. |
+| G1 | medium | The label still called state validation unbuilt | Fixed in 94a012d. |
+| G2 | low | "no compiled build" against the web build | Fixed in 94a012d with the reviewer's wording. |
+
+## Raw replies
+
+### Round 1
+
 CHANGES REQUESTED
 
 F1. **High.** `README.md`: "One create against Weatherstack, evidence saved without the key" and "No test calls the real Weatherstack service."
@@ -48,3 +70,15 @@ Change: Say three workspace packages, or name which two are meant and why `e2e` 
 F10. **Low.** `README.md`: "npm run dev" followed in the same block by "npm run verify" and "npm run e2e", then "The last two commands are the checks described in the next section; only the first three are needed to run the application."
 `npm run dev` does not return, so a reader who runs the block never reaches the checks. Test it does not say whether that process must be stopped or left up, or whether Playwright starts its own API and web server.
 Change: End the Run it block at `npm run dev` and say that it keeps running. State under Test it whether `verify` and `e2e` need that process stopped.
+### Round 2
+
+CHANGES REQUESTED
+
+G1. Severity: medium. Quote: "Zip-to-city and state validation: `state` must be a `UsState` code; the city and zip code are accepted as typed and are not checked against each other or against the state, and Weatherstack region naming was measured for one state only." This bullet is under "Not built", and its name still calls state validation unbuilt, while the new text requires `state` to be a `UsState` code. That code check is a validation rule. The rest of the sentence limits the gap to the city and zip code, which are not checked against each other or against the state. Change the label so the unbuilt item is only that cross-check: "Zip-to-city checks: `state` must be a `UsState` code; the city and zip code are accepted as typed and are not checked against each other or against the state, and Weatherstack region naming was measured for one state only."
+
+G2. Severity: low. Quote: "so no compiled build, bundled hosting or deployment is part of it." The same diff says "`npm run verify` runs format check, codegen, lint, typecheck, unit and integration tests, and the web build." The web build is a compiled build, so "no compiled build" is broader than this bullet's subject, "A compiled API build, serving the web bundle from the API or deployment". Change the ending to: "so a compiled API build, serving the web bundle from the API, and deployment are not part of it."
+### Round 3
+
+APPROVED
+
+The two replacements resolve G1 and G2. Neither item adds a contradiction or breaks a text rule.
