@@ -16,7 +16,7 @@ export class FakeWeatherProvider implements WeatherProvider {
         temperature: 25,
         weather_descriptions: ['Sunny'],
         astro: { sunrise: '06:00 AM', sunset: '06:30 PM' },
-        air_quality: { co: '201.9', no2: '10.2' },
+        air_quality: { co: '201.9', no2: '10.2', 'us-epa-index': '1' },
         provider_only_field: { source: 'fixture' },
       },
     },

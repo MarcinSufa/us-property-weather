@@ -169,18 +169,29 @@ describe('property input parsing', () => {
     expect(parsePropertyFilter({ zipCode: ' 12207 ' }).zipCode).toBe('12207');
   });
 
-  it.each([null, undefined, {}])('AC-FILTER-5 treats whole filter %j as unrestricted', (filter) => {
-    expect(parsePropertyFilter(filter)).toEqual({ city: null, state: null, zipCode: null });
-  });
-
-  it.each(['city', 'zipCode'] as const)(
-    'AC-FILTER-5 treats absent, null, empty and blank %s as unrestricted',
-    (field) => {
-      for (const filter of [{}, { [field]: null }, { [field]: '' }, { [field]: '   ' }]) {
-        expect(parsePropertyFilter(filter)[field]).toBeNull();
-      }
+  it.each([null, undefined, {}])(
+    'AC-FILTER-5 and AC-FILTER-9 treat whole filter %j as unrestricted',
+    (filter) => {
+      expect(parsePropertyFilter(filter)).toEqual({ city: null, state: null, zipCode: null });
     },
   );
+
+  it.each(['', '   '])('AC-FILTER-5 treats blank city %j as unrestricted', (city) => {
+    expect(parsePropertyFilter({ city }).city).toBeNull();
+  });
+
+  it.each(['', '   '])('AC-FILTER-9 treats blank zip code %j as unrestricted', (zipCode) => {
+    expect(parsePropertyFilter({ zipCode }).zipCode).toBeNull();
+  });
+
+  it('AC-FILTER-5 and AC-FILTER-9 treat absent and null values as unrestricted', () => {
+    expect(parsePropertyFilter({})).toEqual({ city: null, state: null, zipCode: null });
+    expect(parsePropertyFilter({ city: null, state: null, zipCode: null })).toEqual({
+      city: null,
+      state: null,
+      zipCode: null,
+    });
+  });
 
   it('AC-FILTER-5 treats absent and null state as unrestricted', () => {
     expect(parsePropertyFilter({}).state).toBeNull();

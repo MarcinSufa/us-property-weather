@@ -1,0 +1,160 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/graphql/errors.test.ts (5 tests | 5 failed) 4ms
+   ❯ toGraphQLError (5)
+     × AC-ERROR-1 maps invalid input with its field errors 3ms
+     × AC-ERROR-2 maps missing properties 0ms
+     × AC-ERROR-3 maps missing locations 0ms
+     × AC-ERROR-4 keeps the weather failure reason out of the result 0ms
+     × AC-ERROR-5 masks error messages and thrown strings without preserving originals 0ms
+ ❯ src/graphql/yoga.test.ts (19 tests | 19 failed) 15ms
+   ❯ GraphQL Yoga API (19)
+     × AC-CREATE-1 returns stored fields, coordinates, weather data and creation time 5ms
+     × AC-CREATE-2 and AC-CREATE-3 returns trimmed street and city 1ms
+     × AC-CREATE-4, AC-CREATE-5, AC-CREATE-6 and AC-ERROR-1 reports all invalid fields before weather 1ms
+     × AC-CREATE-7 rejects invalid states as GraphQL errors before the service runs 1ms
+     × AC-CREATE-16 persists the complete current weather object 0ms
+     × AC-LIST-1 lists no properties and then both created properties 1ms
+     × AC-SORT-1 and AC-SORT-2 uses newest first by default and supports both sort orders 0ms
+     × AC-FILTER-1 to AC-FILTER-4 filters by city, state, zip and all fields over GraphQL 0ms
+     × AC-FILTER-5 treats empty, blank, null and omitted filters as no filter 1ms
+     × AC-FILTER-6 and AC-ERROR-1 maps an invalid zip filter to one field error 0ms
+     × AC-DETAIL-1 and AC-DETAIL-2 returns a property with weather and null for an unknown id 0ms
+     × AC-DELETE-1 returns the deleted property and then the detail query returns null 0ms
+     × AC-DELETE-2 and AC-ERROR-2 maps deleting an unknown id 0ms
+     × AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations without storing a row 0ms
+     × AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather failure reasons 0ms
+     × AC-ERROR-5 masks and logs unexpected repository errors in production mode 0ms
+     × AC-ERROR-5 masks and logs unexpected repository errors in development mode 0ms
+     ❯ AC-WEATHER-9 zero provider calls proof (2)
+       × AC-WEATHER-9 leaves query and delete provider call count unchanged 1ms
+       × AC-WEATHER-9 keeps createProperty at exactly one provider call 0ms
+node : 
+At line:2 char:1
++ node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run src/gr ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯ Failed Tests 24 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-1 maps invalid input with its field errors
+Error: not implemented
+ ❯ toGraphQLError src/graphql/errors.ts:4:9
+      2|
+      3| export function toGraphQLError(_error: unknown): GraphQLError {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/graphql/errors.test.ts:9:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/24]⎯
+
+ FAIL  src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-2 maps missing properties
+Error: not implemented
+ ❯ toGraphQLError src/graphql/errors.ts:4:9
+      2|
+      3| export function toGraphQLError(_error: unknown): GraphQLError {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/graphql/errors.test.ts:23:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/24]⎯
+
+ FAIL  src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-3 maps missing locations
+Error: not implemented
+ ❯ toGraphQLError src/graphql/errors.ts:4:9
+      2|
+      3| export function toGraphQLError(_error: unknown): GraphQLError {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/graphql/errors.test.ts:31:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/24]⎯
+
+ FAIL  src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-4 keeps the weather failure reason out of the result
+Error: not implemented
+ ❯ toGraphQLError src/graphql/errors.ts:4:9
+      2|
+      3| export function toGraphQLError(_error: unknown): GraphQLError {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/graphql/errors.test.ts:39:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/24]⎯
+
+ FAIL  src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-5 masks error messages and thrown strings without preserv
+ing originals
+Error: not implemented
+ ❯ toGraphQLError src/graphql/errors.ts:4:9
+      2|
+      3| export function toGraphQLError(_error: unknown): GraphQLError {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/graphql/errors.test.ts:48:23
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/24]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-1 returns stored fields, coordinates, weather data and c
+reation time
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-2 and AC-CREATE-3 returns trimmed street and city
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-4, AC-CREATE-5, AC-CREATE-6 and AC-ERROR-1 reports all i
+nvalid fields before weather
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-7 rejects invalid states as GraphQL errors before the se
+rvice runs
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-16 persists the complete current weather object
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-LIST-1 lists no properties and then both created properties
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-SORT-1 and AC-SORT-2 uses newest first by default and supports 
+both sort orders
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-1 to AC-FILTER-4 filters by city, state, zip and all fie
+lds over GraphQL
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-5 treats empty, blank, null and omitted filters as no fi
+lter
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-6 and AC-ERROR-1 maps an invalid zip filter to one field
+ error
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DETAIL-1 and AC-DETAIL-2 returns a property with weather and nu
+ll for an unknown id
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DELETE-1 returns the deleted property and then the detail query
+ returns null
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DELETE-2 and AC-ERROR-2 maps deleting an unknown id
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations withou
+t storing a row
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather fail
+ure reasons
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-5 masks and logs unexpected repository errors in producti
+on mode
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-5 masks and logs unexpected repository errors in developm
+ent mode
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-WEATHER-9 zero provider calls proof > AC-WEATHER-9 leaves query
+ and delete provider call count unchanged
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-WEATHER-9 zero provider calls proof > AC-WEATHER-9 keeps create
+Property at exactly one provider call
+Error: not implemented
+ ❯ createPropertyYoga src/graphql/yoga.ts:10:9
+      8|
+      9| export function createPropertyYoga(_options: PropertyYogaOptions) {
+     10|   throw new Error('not implemented');
+       |         ^
+     11| }
+     12|
+ ❯ createHarness src/graphql/yoga.test.ts:32:16
+ ❯ src/graphql/yoga.test.ts:63:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/24]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  24 failed (24)
+   Start at  14:27:31
+   Duration  279ms (import 72%, transform 16%, tests 9%, worker 3%)
+

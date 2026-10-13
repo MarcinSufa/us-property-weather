@@ -1,0 +1,3 @@
+I stopped before editing because the prompt says to stop when it conflicts with the project docs. `docs/plan.md` section 4 says resolvers translate domain errors; the worker prompt says translation must happen centrally through Yoga’s `maskedErrors`. Choosing either would violate that instruction.
+
+No files were changed and no tests were run. The installed Yoga types do support a custom `maskedErrors.maskError` callback. I also couldn’t search durable memory because no memory tools are available in this session.

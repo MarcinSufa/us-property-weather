@@ -1,0 +1,194 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/graphql/yoga.test.ts (23 tests | 6 failed) 147ms
+   ❯ GraphQL Yoga API (23)
+     × AC-CREATE-4, AC-CREATE-5, AC-CREATE-6 and AC-ERROR-1 reports all invalid fields before weather 10ms
+     × AC-FILTER-6 and AC-ERROR-1 maps an invalid zip filter to one field error 3ms
+     × AC-DELETE-2 and AC-ERROR-2 maps deleting an unknown id 3ms
+     × AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations without storing a row 3ms
+     × AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather failure reasons 3ms
+     × AC-ERROR-5 masks and logs unexpected repository errors in development mode 4ms
+node.exe : 
+At line:2 char:1
++ & node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run 2>&1 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-4, AC-CREATE-5, AC-CREATE-6 and AC-ERROR-1 reports all i
+nvalid fields before weather
+AssertionError: expected { code: 'INTERNAL_SERVER_ERROR' } to deeply equal { code: 'BAD_USER_INPUT', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "code": "BAD_USER_INPUT",
+-   "fieldErrors": [
+-     {
+-       "field": "street",
+-       "message": "Street must be between 1 and 200 characters.",
+-     },
+-     {
+-       "field": "city",
+-       "message": "City must be between 1 and 100 characters.",
+-     },
+-     {
+-       "field": "zipCode",
+-       "message": "Zip code must be exactly five digits.",
+-     },
+-   ],
++   "code": "INTERNAL_SERVER_ERROR",
+  }
+
+ ❯ src/graphql/yoga.test.ts:104:50
+    102|
+    103|     expect(errorsOf(result.json)).toHaveLength(1);
+    104|     expect(errorsOf(result.json)[0]?.extensions).toEqual({
+       |                                                  ^
+    105|       code: 'BAD_USER_INPUT',
+    106|       fieldErrors: [
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-6 and AC-ERROR-1 maps an invalid zip filter to one field
+ error
+AssertionError: expected { code: 'INTERNAL_SERVER_ERROR' } to deeply equal { code: 'BAD_USER_INPUT', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "code": "BAD_USER_INPUT",
+-   "fieldErrors": [
+-     {
+-       "field": "zipCode",
+-       "message": "Zip code filter must be exactly five digits.",
+-     },
+-   ],
++   "code": "INTERNAL_SERVER_ERROR",
+  }
+
+ ❯ src/graphql/yoga.test.ts:245:50
+    243|
+    244|     expect(errorsOf(result.json)).toHaveLength(1);
+    245|     expect(errorsOf(result.json)[0]?.extensions).toEqual({
+       |                                                  ^
+    246|       code: 'BAD_USER_INPUT',
+    247|       fieldErrors: [{ field: 'zipCode', message: 'Zip code filter must…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DELETE-2 and AC-ERROR-2 maps deleting an unknown id
+AssertionError: expected { code: 'INTERNAL_SERVER_ERROR' } to deeply equal { code: 'PROPERTY_NOT_FOUND' }
+
+- Expected
++ Received
+
+  {
+-   "code": "PROPERTY_NOT_FOUND",
++   "code": "INTERNAL_SERVER_ERROR",
+  }
+
+ ❯ src/graphql/yoga.test.ts:301:50
+    299|
+    300|     expect(errorsOf(result.json)).toHaveLength(1);
+    301|     expect(errorsOf(result.json)[0]?.extensions).toEqual({ code: 'PROP…
+       |                                                  ^
+    302|   });
+    303|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations withou
+t storing a row
+AssertionError: expected { code: 'INTERNAL_SERVER_ERROR' } to deeply equal { code: 'LOCATION_NOT_FOUND' }
+
+- Expected
++ Received
+
+  {
+-   "code": "LOCATION_NOT_FOUND",
++   "code": "INTERNAL_SERVER_ERROR",
+  }
+
+ ❯ src/graphql/yoga.test.ts:308:50
+    306|     const result = await request(harness.yoga, createQuery, { input: v…
+    307|
+    308|     expect(errorsOf(result.json)[0]?.extensions).toEqual({ code: 'LOCA…
+       |                                                  ^
+    309|     expect(harness.service.list(undefined, 'CREATED_AT_DESC')).toEqual…
+    310|     expect(harness.provider.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather fail
+ure reasons
+AssertionError: expected { code: 'INTERNAL_SERVER_ERROR' } to deeply equal { code: 'WEATHER_UNAVAILABLE' }
+
+- Expected
++ Received
+
+  {
+-   "code": "WEATHER_UNAVAILABLE",
++   "code": "INTERNAL_SERVER_ERROR",
+  }
+
+ ❯ src/graphql/yoga.test.ts:319:50
+    317|     const logs = harness.logLines.map((line) => JSON.parse(line) as Re…
+    318|
+    319|     expect(errorsOf(result.json)[0]?.extensions).toEqual({ code: 'WEAT…
+       |                                                  ^
+    320|     expect(result.body).not.toContain(marker);
+    321|     expect(harness.service.list(undefined, 'CREATED_AT_DESC')).toEqual…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-5 masks and logs unexpected repository errors in developm
+ent mode
+AssertionError: expected { code: 'INTERNAL_SERVER_ERROR', …(1) } to deeply equal { code: 'INTERNAL_SERVER_ERROR' }
+
+ Test Files  1 failed | 7 passed (8)
+      Tests  6 failed | 101 passed (107)
+   Start at  14:32:41
+   Duration  647ms (import 71%, tests 21%, transform 6%, worker 3%)
+
+
+- Expected
++ Received
+
+  {
+    "code": "INTERNAL_SERVER_ERROR",
++   "originalError": {
++     "message": "Unexpected error.",
++     "stack": "GraphQLError: Unexpected error.
++     at toGraphQLError (C:/tmp/covertree-api/apps/api/src/graphql/errors.ts:33:10)
++     at Object.properties (C:/tmp/covertree-api/apps/api/src/graphql/resolvers.ts:45:13)
++     at executeField (file:///C:/tmp/covertree-api/node_modules/@graphql-tools/executor/esm/execution/execute.js:352:2
+4)
++     at executeFields (file:///C:/tmp/covertree-api/node_modules/@graphql-tools/executor/esm/execution/execute.js:297:
+28)
++     at executeOperation (file:///C:/tmp/covertree-api/node_modules/@graphql-tools/executor/esm/execution/execute.js:2
+61:18)
++     at file:///C:/tmp/covertree-api/node_modules/@graphql-tools/executor/esm/execution/execute.js:64:37
++     at Promise.then (file:///C:/tmp/covertree-api/node_modules/@whatwg-node/promise-helpers/esm/index.js:34:40)
++     at handleMaybePromise (file:///C:/tmp/covertree-api/node_modules/@whatwg-node/promise-helpers/esm/index.js:10:33)
++     at executeImpl (file:///C:/tmp/covertree-api/node_modules/@graphql-tools/executor/esm/execution/execute.js:64:12)
++     at execute (file:///C:/tmp/covertree-api/node_modules/@graphql-tools/executor/esm/execution/execute.js:49:12)",
++   },
+  }
+
+ ❯ assertInternalErrorIsMaskedAndLogged src/graphql/yoga.test.ts:374:33
+    372|
+    373|       expect(errorsOf(result.json)).toHaveLength(1);
+    374|       expect(error?.extensions).toEqual({ code: 'INTERNAL_SERVER_ERROR…
+       |                                 ^
+    375|       expect(result.body).not.toContain(marker);
+    376|       expect(result.body).not.toContain('stack');
+ ❯ src/graphql/yoga.test.ts:332:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+

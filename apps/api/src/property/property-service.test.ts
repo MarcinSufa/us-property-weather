@@ -102,15 +102,25 @@ describe('PropertyService', () => {
     ]);
   });
 
-  it('AC-FILTER-1 and AC-FILTER-5 trims city and treats blank values as no restriction', async () => {
+  it('AC-FILTER-1 and AC-FILTER-5 trims city and treats blank city as no restriction', async () => {
     const first = await service.create(validInput);
     const second = await service.create({ ...validInput, city: 'Tucson', zipCode: '85701' });
 
     expect(
       service.list({ city: '  pHoEnIx  ' }, 'CREATED_AT_ASC').map((property) => property.id),
     ).toEqual([first.id]);
+    expect(service.list({ city: '  ' }, 'CREATED_AT_ASC').map((property) => property.id)).toEqual([
+      first.id,
+      second.id,
+    ]);
+  });
+
+  it('AC-FILTER-9 treats a blank zip-code filter as no restriction', async () => {
+    const first = await service.create(validInput);
+    const second = await service.create({ ...validInput, city: 'Tucson', zipCode: '85701' });
+
     expect(
-      service.list({ city: '  ', zipCode: '' }, 'CREATED_AT_ASC').map((property) => property.id),
+      service.list({ zipCode: '  ' }, 'CREATED_AT_ASC').map((property) => property.id),
     ).toEqual([first.id, second.id]);
   });
 
