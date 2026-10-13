@@ -132,3 +132,9 @@ Outcome: answered from `docs/plan.md`. No external API is involved in filtering:
 > Design ok , exo- compact działa?
 
 Outcome: the design is accepted; the `web` brief will point at `docs/design/README.md`. On the plugin: yes, it took this session's third compaction. Checked: the context after that compaction opens with the plugin's seed marker; its capture folder holds a segment file with 105 records written at the time of the cut; the recall tool answered a test question from an index of 1054 of 1054 vectors; the label file holds 7 labels with model jev-1.13.0, so the Jev ranking ran. One compaction, so the result is provisional. The earlier claim that the changed options would only reach a new session was wrong. Defects seen in the seed: harness boilerplate and a sentence fragment listed as constraints, and a truncated errors section.
+
+## Prompt 21
+
+> P7 tak
+
+Outcome: the split of skills is settled. Copies are committed for the public ones (grilling, i-have-adhd, handoff, superpowers, gstack, graphify, demo-video); the private ones (conduct, conduct-binding, exo-compact) are described only. `docs/plan.md` section 19 no longer lists an owed input. The manager's own reading, to be carried into the wave 1 brief that owns the README: only skills actually invoked in this project are copied, as skill files with source, version and licence notice, not as whole upstream repositories.

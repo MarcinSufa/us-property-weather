@@ -431,7 +431,7 @@ Not built, each named in the README:
 
 ## 19. Questions settled at approval
 
-All eight were answered by Marcin on 2026-10-13 as recommended. One input is still owed for P7: which of the skills used are private.
+All eight were answered by Marcin on 2026-10-13 as recommended. The input owed for P7 arrived the same day: public are grilling, i-have-adhd, handoff, superpowers, gstack, graphify and demo-video; private are conduct, conduct-binding and exo-compact.
 
 | Id | Question | Decided |
 |---|---|---|
@@ -441,5 +441,5 @@ All eight were answered by Marcin on 2026-10-13 as recommended. One input is sti
 | P4 | `state` as an enum of 50 states and DC, or a string checked in code | Enum. |
 | P5 | Ask Weatherstack by zip code or by "city, state" | Zip code: closer to the brief's example coordinates, and the API dropped the state from the city query. |
 | P6 | One record folder (`docs/agent/`) and one decisions log, or the second set the brief's draft names (`docs/ai/`, `docs/DECISIONS.md`, `.claude/agents/`) | One. |
-| P7 | Copies of the skills used in the work: commit them, or describe them with their source | Commit the public ones, describe the private ones. Needs Marcin's word on which are which. |
+| P7 | Copies of the skills used in the work: commit them, or describe them with their source | Commit the public ones, describe the private ones. Split confirmed by Marcin on 2026-10-13 (see above). |
 | P8 | Reviewer cost of section 16 | Estimate accepted; stop and report if a single call runs far longer than the trial. |
