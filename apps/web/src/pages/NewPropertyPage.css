@@ -4,14 +4,6 @@
   gap: var(--space-1);
 }
 
-.new-property__back {
-  display: inline-flex;
-  min-height: var(--control-height);
-  align-self: flex-start;
-  align-items: center;
-  gap: var(--space-1);
-}
-
 .new-property__heading p {
   margin: 0;
 }

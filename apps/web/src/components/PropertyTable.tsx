@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import type { PropertiesQuery } from '../graphql/generated/graphql.ts';
-import { formatCreatedAt, formatWeather } from '../formatters.ts';
+import { formatDate, formatWeather } from '../formatters.ts';
 
 type PropertyRow = PropertiesQuery['properties'][number];
 
@@ -40,7 +40,7 @@ export function PropertyTable({ properties }: PropertyTableProps) {
                   {property.zipCode}
                 </td>
                 <td role="cell" data-label="Created">
-                  <time dateTime={property.createdAt}>{formatCreatedAt(property.createdAt)}</time>
+                  <time dateTime={property.createdAt}>{formatDate(property.createdAt)}</time>
                 </td>
                 <td role="cell" data-label="Weather at creation">
                   {formatWeather(

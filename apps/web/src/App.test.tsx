@@ -8,9 +8,44 @@ beforeEach(() => {
   server.use(
     http.get('http://localhost/graphql', ({ request }) => {
       const operationName = new URL(request.url).searchParams.get('operationName');
-      return operationName === 'Properties'
-        ? HttpResponse.json({ data: { properties: [] } })
-        : HttpResponse.json({});
+      if (operationName === 'Properties') return HttpResponse.json({ data: { properties: [] } });
+      if (operationName === 'Property') {
+        return HttpResponse.json({
+          data: {
+            property: {
+              __typename: 'Property',
+              id: 'abc-123',
+              street: '15 Saguaro Blvd',
+              city: 'Fountain Hills',
+              state: 'AZ',
+              zipCode: '85268',
+              lat: 33.609,
+              long: -111.724,
+              createdAt: '2026-10-13T17:12:00.000Z',
+              weatherData: {
+                __typename: 'WeatherData',
+                observation_time: '05:12 PM',
+                temperature: 24,
+                weather_code: 113,
+                weather_icons: [],
+                weather_descriptions: ['Sunny'],
+                wind_speed: 11,
+                wind_degree: 225,
+                wind_dir: 'SW',
+                pressure: 1012,
+                precip: 0,
+                humidity: 18,
+                cloudcover: 0,
+                feelslike: 23,
+                uv_index: 6,
+                visibility: 16,
+                is_day: 'yes',
+              },
+            },
+          },
+        });
+      }
+      return HttpResponse.json({});
     }),
   );
 });
@@ -18,7 +53,7 @@ beforeEach(() => {
 test.each([
   ['/', 'Properties', 'Properties - CoverTree'],
   ['/properties/new', 'Add property', 'Add property - CoverTree'],
-  ['/properties/abc-123', 'Property details', 'Property - CoverTree'],
+  ['/properties/abc-123', '15 Saguaro Blvd', '15 Saguaro Blvd - CoverTree'],
 ])('AC-WEB-2 %s has its page title and one heading', async (path, heading, title) => {
   renderApp([path]);
 

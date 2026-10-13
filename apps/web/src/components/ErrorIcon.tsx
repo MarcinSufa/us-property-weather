@@ -6,6 +6,7 @@ export function ErrorIcon({ size = 22 }: ErrorIconProps) {
   return (
     <svg
       aria-hidden="true"
+      className="alert__icon"
       width={size}
       height={size}
       viewBox="0 0 24 24"

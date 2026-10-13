@@ -202,6 +202,30 @@ test.each([
   expect(screen.getByRole('textbox', { name: label })).toHaveFocus();
 });
 
+test('AC-CREATE-13 state-only field error receives focus', async () => {
+  server.use(
+    createHandler(() =>
+      HttpResponse.json({
+        errors: [
+          {
+            message: 'Invalid address',
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              fieldErrors: [{ field: 'state', message: 'Choose a state.' }],
+            },
+          },
+        ],
+      }),
+    ),
+  );
+  const { user } = renderApp(['/properties/new']);
+  await fillAddress(user);
+  await user.click(screen.getByRole('button', { name: 'Add property' }));
+
+  expect(await screen.findByText('Choose a state.')).toBeInTheDocument();
+  expect(screen.getByRole('combobox', { name: 'State' })).toHaveFocus();
+});
+
 test.each([
   [
     'LOCATION_NOT_FOUND',
@@ -285,8 +309,43 @@ test('AC-LIST-5 creating from an empty list refreshes the list without reloading
   server.use(
     http.get('http://localhost/graphql', ({ request }) => {
       const operationName = new URL(request.url).searchParams.get('operationName');
-      if (operationName !== 'Properties') return HttpResponse.json({});
-      return HttpResponse.json({ data: { properties: created ? [newProperty] : [] } });
+      if (operationName === 'Properties') {
+        return HttpResponse.json({ data: { properties: created ? [newProperty] : [] } });
+      }
+      if (operationName === 'Property') {
+        return HttpResponse.json({
+          data: {
+            property: {
+              __typename: 'Property',
+              id: 'new-list-property',
+              ...address,
+              lat: 33.609,
+              long: -111.724,
+              createdAt: '2026-10-13T08:12:00.000Z',
+              weatherData: {
+                __typename: 'WeatherData',
+                observation_time: null,
+                temperature: 24,
+                weather_code: 113,
+                weather_icons: [],
+                weather_descriptions: ['Sunny'],
+                wind_speed: 11,
+                wind_degree: 225,
+                wind_dir: 'SW',
+                pressure: 1012,
+                precip: 0,
+                humidity: 18,
+                cloudcover: 0,
+                feelslike: 23,
+                uv_index: 6,
+                visibility: 16,
+                is_day: 'yes',
+              },
+            },
+          },
+        });
+      }
+      return HttpResponse.json({});
     }),
     createHandler(() => {
       created = true;
@@ -299,7 +358,7 @@ test('AC-LIST-5 creating from an empty list refreshes the list without reloading
   await user.click(within(screen.getByRole('main')).getByRole('link', { name: 'Add property' }));
   await fillAddress(user);
   await user.click(screen.getByRole('button', { name: 'Add property' }));
-  expect(await screen.findByRole('heading', { name: 'Property details' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: address.street })).toBeInTheDocument();
   await user.click(screen.getByRole('link', { name: 'Properties' }));
 
   expect(await screen.findByRole('link', { name: address.street })).toHaveAttribute(

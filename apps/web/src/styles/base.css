@@ -233,11 +233,6 @@ select {
   background: var(--color-danger-bg);
 }
 
-.alert > svg {
-  flex: 0 0 auto;
-  color: var(--color-danger);
-}
-
 .alert__icon {
   flex: 0 0 auto;
   color: var(--color-danger);
