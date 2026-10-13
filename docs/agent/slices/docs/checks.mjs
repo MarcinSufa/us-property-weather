@@ -124,7 +124,7 @@ const walk = (dir) =>
     return statSync(path).isDirectory() ? walk(path) : [path];
   });
 const owned = ['README.md', ...walk('docs/agent/skills')];
-const dash = /[‒–—―]/;
+const dash = new RegExp(`[${String.fromCharCode(0x2012)}-${String.fromCharCode(0x2015)}]`);
 const email = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
 for (const file of owned) {
   const lines = readFileSync(file, 'utf8').split('\n');
@@ -141,7 +141,7 @@ for (const file of owned) {
   });
   if (clean) console.log(`ok   ${file} (${lines.length} lines)`);
 }
-const planted = 'a — b, someone@example.org';
+const planted = `a ${String.fromCharCode(0x2014)} b, someone${String.fromCharCode(64)}example.org`;
 console.log(
   `self-test on a planted sample: dash ${dash.test(planted) ? 'hit' : 'MISSED'}, email ${email.test(planted) ? 'hit' : 'MISSED'}`,
 );
