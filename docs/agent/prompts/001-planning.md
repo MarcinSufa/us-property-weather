@@ -198,3 +198,21 @@ Outcome: the four decisions on the demo films were taken as Marcin's. The films 
 > odpal lokanie apke , przetestuję ją
 
 Outcome: at about 19:10 the manager started `npm run dev` from `main` (head b3f6c6e) as a background process: the API answers on port 4000 and the web app on port 5173, and a list query through the web proxy returned without an error. The process reads the local environment file, which the manager did not open, so every property Marcin creates makes one real Weatherstack request; he was told this and that the plan had kept two requests for the final manual run. The question on the `transcripts` slice (one more fix round, a merge with the limits recorded, or no export) stays open. While the servers run, the browser suite cannot start, because it uses the same two ports.
+
+## Prompt 31
+
+> ok, trzeba sprawdzić pod względem bezpieczeństwa jeszcze cały projekt przed wypchnięciem na publicze repo na githubie
+
+Outcome: a review only, nothing was changed. The manager scanned the history of every branch and the tracked files with `gitleaks` 8.30.1 (0 findings on `main` and in the tracked files; 3 on the unmerged `slice/transcripts`, all in its test fixtures), searched the whole history of `main` and an export of its head for the values of the Cursor and Typesafe keys (absent) and for any string of 32 hexadecimal characters, the shape of a Weatherstack key (none; the key itself was not searched for by value, because the manager does not read the environment file), confirmed that the environment file was never committed on any branch, that all 90 commits carry the GitHub no-reply address and no trailer, and that the four films carry only encoder tags. `npm audit` reports 0 vulnerabilities in the production dependencies and 10 of high severity in the development chain under `@graphql-codegen/cli`. A Claude subagent (a different model from the worker) read the application code and reported no defect of high severity; its one finding of medium severity, read again by the manager, is that the API listens on all network interfaces with no authentication and with the default GraphQL page and introspection, so anyone on the same network can create properties, each at the cost of one Weatherstack request. The findings in the documents are in the outcome of prompt 33. No Grok call was made.
+
+## Prompt 32
+
+> jak lokalnie odpalić projekt ?
+
+Outcome: answered during the review: the app was already running from the manager's session on ports 4000 and 5173; to run it himself he writes "stop" first, then `npm install`, the environment file from `.env.example`, and `npm run dev`.
+
+## Prompt 33
+
+> nic w docsach nie ma wrażliwego przed wypchnięciem do githuba ?
+
+Outcome: no secret was found in the documents, and the three key-like values in them are test markers. Six things were put to Marcin as his decisions before a public push, none changed by the manager: the first prompt names another project of his and links the job offer; the name of one of his personal skills, which he may prefer to keep out of a public record, stands in the README, the plan and six other places of the record; his local user name and home folder stand in 19 files of worker output, briefs and handoffs; the names of his private tools stand in the prompts, the decisions and the plan; the design notes link a private artifact and the review files carry 58 run identifiers of the reviewer service; and the starting brief quotes the essentials of the employer's assignment. He was told that a correction in a new commit leaves the old text in the history, that the history can be rewritten before the first push at the cost of every commit hash cited in the record, and that only `main` should be pushed.
