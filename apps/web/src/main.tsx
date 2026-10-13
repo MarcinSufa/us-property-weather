@@ -2,7 +2,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'urql';
 import { App } from './App.tsx';
-import { client } from './graphql/client.ts';
+import { createGraphqlClient } from './graphql/client.ts';
+import './styles/tokens.css';
+import './styles/base.css';
+
+const client = createGraphqlClient('/graphql');
 
 const rootElement = document.getElementById('root');
 

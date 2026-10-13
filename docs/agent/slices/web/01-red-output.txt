@@ -1,0 +1,528 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-web/apps/web
+
+ × src/App.test.tsx > AC-WEB-2 / has its page title and one heading 117ms
+   → expected '' to be 'Properties - CoverTree' // Object.is equality
+node : stderr | src/App.test.tsx > AC-WEB-1 unknown paths show a link back to the list
+At line:2 char:1
++ node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run --repo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (stderr | src/Ap...ack to the list:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Error handled by React Router default ErrorBoundary: ErrorResponseImpl {
+  status: 404,
+  statusText: 'Not Found',
+  data: 'Error: No route matches URL "/no/such/path"',
+  error: Error: No route matches URL "/no/such/path"
+      at getInternalRouterError (file:///C:/tmp/covertree-web/node_modules/react-router/dist/development/lib/router/rou
+ter.js:2779:58)
+      at createRouter (file:///C:/tmp/covertree-web/node_modules/react-router/dist/development/lib/router/router.js:156
+:15)
+      at createMemoryRouter (file:///C:/tmp/covertree-web/node_modules/react-router/dist/development/lib/components.js:
+48:9)
+      at renderApp (C:/tmp/covertree-web/apps/web/src/test/render-app.tsx:9:18)
+      at C:/tmp/covertree-web/apps/web/src/App.test.tsx:18:3
+      at file:///C:/tmp/covertree-web/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
+      at file:///C:/tmp/covertree-web/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26
+      at file:///C:/tmp/covertree-web/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:3334:20
+      at new Promise (<anonymous>)
+      at runWithCancel (file:///C:/tmp/covertree-web/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:3329:10),
+  internal: true
+}
+
+ × src/App.test.tsx > AC-WEB-2 /properties/new has its page title and one heading 1017ms
+   → Unable to find role="heading" and name "Add property"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+ × src/App.test.tsx > AC-WEB-2 /properties/abc-123 has its page title and one heading 15ms
+   → expected '' to be 'Property - CoverTree' // Object.is equality
+ × src/App.test.tsx > AC-WEB-1 unknown paths show a link back to the list 1022ms
+   → Unable to find role="heading" and name "Page not found"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h2>
+      Unexpected Application Error!
+    </h2>
+    <h3
+      style="font-style: italic;"
+    >
+      404 Not Found
+    </h3>
+    <p>
+      💿 Hey developer 👋
+    </p>
+    <p>
+      You can provide a way better UX than this when your app throws errors by providing your own 
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        ErrorBoundary
+      </code>
+       or
+       
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        errorElement
+      </code>
+       prop on your route.
+    </p>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h2>
+      Unexpected Application Error!
+    </h2>
+    <h3
+      style="font-style: italic;"
+    >
+      404 Not Found
+    </h3>
+    <p>
+      💿 Hey developer 👋
+    </p>
+    <p>
+      You can provide a way better UX than this when your app throws errors by providing your own 
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        ErrorBoundary
+      </code>
+       or
+       
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        errorElement
+      </code>
+       prop on your route.
+    </p>
+  </div>
+</body>
+ × src/App.test.tsx > AC-WEB-3 header navigation on / 1011ms
+   → Unable to find role="banner"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ × src/App.test.tsx > AC-WEB-3 header navigation on /properties/new 1015ms
+   → Unable to find role="banner"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+ × src/App.test.tsx > AC-WEB-3 header navigation on /properties/abc-123 1005ms
+   → Unable to find role="banner"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ × src/App.test.tsx > AC-WEB-3 clicking Add property navigates to the form 1009ms
+   → Unable to find role="link" and name "Add property"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-2 / has its page title and one heading
+AssertionError: expected '' to be 'Properties - CoverTree' // Object.is equality
+
+- Expected
++ Received
+
+- Properties - CoverTree
+
+ ❯ src/App.test.tsx:14:26
+     12|   expect(await screen.findByRole('heading', { level: 1, name: heading …
+     13|   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+     14|   expect(document.title).toBe(title);
+       |                          ^
+     15| });
+     16|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-2 /properties/new has its page title and one heading
+TestingLibraryElementError: Unable to find role="heading" and name "Add property"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:12:23
+     10|   renderApp([path]);
+     11|
+     12|   expect(await screen.findByRole('heading', { level: 1, name: heading …
+       |                       ^
+     13|   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+     14|   expect(document.title).toBe(title);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-2 /properties/abc-123 has its page title and one heading
+AssertionError: expected '' to be 'Property - CoverTree' // Object.is equality
+
+- Expected
++ Received
+
+- Property - CoverTree
+
+ ❯ src/App.test.tsx:14:26
+     12|   expect(await screen.findByRole('heading', { level: 1, name: heading …
+     13|   expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
+     14|   expect(document.title).toBe(title);
+       |                          ^
+     15| });
+     16|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-1 unknown paths show a link back to the list
+TestingLibraryElementError: Unable to find role="heading" and name "Page not found"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h2>
+      Unexpected Application Error!
+    </h2>
+    <h3
+      style="font-style: italic;"
+    >
+      404 Not Found
+    </h3>
+    <p>
+      💿 Hey developer 👋
+    </p>
+    <p>
+      You can provide a way better UX than this when your app throws errors by providing your own 
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        ErrorBoundary
+      </code>
+       or
+       
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        errorElement
+      </code>
+       prop on your route.
+    </p>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h2>
+      Unexpected Application Error!
+    </h2>
+    <h3
+      style="font-style: italic;"
+    >
+      404 Not Found
+    </h3>
+    <p>
+      💿 Hey developer 👋
+    </p>
+    <p>
+      You can provide a way better UX than this when your app throws errors by providing your own 
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        ErrorBoundary
+      </code>
+       or
+       
+      <code
+        style="padding: 2px 4px; background-color: rgba(200, 200, 200, 0.5);"
+      >
+        errorElement
+      </code>
+       prop on your route.
+    </p>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:20:23
+     18|   renderApp(['/no/such/path']);
+     19|
+     20|   expect(await screen.findByRole('heading', { level: 1, name: 'Page no…
+       |                       ^
+     21|   expect(screen.getByRole('link', { name: 'All properties' })).toHaveA…
+     22|   expect(document.title).toBe('Page not found - CoverTree');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-3 header navigation on /
+TestingLibraryElementError: Unable to find role="banner"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:31:31
+     29| ])('AC-WEB-3 header navigation on %s', async (path, showAdd) => {
+     30|   renderApp([path]);
+     31|   const banner = await screen.findByRole('banner');
+       |                               ^
+     32|   const links = within(banner);
+     33|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-3 header navigation on /properties/new
+TestingLibraryElementError: Unable to find role="banner"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        New property
+      </h1>
+    </main>
+  </div>
+</body>
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  14:15:01
+   Duration  7.52s (tests 84%, environment 11%, setup 3%, import 2%)
+
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:31:31
+     29| ])('AC-WEB-3 header navigation on %s', async (path, showAdd) => {
+     30|   renderApp([path]);
+     31|   const banner = await screen.findByRole('banner');
+       |                               ^
+     32|   const links = within(banner);
+     33|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-3 header navigation on /properties/abc-123
+TestingLibraryElementError: Unable to find role="banner"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Property details
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:31:31
+     29| ])('AC-WEB-3 header navigation on %s', async (path, showAdd) => {
+     30|   renderApp([path]);
+     31|   const banner = await screen.findByRole('banner');
+       |                               ^
+     32|   const links = within(banner);
+     33|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  src/App.test.tsx > AC-WEB-3 clicking Add property navigates to the form
+TestingLibraryElementError: Unable to find role="link" and name "Add property"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <main>
+      <h1>
+        Properties
+      </h1>
+    </main>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/App.test.tsx:45:33
+     43|   const { router, user } = renderApp(['/']);
+     44|
+     45|   await user.click(await screen.findByRole('link', { name: 'Add proper…
+       |                                 ^
+     46|
+     47|   expect(router.state.location.pathname).toBe('/properties/new');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
