@@ -230,3 +230,15 @@ Outcome: two decisions and one question, and two words of this prompt are themse
 > "the stack named in the job offer" = tak tez usuń
 
 Outcome: the manager had left one more mention of the offer, in the alternatives of the decision that the app runs locally, and had asked about it. On this answer the clause was removed from that row of `docs/agent/decisions-log.md`; the alternative now reads "AWS Lambda and CDK". The earlier commits still hold the old text, and the questions on the history, on the skill name and on the names of the private tools stay open.
+
+## Prompt 36
+
+> przepisz historię
+
+Outcome: Marcin's word for rewriting the earlier commits, so that the redacted passages and the local user name leave the history before the first push. Only the preparation was done before he stopped the work for the day: the change of prompt 35 was committed, the refs and objects were counted (93 commits on nine branches, no tags, no stash, no signed commit) and the whole repository was saved as a bundle outside it, at `c:/tmp/covertree-backup-before-rewrite.bundle` (verified by `git bundle verify`; it holds the unredacted history and stays on this machine). No commit was rewritten. The plan is in `docs/agent/manager-state.md`.
+
+## Prompt 37
+
+> chce iść spać , dokończymy jutro
+
+Outcome: the work stops here for the day. The manager stopped the development servers, which had been running with the real key on all network interfaces: the background task was stopped, three processes of this project survived it (the watcher, the API and the web server) and were ended by process id, and ports 4000 and 5173 are free. The tree is clean and nothing was pushed. Open for the next session: the rewrite of the history, the two undecided points of the documents (the skill name and the names of the private tools), the three findings of the code review, and the question on the `transcripts` slice.
