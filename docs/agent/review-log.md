@@ -5,8 +5,9 @@ One row per reviewer call, oldest first. The reviewer is Grok through the Cursor
 | Date | Subject | Round | Model and parameters | Duration | Verdict | Findings | Outcome | Record |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-10-13 | Trial on a synthetic diff with three planted defects | 1 | `grok-4.7`, context=256k, reasoning_effort=high, fast=false | 34 s | BLOCK | 3, all three planted, no false one | Route proven before any slice depended on it | `reviews/grok-smoke.md` |
-| 2026-10-13 | Wave 0, `git diff main...slice/wave-0` at fca2bd7, 80,830 bytes | 1, first call | same | none: the script gave up at its 300-second deadline | none | none | Reply not lost: the run went on at the service and the manager fetched its text once it had finished | `reviews/wave-0-grok.md` on `slice/wave-0` |
-| 2026-10-13 | Wave 0, the same call, reply fetched after the run finished | 1 | same | about 22 minutes | CHANGES REQUESTED | 11 | Adjudicated by the manager: 9 accepted (one as a trial, one in part), 1 deferred to the `web` slice, 1 rejected with the reason in `decisions-log.md`. Fix round and round 2 in progress on `slice/wave-0` | `slices/wave-0/07-review-prompt-round1.md` and `11-review-reply-round1.md` on `slice/wave-0` |
+| 2026-10-13 | Wave 0, `git diff main...slice/wave-0` at fca2bd7, 80,830 bytes | 1, first call | same | none: the script gave up at its 300-second deadline | none | none | Reply not lost: the run went on at the service and the manager fetched its text once it had finished | `reviews/wave-0-grok.md` |
+| 2026-10-13 | Wave 0, the same call, reply fetched after the run finished | 1 | same | about 22 minutes | CHANGES REQUESTED | 11 | Adjudicated by the manager: 9 accepted (one as a trial, one in part), 1 deferred to the `web` slice, 1 rejected with the reason in `decisions-log.md`. Fixed in commit e8edf5e | `slices/wave-0/07-review-prompt-round1.md`, `11-review-reply-round1.md`, `reviews/wave-0-grok.md` |
+| 2026-10-13 | Wave 0, fix diff `git diff fca2bd7 e8edf5e`, 19,521 bytes, with the earlier findings and their outcomes | 2 | same | 837 s | APPROVE | none | Merged into `main` as 82e4f29 after the manager's own `npm run verify` | `slices/wave-0/13-review-prompt-round2.md`, `13-review-reply-round2.md`, `reviews/wave-0-grok.md` |
 
 ## What the first real review changed
 
