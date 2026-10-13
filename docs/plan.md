@@ -1,6 +1,6 @@
 # Plan
 
-Status: PROPOSED on 2026-10-13 by the manager session. Not approved. No application code exists and none is written until Marcin approves this file. Points still open are listed in section 19 and marked `OPEN` where they appear.
+Status: APPROVED by Marcin on 2026-10-13. Written by the manager session. The eight points that were open are settled as recommended and listed in section 19. A change to this file after approval goes through the manager and gets a row in the decisions log.
 
 ## 1. What we are building
 
@@ -51,8 +51,8 @@ Versions are the registry's latest on 2026-10-13 unless a compatibility range sa
 | Language | TypeScript 6.0, `strict`, `noUncheckedIndexedAccess`, `erasableSyntaxOnly` | Newest version the linter supports | TypeScript 7: outside `typescript-eslint`'s range today |
 | API | GraphQL Yoga 5 on `node:http` | Small, spec-compliant, error masking, health endpoint and GraphiQL built in, in-process `yoga.fetch` for tests | Apollo Server: more surface for the same six operations; Express: not needed |
 | Schema | Schema-first SDL in one file, types generated with graphql-codegen for both apps | The SDL file is the contract that lets backend and frontend sessions work in parallel | Code-first (Pothos, Nexus): the contract would be TypeScript inside the API package |
-| Running the API | `node --watch --env-file=.env src/main.ts` `OPEN P2` | No build step, no `tsx`, no `dotenv` | `tsx` and a compiled `dist/` |
-| Database | SQLite through the built-in `node:sqlite`, hand-written SQL in one repository file `OPEN P1` | One table and five statements; no native addon to compile or to be blocked by Windows application control; zero dependencies | Drizzle or Prisma with `better-sqlite3`: a native addon and an ORM for one table; Drizzle on `node:sqlite`: release candidate only |
+| Running the API | `node --watch --env-file=.env src/main.ts` | No build step, no `tsx`, no `dotenv` | `tsx` and a compiled `dist/` |
+| Database | SQLite through the built-in `node:sqlite`, hand-written SQL in one repository file | One table and five statements; no native addon to compile or to be blocked by Windows application control; zero dependencies | Drizzle or Prisma with `better-sqlite3`: a native addon and an ORM for one table; Drizzle on `node:sqlite`: release candidate only |
 | Validation | Zod 4, at the two trust boundaries (mutation input, Weatherstack response) | One library for both boundaries; parses and types in one step | Hand-written checks |
 | Logging | pino | Structured lines, one dependency, redaction built in | `console.log` |
 | Web | React 19, Vite 8, React Router 8 | The brief's stack; three routes with filters in the URL | Next.js: a server we do not need |
@@ -209,8 +209,8 @@ enum UsState { AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA
 
 Choices inside the schema:
 
-- `UsState` as an enum `OPEN P4`: GraphQL itself rejects an unknown state, so the server needs no code for it, and the web select is typed against the same list.
-- `WeatherData` as a typed object with Weatherstack's own field names `OPEN P3`: the brief says the field is the `current` object, so the names stay as they are and no mapping code exists. Every field is nullable because the set depends on the Weatherstack plan. The whole `current` object is stored, including `astro` and `air_quality`; those two are not exposed (some of their keys are expected to contain hyphens, which GraphQL field names cannot; unverified here).
+- `UsState` as an enum: GraphQL itself rejects an unknown state, so the server needs no code for it, and the web select is typed against the same list.
+- `WeatherData` as a typed object with Weatherstack's own field names: the brief says the field is the `current` object, so the names stay as they are and no mapping code exists. Every field is nullable because the set depends on the Weatherstack plan. The whole `current` object is stored, including `astro` and `air_quality`; those two are not exposed (some of their keys are expected to contain hyphens, which GraphQL field names cannot; unverified here).
 - `sort` as one enum argument: a second sort key later is a new enum value, not a new argument.
 - `createdAt` as a string: a custom scalar would add a dependency and validate nothing on output.
 - `property` returns null for an unknown id (a lookup found nothing); `deleteProperty` raises an error (a requested change did not happen).
@@ -250,7 +250,7 @@ CREATE INDEX IF NOT EXISTS property_zip_code ON property (zip_code);
 
 1. GraphQL checks types and the state enum.
 2. The service validates with Zod: `street` and `city` trimmed, 1 to 200 and 1 to 100 characters; `zipCode` matches `^\d{5}$`.
-3. The service calls `weatherProvider.getCurrentWeather(address)`. The adapter sends the zip code as the query `OPEN P5` and returns `{ lat, long, current }` with coordinates parsed to finite numbers.
+3. The service calls `weatherProvider.getCurrentWeather(address)`. The adapter sends the zip code as the query and returns `{ lat, long, current }` with coordinates parsed to finite numbers.
 4. The repository inserts one row. One `INSERT` is atomic on its own, so there is no transaction to manage.
 5. If step 3 fails nothing is stored and the client gets a typed error. There is no retry: the quota is small and the person can press the button again.
 
@@ -345,7 +345,7 @@ Wave 2 proves this on a fresh clone in a temporary folder, not in the working ch
 - `docs/agent/`: one home for the whole record, in the format of the reference project: `prompts/` (verbatim, with outcomes), `decisions-log.md`, `manager-state.md`, `briefs/` and `handoffs/` per slice, `slices/<slice>/` (each worker and reviewer prompt with its raw reply), `reviews/`, `review-log.md`, `session-metrics.md`, `sessions/` (redacted transcripts).
 - `scripts/grok-review.mjs`: the reviewer call as a script, so every conductor uses the same request and saves the raw reply.
 - `scripts/export-sessions.ts`: transcripts to Markdown with redaction, and a test with a list of banned phrases that is seen red first.
-- Not created: subagent definitions, slash commands, hooks or MCP servers that the work does not use. The brief's draft asks for `docs/ai/`, `docs/DECISIONS.md` and `.claude/agents/`; this plan keeps one decisions log and one record folder instead of two of each `OPEN P6`.
+- Not created: subagent definitions, slash commands, hooks or MCP servers that the work does not use. The brief's draft asks for `docs/ai/`, `docs/DECISIONS.md` and `.claude/agents/`; this plan keeps one decisions log and one record folder instead of two of each.
 
 ## 14. Orchestration
 
@@ -361,6 +361,8 @@ The loop of one slice: brief from the manager, worker prompt, worker round (test
 Shared files: `package.json` files and the lockfile belong to the manager after wave 0. A worker that needs a dependency stops and asks.
 
 Model ids are checked before every vendor leg and passed explicitly.
+
+Conductor sessions are started from a terminal in this checkout through the compaction plugin's launcher with its Jev switch, one terminal per slice, each pointed at its own handoff file under `docs/agent/handoffs/`.
 
 ## 15. Waves
 
@@ -399,7 +401,7 @@ No slice depends on another's code: `api` tests against a fake provider, `web` a
 
 ## 16. Cost
 
-- Reviewer: about 22 calls expected (7 slices, up to 3 rounds each, plus the final review). The Cursor API returns no cost. Estimated from Grok 4.5's published price (2 USD per million input tokens, 6 per million output) at roughly 30 thousand tokens in and 5 thousand out per call: about 0.10 USD per call, 2 to 3 USD in total. Provisional; Grok 4.7's price was not found. To be confirmed by Marcin before wave 0 starts.
+- Reviewer: about 22 calls expected (7 slices, up to 3 rounds each, plus the final review). The Cursor API returns no cost. Estimated from Grok 4.5's published price (2 USD per million input tokens, 6 per million output) at roughly 30 thousand tokens in and 5 thousand out per call: about 0.10 USD per call, 2 to 3 USD in total. Provisional; Grok 4.7's price was not found. Accepted by Marcin on 2026-10-13; a conductor stops and reports when a single call runs far longer than the trial call (34 seconds).
 - Worker: `codex exec` on Marcin's Codex subscription; whether it is billed per call is not known to the manager.
 - Weatherstack: free plan, 4 more calls planned.
 
@@ -427,11 +429,11 @@ Not built, each named in the README:
 8. The README covers what it is, the stack and why, how to run and test, environment variables, the architecture diagram, trade-offs, what comes next, and how AI was used, including where an agent was wrong and how it was caught.
 9. Nothing is pushed. Marcin publishes.
 
-## 19. Open questions
+## 19. Questions settled at approval
 
-For the next grilling round. Each has a recommendation; the plan above is written as if the recommendation holds.
+All eight were answered by Marcin on 2026-10-13 as recommended. One input is still owed for P7: which of the skills used are private.
 
-| Id | Question | Recommendation |
+| Id | Question | Decided |
 |---|---|---|
 | P1 | Database access: the SQLite built into Node with hand-written SQL, or an ORM with a native addon | Built-in. One table, five statements, nothing to compile or to be blocked on Windows. |
 | P2 | Run the API's TypeScript directly with Node 24, or add `tsx` and a build step | Directly. Costs: Node 24 is required, and imports carry the `.ts` extension. |
@@ -440,4 +442,4 @@ For the next grilling round. Each has a recommendation; the plan above is writte
 | P5 | Ask Weatherstack by zip code or by "city, state" | Zip code: closer to the brief's example coordinates, and the API dropped the state from the city query. |
 | P6 | One record folder (`docs/agent/`) and one decisions log, or the second set the brief's draft names (`docs/ai/`, `docs/DECISIONS.md`, `.claude/agents/`) | One. |
 | P7 | Copies of the skills used in the work: commit them, or describe them with their source | Commit the public ones, describe the private ones. Needs Marcin's word on which are which. |
-| P8 | Reviewer cost of section 16 | Accept the estimate; stop and report if a single call runs far longer than the trial. |
+| P8 | Reviewer cost of section 16 | Estimate accepted; stop and report if a single call runs far longer than the trial. |

@@ -96,3 +96,21 @@ Outcome: the same doctor command passed: all four checks ok, the Jev service ans
 > chce pracować na wtyczce exo-compact nie na natywnym kompakcie
 
 Outcome: two plugin options changed in the user settings file (a dated backup sits next to it): `jevEnabled` set to true, `interactiveOnly` set from true to false. Checked before the change: the plugin's hooks do run in a session started from the editor extension (it wrote and twice refreshed the task card), so the plugin loads; what it did not do is take the compaction. `compact.ts:404` hands the compaction back to the native one when `interactiveOnly` is true and the session reports no surface, without any notice. That an editor-extension session reports no surface is inferred, not measured. The plugin is enabled only in this project (`.claude/settings.local.json`, ignored by git), so turning `interactiveOnly` off changes scripted runs only here. Options are read when a session starts: this manager session stays on native compaction, and the proof is a new session whose first message after `/compact` starts with the plugin's seed marker.
+
+## Prompt 15 (sent mid-turn)
+
+> czy wymaga to poprawy wtyczki? jeśli tak to daj prompta wyśle do agenta zajmującego się wtyczką
+
+Outcome: yes. Three defects named for the plugin's own agent, with a prompt to paste: the plugin hands compaction back to the native one without any notice; `interactiveOnly` most likely treats a session started from the editor extension as a scripted run (inferred from the source, to be measured by that agent); the recall tool reported no index although recall is on. The settings change made at prompts 13 and 14 is a workaround, not that fix. Later the same day the recall tool answered from its index, so the third point may be about the first minutes after a compaction only.
+
+## Prompt 16
+
+> pokaż pytania P1-P8
+
+Outcome: the eight open points of `docs/plan.md` section 19 shown in Polish with their recommendations.
+
+## Prompt 17
+
+> wszystko tak
+
+Outcome: the plan is approved. All eight points are settled as recommended, and so is the way conductors are started (from a terminal, through the plugin's launcher with its Jev switch). `docs/plan.md` carries the approved status and no open markers. The brief and the handoff for wave 0 are written: `docs/agent/briefs/wave-0.md`, `docs/agent/handoffs/wave-0.md`. Still owed by Marcin: which of the skills used are private (point P7), and the Claude Design login for the design step.
