@@ -150,3 +150,9 @@ Outcome: the split of skills is settled. Copies are committed for the public one
 > Nie z powershell tylko tutaj tobie potwierdzam odpalaj
 
 Outcome: the way conductors are started changed. The manager session starts them itself as background subagents (Claude Opus 5.5 at medium effort), one per slice, instead of Marcin starting each from a terminal; the worker stays GPT Luna through `codex exec` and the reviewer stays Grok through the Cursor API. The second message read as the opposite, the third and fourth corrected it. What "as many as possible" comes to: wave 0 has to run alone, because every later slice imports what it creates, so one conductor was started now; the five slices of wave 1 start together once wave 0 is merged and green. While wave 0 runs the manager writes the wave 1 briefs. Each conductor keeps its record on its slice branch, so parallel conductors never share a git index.
+
+## Prompt 23
+
+> ile % zrobiono juz ?
+
+Outcome: answered with an estimate of about 50 percent, counted by merged work and not by time: wave 0, `weather` and `docs` are on `main`; `api` had reported and was waiting for the manager's checks; `web` and `transcripts` were still running; wave 2 (`e2e`, CI, the closing review, the fresh-clone run, one real create, the transcript export) had not started. The estimate is the manager's reading and was given as such.

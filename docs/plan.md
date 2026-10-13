@@ -240,7 +240,7 @@ CREATE INDEX IF NOT EXISTS property_zip_code ON property (zip_code);
 - `created_at` is set by the database, with milliseconds. Sorting uses `created_at` and then `rowid`, so two rows from the same millisecond keep insertion order.
 - `weather_data` is the `current` object as JSON text, stored whole.
 - `zip_code` is text: zip codes have leading zeros.
-- Statements: insert with `RETURNING *`, select by id, delete with `RETURNING *` (the deleted row and the not-found case in one statement), and the list in two prepared variants (ascending, descending), because a sort direction cannot be a bound parameter. Filters are bound parameters: `(:city IS NULL OR city = :city) AND (:state IS NULL OR state = :state) AND (:zipCode IS NULL OR zip_code = :zipCode)`.
+- Statements: insert with `RETURNING *`, select by id, delete with `RETURNING *` (the deleted row and the not-found case in one statement), and the list. The list keeps only the predicates whose filter is set, composed inside the repository from fixed fragments (`city = :city`, `state = :state`, `zip_code = :zipCode`) joined with `AND`; every value is a bound parameter and nothing from a caller is concatenated into SQL. The sort direction is one of two fixed `ORDER BY` fragments, because a direction cannot be a bound parameter. A filter on one column must plan as a search on that column's index: the earlier form `(:city IS NULL OR city = :city)` was measured to scan the table for every list.
 - No migration tool: there is one schema version. Listed in the deferrals.
 - The same address may be stored twice. The brief asks for no uniqueness rule.
 
