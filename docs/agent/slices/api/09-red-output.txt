@@ -1,0 +1,98 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/property/property-repository.test.ts (12 tests | 3 failed) 25ms
+   ❯ PropertyRepository (12)
+     × AC-STORE-2 uses the city index for a city-only list filter 7ms
+     × AC-STORE-2 uses the state index for a state-only list filter 2ms
+     × AC-STORE-2 uses the zip code index for a zip-only list filter 1ms
+node : 
+At line:2 char:1
++ node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run *> ../ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the city index for a city-only l
+ist filter
+AssertionError: Query plan details:
+SCAN property
+USE TEMP B-TREE FOR ORDER BY: expected 'SCAN property\nUSE TEMP B-TREE FOR OR…' to contain 'SEARCH property USING INDEX
+ property_…'
+
+- Expected
++ Received
+
+- SEARCH property USING INDEX property_city
++ SCAN property
++ USE TEMP B-TREE FOR ORDER BY
+
+ ❯ expectIndexedList src/property/property-repository.test.ts:86:58
+     84|     const planText = details.join('\n');
+     85|
+     86|     expect(planText, `Query plan details:\n${planText}`).toContain(
+       |                                                          ^
+     87|       `SEARCH property USING INDEX ${indexName}`,
+     88|     );
+ ❯ src/property/property-repository.test.ts:93:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the state index for a state-only
+ list filter
+AssertionError: Query plan details:
+SCAN property
+USE TEMP B-TREE FOR ORDER BY: expected 'SCAN property\nUSE TEMP B-TREE FOR OR…' to contain 'SEARCH property USING INDEX
+ property_…'
+
+- Expected
++ Received
+
+- SEARCH property USING INDEX property_state
++ SCAN property
++ USE TEMP B-TREE FOR ORDER BY
+
+ ❯ expectIndexedList src/property/property-repository.test.ts:86:58
+     84|     const planText = details.join('\n');
+     85|
+     86|     expect(planText, `Query plan details:\n${planText}`).toContain(
+       |                                                          ^
+     87|       `SEARCH property USING INDEX ${indexName}`,
+     88|     );
+ ❯ src/property/property-repository.test.ts:97:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the zip code index for a zip-onl
+y list filter
+AssertionError: Query plan details:
+SCAN property
+USE TEMP B-TREE FOR ORDER BY: expected 'SCAN property\nUSE TEMP B-TREE FOR OR…' to contain 'SEARCH property USING INDEX
+ property_…'
+
+- Expected
++ Received
+
+- SEARCH property USING INDEX property_zip_code
++ SCAN property
++ USE TEMP B-TREE FOR ORDER BY
+
+ ❯ expectIndexedList src/property/property-repository.test.ts:86:58
+     84|     const planText = details.join('\n');
+     85|
+     86|     expect(planText, `Query plan details:\n${planText}`).toContain(
+       |                                                          ^
+     87|       `SEARCH property USING INDEX ${indexName}`,
+     88|     );
+ ❯ src/property/property-repository.test.ts:101:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 7 passed (8)
+      Tests  3 failed | 108 passed (111)
+   Start at  15:13:30
+   Duration  605ms (import 61%, transform 23%, tests 14%, worker 2%)
+

@@ -1,0 +1,107 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/property/property-service.test.ts (11 tests | 1 failed) 20ms
+   ❯ PropertyService (11)
+     × AC-WEATHER-9 list, get and delete do not call the provider 6ms
+ ❯ src/graphql/yoga.test.ts (23 tests | 3 failed) 160ms
+   ❯ GraphQL Yoga API (23)
+     × AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations without storing a row 7ms
+     × AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather failure reasons 5ms
+     ❯ AC-WEATHER-9 zero provider calls proof (2)
+       × AC-WEATHER-9 leaves query and delete provider call count unchanged 6ms
+node.exe : 
+At line:2 char:1
++ & node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run 2>&1 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-WEATHER-9 list, get and delete do not call the prov
+ider
+AssertionError: expected [ { street: '1 Main St', …(3) }, …(1) ] to have a length of 1 but got 2
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ src/property/property-service.test.ts:92:35
+     90|
+     91|     expect(callsAfterCreate).toBe(1);
+     92|     expect(weatherProvider.calls).toHaveLength(1);
+       |                                   ^
+     93|   });
+     94|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations withou
+t storing a row
+AssertionError: expected [ { street: '1 Main St', …(3) }, …(1) ] to have a length of 1 but got 2
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ src/graphql/yoga.test.ts:310:36
+    308|     expect(errorsOf(result.json)[0]?.extensions).toEqual({ code: 'LOCA…
+    309|     expect(harness.service.list(undefined, 'CREATED_AT_DESC')).toEqual…
+    310|     expect(harness.provider.calls).toHaveLength(1);
+       |                                    ^
+    311|   });
+    312|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather fail
+ure reasons
+AssertionError: expected [ { street: '1 Main St', …(3) }, …(1) ] to have a length of 1 but got 2
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ src/graphql/yoga.test.ts:322:36
+    320|     expect(result.body).not.toContain(marker);
+    321|     expect(harness.service.list(undefined, 'CREATED_AT_DESC')).toEqual…
+    322|     expect(harness.provider.calls).toHaveLength(1);
+       |                                    ^
+    323|     expect(logs).toHaveLength(1);
+    324|     expect(logs[0]).toMatchObject({ level: 40, reason: marker });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/graphql/yoga.test.ts > GraphQL Yoga API > AC-WEATHER-9 zero provider calls proof > AC-WEATHER-9 leaves query
+ and delete provider call count unchanged
+AssertionError: expected [ { street: '1 Main St', …(3) }, …(2) ] to have a length of 1 but got 3
+
+- Expected
++ Received
+
+- 1
++ 3
+
+ ❯ src/graphql/yoga.test.ts:399:38
+    397|       await request(harness.yoga, 'mutation { deleteProperty(id: "unkn…
+    398|
+    399|       expect(harness.provider.calls).toHaveLength(1);
+       |                                      ^
+    400|     });
+    401|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed | 6 passed (8)
+      Tests  4 failed | 103 passed (107)
+   Start at  14:33:38
+   Duration  650ms (import 72%, tests 18%, transform 8%, worker 2%)
+

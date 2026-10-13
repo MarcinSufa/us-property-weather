@@ -1,0 +1,19 @@
+## port 4000 before start
+free
+## missing key: env -u WEATHERSTACK_API_KEY node src/main.ts
+WEATHERSTACK_API_KEY is required; PORT must be an integer from 1 to 65535
+exit code 1
+## start: WEATHERSTACK_API_KEY=placeholder-not-a-key DATABASE_PATH=<temp>/nested/properties.db node src/main.ts (in apps/api, no env file)
+## query { properties { id } }
+{"data":{"properties":[]}}
+## query deleteProperty unknown id
+{"errors":[{"message":"Property not found.","locations":[{"line":1,"column":12}],"path":["deleteProperty"],"extensions":{"code":"PROPERTY_NOT_FOUND"}}],"data":null}
+## listener
+  TCP    0.0.0.0:4000           0.0.0.0:0              LISTENING       80732
+  TCP    [::]:4000              [::]:0                 LISTENING       80732
+## server log
+{"level":30,"time":1791895375686,"pid":80732,"hostname":"marcin-legion","port":4000,"msg":"GraphQL server listening"}
+## database file
+properties.db
+## port 4000 after stop (process stopped by pid with taskkill)
+free

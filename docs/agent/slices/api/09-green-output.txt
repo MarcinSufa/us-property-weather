@@ -1,0 +1,129 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+stdout | src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the city index for a city-only list filter
+AC-STORE-2 property_city: SEARCH property USING INDEX property_city (city=?) | USE TEMP B-TREE FOR ORDER BY
+
+stdout | src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the state index for a state-only list filter
+AC-STORE-2 property_state: SEARCH property USING INDEX property_state (state=?) | USE TEMP B-TREE FOR ORDER BY
+
+stdout | src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the zip code index for a zip-only list filter
+AC-STORE-2 property_zip_code: SEARCH property USING INDEX property_zip_code (zip_code=?) | USE TEMP B-TREE FOR ORDER BY
+
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the city index for a city-only list filter 3ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the state index for a state-only list filter 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-STORE-2 uses the zip code index for a zip-only list filter 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-CREATE-1 returns address, coordinates and unique UUID identifiers 2ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-CREATE-16 stores and reads back the whole weather object 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-CREATE-17 uses a database timestamp with milliseconds near the current time 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-DETAIL-1 returns a stored property and AC-DETAIL-2 returns null for an unknown id 0ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-DELETE-1 returns the deleted property and null for an unknown id 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-FILTER-1 to AC-FILTER-4 applies every combination of exact filters 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-SORT-1 and AC-SORT-2 return insertion order ascending and reverse descending 1ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-SORT-3 preserves insertion order across matching creation milliseconds 6ms
+ ✓ src/property/property-repository.test.ts > PropertyRepository > AC-FILTER-1 treats SQL metacharacters as a bound filter value 1ms
+ ✓ src/db/database.test.ts > openDatabase > AC-STORE-1 creates nested folders and preserves properties after reopening 16ms
+ ✓ src/db/database.test.ts > openDatabase > AC-STORE-1 opens an in-memory database with no properties 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-1 applies defaults when only the key is set 2ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-1 returns all configured values with numeric values parsed 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-1 trims all configured values before returning them 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for unset key 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for empty key 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for blank key 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for invalid URL 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for unsupported URL scheme 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for non-numeric timeout 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for zero timeout 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for negative timeout 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for fractional timeout 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for non-numeric port 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for zero port 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for large port 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for fractional port 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for unknown log level 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-2 reports every broken variable in one ConfigError 0ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-3 never exposes secret or malformed values in error output 2ms
+ ✓ src/config.test.ts > configuration loading > AC-CONFIG-3 treats blank optional variables as unset 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-1 returns a valid address unchanged 2ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-2 and AC-CREATE-3 trims street and city 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-4 rejects a street of invalid trimmed length: "" 1ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-4 rejects a street of invalid trimmed length: "   " 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-4 rejects a street of invalid trimmed length: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-4 accepts a 200 character street 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-5 rejects a city of invalid trimmed length: "" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-5 rejects a city of invalid trimmed length: "   " 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-5 rejects a city of invalid trimmed length: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-5 accepts a 100 character city 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "1234" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "123456" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "abcde" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code " 1234" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "12345 " 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-CREATE-7 rejects a state outside the generated list 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports one safe error per invalid field in order 1ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports all fields when the input is not an object: null 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports all fields when the input is not an object: "not an object" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports all fields when the input is not an object: 42 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-1 trims city without changing case 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-3 returns a valid state unchanged 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-4 returns a valid zip unchanged and trims surrounding whitespace 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 and AC-FILTER-9 treat whole filter null as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 and AC-FILTER-9 treat whole filter undefined as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 and AC-FILTER-9 treat whole filter {} as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats blank city "" as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats blank city "   " as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-9 treats blank zip code "" as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-9 treats blank zip code "   " as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 and AC-FILTER-9 treat absent and null values as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats absent and null state as unrestricted 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-6 rejects zip filter "1234" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-6 rejects zip filter "123456" 0ms
+ ✓ src/property/property-input.test.ts > property input parsing > AC-FILTER-6 rejects zip filter "abcde" 0ms
+ ✓ src/graphql/schema.contract.test.ts > the GraphQL schema exposes the exact property operation contract 2ms
+ ✓ src/graphql/schema.contract.test.ts > the schema includes all state values and only the supported property sorts 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-CREATE-1 and AC-WEATHER-1 calls once with the validated address and persists the report 3ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-CREATE-2 and AC-CREATE-3 stores trimmed street and city values 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-CREATE-4, AC-CREATE-5 and AC-CREATE-6 rejects invalid input before weather or storage 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-WEATHER-10 and AC-WEATHER-11 propagates weather errors without retry or storage 2ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-WEATHER-9 list, get and delete do not call the provider 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-LIST-1 and AC-SORT-1 lists all properties newest first by default sort request 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-FILTER-1 and AC-FILTER-5 trims city and treats blank city as no restriction 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-FILTER-9 treats a blank zip-code filter as no restriction 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-FILTER-6 rejects a four digit zip filter with a zipCode field error 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-DETAIL-2 returns null for an unknown id 1ms
+ ✓ src/property/property-service.test.ts > PropertyService > AC-DELETE-1 and AC-DELETE-2 returns deleted property and carries an unknown id 1ms
+ ✓ src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-1 maps invalid input with its field errors 1ms
+ ✓ src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-2 maps missing properties 0ms
+ ✓ src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-3 maps missing locations 0ms
+ ✓ src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-4 keeps the weather failure reason out of the result 0ms
+ ✓ src/graphql/errors.test.ts > toGraphQLError > AC-ERROR-5 masks error messages and thrown strings without preserving originals 0ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-1 returns stored fields, coordinates, weather data and creation time 30ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-2 and AC-CREATE-3 returns trimmed street and city 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-4, AC-CREATE-5, AC-CREATE-6 and AC-ERROR-1 reports all invalid fields before weather 6ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-7 rejects invalid states as GraphQL errors before the service runs 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-CREATE-16 persists the complete current weather object 6ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-LIST-1 lists no properties and then both created properties 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-SORT-1 and AC-SORT-2 uses newest first by default and supports both sort orders 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-1 to AC-FILTER-4 filters by city, state, zip and all fields over GraphQL 7ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-5 treats a blank city filter as no restriction 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-9 treats a blank zip-code filter as no restriction 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-5 and AC-FILTER-9 treat whole empty filters as unrestricted 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-6 and AC-ERROR-1 maps an invalid zip filter to one field error 2ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-FILTER-11 rejects an empty state before the service runs 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DETAIL-1 and AC-DETAIL-2 returns a property with weather and null for an unknown id 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DELETE-1 returns the deleted property and then the detail query returns null 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-DELETE-2 and AC-ERROR-2 maps deleting an unknown id 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-3 and AC-WEATHER-11 maps missing weather locations without storing a row 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-4 and AC-WEATHER-11 logs but does not expose weather failure reasons 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-5 masks and logs unexpected repository errors in production mode 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-5 masks and logs unexpected repository errors in development mode 3ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-ERROR-5 and AC-WEATHER-11 masks unexpected provider errors and does not store a property 2ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-WEATHER-9 zero provider calls proof > AC-WEATHER-9 leaves query and delete provider call count unchanged 5ms
+ ✓ src/graphql/yoga.test.ts > GraphQL Yoga API > AC-WEATHER-9 zero provider calls proof > AC-WEATHER-9 keeps createProperty at exactly one provider call 2ms
+
+ Test Files  8 passed (8)
+      Tests  111 passed (111)
+   Start at  15:15:00
+   Duration  515ms (import 74%, tests 17%, transform 7%, worker 3%)
+

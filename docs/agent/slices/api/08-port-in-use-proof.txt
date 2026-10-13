@@ -1,0 +1,5 @@
+## second instance while port 4000 is taken (placeholder key, no env file)
+{"level":50,"time":1791896875086,"pid":65948,"hostname":"marcin-legion","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::4000","stack":"<cut>","code":"EADDRINUSE","errno":-4091,"syscall":"listen","address":"::","port":4000},"msg":"HTTP server error"}
+exit code 1
+## port 4000 after stopping the first instance by pid
+free

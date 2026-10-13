@@ -1,0 +1,133 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/db/database.test.ts (2 tests | 2 failed) 6ms
+   ❯ openDatabase (2)
+     × AC-STORE-1 creates nested folders and preserves properties after reopening 5ms
+     × AC-STORE-1 opens an in-memory database with no properties 0ms
+ ❯ src/property/property-repository.test.ts (9 tests | 9 failed) 6ms
+   ❯ PropertyRepository (9)
+     × AC-CREATE-1 returns address, coordinates and unique UUID identifiers 3ms
+     × AC-CREATE-16 stores and reads back the whole weather object 0ms
+     × AC-CREATE-17 uses a database timestamp with milliseconds near the current time 0ms
+     × AC-DETAIL-1 returns a stored property and AC-DETAIL-2 returns null for an unknown id 0ms
+     × AC-DELETE-1 returns the deleted property and null for an unknown id 0ms
+     × AC-FILTER-1 to AC-FILTER-4 applies every combination of exact filters 0ms
+     × AC-SORT-1 and AC-SORT-2 return insertion order ascending and reverse descending 0ms
+     × AC-SORT-3 preserves insertion order across matching creation milliseconds 0ms
+     × AC-FILTER-1 treats SQL metacharacters as a bound filter value 0ms
+ ❯ src/property/property-service.test.ts (10 tests | 10 failed) 7ms
+   ❯ PropertyService (10)
+     × AC-CREATE-1 and AC-WEATHER-1 calls once with the validated address and persists the report 4ms
+     × AC-CREATE-2 and AC-CREATE-3 stores trimmed street and city values 0ms
+     × AC-CREATE-4, AC-CREATE-5 and AC-CREATE-6 rejects invalid input before weather or storage 0ms
+     × AC-WEATHER-10 and AC-WEATHER-11 propagates weather errors without retry or storage 0ms
+     × AC-WEATHER-9 list, get and delete do not call the provider 0ms
+     × AC-LIST-1 and AC-SORT-1 lists all properties newest first by default sort request 0ms
+     × AC-FILTER-1 and AC-FILTER-5 trims city and treats blank values as no restriction 0ms
+     × AC-FILTER-6 rejects a four digit zip filter with a zipCode field error 0ms
+     × AC-DETAIL-2 returns null for an unknown id 0ms
+     × AC-DELETE-1 and AC-DELETE-2 returns deleted property and carries an unknown id 0ms
+node : 
+At line:2 char:1
++ node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run 2>&1 | ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯ Failed Tests 21 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/db/database.test.ts > openDatabase > AC-STORE-1 creates nested folders and preserves properties after reopen
+ing
+Error: not implemented
+ ❯ openDatabase src/db/database.ts:4:9
+      2|
+      3| export function openDatabase(_path: string): DatabaseSync {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/db/database.test.ts:21:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯
+
+ FAIL  src/db/database.test.ts > openDatabase > AC-STORE-1 opens an in-memory database with no properties
+Error: not implemented
+ ❯ openDatabase src/db/database.ts:4:9
+      2|
+      3| export function openDatabase(_path: string): DatabaseSync {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/db/database.test.ts:43:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯
+
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-CREATE-1 returns address, coordinates and uni
+que UUID identifiers
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-CREATE-16 stores and reads back the whole wea
+ther object
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-CREATE-17 uses a database timestamp with mill
+iseconds near the current time
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-DETAIL-1 returns a stored property and AC-DET
+AIL-2 returns null for an unknown id
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-DELETE-1 returns the deleted property and nul
+l for an unknown id
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-FILTER-1 to AC-FILTER-4 applies every combina
+tion of exact filters
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-SORT-1 and AC-SORT-2 return insertion order a
+scending and reverse descending
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-SORT-3 preserves insertion order across match
+ing creation milliseconds
+ FAIL  src/property/property-repository.test.ts > PropertyRepository > AC-FILTER-1 treats SQL metacharacters as a bound
+ filter value
+Error: not implemented
+ ❯ openDatabase src/db/database.ts:4:9
+      2|
+      3| export function openDatabase(_path: string): DatabaseSync {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/property/property-repository.test.ts:29:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/21]⎯
+
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-CREATE-1 and AC-WEATHER-1 calls once with the valid
+ated address and persists the report
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-CREATE-2 and AC-CREATE-3 stores trimmed street and 
+city values
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-CREATE-4, AC-CREATE-5 and AC-CREATE-6 rejects inval
+id input before weather or storage
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-WEATHER-10 and AC-WEATHER-11 propagates weather err
+ors without retry or storage
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-WEATHER-9 list, get and delete do not call the prov
+ider
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-LIST-1 and AC-SORT-1 lists all properties newest fi
+rst by default sort request
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-FILTER-1 and AC-FILTER-5 trims city and treats blan
+k values as no restriction
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-FILTER-6 rejects a four digit zip filter with a zip
+Code field error
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-DETAIL-2 returns null for an unknown id
+ FAIL  src/property/property-service.test.ts > PropertyService > AC-DELETE-1 and AC-DELETE-2 returns deleted property a
+nd carries an unknown id
+Error: not implemented
+ ❯ openDatabase src/db/database.ts:4:9
+      2|
+      3| export function openDatabase(_path: string): DatabaseSync {
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/property/property-service.test.ts:24:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/21]⎯
+
+
+ Test Files  3 failed | 3 passed (6)
+      Tests  21 failed | 54 passed (75)
+   Start at  14:18:47
+   Duration  256ms (import 58%, transform 28%, tests 9%, worker 5%)
+

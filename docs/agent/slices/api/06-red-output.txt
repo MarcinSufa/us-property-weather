@@ -1,0 +1,28 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/config.test.ts (20 tests | 1 failed) 13ms
+   ❯ configuration loading (20)
+     × AC-CONFIG-1 trims all configured values before returning them 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-1 trims all configured values before returning them
+ConfigError: WEATHER_TIMEOUT_MS must be a positive integer; PORT must be an integer from 1 to 65535; LOG_LEVEL must be one of fatal, error, warn, info, debug, trace or silent
+ ❯ loadConfig src/config.ts:90:11
+     88|     !logLevel.success
+     89|   ) {
+     90|     throw new ConfigError(errors.join('; '));
+       |           ^
+     91|   }
+     92|
+ ❯ src/config.test.ts:38:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 7 passed (8)
+      Tests  1 failed | 107 passed (108)
+   Start at  14:40:36
+   Duration  687ms (import 75%, tests 18%, transform 5%, worker 2%)
+

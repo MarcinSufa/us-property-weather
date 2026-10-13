@@ -1,0 +1,413 @@
+
+ RUN  v5.0.4 C:/tmp/covertree-api/apps/api
+
+ ❯ src/config.test.ts (19 tests | 19 failed) 8ms
+   ❯ configuration loading (19)
+     × AC-CONFIG-1 applies defaults when only the key is set 3ms
+     × AC-CONFIG-1 returns all configured values with numeric values parsed 0ms
+     × AC-CONFIG-2 names the invalid variable for unset key 1ms
+     × AC-CONFIG-2 names the invalid variable for empty key 0ms
+     × AC-CONFIG-2 names the invalid variable for blank key 0ms
+     × AC-CONFIG-2 names the invalid variable for invalid URL 0ms
+     × AC-CONFIG-2 names the invalid variable for unsupported URL scheme 0ms
+     × AC-CONFIG-2 names the invalid variable for non-numeric timeout 0ms
+     × AC-CONFIG-2 names the invalid variable for zero timeout 0ms
+     × AC-CONFIG-2 names the invalid variable for negative timeout 0ms
+     × AC-CONFIG-2 names the invalid variable for fractional timeout 0ms
+     × AC-CONFIG-2 names the invalid variable for non-numeric port 0ms
+     × AC-CONFIG-2 names the invalid variable for zero port 0ms
+     × AC-CONFIG-2 names the invalid variable for large port 0ms
+     × AC-CONFIG-2 names the invalid variable for fractional port 0ms
+     × AC-CONFIG-2 names the invalid variable for unknown log level 0ms
+     × AC-CONFIG-2 reports every broken variable in one ConfigError 0ms
+     × AC-CONFIG-3 never exposes secret or malformed values in error output 0ms
+     × AC-CONFIG-3 treats blank optional variables as unset 0ms
+ ❯ src/property/property-input.test.ts (33 tests | 33 failed) 13ms
+   ❯ property input parsing (33)
+     × AC-CREATE-1 returns a valid address unchanged 3ms
+     × AC-CREATE-2 and AC-CREATE-3 trims street and city 0ms
+     × AC-CREATE-4 rejects a street of invalid trimmed length: "" 2ms
+     × AC-CREATE-4 rejects a street of invalid trimmed length: "   " 1ms
+     × AC-CREATE-4 rejects a street of invalid trimmed length: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 0ms
+     × AC-CREATE-4 accepts a 200 character street 0ms
+     × AC-CREATE-5 rejects a city of invalid trimmed length: "" 0ms
+     × AC-CREATE-5 rejects a city of invalid trimmed length: "   " 0ms
+     × AC-CREATE-5 rejects a city of invalid trimmed length: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 0ms
+     × AC-CREATE-5 accepts a 100 character city 0ms
+     × AC-CREATE-6 rejects invalid zip code "1234" 0ms
+     × AC-CREATE-6 rejects invalid zip code "123456" 0ms
+     × AC-CREATE-6 rejects invalid zip code "abcde" 0ms
+     × AC-CREATE-6 rejects invalid zip code " 1234" 0ms
+     × AC-CREATE-6 rejects invalid zip code "12345 " 0ms
+     × AC-CREATE-6 rejects invalid zip code "" 1ms
+     × AC-CREATE-7 rejects a state outside the generated list 0ms
+     × AC-ERROR-1 reports one safe error per invalid field in order 0ms
+     × AC-ERROR-1 reports all fields when the input is not an object: null 0ms
+     × AC-ERROR-1 reports all fields when the input is not an object: "not an object" 0ms
+     × AC-ERROR-1 reports all fields when the input is not an object: 42 0ms
+     × AC-FILTER-1 trims city without changing case 0ms
+     × AC-FILTER-3 returns a valid state unchanged 0ms
+     × AC-FILTER-4 returns a valid zip unchanged and trims surrounding whitespace 0ms
+     × AC-FILTER-5 treats whole filter null as unrestricted 0ms
+     × AC-FILTER-5 treats whole filter undefined as unrestricted 0ms
+     × AC-FILTER-5 treats whole filter {} as unrestricted 0ms
+     × AC-FILTER-5 treats absent, null, empty and blank city as unrestricted 0ms
+     × AC-FILTER-5 treats absent, null, empty and blank zipCode as unrestricted 0ms
+     × AC-FILTER-5 treats absent and null state as unrestricted 0ms
+     × AC-FILTER-6 rejects zip filter "1234" 0ms
+     × AC-FILTER-6 rejects zip filter "123456" 0ms
+     × AC-FILTER-6 rejects zip filter "abcde" 0ms
+node : 
+At line:2 char:1
++ node C:/Users/USER/.codex/tools/vitest-sandbox/vitest.mjs run *> C:/ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯ Failed Tests 52 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-1 applies defaults when only the key is set
+Error: not implemented
+ ❯ loadConfig src/config.ts:11:9
+      9|
+     10| export function loadConfig(_env: NodeJS.ProcessEnv): Config {
+     11|   throw new Error('not implemented');
+       |         ^
+     12| }
+     13|
+ ❯ src/config.test.ts:6:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/52]⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-1 returns all configured values with numeric values parse
+d
+Error: not implemented
+ ❯ loadConfig src/config.ts:11:9
+      9|
+     10| export function loadConfig(_env: NodeJS.ProcessEnv): Config {
+     11|   throw new Error('not implemented');
+       |         ^
+     12| }
+     13|
+ ❯ src/config.test.ts:18:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/52]⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for unset key
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for empty key
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for blank key
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for invalid URL
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for unsupported URL scheme
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for non-numeric timeout
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for zero timeout
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for negative timeout
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for fractional timeout
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for non-numeric port
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for zero port
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for large port
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for fractional port
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 names the invalid variable for unknown log level
+AssertionError: The instanceof assertion needs a constructor but undefined was given.
+ ❯ src/config.test.ts:56:21
+     54|       throw new Error('Expected configuration validation to fail');
+     55|     } catch (error) {
+     56|       expect(error).toBeInstanceOf(ConfigError);
+       |                     ^
+     57|       expect((error as Error).message).toMatch(
+     58|         /WEATHERSTACK_API_KEY|WEATHERSTACK_BASE_URL|WEATHER_TIMEOUT_MS…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/52]⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-2 reports every broken variable in one ConfigError
+AssertionError: The instanceof assertion needs a constructor but undefined was given.
+ ❯ src/config.test.ts:74:21
+     72|       throw new Error('Expected configuration validation to fail');
+     73|     } catch (error) {
+     74|       expect(error).toBeInstanceOf(ConfigError);
+       |                     ^
+     75|       const message = (error as Error).message;
+     76|       for (const variable of [
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/52]⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-3 never exposes secret or malformed values in error outpu
+t
+AssertionError: The instanceof assertion needs a constructor but undefined was given.
+ ❯ src/config.test.ts:95:21
+     93|       throw new Error('Expected configuration validation to fail');
+     94|     } catch (error) {
+     95|       expect(error).toBeInstanceOf(ConfigError);
+       |                     ^
+     96|       const configError = error as ConfigError;
+     97|       for (const rendered of [
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/52]⎯
+
+ FAIL  src/config.test.ts > configuration loading > AC-CONFIG-3 treats blank optional variables as unset
+Error: not implemented
+ ❯ loadConfig src/config.ts:11:9
+      9|
+     10| export function loadConfig(_env: NodeJS.ProcessEnv): Config {
+     11|   throw new Error('not implemented');
+       |         ^
+     12| }
+     13|
+ ❯ src/config.test.ts:111:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-1 returns a valid address unchanged
+Error: not implemented
+ ❯ parseCreatePropertyInput src/property/property-input.ts:4:9
+      2|
+      3| export function parseCreatePropertyInput(_input: unknown): PropertyAdd…
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/property/property-input.test.ts:8:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-2 and AC-CREATE-3 trims street and city
+Error: not implemented
+ ❯ parseCreatePropertyInput src/property/property-input.ts:4:9
+      2|
+      3| export function parseCreatePropertyInput(_input: unknown): PropertyAdd…
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/property/property-input.test.ts:24:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-4 rejects a street of invalid trimmed l
+ength: ""
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-4 rejects a street of invalid trimmed l
+ength: "   "
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-4 rejects a street of invalid trimmed l
+ength: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:45:23
+     43|         throw new Error('Expected street validation to fail');
+     44|       } catch (error) {
+     45|         expect(error).toBeInstanceOf(InvalidInputError);
+       |                       ^
+     46|         expect((error as InvalidInputError).fieldErrors.map(({ field }…
+     47|           'street',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-4 accepts a 200 character street
+Error: not implemented
+ ❯ parseCreatePropertyInput src/property/property-input.ts:4:9
+      2|
+      3| export function parseCreatePropertyInput(_input: unknown): PropertyAdd…
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/property/property-input.test.ts:55:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-5 rejects a city of invalid trimmed len
+gth: ""
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-5 rejects a city of invalid trimmed len
+gth: "   "
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-5 rejects a city of invalid trimmed len
+gth: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:67:23
+     65|         throw new Error('Expected city validation to fail');
+     66|       } catch (error) {
+     67|         expect(error).toBeInstanceOf(InvalidInputError);
+       |                       ^
+     68|         expect((error as InvalidInputError).fieldErrors.map(({ field }…
+     69|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-5 accepts a 100 character city
+Error: not implemented
+ ❯ parseCreatePropertyInput src/property/property-input.ts:4:9
+      2|
+      3| export function parseCreatePropertyInput(_input: unknown): PropertyAdd…
+      4|   throw new Error('not implemented');
+       |         ^
+      5| }
+      6|
+ ❯ src/property/property-input.test.ts:75:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "1234"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "123456"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "abcde"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code " 1234"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code "12345 "
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-6 rejects invalid zip code ""
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:87:23
+     85|         throw new Error('Expected zip code validation to fail');
+     86|       } catch (error) {
+     87|         expect(error).toBeInstanceOf(InvalidInputError);
+       |                       ^
+     88|         expect((error as InvalidInputError).fieldErrors.map(({ field }…
+     89|           'zipCode',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-CREATE-7 rejects a state outside the generated
+ list
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:100:21
+     98|       throw new Error('Expected state validation to fail');
+     99|     } catch (error) {
+    100|       expect(error).toBeInstanceOf(InvalidInputError);
+       |                     ^
+    101|       expect((error as InvalidInputError).fieldErrors.map(({ field }) …
+    102|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports one safe error per invalid fie
+ld in order
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:110:21
+    108|       throw new Error('Expected address validation to fail');
+    109|     } catch (error) {
+    110|       expect(error).toBeInstanceOf(InvalidInputError);
+       |                     ^
+    111|       const fieldErrors = (error as InvalidInputError).fieldErrors;
+    112|       expect(fieldErrors.map(({ field }) => field)).toEqual(['street',…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports all fields when the input is n
+ot an object: null
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports all fields when the input is n
+ot an object: "not an object"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-ERROR-1 reports all fields when the input is n
+ot an object: 42
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:128:23
+    126|         throw new Error('Expected input validation to fail');
+    127|       } catch (error) {
+    128|         expect(error).toBeInstanceOf(InvalidInputError);
+       |                       ^
+    129|         expect((error as InvalidInputError).fieldErrors.map(({ field }…
+    130|           'street',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-1 trims city without changing case
+Error: not implemented
+ ❯ parsePropertyFilter src/property/property-input.ts:8:9
+      6|
+      7| export function parsePropertyFilter(_filter: unknown): PropertyFilter {
+      8|   throw new Error('not implemented');
+       |         ^
+      9| }
+     10|
+ ❯ src/property/property-input.test.ts:140:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-3 returns a valid state unchanged
+Error: not implemented
+ ❯ parsePropertyFilter src/property/property-input.ts:8:9
+      6|
+      7| export function parsePropertyFilter(_filter: unknown): PropertyFilter {
+      8|   throw new Error('not implemented');
+       |         ^
+      9| }
+     10|
+ ❯ src/property/property-input.test.ts:144:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-4 returns a valid zip unchanged and tri
+ms surrounding whitespace
+Error: not implemented
+ ❯ parsePropertyFilter src/property/property-input.ts:8:9
+      6|
+      7| export function parsePropertyFilter(_filter: unknown): PropertyFilter {
+      8|   throw new Error('not implemented');
+       |         ^
+      9| }
+     10|
+ ❯ src/property/property-input.test.ts:148:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats whole filter null as unrestric
+ted
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats whole filter undefined as unre
+stricted
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats whole filter {} as unrestricte
+d
+Error: not implemented
+
+ ❯ parsePropertyFilter src/property/property-input.ts:8:9
+      6|
+      7| export function parsePropertyFilter(_filter: unknown): PropertyFilter {
+      8|   throw new Error('not implemented');
+       |         ^
+      9| }
+     10|
+ ❯ src/property/property-input.test.ts:153:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats absent, null, empty and blank 
+city as unrestricted
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats absent, null, empty and blank 
+zipCode as unrestricted
+Error: not implemented
+ ❯ parsePropertyFilter src/property/property-input.ts:8:9
+      6|
+      7| export function parsePropertyFilter(_filter: unknown): PropertyFilter {
+      8|   throw new Error('not implemented');
+       |         ^
+      9| }
+     10|
+ ❯ src/property/property-input.test.ts:160:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-5 treats absent and null state as unres
+tricted
+Error: not implemented
+ ❯ parsePropertyFilter src/property/property-input.ts:8:9
+      6|
+      7| export function parsePropertyFilter(_filter: unknown): PropertyFilter {
+      8|   throw new Error('not implemented');
+       |         ^
+      9| }
+     10|
+ ❯ src/property/property-input.test.ts:166:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/52]⎯
+
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-6 rejects zip filter "1234"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-6 rejects zip filter "123456"
+ FAIL  src/property/property-input.test.ts > property input parsing > AC-FILTER-6 rejects zip filter "abcde"
+AssertionError: expected Error: not implemented to be an instance of InvalidInputError
+ ❯ src/property/property-input.test.ts:175:21
+    173|       throw new Error('Expected zip filter validation to fail');
+    174|     } catch (error) {
+    175|       expect(error).toBeInstanceOf(InvalidInputError);
+       |                     ^
+    176|       expect((error as InvalidInputError).fieldErrors).toEqual([
+    177|         expect.objectContaining({ field: 'zipCode' }),
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/52]⎯
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  52 failed | 2 passed (54)
+   Start at  14:13:07
+   Duration  416ms (transform 63%, import 27%, tests 6%, worker 3%)
+
