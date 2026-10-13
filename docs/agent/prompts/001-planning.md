@@ -186,3 +186,9 @@ Outcome: checked at 17:49 from the subagent's files and logs, without interrupti
 > na jakim etapie jestesmy ?
 
 Outcome: answered at about 18:05 with the state of wave 2: slice `e2e` merged into `main` as 5a09132 with `npm run verify` exit 0 and the browser suite at 10 passed, `transcripts` in its fix round before the last review, the demo films rendered once and being checked by their subagent, the closing steps of wave 2 not started. Two checks of the merge that the first pass skipped (a fresh install and the manager's reading of the suite) were done afterwards and recorded. The films were reported by their subagent at 18:22 and checked by the manager; the result is in `manager-state.md`. One question went to Marcin: whether `demo-video/` enters the repository.
+
+## Prompt 29
+
+> mozemy wrzucic do repo ten film , czemu nie rekomendujesz tego ? f2 tak f3 daj zmyślone adresy f4 głos zostaje
+
+Outcome: the four decisions on the demo films were taken as Marcin's. The films and their sources enter the repository (the manager had recommended keeping them out, as a presentation tool that is not part of the graded code and as binary files that stay in the history; the four files are 7.4 MB together). The before/after banners are retimed, the three real addresses are replaced by the invented ones the tests already use, and the narrator's voice stays. At 18:29 the same subagent was resumed for one rebuild with these changes; it copies the final films to `docs/demo/` and commits them with the sources as one new commit on `slice/demo-video`. Nobody has listened to the narration yet.
