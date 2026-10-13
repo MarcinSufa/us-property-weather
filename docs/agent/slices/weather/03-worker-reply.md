@@ -1,0 +1,5 @@
+Implemented the response schema and Weatherstack adapter in [weatherstack-response.ts](/C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-response.ts) and [weatherstack-provider.ts](/C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts). The adapter validates coordinates and preserves `current`, maps provider, HTTP, JSON, and shape failures, and logs one clean summary per call.
+
+The deliberate leak is marked as requested. Failure errors carry the request URL as their cause, except fetch and body-read failures, which retain the caught error. The leak inspection tests are therefore expected to fail in this round; the other tests could not be confirmed because the API test command stopped at startup with `spawn EPERM`. I stopped retrying as instructed.
+
+ESLint, API typecheck, and Prettier checks pass. The deliberate URL cause conflicts with `AGENTS.md`’s rule against throwing URLs containing the key; I followed this round’s explicit instruction and marked the exception. No test changes were made.

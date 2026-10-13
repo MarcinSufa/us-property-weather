@@ -1,0 +1,52 @@
+{
+  "request": { "type": "Zipcode", "query": "85268", "language": "en", "unit": "m" },
+  "location": {
+    "name": "Fountain Hills",
+    "country": "USA",
+    "region": "Arizona",
+    "lat": "33.609",
+    "lon": "-111.724",
+    "timezone_id": "America\/Phoenix",
+    "localtime": "2026-10-13 05:10",
+    "localtime_epoch": 1791868200,
+    "utc_offset": "-7.0"
+  },
+  "current": {
+    "observation_time": "12:10 PM",
+    "temperature": 19,
+    "weather_code": 176,
+    "weather_icons": [
+      "https:\/\/cdn.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0025_light_rain_showers_night.png"
+    ],
+    "weather_descriptions": ["Patchy rain nearby"],
+    "astro": {
+      "sunrise": "06:30 AM",
+      "sunset": "05:55 PM",
+      "moonrise": "09:36 AM",
+      "moonset": "07:32 PM",
+      "moon_phase": "Waxing Crescent",
+      "moon_illumination": 6
+    },
+    "air_quality": {
+      "co": "109",
+      "no2": "4.2",
+      "o3": "47",
+      "so2": "0.3",
+      "pm2_5": "5.7",
+      "pm10": "16.4",
+      "us-epa-index": "1",
+      "gb-defra-index": "1"
+    },
+    "wind_speed": 8,
+    "wind_degree": 76,
+    "wind_dir": "ENE",
+    "pressure": 1011,
+    "precip": 0,
+    "humidity": 72,
+    "cloudcover": 74,
+    "feelslike": 19,
+    "uv_index": 0,
+    "visibility": 10,
+    "is_day": "no"
+  }
+}

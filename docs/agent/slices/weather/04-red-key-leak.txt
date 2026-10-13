@@ -1,0 +1,1453 @@
+
+> test
+> vitest run
+
+
+ RUN  v5.0.4 C:/tmp/covertree-weather/apps/api
+
+ ❯ src/weather/weatherstack-provider.test.ts (143 tests | 34 failed) 97ms
+   ❯ WeatherstackProvider (143)
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-3 HTTP 200 success false 4ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-4 code 615 HTTP 400 fixture 2ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-4 code 615 HTTP 200 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 101 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 104 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 105 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 106 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 999 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 HTTP 500 with a non-JSON b… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 rejected fetch is a networ… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 aborted fetch is a timeout 2ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 unreadable body is unreada… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 body read timeout is a tim… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 body read network failure … 2ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 missing location is unexpe… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 number latitude is unexpec… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 missing latitude is unexpe… 2ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 empty latitude is unexpect… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 blank latitude is unexpect… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 nonnumeric latitude is une… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 NaN latitude is unexpected… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 infinite latitude is unexp… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 number longitude is unexpe… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 missing longitude is unexp… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 empty longitude is unexpec… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 blank longitude is unexpec… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 nonnumeric longitude is un… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 NaN longitude is unexpecte… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 infinite longitude is unex… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 current missing is unexpec… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 current array is unexpecte… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 null current is unexpected… 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 non-JSON success response … 1ms
+     × AC-WEATHER-7 does not leak the key for AC-WEATHER-6 non-2xx JSON with an unexp… 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 34 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-3 HTTP 200 success false
+AssertionError: expected '{"level":40,"time":1791893943836,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943836,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"code_101","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:67:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'code_101',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=code_101
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-4 code 615 HTTP 400 fixture
+AssertionError: expected '{"level":40,"time":1791893943840,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943840,"pid":71008,"hostname":"marcin-legion","outcome":"location_not_found","reason":"code_615","durationMs":0,"msg":"Weather lookup failed"}
++
++ LocationNotFoundError: Location not found
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:62:25)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Location not found',
++   name: 'LocationNotFoundError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Location not found
++ name=LocationNotFoundError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-4 code 615 HTTP 200
+AssertionError: expected '{"level":40,"time":1791893943842,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943842,"pid":71008,"hostname":"marcin-legion","outcome":"location_not_found","reason":"code_615","durationMs":0,"msg":"Weather lookup failed"}
++
++ LocationNotFoundError: Location not found
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:62:25)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Location not found',
++   name: 'LocationNotFoundError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Location not found
++ name=LocationNotFoundError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 101
+AssertionError: expected '{"level":40,"time":1791893943843,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943843,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"code_101","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:67:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'code_101',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=code_101
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 104
+AssertionError: expected '{"level":40,"time":1791893943844,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943844,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"code_104","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:67:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'code_104',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=code_104
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 105
+AssertionError: expected '{"level":40,"time":1791893943845,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943845,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"code_105","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:67:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'code_105',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=code_105
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 106
+AssertionError: expected '{"level":40,"time":1791893943845,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943845,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"code_106","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:67:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'code_106',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=code_106
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-5 Weatherstack error code 999
+AssertionError: expected '{"level":40,"time":1791893943846,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943846,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"code_999","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:67:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'code_999',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=code_999
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 HTTP 500 with a non-JSON b…
+AssertionError: expected '{"level":40,"time":1791893943847,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943847,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"http_500","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:70:36)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'http_500',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=http_500
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 rejected fetch is a networ…
+AssertionError: expected '{"level":40,"time":1791893943848,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943848,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"network","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:41:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'network',
++   name: 'WeatherUnavailableError',
++   cause: Error [TypeError]: Fetch failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++       at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:85:26)
++       ... 7 lines matching cause stack trace ...
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'Fetch failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++     [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++         at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++         at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:85:26)
++         at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:223:57)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++         at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++         at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++       [stack]: [Getter/Setter],
++       [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++     },
++     name: 'TypeError'
++   }
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=network
++ name=WeatherUnavailableError
++ cause=Error [TypeError]: Fetch failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++     at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:85:26)
++     ... 7 lines matching cause stack trace ...
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'Fetch failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++   [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++       at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:85:26)
++       at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:223:57)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++       at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++       at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++   },
++   name: 'TypeError'
++ }
++ stack=[Accessor]
++ message=Fetch failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ cause=Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++     at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:85:26)
++     at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:223:57)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++     at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ name=TypeError
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 aborted fetch is a timeout
+AssertionError: expected '{"level":40,"time":1791893943849,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943849,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"timeout","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:41:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'timeout',
++   name: 'WeatherUnavailableError',
++   cause: Error [TimeoutError]: The operation was aborted due to timeout: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++       at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:92:7)
++       ... 7 lines matching cause stack trace ...
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'The operation was aborted due to timeout: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++     [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++         at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++         at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:92:7)
++         at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:223:57)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++         at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++         at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++       [stack]: [Getter/Setter],
++       [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++     },
++     name: 'TimeoutError'
++   }
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=timeout
++ name=WeatherUnavailableError
++ cause=Error [TimeoutError]: The operation was aborted due to timeout: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++     at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:92:7)
++     ... 7 lines matching cause stack trace ...
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'The operation was aborted due to timeout: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++   [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++       at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:92:7)
++       at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:223:57)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++       at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++       at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++   },
++   name: 'TimeoutError'
++ }
++ stack=[Accessor]
++ message=The operation was aborted due to timeout: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ cause=Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++     at Object.fetchError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:92:7)
++     at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:223:57)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++     at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ name=TimeoutError
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 unreadable body is unreada…
+AssertionError: expected '{"level":40,"time":1791893943852,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943852,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unreadable_body","durationMs":1,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:71:31)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unreadable_body',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unreadable_body
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 body read timeout is a tim…
+AssertionError: expected '{"level":40,"time":1791893943852,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943852,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"timeout","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:48:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'timeout',
++   name: 'WeatherUnavailableError',
++   cause: Error [TimeoutError]: Body read timed out: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++       at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:106:29)
++       ... 7 lines matching cause stack trace ...
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'Body read timed out: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++     [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++         at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++         at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:106:29)
++         at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:229:31)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++         at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++         at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++       [stack]: [Getter/Setter],
++       [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++     },
++     name: 'TimeoutError'
++   }
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=timeout
++ name=WeatherUnavailableError
++ cause=Error [TimeoutError]: Body read timed out: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++     at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:106:29)
++     ... 7 lines matching cause stack trace ...
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'Body read timed out: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++   [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++       at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:106:29)
++       at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:229:31)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++       at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++       at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++   },
++   name: 'TimeoutError'
++ }
++ stack=[Accessor]
++ message=Body read timed out: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ cause=Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++     at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:106:29)
++     at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:229:31)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++     at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ name=TimeoutError
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 body read network failure …
+AssertionError: expected '{"level":40,"time":1791893943854,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943854,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"network","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:48:20)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'network',
++   name: 'WeatherUnavailableError',
++   cause: Error [TypeError]: Body read failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++       at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:113:29)
++       ... 7 lines matching cause stack trace ...
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'Body read failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++     [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++         at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++         at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:113:29)
++         at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:229:31)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++         at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++         at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++         at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++         at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++       [stack]: [Getter/Setter],
++       [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++     },
++     name: 'TypeError'
++   }
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=network
++ name=WeatherUnavailableError
++ cause=Error [TypeError]: Body read failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:17)
++     at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:113:29)
++     ... 7 lines matching cause stack trace ...
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'Body read failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268',
++   [cause]: Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++       at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++       at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:113:29)
++       at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:229:31)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++       at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++       at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++       at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++       at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++     [stack]: [Getter/Setter],
++     [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++   },
++   name: 'TypeError'
++ }
++ stack=[Accessor]
++ message=Body read failed: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ cause=Error: cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++     at hostileError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:182:58)
++     at Object.bodyReadError (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:113:29)
++     at responseFor (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:229:31)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:367:44
++     at Object.fetchStub [as fetch] (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:207:12)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:36:39)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:30
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2882:64
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:1632:35
++     at file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:26 {
++   [stack]: [Getter/Setter],
++   [message]: 'cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=cause: https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
++ name=TypeError
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 missing location is unexpe…
+AssertionError: expected '{"level":40,"time":1791893943856,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943856,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":1,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 number latitude is unexpec…
+AssertionError: expected '{"level":40,"time":1791893943856,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943856,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 missing latitude is unexpe…
+AssertionError: expected '{"level":40,"time":1791893943857,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943857,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 empty latitude is unexpect…
+AssertionError: expected '{"level":40,"time":1791893943859,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943859,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 blank latitude is unexpect…
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 nonnumeric latitude is une…
+AssertionError: expected '{"level":40,"time":1791893943860,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943860,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 NaN latitude is unexpected…
+AssertionError: expected '{"level":40,"time":1791893943861,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943861,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 infinite latitude is unexp…
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 number longitude is unexpe…
+AssertionError: expected '{"level":40,"time":1791893943862,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943862,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 missing longitude is unexp…
+AssertionError: expected '{"level":40,"time":1791893943863,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943863,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 empty longitude is unexpec…
+AssertionError: expected '{"level":40,"time":1791893943864,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943864,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 blank longitude is unexpec…
+AssertionError: expected '{"level":40,"time":1791893943865,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943865,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":1,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 nonnumeric longitude is un…
+AssertionError: expected '{"level":40,"time":1791893943865,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943865,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 NaN longitude is unexpecte…
+AssertionError: expected '{"level":40,"time":1791893943866,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943866,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 infinite longitude is unex…
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 current missing is unexpec…
+AssertionError: expected '{"level":40,"time":1791893943867,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943867,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 current array is unexpecte…
+AssertionError: expected '{"level":40,"time":1791893943868,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943868,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 null current is unexpected…
+AssertionError: expected '{"level":40,"time":1791893943869,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943869,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unexpected_shape","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:72:40)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unexpected_shape',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unexpected_shape
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[29/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 non-JSON success response …
+AssertionError: expected '{"level":40,"time":1791893943870,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943870,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"unreadable_body","durationMs":0,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:71:31)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'unreadable_body',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=unreadable_body
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[30/34]⎯
+
+ FAIL  src/weather/weatherstack-provider.test.ts > WeatherstackProvider > AC-WEATHER-7 does not leak the key for AC-WEATHER-6 non-2xx JSON with an unexp…
+AssertionError: expected '{"level":40,"time":1791893943871,"pid…' not to contain 'MARKER_KEY_7f3a'
+
+- Expected
++ Received
+
+- MARKER_KEY_7f3a
++ {"level":40,"time":1791893943871,"pid":71008,"hostname":"marcin-legion","outcome":"unavailable","reason":"http_500","durationMs":1,"msg":"Weather lookup failed"}
++
++ WeatherUnavailableError: Weather is unavailable
++     at WeatherstackProvider.unavailable (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:110:19)
++     at WeatherstackProvider.getCurrentWeather (C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.ts:70:36)
++     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
++     at C:/tmp/covertree-weather/apps/api/src/weather/weatherstack-provider.test.ts:370:7
++     at async file:///C:/tmp/covertree-weather/node_modules/vitest/dist/chunks/run.Cm2sd7-x.js:2794:20 {
++   [stack]: [Getter/Setter],
++   [message]: 'Weather is unavailable',
++   reason: 'http_500',
++   name: 'WeatherUnavailableError',
++   cause: 'https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268'
++ }
++ stack=[Accessor]
++ message=Weather is unavailable
++ reason=http_500
++ name=WeatherUnavailableError
++ cause=https://weather.example.test/v1/current?access_key=MARKER_KEY_7f3a&query=85268
+
+ ❯ src/weather/weatherstack-provider.test.ts:377:26
+    375|     const combined = `${harness.logs.join('')}\n${errorTextDeep(caught…
+    376|     expect(caught).toBeDefined();
+    377|     expect(combined).not.toContain(markerKey);
+       |                          ^
+    378|     expect(combined).not.toContain('access_key');
+    379|     expect(harness.calls).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[31/34]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  34 failed | 111 passed (145)
+   Start at  14:19:03
+   Duration  490ms (import 66%, tests 21%, transform 10%, worker 2%)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path C:\tmp\covertree-weather\apps\api
+npm error workspace @covertree/api
+npm error location C:\tmp\covertree-weather\apps\api
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c vitest run

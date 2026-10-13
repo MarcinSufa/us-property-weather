@@ -1,0 +1,3 @@
+Implemented the coordinate validation rules and centralized mapped failure logging. Unexpected errors now propagate without logging, success logger errors propagate unchanged, and the leak test uses `$label`.
+
+Lint, API typecheck, and Prettier checks all passed. I did not run Vitest, as instructed. I found no contradiction. The test file already contained round 3a changes; this turn changed only the requested test-name field.

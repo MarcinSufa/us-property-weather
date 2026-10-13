@@ -1,0 +1,13 @@
+
+> test
+> vitest run
+
+
+ RUN  v5.0.4 C:/tmp/covertree-weather/apps/api
+
+
+ Test Files  2 passed (2)
+      Tests  145 passed (145)
+   Start at  14:21:13
+   Duration  404ms (import 67%, tests 19%, transform 11%, worker 2%)
+
