@@ -1,40 +1,83 @@
-import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
-import { createSchema, createYoga } from 'graphql-yoga';
 import pino from 'pino';
-import type { DatabaseSync } from 'node:sqlite';
+import { ConfigError, loadConfig, type Config } from './config.ts';
+import { openDatabase } from './db/database.ts';
+import { createPropertyYoga } from './graphql/yoga.ts';
 import { PropertyRepository } from './property/property-repository.ts';
 import { PropertyService } from './property/property-service.ts';
-import type { GraphQLContext } from './graphql/resolvers.ts';
-import { resolvers } from './graphql/resolvers.ts';
 import { WeatherstackProvider } from './weather/weatherstack-provider.ts';
 
-const logger = pino();
-// The api slice of wave 1 replaces this placeholder repository and empty provider configuration.
-const repository = new PropertyRepository(undefined as unknown as DatabaseSync);
-const weatherProvider = new WeatherstackProvider({
-  fetch,
-  baseUrl: '',
-  apiKey: '',
-  timeoutMs: 0,
-  logger,
-});
-const propertyService = new PropertyService({ repository, weatherProvider });
-const typeDefs = readFileSync(new URL('../schema.graphql', import.meta.url), 'utf8');
-const schema = createSchema<GraphQLContext>({ typeDefs, resolvers });
-const yoga = createYoga<GraphQLContext>({ schema, context: () => ({ propertyService }) });
-const server = createServer((request, response) => {
-  void yoga(request, response);
-});
-const port = Number(process.env.PORT ?? 4000);
+let config: Config | undefined;
+try {
+  config = loadConfig(process.env);
+} catch (error) {
+  if (error instanceof ConfigError) {
+    process.stderr.write(`${error.message}\n`);
+    process.exitCode = 1;
+  } else {
+    throw error;
+  }
+}
 
-server.listen(port, () => {
-  const address = server.address();
-  logger.info({ address }, 'GraphQL server listening');
-});
+if (config !== undefined) {
+  const logger = pino({ level: config.logLevel });
+  const database = openDatabase(config.databasePath);
+  const weatherProvider = new WeatherstackProvider({
+    fetch,
+    baseUrl: config.weatherstackBaseUrl,
+    apiKey: config.weatherstackApiKey,
+    timeoutMs: config.weatherTimeoutMs,
+    logger,
+  });
+  const repository = new PropertyRepository(database);
+  const propertyService = new PropertyService({ repository, weatherProvider });
+  const yoga = createPropertyYoga({ propertyService, logger });
+  const server = createServer((request, response) => {
+    void yoga(request, response);
+  });
+  let databaseClosed = false;
+  let shutdownStarted = false;
+  let serverFailed = false;
 
-const close = () => {
-  server.close();
-};
-process.on('SIGINT', close);
-process.on('SIGTERM', close);
+  function closeDatabase(): void {
+    if (!databaseClosed) {
+      database.close();
+      databaseClosed = true;
+    }
+  }
+
+  function shutdown(): void {
+    if (shutdownStarted) {
+      return;
+    }
+    shutdownStarted = true;
+    server.close(() => {
+      closeDatabase();
+      logger.info('GraphQL server stopped');
+      if (!serverFailed) {
+        process.exitCode = 0;
+      }
+    });
+    server.closeIdleConnections();
+  }
+
+  server.on('error', (error) => {
+    if (!serverFailed) {
+      serverFailed = true;
+      logger.error({ err: error }, 'HTTP server error');
+      closeDatabase();
+      process.exitCode = 1;
+      if (server.listening) {
+        server.close();
+        server.closeAllConnections();
+      }
+    }
+  });
+
+  server.listen(config.port, () => {
+    logger.info({ port: config.port }, 'GraphQL server listening');
+  });
+
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+}

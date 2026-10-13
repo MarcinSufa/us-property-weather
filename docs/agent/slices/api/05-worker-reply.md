@@ -10,9 +10,9 @@ The new provider-error test passed in the pre-fix run: Yoga already masked that 
 
 **Checks**
 
-- `npx prettier --check apps/api` — passed
-- `npm run lint` — passed
-- `npm run typecheck` — passed
+- `npx prettier --check apps/api`, passed
+- `npm run lint`, passed
+- `npm run typecheck`, passed
 
 The `instanceof` mismatch was confirmed under Vitest: an error created through Yoga’s `createGraphQLError` did not pass `instanceof` against the directly imported `graphql` class. The installed `graphql` package also has a `development` export condition. Together, that supports the two-module-copy diagnosis. I updated the unit assertion to check the error name while retaining the requested `GraphQLError` return type.
 

@@ -36,7 +36,8 @@ const logLevelSchema = z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace
 
 function optionalValue(env: NodeJS.ProcessEnv, key: string): string | undefined {
   const value = env[key];
-  return value === undefined || value.trim() === '' ? undefined : value;
+  const trimmedValue = value?.trim();
+  return trimmedValue === undefined || trimmedValue === '' ? undefined : trimmedValue;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv): Config {

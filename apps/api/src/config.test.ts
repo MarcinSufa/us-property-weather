@@ -33,6 +33,26 @@ describe('configuration loading', () => {
     });
   });
 
+  it('AC-CONFIG-1 trims all configured values before returning them', () => {
+    expect(
+      loadConfig({
+        WEATHERSTACK_API_KEY: ' marker-key ',
+        WEATHERSTACK_BASE_URL: ' http://localhost:8080/weather ',
+        WEATHER_TIMEOUT_MS: ' 2500 ',
+        PORT: ' 5173 ',
+        DATABASE_PATH: ' data/custom.db ',
+        LOG_LEVEL: ' debug ',
+      }),
+    ).toEqual({
+      weatherstackApiKey: 'marker-key',
+      weatherstackBaseUrl: 'http://localhost:8080/weather',
+      weatherTimeoutMs: 2500,
+      port: 5173,
+      databasePath: 'data/custom.db',
+      logLevel: 'debug',
+    });
+  });
+
   it.each([
     ['unset key', { WEATHERSTACK_API_KEY: undefined }, 'WEATHERSTACK_API_KEY'],
     ['empty key', { WEATHERSTACK_API_KEY: '' }, 'WEATHERSTACK_API_KEY'],
