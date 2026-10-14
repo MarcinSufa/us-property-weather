@@ -254,6 +254,10 @@ The loop of one slice:
 
 A finding that is not fixed is recorded with its reason. Model ids are checked before every vendor leg and passed explicitly.
 
+### Context-compaction experiment
+
+During development, this repository also served as a real-world test of the private `exo-compact` context-compaction plugin. One compaction took place during a long manager session, and the work continued afterwards without restarting the task. The plugin is not required to install, run or test this repository.
+
 The project record lives in `docs/agent/`:
 
 - `prompts/`: prompts verbatim with their outcomes.
@@ -272,7 +276,7 @@ The project record lives in `docs/agent/`:
 
 ### Where an agent was wrong and how it was caught
 
-This section is filled in wave 2 from the review logs under `docs/agent/reviews/` and the slice records.
+The review loop caught, among other things, an unindexed list predicate, delete-dialog and weather-card defects, a React Strict Mode regression, and an end-to-end assertion race. The fixes were reproduced with tests or adjudicated with recorded evidence before the affected slices were merged. The full findings and outcomes are in `docs/agent/reviews/` and `docs/agent/review-log.md`.
 
 ## Skills
 
